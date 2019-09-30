@@ -4,7 +4,7 @@
 
 
 
-<html lang="zh-tw">
+<html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -47,9 +47,9 @@
     path: '',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
-      copy_button: 'Kopieren',
-      copy_success: 'Kopiert',
-      copy_failure: 'Kopieren fehlgeschlagen'
+      copy_button: '複製',
+      copy_success: '複製成功',
+      copy_failure: '複製失敗'
     },
     sidebarPadding: 40
   };
@@ -61,11 +61,13 @@
 <meta property="og:url" content="http://yoursite.com/2019/09/30/Chapter 1 – Introduction/index.html">
 <meta property="og:site_name" content="Math.py">
 <meta property="og:description" content="演算法 Algorithm 的定義 :A finite, definite, effective procedure, with some output. — Donald Knuth,1968. A well-defined procedure for transforming some input to a desire output. — Cormen et al. Introduction">
-<meta property="og:locale" content="zh-tw">
-<meta property="og:updated_time" content="2019-09-30T07:53:20.151Z">
+<meta property="og:locale" content="zh-TW">
+<meta property="og:image" content="https://i.imgur.com/D4qCw7T.jpg">
+<meta property="og:updated_time" content="2019-09-30T09:02:27.512Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 1 -- Introduction">
 <meta name="twitter:description" content="演算法 Algorithm 的定義 :A finite, definite, effective procedure, with some output. — Donald Knuth,1968. A well-defined procedure for transforming some input to a desire output. — Cormen et al. Introduction">
+<meta name="twitter:image" content="https://i.imgur.com/D4qCw7T.jpg">
   <link rel="canonical" href="http://yoursite.com/2019/09/30/Chapter 1 – Introduction/">
 
 
@@ -116,7 +118,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-TW">
   <div class="container use-motion">
     <div class="headband"></div>
 
@@ -134,7 +136,7 @@
   </div>
 
   <div class="site-nav-toggle">
-    <button aria-label="Navigationsleiste an/ausschalten">
+    <button aria-label="切換導航欄">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -154,7 +156,7 @@
       
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首頁</a>
 
   </li>
       
@@ -165,7 +167,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分類</a>
 
   </li>
       
@@ -176,7 +178,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>歸檔</a>
 
   </li>
   </ul>
@@ -228,13 +230,13 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              <span class="post-meta-item-text">Veröffentlicht am</span>
+              <span class="post-meta-item-text">發表於</span>
 
               
                 
               
 
-              <time title="Erstellt: 2019-09-30 14:46:54 / Geändert am: 15:53:20" itemprop="dateCreated datePublished" datetime="2019-09-30T14:46:54+08:00">2019-09-30</time>
+              <time title="創建時間：2019-09-30 14:46:54 / 修改時間：17:02:27" itemprop="dateCreated datePublished" datetime="2019-09-30T14:46:54+08:00">2019-09-30</time>
             </span>
           
             
@@ -245,7 +247,7 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">in</span>
+              <span class="post-meta-item-text">分類於</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/江蕙如-Algorithm/" itemprop="url" rel="index"><span itemprop="name">江蕙如 Algorithm</span></a></span>
 
@@ -301,12 +303,7 @@
 <p><strong><proof></proof></strong></p>
 <p>假設 Gale &amp; Shapley Algorithm 最後會 return 一個 unstable matching，意即，存在至少一對男女喜歡對方更勝於自己的配對。</p>
 <p>存在 instable pairs $(m,w)$ 與 $(m’,w’)$，且 $m$ prefers $w’$ to $w$ and $w’$ prefers $m$ to $m’$</p>
-<center>
-
-![](https://i.imgur.com/D4qCw7T.jpg  =300x)
-
-</center>
-
+<p><img src="https://i.imgur.com/D4qCw7T.jpg" alt></p>
 <p>我們可以知道，在 Gale &amp; Shapley Algorithm 執行過後的配對會是最後一次 propose 的結果 ( 不管前面經過多少次配對或解開配對 )。</p>
 <p>Case 1 : $m$ 不曾 propose $w’$<br>$m$ 最後停在 $w$ 的配對狀態，且未曾與 $w’$ 配對過，則可確定在 $m$ 的 ranking list 上 $w$ 的名次必然在 $w’$ 之前，也就是 $m$ prefers $w$ to $w’$ ( $\rightarrow\leftarrow$ )</p>
 <p>Case 2 : $m$ 曾經 propose $w’$<br>既然 $m$ 曾經 propose $w’$，但最後卻與 $w$ 配對，則可確定當時 propose $w’$ 時被拒絕，這樣也表示 $w’$ 喜歡某人( 可能是 $m’$ 也可能是另外一個 $m’’$ )勝過 $m$。<br>若 $m’=m’’$ ，則 $w’$ prefers $m’$ to $m$ ( $\rightarrow\leftarrow$ )<br>若 $m’\neq m’’$ ，則 $w’$ 喜歡 $m’$ 勝過 $m’’$，根據Case 2的推導， $w’$ 喜歡 $m’’$ 又勝過 $m$，那麼 $w’$ 喜歡 $m’$ 必然勝過 $m$ ( $\rightarrow\leftarrow$ )</p>
@@ -314,19 +311,18 @@
 <p>對每一個男性 m 來說，一定會存在一些女性是可能的配對對象，之所以稱之為「可能」，意即在這樣的配對下是有可能達到全體 stable matching 的狀態。而在這個 property 下，可以確定每一個男性最後配對的對象必然是可能對象中最好的那一個。而這個 propertｙ　也間接證明了，Gale &amp; Shapley Algorithm　return 的必是唯一解<sup><a href="#fn_註1" id="reffn_註1">註1</a></sup>。</p>
 <p><strong><proof></proof></strong></p>
 <p>假設某次執行 Gale &amp; Shapley Algorithm $E$ 時 solution $S_E$ 中存在一組配對女方並非男方的 Best valid partner。</p>
-<p>$\Longrightarrow$<br>既然女方並非男方的 Best valid partner,則可確定這配對中的男生，一定有被自己的 valid partner 拒絕的經驗</p>
-<p>$\Longrightarrow$<br>$W.L.O.G$ 假設 $m$ 是所有男性中第一個被 valid partner 拒絕的男性，則在 $S_E$ 中  $(m,w)$， $w\neq w^*$</p>
-<p>$\Longrightarrow$<br>$\exists$ a valid partner $w’$ s.t. $m$ 被 $w’$ 拒絕過 ，從 observation 3 可以確定第一個拒絕 $m$ 的 $w’=w^*$</p>
-<p>$\Longrightarrow$<br>$\exists$ $m’$ s.t. $w^*$ 喜歡他更勝於 $m$ $\cdots\cdots( 1 )$ </p>
-<p>$\Longrightarrow$ </p>
-<p><script type="math/tex">w^*</script> 是 $m$ 的 valid partner，那麼必然在某一次執行 $E’$ 中的結果 $S_{E’}$ 是 stable matching ，且 $(m,w^*)\in S_{E’}$，而且在 $S_{E’}$ 之中一定有一個 $w’’$ 與 $m’$ 配對 $(m’,w’’)$</p>
-<p>$\Longrightarrow$<br>$m$ 之所以被 <script type="math/tex">w^*</script> 拒絕，是因為 $m’$ 的緣故。也就是說在 $m$ 對 <script type="math/tex">w^*</script> propose 以前，$m’$ 已先對 <script type="math/tex">w^*</script> propose。前面我們假設 $m$ 是第一個被 valid partner 拒絕的 Case，因此我們可以總結一下 : </p>
+<p>$\Longrightarrow$ 既然女方並非男方的 Best valid partner,則可確定這配對中的男生，一定有被自己的 valid partner 拒絕的經驗</p>
+<p>$\Longrightarrow$ $W.L.O.G$ 假設 $m$ 是所有男性中第一個被 valid partner 拒絕的男性，則在 $S_E$ 中  $(m,w)$， $w\neq w^*$</p>
+<p>$\Longrightarrow$ $\exists$ a valid partner $w’$ s.t. $m$ 被 $w’$ 拒絕過 ，從 observation 3 可以確定第一個拒絕 $m$ 的 $w’=w^*$</p>
+<p>$\Longrightarrow$ $\exists$ $m’$ s.t. $w^*$ 喜歡他更勝於 $m$ $\cdots\cdots( 1 )$ </p>
+<p>$\Longrightarrow$ <script type="math/tex">w^*</script> 是 $m$ 的 valid partner，那麼必然在某一次執行 $E’$ 中的結果 $S_{E’}$ 是 stable matching ，且 $(m,w^*)\in S_{E’}$，而且在 $S_{E’}$ 之中一定有一個 $w’’$ 與 $m’$ 配對 $(m’,w’’)$</p>
+<p>$\Longrightarrow$  $m$ 之所以被 <script type="math/tex">w^*</script> 拒絕，是因為 $m’$ 的緣故。也就是說在 $m$ 對 <script type="math/tex">w^*</script> propose 以前，$m’$ 已先對 <script type="math/tex">w^*</script> propose。前面我們假設 $m$ 是第一個被 valid partner 拒絕的 Case，因此我們可以總結一下 : </p>
 <ol>
 <li>在 $m$ 對 <script type="math/tex">w^*</script> propose 的當下 ，<script type="math/tex">w^*</script> 已經先和 $m’$ 配對，所以才會拒絕他</li>
 <li>在 $m$ 對 <script type="math/tex">w^*</script> propose 之前，$m’$ 並未被任何的 valid partner 拒絕過 。( 因為 $m$ 被 <script type="math/tex">w^*</script> 拒絕是第一個 case )</li>
 </ol>
-<p>$\Longrightarrow$<br>從 $m’$ 的 ranking ist 來看，排在 <script type="math/tex">w^*</script> 之前的都必然是 invalid partner，又 $w’’$ 是他的 valid partner，所以 $w’’$ 的 ranking 一定比 <script type="math/tex">w^*</script> 低</p>
-<p>$\Longrightarrow$<br>$m’$ 喜歡 <script type="math/tex">w^*</script> 更勝於 $w’’$ $\cdots\cdots( 2 )$</p>
+<p>$\Longrightarrow$ 從 $m’$ 的 ranking ist 來看，排在 <script type="math/tex">w^*</script> 之前的都必然是 invalid partner，又 $w’’$ 是他的 valid partner，所以 $w’’$ 的 ranking 一定比 <script type="math/tex">w^*</script> 低</p>
+<p>$\Longrightarrow$  $m’$ 喜歡 <script type="math/tex">w^*</script> 更勝於 $w’’$ $\cdots\cdots( 2 )$</p>
 <p>從  ( 1 ) ( 2 ) 來看，在 Stable Matching solution $S_{E’}$ 中會存在一個 instable 的狀況 ( $\rightarrow\leftarrow$ )，得證。</p>
 <h2 id="註釋"><a href="#註釋" class="headerlink" title="註釋"></a>註釋</h2><blockquote id="fn_註1">
 <sup>註1</sup>. 這個部分有個邏輯性的問題待釐清，Stable Matching 的解並不會是唯一解，但 Gale &amp; Shapley Algorithm 會吐出的是對男性來說最優的解，也就是 Gale &amp; Shapley Algorithm 的解是唯一的。<a href="#reffn_註1" title="Jump back to footnote [註1] in the text."> &#8617;</a>
@@ -356,10 +352,6 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-              
-                <a href="/2019/09/30/Unsupervised Learning – Generation ( PixelRNN、Variational Auto-Encoder ( VAE ) )/" rel="prev" title="">
-                   <i class="fa fa-chevron-right"></i>
-                </a>
               
             </div>
           </div>
@@ -399,10 +391,10 @@
 
       <ul class="sidebar-nav motion-element">
         <li class="sidebar-nav-toc">
-          Inhaltsverzeichnis
+          文章目錄
         </li>
         <li class="sidebar-nav-overview">
-          Übersicht
+          本站概要
         </li>
       </ul>
 
@@ -427,8 +419,8 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">3</span>
-          <span class="site-state-item-name">Artikel</span>
+          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-name">文章</span>
         </a>
       </div>
     
@@ -441,7 +433,7 @@
           
         
         <span class="site-state-item-count">1</span>
-        <span class="site-state-item-name">Kategorien</span>
+        <span class="site-state-item-name">分類</span>
         </a>
       </div>
     
@@ -503,9 +495,9 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Allen Tzeng</span>
 </div>
-  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動 v3.9.0</div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">Design – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
+  <div class="theme-info">主題 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
 
         
 
