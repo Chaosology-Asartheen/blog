@@ -233,7 +233,7 @@
                 
               
 
-              <time title="創建時間：2019-09-30 20:38:20 / 修改時間：20:44:35" itemprop="dateCreated datePublished" datetime="2019-09-30T20:38:20+08:00">2019-09-30</time>
+              <time title="創建時間：2019-09-30 20:38:20 / 修改時間：20:46:45" itemprop="dateCreated datePublished" datetime="2019-09-30T20:38:20+08:00">2019-09-30</time>
             </span>
           
             
@@ -287,7 +287,7 @@
 <p>  $h(\mathbb{X})=sign(\sum\limits_{i=1}^{N}w_ix_i+threshold)  =sign(\sum\limits_{i=0}^{N}w_ix_i)=sign(\mathbb{W}^T\mathbb{X})$</p>
 <p>  在此處可以清楚看見，決定$h$的因素在於$w_i$及$threshold$，也就是$\mathbb{W}$，因此在往後的課程中，討論hypothesis的重點將會放在$\mathbb{W}$上面</p>
 </li>
-<li><p><strong>Geometric Meaning of </strong>$h$<em>**</em></p>
+<li><p><strong>Geometric Meaning of </strong>$h$<strong> </strong></p>
 </li>
 </ul>
 <p><img src="https://i.imgur.com/z9lsd58.png" alt><br>    $\mathbb{W}$會很容易讓人誤會是那一條分類線(超平面)，嚴格說起來也是沒錯，但嚴謹一點來說，應該指的是其法向量，這也呼應到上面講的，任何一個$h$ ，都能唯一找到一個$\mathbb{W}$，當我們要找$h$，也就只要專注在找出對應的$\mathbb{W}$即可。<br><br>    </p>
@@ -299,9 +299,7 @@
 <p>  <img src="https://i.imgur.com/HvSXMny.png" alt><br><br></p>
 </li>
 <li><p>PLA其實是一個極為理想的狀態，是否真正存在一個理想的$f$ 我們不能確定，而且現實的dataset絕大多數都會因為noise而不會Linear Separable</p>
-<p>  如果我們真的找不到完美的分類器，那麼可以退而求其次，找出誤差最小的總可以了吧!</p>
-<script type="math/tex; mode=display">
-\mathbb{W}_g=arg\min\limits_{\forall\mathbb{W}}\sum\limits_{n=1}^{N}[\![y_n\neq(\mathbb{W}^T\mathbb{X}+b)]\!]</script><p>  很遺憾的，這是一個NP-Hard的問題看來也是無解。</p>
+<p>  如果我們真的找不到完美的分類器，那麼可以退而求其次，找出誤差最小的總可以了吧!<br>  $\mathbb{W}_g=arg\min\limits_{\forall\mathbb{W}}\sum\limits_{n=1}^{N}[![y_n\neq(\mathbb{W}^T\mathbb{X}+b)]!]$<br>  很遺憾的，這是一個NP-Hard的問題看來也是無解。</p>
 </li>
 </ul>
 <h2 id="Pocket-Algorethm"><a href="#Pocket-Algorethm" class="headerlink" title="Pocket Algorethm"></a>Pocket Algorethm</h2><p>這是一種PLA的變形演算法，過程與PLA大致都相同，一樣要經過迭代程序，但不同的地方在於 : 「PLA目的在找出一個絕對好的分類器，但Pocket則是找出相對好的即可。」</p>
