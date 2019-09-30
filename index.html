@@ -233,7 +233,7 @@
                 
               
 
-              <time title="創建時間：2019-09-30 20:38:20 / 修改時間：20:41:47" itemprop="dateCreated datePublished" datetime="2019-09-30T20:38:20+08:00">2019-09-30</time>
+              <time title="創建時間：2019-09-30 20:38:20 / 修改時間：20:44:35" itemprop="dateCreated datePublished" datetime="2019-09-30T20:38:20+08:00">2019-09-30</time>
             </span>
           
             
@@ -301,16 +301,15 @@
 <li><p>PLA其實是一個極為理想的狀態，是否真正存在一個理想的$f$ 我們不能確定，而且現實的dataset絕大多數都會因為noise而不會Linear Separable</p>
 <p>  如果我們真的找不到完美的分類器，那麼可以退而求其次，找出誤差最小的總可以了吧!</p>
 <script type="math/tex; mode=display">
-\mathbb{W}_g=arg\min\limits_{\forall\mathbb{W}}\sum\limits_{n=1}^{N}[\\![y_n\neq(\mathbb{W}^T\mathbb{X}+b)]\\!]
- $$[^註1]              
- $$很遺憾的，這是一個NP-Hard的問題看來也是無解。</script></li>
+\mathbb{W}_g=arg\min\limits_{\forall\mathbb{W}}\sum\limits_{n=1}^{N}[\![y_n\neq(\mathbb{W}^T\mathbb{X}+b)]\!]</script><p>  很遺憾的，這是一個NP-Hard的問題看來也是無解。</p>
+</li>
 </ul>
 <h2 id="Pocket-Algorethm"><a href="#Pocket-Algorethm" class="headerlink" title="Pocket Algorethm"></a>Pocket Algorethm</h2><p>這是一種PLA的變形演算法，過程與PLA大致都相同，一樣要經過迭代程序，但不同的地方在於 : 「PLA目的在找出一個絕對好的分類器，但Pocket則是找出相對好的即可。」</p>
 <p>每一次的迭代過程，都把新的$\mathbb{W}_t$跟上一個$\mathbb{W}_{t-1}$做比較，誤差量相對小的就把她暫時當成目前最好的分類器$\tilde{\mathbb{W}}$放在Pocket中，雖然經過不斷的迭代，但Pocket中的$\tilde{\mathbb{W}}$絕對是”當下”最好的分類器。</p>
 <p><code>[Remark] Pocket演算法不見得最終會 halt (因為現實資料並不見得線性可分)，那麼停止的條件便只能用人為來判斷迭代次數，只要我們認為迭代次數夠多了就可以停止Pocket Algorithm</code></p>
 <p>這樣的演算法，便能克服在現實狀況中會遇到的問題。</p>
 <p>但是這也不是非常完美的方式，這樣的演算法的計算時間相對PLA要來的久 ( 因為要不斷儲存$\tilde{\mathbb{W}}$，而且每一次迭代都必須重新計算誤差量 )。<br><br></p>
-<h3 id="註釋"><a href="#註釋" class="headerlink" title="註釋"></a>註釋</h3><p><sup><a href="#fn_註1" id="reffn_註1">註1</a></sup>:$[\![a]\!]$雙方括號 :<br>可以表達為小於等於a的最大整數，但在此為 $Iverson bracket$ ，在括號內的邏輯條件為True則為1，為Flase則為0。</p>
+<h3 id="註釋"><a href="#註釋" class="headerlink" title="註釋"></a>註釋</h3><p><sup><a href="#fn_註1" id="reffn_註1">註1</a></sup>  $[\![a]\!]$雙方括號 :<br>可以表達為小於等於a的最大整數，但在此為 $Iverson bracket$ ，在括號內的邏輯條件為True則為1，為Flase則為0。</p>
 
         
       
