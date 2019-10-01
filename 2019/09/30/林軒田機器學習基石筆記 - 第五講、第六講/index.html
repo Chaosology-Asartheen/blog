@@ -62,12 +62,21 @@
 <meta property="og:site_name" content="Math.py">
 <meta property="og:description" content="本文為一系列課程之筆記，建議從” 機器學習基石筆記-1 “開始閱讀  本文討論內容請參考:機器學習基石第五講 : Training versus Testing機器學習基石第六講 : Theory of Generalization  本篇所有圖片部分由筆者製作，其它均為機器學習基石課程內容講義">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:image" content="https://i.imgur.com/A7RzZrl.png=300x">
-<meta property="og:updated_time" content="2019-10-01T14:25:35.343Z">
+<meta property="og:image" content="https://i.imgur.com/GYAMpry.png =200x">
+<meta property="og:image" content="https://i.imgur.com/A7RzZrl.png">
+<meta property="og:image" content="https://i.imgur.com/hAG2G5G.png">
+<meta property="og:image" content="https://i.imgur.com/cuNoGXM.png">
+<meta property="og:image" content="https://i.imgur.com/cuNoGXM.png =300x">
+<meta property="og:image" content="https://i.imgur.com/hJOlpy9.png =300x">
+<meta property="og:image" content="https://i.imgur.com/SFDXhiD.png =300x">
+<meta property="og:image" content="https://i.imgur.com/A21Tr8u.png =300x">
+<meta property="og:image" content="https://i.imgur.com/xP147ab.png =300x">
+<meta property="og:image" content="https://i.imgur.com/xJrAxfj.png">
+<meta property="og:updated_time" content="2019-10-01T17:50:07.991Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="林軒田機器學習基石筆記 - 第五講、第六講">
 <meta name="twitter:description" content="本文為一系列課程之筆記，建議從” 機器學習基石筆記-1 “開始閱讀  本文討論內容請參考:機器學習基石第五講 : Training versus Testing機器學習基石第六講 : Theory of Generalization  本篇所有圖片部分由筆者製作，其它均為機器學習基石課程內容講義">
-<meta name="twitter:image" content="https://i.imgur.com/A7RzZrl.png=300x">
+<meta name="twitter:image" content="https://i.imgur.com/GYAMpry.png =200x">
   <link rel="canonical" href="https://allen108108.github.io/2019/09/30/林軒田機器學習基石筆記 - 第五講、第六講/">
 
 
@@ -247,7 +256,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2019-10-01 22:25:35" itemprop="dateModified" datetime="2019-10-01T22:25:35+08:00">2019-10-01</time>
+                <time title="修改時間：2019-10-02 01:50:07" itemprop="dateModified" datetime="2019-10-02T01:50:07+08:00">2019-10-02</time>
               </span>
             
           
@@ -284,17 +293,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-            <div class="post-gallery-row">
-              <img src="https://i.imgur.com/A7RzZrl.png=300x" itemprop="contentUrl">
-            
-          
-
-          </div>
-        </div>
         <blockquote>
 <ul>
-<li><p><strong>本文為一系列課程之筆記，建議從” <a href="https://hackmd.io/s/ryxzB7LwN" target="_blank" rel="noopener">機器學習基石筆記-1</a> “開始閱讀</strong></p>
+<li><p><strong>本文為一系列課程之筆記，建議從” <a href="https://allen108108.github.io/2019/09/30/%E6%9E%97%E8%BB%92%E7%94%B0%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E5%9F%BA%E7%9F%B3%E7%AD%86%E8%A8%98%20-%20%E7%AC%AC%E4%B8%80%E8%AC%9B%E3%80%81%E7%AC%AC%E4%BA%8C%E8%AC%9B/">機器學習基石筆記-1</a> “開始閱讀</strong></p>
 </li>
 <li><p><strong>本文討論內容請參考:<br>機器學習基石第五講 : Training versus Testing<br>機器學習基石第六講 : Theory of Generalization</strong></p>
 </li>
@@ -391,7 +392,7 @@
 <script type="math/tex; mode=display">\mathbb{P}(\mid E_{out}(\mathbb{H})-E_{in}(\mathbb{H}) \mid>\epsilon)\leq 4m_\mathbb{H}(N)e^{\frac{1}{8}\epsilon^2N}</script><p>我們稱之為 $Vapnik-Chervonenkis Bound\ (VC\ Bound)$</p>
 <h3 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h3><p>$\mathbb{P}(\mid E_{in}(g)-E_{out}(g)\mid&gt;\epsilon)$<br>$\leq 4m_\mathbb{H}(2N)\cdot e^{-\frac{1}{8}\epsilon^2N}$<br>$\leq 4(2N)^{K-1}\cdot e^{-\frac{1}{8}\epsilon^2N}\ ,\ if\ N\ is\ large\ enough\ and\ K\ exists.$<br>($\because m_\mathbb{H}(N)\leq B(N,K)\leq N^{K-1}$)</p>
 <p>$\therefore$存在 $Break\ point$ 且 $N$ 夠大的情況下，即使 $infinite\ \mathbb{H}$，演算法從$E_{in}$很小的條件下挑出一個 $g$，都一定會有一個有限上界可以確保$E_{in}$跟$E_{out}$夠接近。</p>
-<h2 id="註釋"><a href="#註釋" class="headerlink" title="註釋"></a>註釋</h2><p><sup><a href="#fn_註1" id="reffn_註1">註1</a></sup>:<br>為什麼 $m_\mathbb{H}(N)$ 不一定會等於要取 $\max$ ? 為什麼不等於$2^N$?<br>從排列組合的觀點來看，$N$ 個點的二元分類應該要有 $2^N$ 種，但我們這裡要的是 $”Linear\ separable”$ 所以會有所差異。<br><img src="https://i.imgur.com/cuNoGXM.png" alt><br>從上圖可以看出來，$N=4$ 時，應該會有16種二分法，但是由於我們要求線性可分，因此一定「至少」有兩種 ( 圖中打 X 的狀況以及其對稱情況 )不符合我們的需求。 為什麼是「至少」? 如果這 $N$ 筆資料有特別的排列情況(EX:共線)，當然有可能有更多種狀況會被排除，但，$m_\mathbb{H}(N)$函數要的是「max」，也就是說我現在要看的是被排除最少的情況，所以在 $N=4$ 時，$m_\mathbb{H}(4)=14$ ( 那兩種被排除的狀況，就是不管四筆資料怎麼分布，絕對都會被排除 )<br>當然，$m_\mathbb{H}(N)$也會跟資料本身處的維度空間有關。</p>
+<h3 id="註釋"><a href="#註釋" class="headerlink" title="註釋"></a>註釋</h3><p><sup><a href="#fn_註1" id="reffn_註1">註1</a></sup>:<br>為什麼 $m_\mathbb{H}(N)$ 不一定會等於要取 $\max$ ? 為什麼不等於$2^N$?<br>從排列組合的觀點來看，$N$ 個點的二元分類應該要有 $2^N$ 種，但我們這裡要的是 $”Linear\ separable”$ 所以會有所差異。<br><img src="https://i.imgur.com/cuNoGXM.png" alt><br>從上圖可以看出來，$N=4$ 時，應該會有16種二分法，但是由於我們要求線性可分，因此一定「至少」有兩種 ( 圖中打 X 的狀況以及其對稱情況 )不符合我們的需求。 為什麼是「至少」? 如果這 $N$ 筆資料有特別的排列情況(EX:共線)，當然有可能有更多種狀況會被排除，但，$m_\mathbb{H}(N)$函數要的是「max」，也就是說我現在要看的是被排除最少的情況，所以在 $N=4$ 時，$m_\mathbb{H}(4)=14$ ( 那兩種被排除的狀況，就是不管四筆資料怎麼分布，絕對都會被排除 )<br>當然，$m_\mathbb{H}(N)$也會跟資料本身處的維度空間有關。</p>
 <p><sup><a href="#fn_註2" id="reffn_註2">註2</a></sup>:<br>林軒田教授在課堂上講了四種的資料空間及分類型態 :<br><strong>2-D Preceptron , 1-D Positive Ray , 1-D Positive interval and Convex Set</strong><br><br><br><img src="https://i.imgur.com/cuNoGXM.png =300x" alt><img src="https://i.imgur.com/hJOlpy9.png =300x" alt> <img src="https://i.imgur.com/SFDXhiD.png =300x" alt><img src="https://i.imgur.com/A21Tr8u.png =300x" alt></p>
 <p><sup><a href="#fn_註3" id="reffn_註3">註3</a></sup>:<br>試證明 $B(N,K)=B(N-1,K)+B(N-1,K-1)$<br>Claim:$B(N,K)=\sum\limits_{j=0}^{K-1}{{N}\choose{j}}$<br>Proof :<br>$B(N,K)\\=2^N-{{N}\choose{K}}-{{N}\choose{K+1}}-…-{{N}\choose{N}}\\={{N}\choose{0}}+{{N}\choose{1}}+{{N}\choose{2}}+…+{{N}\choose{K-1}}\\=\sum\limits_{j=0}^{K-1}{{N}\choose{j}}$<br>$B(N,K)$的最高次項為$N^{K-1}$<br>因為最後一項為$\frac{N(N-1)(N-2)…(N-K+1)}{K!}$</p>
 <p>$\because B(N,K)=\sum\limits_{j=0}^{K-1}{{N}\choose{j}}={{N}\choose{0}}+{{N}\choose{1}}+{{N}\choose{2}}+…+{{N}\choose{K-1}}\\<br>={{N}\choose{0}}+({{N-1}\choose{1}}+{{N-1}\choose{0}})+({{N-1}\choose{2}}+{{N-1}\choose{1}})+…+({{N-1}\choose{k-1}}+{{N-1}\choose{k-2}})\\<br>={{N-1}\choose{0}}+({{N-1}\choose{1}}+{{N-1}\choose{2}}+..+{{N-1}\choose{k-1}})+({{N-1}\choose{0}}+{{N-1}\choose{1}}+..+{{N-1}\choose{k-2}})\\<br>=\sum\limits_{j=0}^{K-2}{{N}\choose{j}}+\sum\limits_{j=0}^{K-1}{{N-1}\choose{j}}$</p>
@@ -444,6 +445,10 @@
 
             <div class="post-nav-prev post-nav-item">
               
+                <a href="/2019/10/01/林軒田機器學習基石筆記 - 第八講/" rel="prev" title="林軒田機器學習基石筆記 - 第八講">
+                  林軒田機器學習基石筆記 - 第八講 <i class="fa fa-chevron-right"></i>
+                </a>
+              
             </div>
           </div>
         
@@ -491,7 +496,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#2Me-2-epsilon-2N-這個上界夠好嗎"><span class="nav-number">1.</span> <span class="nav-text">$2Me^{-2\epsilon^2N}$這個上界夠好嗎?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如果-mathbb-H-是-infinite-set"><span class="nav-number">2.</span> <span class="nav-text">如果 $\mathbb{H}$ 是 $infinite\ set$ ?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#結論"><span class="nav-number">3.</span> <span class="nav-text">結論</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#註釋"><span class="nav-number"></span> <span class="nav-text">註釋</span></a></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#2Me-2-epsilon-2N-這個上界夠好嗎"><span class="nav-number">1.</span> <span class="nav-text">$2Me^{-2\epsilon^2N}$這個上界夠好嗎?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如果-mathbb-H-是-infinite-set"><span class="nav-number">2.</span> <span class="nav-text">如果 $\mathbb{H}$ 是 $infinite\ set$ ?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#結論"><span class="nav-number">3.</span> <span class="nav-text">結論</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#註釋"><span class="nav-number">4.</span> <span class="nav-text">註釋</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -510,7 +515,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
