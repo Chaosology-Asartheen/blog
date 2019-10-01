@@ -58,14 +58,14 @@
   <meta name="description" content="Study about Mathematics , Programming and Data Science">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Math.py">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="https://allen108108.github.io/index.html">
 <meta property="og:site_name" content="Math.py">
 <meta property="og:description" content="Study about Mathematics , Programming and Data Science">
 <meta property="og:locale" content="zh-TW">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Math.py">
 <meta name="twitter:description" content="Study about Mathematics , Programming and Data Science">
-  <link rel="canonical" href="http://yoursite.com/">
+  <link rel="canonical" href="https://allen108108.github.io/">
 
 
 <script id="page-configurations">
@@ -204,7 +204,7 @@
   
   
   <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/30/林軒田機器學習基石筆記 - 第五講、第六講/">
+    <link itemprop="mainEntityOfPage" href="https://allen108108.github.io/2019/09/30/林軒田機器學習基石筆記 - 第五講、第六講/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Allen Tzeng">
@@ -244,7 +244,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2019-10-01 09:13:13" itemprop="dateModified" datetime="2019-10-01T09:13:13+08:00">2019-10-01</time>
+                <time title="修改時間：2019-10-01 22:25:35" itemprop="dateModified" datetime="2019-10-01T22:25:35+08:00">2019-10-01</time>
               </span>
             
           
@@ -273,9 +273,18 @@
     <div class="post-body" itemprop="articleBody">
 
       
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+            <div class="post-gallery-row">
+              <img src="https://i.imgur.com/A7RzZrl.png=300x" itemprop="contentUrl">
+            
+          
+
+          </div>
+        </div>
           <blockquote>
 <ul>
-<li><strong>本文為一系列課程之筆記，建議從” <a href="https://hackmd.io/s/ryxzB7LwN" target="_blank" rel="noopener">機器學習基石筆記-1</a> “開始閱讀</strong><br>&gt;</li>
+<li><p><strong>本文為一系列課程之筆記，建議從” <a href="https://hackmd.io/s/ryxzB7LwN" target="_blank" rel="noopener">機器學習基石筆記-1</a> “開始閱讀</strong></p>
+</li>
 <li><p><strong>本文討論內容請參考:<br>機器學習基石第五講 : Training versus Testing<br>機器學習基石第六講 : Theory of Generalization</strong></p>
 </li>
 <li><p><strong>本篇所有圖片部分由筆者製作，其它均為機器學習基石課程內容講義</strong></p>
@@ -283,105 +292,15 @@
 </ul>
 </blockquote>
 <hr>
-<p>回顧上一篇的結論，只要 Hypothesis set $\mathbb{H}$ 是有限集 (#$\mathbb{H}=M$ is finite)，且dataset $\mathbb{D}$ 有夠多的資料(#$\mathbb{D}=N$ is large enough)，我們就能確定 :</p>
-<p>$\mathbb{P}(\mid E_{out}(\mathbb{H})-E_{in}(\mathbb{H}) \mid&gt;\epsilon)$ 有一個很小的上界$2Me^{-2\epsilon^2N}$</p>
-<p>$\implies E_{out}$與 $E_{in}$ 夠接近 ( Learning Algorithm 從 $\mathbb{H}$ 選出來的 $g$ ，$E_{out}(g)$與 $E_{in}(g)$ 夠接近 )</p>
-<p>$\implies E_{in}(g) \rightarrow 0$ 則 $E_{out}(g) \rightarrow 0$<br><br></p>
-<p>那我們現在有兩個問題要解決 :</p>
-<ol>
-<li><strong>$2Me^{-2\epsilon^2N}$這個上界夠好嗎?</strong></li>
-<li><strong>如果 $\mathbb{H}$ 是 $infinite\ set$ ?</strong></li>
-</ol>
-<p>這兩個問題其實是一體兩面，解決了一個，另外一個也就能順利解決。<br>我們能不能找到一個足以代表 $infinite\ \mathbb{H}$ 的一個 $finite\ number\ -m_{\mathbb{H}}$ 替換掉 $M$ ，形成一個更逼近的上界，也可以處理 $infinite\ \mathbb{H}$沒有上界的情況 ?</p>
-<h3 id="2Me-2-epsilon-2N-這個上界夠好嗎"><a href="#2Me-2-epsilon-2N-這個上界夠好嗎" class="headerlink" title="$2Me^{-2\epsilon^2N}$這個上界夠好嗎?"></a>$2Me^{-2\epsilon^2N}$這個上界夠好嗎?</h3><p><br></p>
-<p><img src="https://i.imgur.com/GYAMpry.png =200x" alt></p>
-<p>這是一個簡單的文式圖，如果我們今天要算 $B_1\cup B_2\cup B_3$ 數量的上界，最簡單的莫過於直接把三者數量相加， $B_1+B_2+B_3$ 絕對是 $B_1\cup B_2\cup B_3$的其中一個上界，但我們也很清楚的知道，當三者重疊部分越多，這樣的上界越不逼近。</p>
-<p>但在上一篇的證明中，我們卻利用這樣的方法找出其上界</p>
-<p><img src="https://i.imgur.com/A7RzZrl.png" alt></p>
-<p>當 $M$ 為 $finite$ 時還行得通，反正我們只要確定有上界即可逼近，但當 $M$ 為 $infinite$ 時就會出現很大的問題。</p>
-<h3 id="如果-mathbb-H-是-infinite-set"><a href="#如果-mathbb-H-是-infinite-set" class="headerlink" title="如果 $\mathbb{H}$ 是 $infinite\ set$ ?"></a>如果 $\mathbb{H}$ 是 $infinite\ set$ ?</h3><hr>
-<p>在處理這個問題以前，我們先定義一些概念:</p>
-<ul>
-<li><p><strong>dichotomy</strong><br>  以 $\mathbb{R}^2$ 為例，在其中有$N$個資料點 $\mathbb{X}_1,\mathbb{X}_2,…,\mathbb{X}_N$，則顯然的能將這 $N$個資料點進行二元分類的 $\mathbb{H}$ 是一個 $infinite\ set$ (任何一條在 $\mathbb{R}^2$ 的直線都是一個 $h$)。<br>  從數學的角度來說， $dichotomy$ 代表的是一個族 ( $family$ )，就 hypothesis $\mathbb{H}$ 來看，若把對 $\mathbb{X}_1,\mathbb{X}_2,…,$family$\mathbb{X}_N$ 進行同一種分類的 $h$ 視為同一族，那麼我們便可以將無限多的 $h$ 變成有限個 $dichotomies$。</p>
-</li>
-<li><p><strong>Growth Function $m_\mathbb{H}(N)$ :</strong> $\mathbb{H}\rightarrow\mathbb{R}^1$<br>   $m_\mathbb{H}(N)=\max\limits_{\forall x_i\in\chi}(\mathbb{H}(\mathbb{X}_1,\mathbb{X}_2,…,\mathbb{X}_N ))$，這函數白話一點來說，就是所有的 $h$ 到底可以把資料點做出多少種不同的二元分類。在 Machine Learning 的討論中，$N$ 都是有限正整數，那麼$m_\mathbb{H}(N)$出來的值也必然會是有限正整數 ( $\leq2^N$ )<sup><a href="#fn_註1" id="reffn_註1">註1</a></sup></p>
-</li>
-</ul>
-<ul>
-<li><p><strong>shatter</strong><br>  我們說 $\mathbb{X}_1,\mathbb{X}_2,…,\mathbb{X}_N$ 可以被 $shatter$ $\implies m_\mathbb{H}(N)=2^N$ (所有的分類情況都會發生)。所以在 $\mathbb{R}^2$ 情況下，$\mathbb{X}_1,\mathbb{X}_2,…,\mathbb{X}_N$ 可以被 $shatter$ (當 $N\leq3$)</p>
-<p>  $Mathematical\ \ \ Definition\ :$<br>  $C\ shatters\ A\ \ if\  \ \forall a\in A，\exists c\in        C\ \ s.t\ \ a=c\cap A \\ i.e.\ \mathbb{P}(A)=\left\{        c\cap A \mid\ c\in C\right\}$<br>  <br></p>
-</li>
-<li><p><strong>Break Point</strong><br>  第一個不會被 $shatter$ 的 $N$，在 $\mathbb{R}^2$ 情況下，$break\ point=4$</p>
-<blockquote>
-<p>Break Point是一項很重要的指標，代表著當 $N&gt;Break\ Point$ 時，整個成長會大幅趨緩 ( $O(N)\ll 2^N,when\ N&gt;Break\ Point$ )。    </p>
-</blockquote>
-</li>
-<li><p><strong>Big O</strong> ( Time complexity 、成長速度、無限大漸進概念)</p>
-<p>  $Mathematical\ \ \ Definition\ :$<br>  $Given f(x),g(x)\ \ \\\exists\ M,x_0\ \ \forall\ x\geq x_0\ \ s.t.\ \mid f(x)\mid\leq M\mid g(x)\mid \\\implies\ f(x)\in O(g(x)) \ or\ f(x)=O(g(x))$</p>
-</li>
-</ul>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>資料空間 &amp;分類型態<sup><a href="#fn_註2" id="reffn_註2">註2</a></sup></th>
-<th>Break Point</th>
-<th>$m_\mathbb{H}(N)$</th>
-<th>O(N)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1-D Positive ray</td>
-<td>2</td>
-<td>N+1</td>
-<td>$O(N)$</td>
-</tr>
-<tr>
-<td>1-D Positive interval</td>
-<td>3</td>
-<td>$\frac{1}{2}N^2+\frac{1}{2}N+1$</td>
-<td>$O(N^2)$</td>
-</tr>
-<tr>
-<td>Convex Set</td>
-<td>$\infty$</td>
-<td>$2^N$</td>
-<td>-</td>
-</tr>
-<tr>
-<td>2-D Perceptron</td>
-<td>4</td>
-<td>$&lt;2^N$ (in some cases)</td>
-<td>$O(N^3)$</td>
-</tr>
-</tbody>
-</table>
-</div>
-<ul>
-<li><p><strong>Bounding Function $B(N,K)=\max\limits_{N&gt;K}(m_{\mathbb{H}}),\ where\ K=Break\ Point$</strong><br>  這樣看起來還是有點抽象，我引用林軒田與Yaser S . Abu-Mostafa所著的 “ Learning From Data “ 一書的說法比較清楚 :</p>
-<script type="math/tex; mode=display">B (N, k)\ is\ the\ maximum\ number\ of\ dichotomies\\ on\ N\ points\ such\ that\ no\ subset\ of\ size\ k\ of\ the\ N\ points\ can\ be\ shattered\\ by\ these\ dichotomies.</script><p>  在討論Bounding Function時，我們已經不管分類的型態是什麼，單純只看Break Point K為多少。(1-D perceptron 或是 1-D positive ray K值都是3)</p>
-<p>  <img src="https://i.imgur.com/hAG2G5G.png" alt><br>  (這邊在課堂上都保守的以 $\leq$ 表示，但實際上有更強的 $=$ 關係)</p>
-<p>  從上圖我們可以發現Bounding Function的幾個重要性質<sup><a href="#fn_註3" id="reffn_註3">註3</a></sup> :</p>
-<script type="math/tex; mode=display">B(N,K)=B(N-1,K)+B(N-1,K-1)</script><script type="math/tex; mode=display">m_\mathbb{H}(N)\leq B(N,K)</script></li>
-</ul>
-<hr>
-<p>現在所有的工具都準備好了，我們該準備來面對上面的問題了~<br>為了避免因為 $infinite\ \mathbb{H}$ 而造成的上界快速擴張狀況，我們用$m_\mathbb{H}(N)$來取代原本的 $M$<br>最後可以得到一個比較逼近的上界<sup><a href="#fn_註4" id="reffn_註4">註4</a></sup> :</p>
-<script type="math/tex; mode=display">\mathbb{P}(\mid E_{out}(\mathbb{H})-E_{in}(\mathbb{H}) \mid>\epsilon)\leq 4m_\mathbb{H}(N)e^{\frac{1}{8}\epsilon^2N}</script><p>我們稱之為 $Vapnik-Chervonenkis Bound\ (VC\ Bound)$</p>
-<h3 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h3><p>$\mathbb{P}(\mid E_{in}(g)-E_{out}(g)\mid&gt;\epsilon)$<br>$\leq 4m_\mathbb{H}(2N)\cdot e^{-\frac{1}{8}\epsilon^2N}$<br>$\leq 4(2N)^{K-1}\cdot e^{-\frac{1}{8}\epsilon^2N}\ ,\ if\ N\ is\ large\ enough\ and\ K\ exists.$<br>($\because m_\mathbb{H}(N)\leq B(N,K)\leq N^{K-1}$)</p>
-<p>$\therefore$存在 $Break\ point$ 且 $N$ 夠大的情況下，即使 $infinite\ \mathbb{H}$，演算法從$E_{in}$很小的條件下挑出一個 $g$，都一定會有一個有限上界可以確保$E_{in}$跟$E_{out}$夠接近。</p>
-<h2 id="註釋"><a href="#註釋" class="headerlink" title="註釋"></a>註釋</h2><p><sup><a href="#fn_註1" id="reffn_註1">註1</a></sup>:<br>為什麼 $m_\mathbb{H}(N)$ 不一定會等於要取 $\max$ ? 為什麼不等於$2^N$?<br>從排列組合的觀點來看，$N$ 個點的二元分類應該要有 $2^N$ 種，但我們這裡要的是 $”Linear\ separable”$ 所以會有所差異。<br><img src="https://i.imgur.com/cuNoGXM.png" alt><br>從上圖可以看出來，$N=4$ 時，應該會有16種二分法，但是由於我們要求線性可分，因此一定「至少」有兩種 ( 圖中打 X 的狀況以及其對稱情況 )不符合我們的需求。 為什麼是「至少」? 如果這 $N$ 筆資料有特別的排列情況(EX:共線)，當然有可能有更多種狀況會被排除，但，$m_\mathbb{H}(N)$函數要的是「max」，也就是說我現在要看的是被排除最少的情況，所以在 $N=4$ 時，$m_\mathbb{H}(4)=14$ ( 那兩種被排除的狀況，就是不管四筆資料怎麼分布，絕對都會被排除 )<br>當然，$m_\mathbb{H}(N)$也會跟資料本身處的維度空間有關。</p>
-<p><sup><a href="#fn_註2" id="reffn_註2">註2</a></sup>:<br>林軒田教授在課堂上講了四種的資料空間及分類型態 :<br><strong>2-D Preceptron , 1-D Positive Ray , 1-D Positive interval and Convex Set</strong><br><br><br><img src="https://i.imgur.com/cuNoGXM.png =300x" alt><img src="https://i.imgur.com/hJOlpy9.png =300x" alt> <img src="https://i.imgur.com/SFDXhiD.png =300x" alt><img src="https://i.imgur.com/A21Tr8u.png =300x" alt></p>
-<p><sup><a href="#fn_註3" id="reffn_註3">註3</a></sup>:<br>試證明 $B(N,K)=B(N-1,K)+B(N-1,K-1)$<br>Claim:$B(N,K)=\sum\limits_{j=0}^{K-1}{{N}\choose{j}}$<br>Proof :<br>$B(N,K)\\=2^N-{{N}\choose{K}}-{{N}\choose{K+1}}-…-{{N}\choose{N}}\\={{N}\choose{0}}+{{N}\choose{1}}+{{N}\choose{2}}+…+{{N}\choose{K-1}}\\=\sum\limits_{j=0}^{K-1}{{N}\choose{j}}$<br>$B(N,K)$的最高次項為$N^{K-1}$<br>因為最後一項為$\frac{N(N-1)(N-2)…(N-K+1)}{K!}$</p>
-<p>$\because B(N,K)=\sum\limits_{j=0}^{K-1}{{N}\choose{j}}={{N}\choose{0}}+{{N}\choose{1}}+{{N}\choose{2}}+…+{{N}\choose{K-1}}\\<br>={{N}\choose{0}}+({{N-1}\choose{1}}+{{N-1}\choose{0}})+({{N-1}\choose{2}}+{{N-1}\choose{1}})+…+({{N-1}\choose{k-1}}+{{N-1}\choose{k-2}})\\<br>={{N-1}\choose{0}}+({{N-1}\choose{1}}+{{N-1}\choose{2}}+..+{{N-1}\choose{k-1}})+({{N-1}\choose{0}}+{{N-1}\choose{1}}+..+{{N-1}\choose{k-2}})\\<br>=\sum\limits_{j=0}^{K-2}{{N}\choose{j}}+\sum\limits_{j=0}^{K-1}{{N-1}\choose{j}}$</p>
-<p><sup><a href="#fn_註4" id="reffn_註4">註4</a></sup>:<br>證明 $\mathbb{P}(\mid E_{out}(\mathbb{H})-E_{in}(\mathbb{H}) \mid&gt;\epsilon)\leq 4m_\mathbb{H}(N)e^{\frac{1}{8}\epsilon^2N}$<br>Proof :<br>Step1 :<br>Assume $D’$ iid with $D$ is a data set with size N (ghost data)<br>(若$E_{in}$與$E_{out}$離得很遠，則$D$裡面N筆資料大多沒選到error點，那母體種再取N個點($D’$)就會包含比較多的error，$E’_{in}$與$E_{out}$就會有較大機率會比較靠近)</p>
-<p>PS: $E_{in},E’_{in}\ and\ E_{out}$，其實就是個別代表著實務上的 $E_{train},E_{val}\ and\ E_{test}$</p>
-<p>Step2 :<br><img src="https://i.imgur.com/xP147ab.png =300x" alt><br>當$N$足夠大時，$E_{in}(E’_{in})$的整體分布狀況會近似於以$E_{out}$為中心的常態分佈，$E_{in}$越往右跑，$E’_{in}$會越往左靠</p>
-<p>$\mathbb{P}(\sup\limits_{h\in\mathbb{H}}\mid E_{in}(h)-E’_{in}(h)\mid&gt;\frac{\epsilon}{2})$<br>$\geq\mathbb{P}(\sup\limits_{h\in\mathbb{H}}\mid E_{in}(h)-E’_{in}(h)\mid&gt;\frac{\epsilon}{2}\ and\ \sup\limits_{h\in\mathbb{H}}\mid E_{in}(h)-E_{out}(h)\mid&gt;\epsilon)$<br>$=\mathbb{P}(\sup\limits_{h\in\mathbb{H}}\mid E_{in}(h)-E_{out}(h)\mid&gt;\epsilon)\times\mathbb{P}(\sup\limits_{h\in\mathbb{H}}\mid E_{in}(h)-E’_{in}(h)\mid&gt;\frac{\epsilon}{2}\ \<br>\mid \ \sup\limits_{h\in\mathbb{H}}\mid E_{in}(h)-E_{out}(h)\mid&gt;\epsilon)$</p>
-<p><img src="https://i.imgur.com/xJrAxfj.png" alt></p>
-<p>$\therefore\mathbb{P}(\sup\limits_{h\in\mathbb{H}}\mid E_{in}(h)-E’_{in}(h)\mid&gt;\frac{\epsilon}{2})\geq(1-2e^{-2({\frac{\epsilon}{2}})^2N})\times\mathbb{P}(\sup\limits_{h\in\mathbb{H}}\mid E_{in}(h)-E_{out}(h)\mid&gt;\epsilon)$</p>
-<p>Step3 :<br>W.L.O.G assum : $e^{\frac{1}{2}\epsilon^2N}&lt; \frac{1}{4}$<br>(if not ,VC BOund 顯然為真)<br>$\therefore\mathbb{P}(\sup\limits_{h\in\mathbb{H}}\mid E_{in}(h)-E’_{in}(h)\mid&gt;\frac{\epsilon}{2})\geq\frac{1}{2}\times\mathbb{P}(\sup\limits_{h\in\mathbb{H}}\mid E_{in}(h)-E_{out}(h)\mid&gt;\epsilon)$<br>$\therefore 2\mathbb{P}(\sup\limits_{h\in\mathbb{H}}\mid E_{in}(h)-E’_{in}(h)\mid&gt;\frac{\epsilon}{2})\geq\mathbb{P}(\sup\limits_{h\in\mathbb{H}}\mid E_{in}(h)-E_{out}(h)\mid&gt;\epsilon)$<br><br><br>Step4 :<br>現在整個母體的機率已經被我們用$D\ and\ D’$限制住<br>$\mathbb{P}(\mid E_{in}(h)-E_{out}(h)\mid&gt;\epsilon)$<br>$\leq2\mathbb{P}(\sup\limits_{h\in\mathbb{H}}\mid E_{in}(h)-E’_{in}(h)\mid&gt;\frac{\epsilon}{2})$<br>$\leq 2\sum\limits_{h\in\mathbb{H}}\mathbb{P}(\mid E_{in}(h)-E’_{in}(h)\mid&gt;\frac{\epsilon}{2})$<br>$=2m_\mathbb{H}(2N)\times\mathbb{P}(\mid E_{in}(h)-E’_{in}(h)\mid&gt;\frac{\epsilon}{2})\mid)$<br>($\because$把$D,D’$作為一個母體來看)<br>$=2m_\mathbb{H}(2N)\times\mathbb{P}(\mid E_{in}(h)-\frac{E_{in}(h)-E’_{in}(h)}{2}\mid&gt;\frac{\epsilon}{2})&gt;\frac{\epsilon}{4}\mid)$<br>($\because E_{in}(h)-E’_{in}(h)&lt;\frac{\epsilon}{2}\implies\frac{E_{in}(h)-E’_{in}(h)}{2}&lt;\frac{\epsilon}{4}\implies E_{in}(h)-\frac{E_{in}(h)}{2}-\frac{E’_{in}(h)}{2}&lt;\frac{\epsilon}{4}$)<br>$\leq 2m_\mathbb{H}(2N)\cdot 2\cdot e^{-2e^{-2({\frac{\epsilon}{2}})^2N}}$($\because$針對單一$h$，所以$M=1$)<br>$=4m_\mathbb{H}(2N)e^{-\frac{1}{8}\epsilon^2N}$得證</p>
-
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2019/09/30/林軒田機器學習基石筆記 - 第五講、第六講/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -405,7 +324,7 @@
   
   
   <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/30/林軒田機器學習基石筆記 - 第三講、第四講/">
+    <link itemprop="mainEntityOfPage" href="https://allen108108.github.io/2019/09/30/林軒田機器學習基石筆記 - 第三講、第四講/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Allen Tzeng">
@@ -434,11 +353,19 @@
                 
               
 
-              <time title="創建時間：2019-09-30 21:14:12 / 修改時間：22:00:43" itemprop="dateCreated datePublished" datetime="2019-09-30T21:14:12+08:00">2019-09-30</time>
+              <time title="創建時間：2019-09-30 21:14:12" itemprop="dateCreated datePublished" datetime="2019-09-30T21:14:12+08:00">2019-09-30</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2019-10-01 22:26:54" itemprop="dateModified" datetime="2019-10-01T22:26:54+08:00">2019-10-01</time>
+              </span>
             
           
             <span class="post-meta-item">
@@ -466,6 +393,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+            <div class="post-gallery-row">
+              <img src="https://i.imgur.com/gcF9CdZ.png" itemprop="contentUrl">
+            
+          
+
+          </div>
+        </div>
           <blockquote>
 <ul>
 <li><strong>本文為一系列課程之筆記，建議從” <a href="https://hackmd.io/s/ryxzB7LwN" target="_blank" rel="noopener">機器學習基石筆記-1</a> “開始閱讀</strong><br>&gt;</li>
@@ -476,112 +411,15 @@
 </ul>
 </blockquote>
 <hr>
-<h2 id="Types-of-Learning"><a href="#Types-of-Learning" class="headerlink" title="Types of Learning"></a>Types of Learning</h2><p>在前文中，我們介紹了一種最簡單的機器學習模式 : <strong>簡單二元分類 (Perceptron)</strong> ，但機器學習的型態非常多，以下我們從<strong>輸出空間Output Space、目標標籤Data Lable、處理資料的方式Protocol以及輸入空間Input Space</strong>這幾個面向來討論</p>
-<h3 id="Output-Space"><a href="#Output-Space" class="headerlink" title="Output Space"></a><strong>Output Space</strong></h3><ul>
-<li><p>Binary classification : $\mathbb{y}\in\left\{+1,-1\right\}$<br>  許多的ML理論推導均由 binary classification 出發</p>
-</li>
-<li><p>Multiclass classification : $\mathbb{y}\in\left\{1,2,3,4,…,k\right\}$<br>  $1,2,3,4,…,k$ 為多種目標的「編號」，並非目標就是 $1,2,3,4,…,k$</p>
-<blockquote>
-<p>以 Classify US coin by size &amp; mass 為例<br>$\mathbb{y}\in\left\{1c,5c,10c,25c\right\}$ or $\left\{1,2,3,4\right\}$</p>
-</blockquote>
-<p>  binary classification 為 k=2 時的特例</p>
-</li>
-<li><p>Regression : $\mathbb{y}\in\mathbb{R}$</p>
-</li>
-<li><p>Structure Learning : $\mathbb{y}\in\left\{Structural\ Sequence\right\}$</p>
-<blockquote>
-<p>$\mathbb{X}:\left\{詞\right\}\rightarrow\mathbb{Y} :\left\{詞性\right\}$ Multiclass classification<br>  $\mathbb{X}:\left\{句子\right\}\rightarrow\mathbb{Y} :\left\{結構\right\}$ Structure Learning </p>
-</blockquote>
-</li>
-</ul>
-<p><br></p>
-<h3 id="Data-Label"><a href="#Data-Label" class="headerlink" title="Data Label"></a><strong>Data Label</strong></h3><ul>
-<li><p>Supervised Learning ( 監督式學習 ) :<br>  其實就是 Multiclass classification $\mathbb{y}\in\left\{1,2,3,4,…,k\right\}$ </p>
-</li>
-<li><p>Unsupervised Learning ( 非監督式學習 ) : $unknown\ \mathbb{y}$</p>
-<blockquote>
-<p>在 Classify US coin by size &amp; mass 例子中，若不告知電腦目標值為多少，而讓其自行進行分類判斷，即為 Unsupervised Learning </p>
-</blockquote>
-<p> 像 Clustering (分群)、Density estimation (密度估計)、Outlier detection ( 異常偵測 )均為 Unsupervised Learning範圍</p>
-</li>
-<li><p>Semi-supervised Learning ( 半監督式學習 ) :</p>
-<blockquote>
-<p>在 Classify US coin by size &amp; mass 例子中，若僅告知某幾個資料的分類為何，其餘讓電腦自行判斷，便為Semi-supervised Learning</p>
-</blockquote>
-</li>
-<li><p>Reinforcement Learning ( 增強式學習 ) :<br>  $\mathbb{y}$ 仍不明確，但每一筆輸出都給予電腦回饋，讓系統逐漸學習者稱之。<br>  增強式的學習是序列性、逐筆的學習，而前面的其它學習法幾乎都是整個資料集一次餵進去給電腦。</p>
-</li>
-</ul>
-<p><br></p>
-<h3 id="Protocol"><a href="#Protocol" class="headerlink" title="Protocol"></a><strong>Protocol</strong></h3><ul>
-<li>Batch Data<br>  將資料成批的餵給電腦進行學習，學習出一個固定的 $g$</li>
-<li>Online Data<br>  類似 PLA / Pocket 概念，資料不斷進來，電腦也不斷地調整 $g$</li>
-<li>Active Learning<br>  系統會主動向使用者進行提問而來進行優化 $g$</li>
-</ul>
-<p><br></p>
-<h3 id="Input-Space"><a href="#Input-Space" class="headerlink" title="Input Space"></a><strong>Input Space</strong></h3><ul>
-<li>Concrete Feature<br>  $\mathbb{X}$ 中帶有具體的描述 / 特徵稱為 concrete feature $x_i$，通常由 domain knowledge 決定</li>
-<li><p>Raw Feature</p>
-<blockquote>
-<p>EX: 手寫辨識<br>將每一個手寫字分為256個畫素 ，依程度賦予其數值 $\mathbb{X}\in\mathbb{R^{256}}$</p>
-</blockquote>
-</li>
-<li><p>Abstract Feature<br>  特徵不具體 — 像是USER_ID , Rating 或 item_ID - 因為沒有「物理」上的意義，因此這樣的問題在ML中相對困難。</p>
-</li>
-</ul>
-<p><br></p>
-<h2 id="Feasibility-of-Learning"><a href="#Feasibility-of-Learning" class="headerlink" title="Feasibility of Learning"></a>Feasibility of Learning</h2><p><img src="https://i.imgur.com/nmOVBQz.png" alt></p>
-<p>討論機器學習的可行性，我們就從講義的這一個例子開頭吧!</p>
-<p>這樣的例子在一般的智力測驗中算是非常常見的題型之一，但是，好像都不會有人質疑這樣的題目是不是真的唯一解 ?<sup><a href="#fn_註1" id="reffn_註1">註1</a></sup></p>
-<p>若從上面的例子來看，$g(x)=+1 或是 -1$都是很合理的推測。</p>
-<p>這下糟糕了!</p>
-<p>那我們怎麼確保機器學習出來的模型可以被侷限住達到有效的預測 ? 而不會預測出來有無限多種可能性 ?</p>
-<h3 id="Probability-amp-error"><a href="#Probability-amp-error" class="headerlink" title="Probability &amp; error"></a>Probability &amp; error</h3><p>課程走到這，其實會覺得突然引進機率概念會覺得有點突兀、難理解。但是其實並不然，現實生活任何事件都是充滿機率概念，機器學習也不例外。</p>
-<p>我們手中有的 dataset 的取得以及分布、雜訊的生成、Model對未來資料的擬合精確度…等也都跟機率有關，所以在機器學習的研究進程中會將機率引入相對來說算是合情而且合理的。有了機率的概念，這表示不會百分之百精準，這時error的概念也會隨之而生。</p>
-<p>OK，既然可以理解了這兩個概念在機器學習理論上的定位後，就可以來討論上面的問題 :「機器學習的可行性在理論上的保證」</p>
-<h3 id="Hoeffding’s-Inequality"><a href="#Hoeffding’s-Inequality" class="headerlink" title="Hoeffding’s Inequality"></a>Hoeffding’s Inequality</h3><p>給定某事件在母體中機率 $\mu$，現有一抽樣，其樣本數 $N$，此事件在樣本中機率$\nu$<br>則 $\mu\ 與\ \nu$之誤差大於 $\epsilon$ 的 機率不會超過 $2e^{-2\epsilon^2N}$<br><strong><script type="math/tex">\mathbb{P}(|\mu-\nu|>\epsilon) \leq 2e^{-2\epsilon^2N}</script></strong></p>
-<p><img src="https://i.imgur.com/gcF9CdZ.png" alt></p>
-<p>我們把上面這樣的一個概念跟機器學習做一個類比:</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>抽球</th>
-<th>ML</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>給定一個Bin，裡面裝滿綠球跟橘球</td>
-<td>給定一個$h$，及一個Dataset $\mathbb{D}$</td>
-</tr>
-<tr>
-<td>Bin內抽中橘球的機率為$\mu$，樣本內抽中橘球的機率為$\nu$</td>
-<td>在$\mathbb{D}$以外的資料中，$h(\mathbb{X})\neq f(\mathbb{X})$ 的機率為$E_{out}(h)$，在$\mathbb{D}$中的資料中，$h(\mathbb{X})\neq f(\mathbb{X})$ 的機率為$E_{in}(h)$</td>
-</tr>
-<tr>
-<td>$\mathbb{P}(\mid\mu-\nu\mid&gt;\epsilon) \leq 2e^{-2\epsilon^2N}$</td>
-<td>$\mathbb{P}(\mid E_{out}(h)-E_{in}(h)\mid&gt;\epsilon) \leq 2e^{-2\epsilon^2N}$</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>從 Hoeffding’s Inequality 可知道 :<br>樣本的數量 $N$ 越大，$2e^{-2\epsilon^2N}$會越小$\implies$$\mu$ 與 $\nu$ 會越接近 ( $E_{out}(h)$ 與 $E_{in}(h)$ 會越接近 )<br>只要 $E_{out}(h)$足夠小， 我們便可以宣稱 $h$ 與 $f$ 夠接近了。</p>
-<p>看起來好像沒問題了?</p>
-<p>上述的理論出發點是「給定一個 $h$ 」，然而我們的 Hypothesis Set  $\mathbb{H}$裡面可不只裝一個 $h$ (可能 finite ,也可能 infinite) ，如何在這眾多的 $h_k$ 中選擇一個表現最好的來當我們要的 $g$ ?</p>
-<p>我們一樣先從單一的 $h$ 來看 Hoeffding’s Inequality的意義是什麼?</p>
-<p><img src="https://i.imgur.com/phA4piY.png" alt></p>
-<p>$D_k$代表的是母體中採樣樣本數量為 $N$ 的各種採樣組合<br><br><br>Hoeffding告訴我們，只要採樣樣本數為 $N$ ，那麼「不好的採樣」<br>( 意即$E_{out}(h)-E_{in}(h)\mid&gt;\epsilon$ ) 的機率一定會有一個上界 $2e^{-2\epsilon^2N}$，從上圖來解釋，其實就是BAD的機率會有上界 $2e^{-2\epsilon^2N}$</p>
-<p>那麼把所有 hypothesis $h_k$( 假設 $\mathbb{H}$ 為有限集 )攤開來看<br><img src="https://i.imgur.com/c4hPzQ4.png" alt></p>
-<p>在所有的 $h_k$ 之中，真正一個「好的採樣」，應該是不管機器選到哪一個 hypothesis $h_k$ ，都仍然是一個「好的採樣」 ( 意即$E_{out}(h)-E_{in}(h)\mid&lt;\epsilon$ )。上圖的 $D_{1126}$便是一個如此的「好的採樣」。</p>
-<p>那我們仍然從 Hoeffiding’s Inequality的角度來看 :</p>
-<p>$\mathbb{P} (|E_{out}(\mathbb{H})-E_{in}(\mathbb{H})|&gt;\epsilon)$</p>
-<p>$=\mathbb{P} ((|E_{out}(h_1)-E_{in}(h_1)|&gt;\epsilon)\ or\ (|E_{out}(h_2)-E_{in}(h_2)|&gt;\epsilon)\ or\ …or(|E_{out}(h_M)-E_{in}(h_M)|&gt;\epsilon))$</p>
-<p>$\leq\mathbb{P} ((|E_{out}(h_1)-E_{in}(h_1)|&gt;\epsilon)\ +\ (|E_{out}(h_2)-E_{in}(h_2)|&gt;\epsilon)\ +\ …+(|E_{out}(h_M)-E_{in}(h_M)|&gt;\epsilon))$</p>
-<p>$\leq2Me^{-2\epsilon^2N}$</p>
-<p>所以我們可以得到以下結論 :<br>M 為有限數 , N夠大 ，$E_{out}(h)$ 與 $E_{in}(h)$ 會夠接近<br>$\implies$ M 為有限數 , N夠大 ，  $E_{in}(h)\rightarrow0$，則 $E_{out}(h)\rightarrow0$<br>$\implies$ 機器學習中，只要 M為有限數，樣本數夠多，我們盡可能的  找出$E_{in}(h)\rightarrow0$，則便可確保$E_{out}(h)\rightarrow0$</p>
-<h2 id="註釋"><a href="#註釋" class="headerlink" title="註釋"></a>註釋</h2><p><sup><a href="#fn_註1" id="reffn_註1">註1</a></sup>:<br>還有一種很常見的題目「1=2；2=4；3=8，請問4= ?」<br>大家正常都會非常快速的回答出「16」，而答案通常也是如此。<br>假設有一個函數 $f$ 滿足上面的條件，$f(1)=2，f(2)=4，f(3)=8$<br>從座標的角度來看可以看做給定三點$(1,2) , (2,4) ,(3,8)$求過第四點$(4,y)$的曲線，<br>從這裡不難發現，給定任意四點，我都可以求出一個四次方程式$f(x)=ax^3+bx^2+cx+d$通過這四點，<br>也就是說，不管我們給定哪一個$y$值，都一定可以找到一個(或以上)的 $f$ 來對應。</p>
-
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2019/09/30/林軒田機器學習基石筆記 - 第三講、第四講/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -605,7 +443,7 @@
   
   
   <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/30/林軒田機器學習基石筆記 - 第一講、第二講/">
+    <link itemprop="mainEntityOfPage" href="https://allen108108.github.io/2019/09/30/林軒田機器學習基石筆記 - 第一講、第二講/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Allen Tzeng">
@@ -634,11 +472,19 @@
                 
               
 
-              <time title="創建時間：2019-09-30 20:38:20 / 修改時間：21:03:27" itemprop="dateCreated datePublished" datetime="2019-09-30T20:38:20+08:00">2019-09-30</time>
+              <time title="創建時間：2019-09-30 20:38:20" itemprop="dateCreated datePublished" datetime="2019-09-30T20:38:20+08:00">2019-09-30</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2019-10-01 22:27:56" itemprop="dateModified" datetime="2019-10-01T22:27:56+08:00">2019-10-01</time>
+              </span>
             
           
             <span class="post-meta-item">
@@ -666,6 +512,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+            <div class="post-gallery-row">
+              <img src="https://i.imgur.com/MIslz7k.png" itemprop="contentUrl">
+            
+          
+
+          </div>
+        </div>
           <blockquote>
 <ul>
 <li><p><strong>本文討論內容請參考:<br>機器學習基石第一講 : The Learning Problem<br>機器學習基石第二講 : Learning to Answer Yes/No</strong></p>
@@ -673,46 +527,16 @@
 <li><p><strong>本篇所有圖片部分由筆者製作，其它均為機器學習基石課程內容講義</strong></p>
 </li>
 </ul>
-</blockquote>
 <hr>
-<ul>
-<li><p><strong>Learning :</strong> 從觀察開始，經由腦內轉化，形成有用的技能。<br>  <strong>Machine Learning :</strong> 利用電腦模擬上述的過程，稱之。</p>
-</li>
-<li><p><strong>Machine Learning 本質 :</strong><br>存在潛藏模式可以被學習，但我們無法明確給訂規則及定義，因此利用過往資料讓機器自行學習判斷。</p>
-</li>
-</ul>
-<p><br></p>
-<h2 id="Componemts-of-Machine-Learning"><a href="#Componemts-of-Machine-Learning" class="headerlink" title="Componemts of Machine Learning"></a>Componemts of Machine Learning</h2><p><img src="https://i.imgur.com/MIslz7k.png" alt></p>
-<ul>
-<li><p><strong>Perceptron Hypothesis Set</strong><br>  Perceptron指的是一種簡單的二元分類器 $\left( y\in\left\{+1,-1,0\right\}\right)$ ，而機器學習許多的概念都是由這最簡單的二元分類器而來。</p>
-<p>  $h(\mathbb{X})=sign(\sum\limits_{i=1}^{N}w_ix_i+threshold)  =sign(\sum\limits_{i=0}^{N}w_ix_i)=sign(\mathbb{W}^T\mathbb{X})$</p>
-<p>  在此處可以清楚看見，決定 $h$ 的因素在於 $w_i$ 及 $threshold$，也就是 $\mathbb{W}$，因此在往後的課程中，討論hypothesis的重點將會放在 $\mathbb{W}$ 上面</p>
-</li>
-<li><p><strong>Geometric Meaning of </strong>$h$<strong> </strong></p>
-</li>
-</ul>
-<p><img src="https://i.imgur.com/z9lsd58.png" alt><br>    $\mathbb{W}$ 會很容易讓人誤會是那一條分類線(超平面)，嚴格說起來也是沒錯，但嚴謹一點來說，應該指的是其法向量，這也呼應到上面講的，任何一個$h$ ，都能唯一找到一個 $\mathbb{W}$，當我們要找 $h$，也就只要專注在找出對應的 $\mathbb{W}$ 即可。<br><br>    </p>
-<h2 id="Perceptron-Learning-Algorithm-PLA"><a href="#Perceptron-Learning-Algorithm-PLA" class="headerlink" title="Perceptron Learning Algorithm (PLA)"></a>Perceptron Learning Algorithm (PLA)</h2><p><img src="https://i.imgur.com/6c5EOJg.png" alt></p>
-<script type="math/tex; mode=display">PLA其實就是經由不斷的修正錯誤最終求得一個完美分類器的迭代過程。</script><p>在林軒田的課程中，講義的符號的一些細節常常會讓人忽略，然而讀到後面就會開始腦袋打結，例如 : 資料點 $X$ (我自己習慣用$\mathbb{X}$) 與 $x$ 的差別</p>
-<p>在Step2中，以數學的觀點來看，第 $t$ 次迭代找到的錯誤點 $\left(\mathbb{X}_{n_{t}},y_{n_{t}}\right)$ 並非剛好就會是原始資料中的第 $n$ 個資料，因此便在 $n$ 下方再多一個下標 $t$，以明確標示出每一個錯誤的點。</p>
-<ul>
-<li><p><strong>經過這樣一系列的迭代過程，PLA最終真的會停止(halt)嗎</strong>?<br>  是的，只要我們手中的 Dataset 是線性可分(Linear Separable)，最後 PLA 必然會收斂，這就是所謂的 “ Perceptron Convergence Theorem” </p>
-<p>  <img src="https://i.imgur.com/HvSXMny.png" alt><br><br></p>
-</li>
-<li><p>PLA其實是一個極為理想的狀態，是否真正存在一個理想的$f$ 我們不能確定，而且現實的dataset絕大多數都會因為noise而不會Linear Separable</p>
-<p>  如果我們真的找不到完美的分類器，那麼可以退而求其次，找出誤差最小的總可以了吧!<br>  <script type="math/tex">\mathbb{W}_g=arg\min\limits_{\forall\mathbb{W}}\sum\limits_{n=1}^{N}[\![y_n\neq(\mathbb{W}^T\mathbb{X}+b)]\!]</script><sup><a href="#fn_註1" id="reffn_註1">註1</a></sup><br>  很遺憾的，這是一個NP-Hard的問題看來也是無解。</p>
-</li>
-</ul>
-<h2 id="Pocket-Algorethm"><a href="#Pocket-Algorethm" class="headerlink" title="Pocket Algorethm"></a>Pocket Algorethm</h2><p>這是一種PLA的變形演算法，過程與PLA大致都相同，一樣要經過迭代程序，但不同的地方在於 : 「PLA目的在找出一個絕對好的分類器，但Pocket則是找出相對好的即可。」</p>
-<p>每一次的迭代過程，都把新的 $\mathbb{W}_t$ 跟上一個 $\mathbb{W}_{t-1}$ 做比較，誤差量相對小的就把她暫時當成目前最好的分類器 $\tilde{\mathbb{W}}$ 放在Pocket中，雖然經過不斷的迭代，但Pocket中的 $\tilde{\mathbb{W}}$ 絕對是”當下”最好的分類器。</p>
-<p><code>[Remark] Pocket演算法不見得最終會 halt (因為現實資料並不見得線性可分)，那麼停止的條件便只能用人為來判斷迭代次數，只要我們認為迭代次數夠多了就可以停止Pocket Algorithm</code></p>
-<p>這樣的演算法，便能克服在現實狀況中會遇到的問題。</p>
-<p>但是這也不是非常完美的方式，這樣的演算法的計算時間相對PLA要來的久 ( 因為要不斷儲存 $\tilde{\mathbb{W}}$，而且每一次迭代都必須重新計算誤差量 )。<br><br></p>
-<h2 id="註釋"><a href="#註釋" class="headerlink" title="註釋"></a>註釋</h2><blockquote id="fn_註1">
-<sup>註1</sup>. $[\![a]\!]$ 雙方括號 : <a href="#reffn_註1" title="Jump back to footnote [註1] in the text."> &#8617;</a>
-</blockquote>
-<p>可以表達為小於等於 a 的最大整數，但在此為 $Iverson\ bracket$ ，在括號內的邏輯條件為 True 則為 1，為 Flase 則為 0。</p>
-
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2019/09/30/林軒田機器學習基石筆記 - 第一講、第二講/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -736,7 +560,7 @@
   
   
   <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/30/Chapter 1 – Introduction/">
+    <link itemprop="mainEntityOfPage" href="https://allen108108.github.io/2019/09/30/Chapter 1 – Introduction/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Allen Tzeng">
@@ -765,11 +589,19 @@
                 
               
 
-              <time title="創建時間：2019-09-30 14:46:54 / 修改時間：21:03:22" itemprop="dateCreated datePublished" datetime="2019-09-30T14:46:54+08:00">2019-09-30</time>
+              <time title="創建時間：2019-09-30 14:46:54" itemprop="dateCreated datePublished" datetime="2019-09-30T14:46:54+08:00">2019-09-30</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2019-10-01 21:06:00" itemprop="dateModified" datetime="2019-10-01T21:06:00+08:00">2019-10-01</time>
+              </span>
             
           
             <span class="post-meta-item">
@@ -806,57 +638,15 @@
 <li>找出一套演算法可以清楚、簡單的解決問題</li>
 <li>證明這套演算法是正確的，並且解決問題所花的時間必須在可接受的範圍內。</li>
 </ol>
-<h2 id="Stable-Matching-Problem"><a href="#Stable-Matching-Problem" class="headerlink" title="Stable Matching Problem"></a>Stable Matching Problem</h2><p>問題描述 : </p>
-<p>現在有 n 位男性與 n 位女性，雙方都清楚了解對方的情況下，要求每一位男( 女 )性都要依照自己的喜好對 n 位異性做出一個 ranking list 排序 ( 無平手狀況 )。而我們現在的工作就是要將雙方進行配對，而配對的條件是 :<br>(1) Perfect matching : 一對一配對，不會有落單的人沒有被配對到<br>(2) Stable Matching : 被配對的雙方都是 Happy and Stable，意即，不存在一對男女互相喜歡對方更勝過於我們幫他們配對的對象。</p>
-<h2 id="Random-Matching-and-Fixing-up"><a href="#Random-Matching-and-Fixing-up" class="headerlink" title="Random Matching and Fixing up"></a>Random Matching and Fixing up</h2><p>Step 1 : 先進行隨機配對<br>Step 2 : 當存在 unstable pair ，藉由交換配對來進行修正</p>
-<p>這樣的方式會有幾個問題，我們利用交換配對來進行修正，很有可能解決了某一對 unstable 狀況，但卻另外造成其他的 unstable。這樣的方式很容易造成無限迴圈。</p>
-<h2 id="Gale-amp-Shapley-Algorithm-—-Propose-and-Reject"><a href="#Gale-amp-Shapley-Algorithm-—-Propose-and-Reject" class="headerlink" title="Gale &amp; Shapley Algorithm  — Propose and Reject"></a>Gale &amp; Shapley Algorithm  — Propose and Reject</h2><p>Step 1 : 男性向女性 Propose<br>Step 2 : 女性決定要 Accept 還是要 Reject</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">function stableMatching &#123;</span><br><span class="line">    Initialize all m ∈ M and w ∈ W to free </span><br><span class="line">    # 初始化所有人均為單身</span><br><span class="line">    while ∃ free man m who still has a woman w to propose to &#123;</span><br><span class="line">       w = first woman on m&apos;s list to whom m has not yet proposed</span><br><span class="line">       # 男生要進行 Propose 必然會先從名單上最高分的女性進行 Propose</span><br><span class="line">       if w is free</span><br><span class="line">         (m, w) become engaged</span><br><span class="line">       # 如果女性單身，則配對</span><br><span class="line">       else some pair (m&apos;, w) already exists</span><br><span class="line">         if w prefers m to m&apos;</span><br><span class="line">            m&apos; becomes free</span><br><span class="line">           (m, w) become engaged </span><br><span class="line">         else</span><br><span class="line">           (m&apos;, w) remain engaged</span><br><span class="line">       # 若女性已被有配對，則比較兩位男性對於這女性的名單 ranking　高低來決定與誰配對</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>這個演算法有一個特別的地方在於中間會有 Deffered Decision Making 的過程，簡單來說就是男女雙方都可以有一個猶豫期來決定這個配對要繼續還是解除。待所有配對都進入這個猶豫期且不變後，才會正式確定全體配對。</p>
-<p>在這樣的演算法下，男性主動 Propose ,而女性被動的選擇是否要 Reject。對男性來說，最後的結果必然是最優化的結果，然而對於只能被動接受或拒絕的女性就未必會是最優化的結果。</p>
-<h3 id="1-Convergence-of-Gale-amp-Shapley-Algorithm"><a href="#1-Convergence-of-Gale-amp-Shapley-Algorithm" class="headerlink" title="1. Convergence of Gale &amp; Shapley Algorithm"></a>1. Convergence of Gale &amp; Shapley Algorithm</h3><p><strong>Claim : Gale &amp; Shapley Algorithm terminates after at most $n^2$ iterations.</strong></p>
-<p><strong><proof></proof></strong></p>
-<p>我們要看 while loop 最多執行多少次，最直覺的方式就是看 free men 個數來決定，但這樣會非常難算，因為每一次的 iteration 都可能更動前幾次的狀態，使得男生可能在 free 或是 engaged 狀態跳來跳去。</p>
-<p>換一個角度來看，每一個 while loop 都一定會有男性向女性提出一個 propose，所以我們直接算最多可能有幾種 propose 可能。</p>
-<p>每一位男性最多可以提出 $n$ 個 propose，總共又有 $n$ 個男性，因此整個 while loop 最多可以執行 $n^2$ 次。</p>
-<h3 id="2-Correctness-of-Gale-amp-Shapley-Algorithm"><a href="#2-Correctness-of-Gale-amp-Shapley-Algorithm" class="headerlink" title="2. Correctness of Gale &amp; Shapley Algorithm"></a>2. Correctness of Gale &amp; Shapley Algorithm</h3><p>這裡先提出幾個對於 Gale &amp; Shapley Algorithm 的觀察 : </p>
-<ul>
-<li>Observation 1 : 男生必然會從其 ranking list 最高分的女性開始 propose</li>
-<li>Observation 2 : Free woman 必然會接受第一個 propose</li>
-<li>Observation 3 : 男性交換配對的方向是一路從 high ranking 換到 low ranking，但女性則是從 low ranking 一路換到 high ranking</li>
-</ul>
-<p><strong>Claim : Gale &amp; Shapley Algorithm return a perfect matching.</strong></p>
-<p><strong><proof></proof></strong></p>
-<p>假設 Gale &amp; Shapley Algorithm 最後會 return 一個 free man M。<br>在此假設下也必然至少存在一位 Free woman W，仍然沒有被 Proposed。從 observation 2 可以確定此 W 從來沒有被 proposed，當然包括 M 。<br>從上述兩個狀態來看，Gale &amp; Shapley Algorithm 會繼續執行 while loop 不會 return 。( $\rightarrow\leftarrow$ )</p>
-<p><strong>Claim : Gale &amp; Shapley Algorithm return a stable matching.</strong></p>
-<p><strong><proof></proof></strong></p>
-<p>假設 Gale &amp; Shapley Algorithm 最後會 return 一個 unstable matching，意即，存在至少一對男女喜歡對方更勝於自己的配對。</p>
-<p>存在 instable pairs $(m,w)$ 與 $(m’,w’)$，且 $m$ prefers $w’$ to $w$ and $w’$ prefers $m$ to $m’$</p>
-<p><img src="https://i.imgur.com/D4qCw7T.jpg" alt></p>
-<p>我們可以知道，在 Gale &amp; Shapley Algorithm 執行過後的配對會是最後一次 propose 的結果 ( 不管前面經過多少次配對或解開配對 )。</p>
-<p>Case 1 : $m$ 不曾 propose $w’$<br>$m$ 最後停在 $w$ 的配對狀態，且未曾與 $w’$ 配對過，則可確定在 $m$ 的 ranking list 上 $w$ 的名次必然在 $w’$ 之前，也就是 $m$ prefers $w$ to $w’$ ( $\rightarrow\leftarrow$ )</p>
-<p>Case 2 : $m$ 曾經 propose $w’$<br>既然 $m$ 曾經 propose $w’$，但最後卻與 $w$ 配對，則可確定當時 propose $w’$ 時被拒絕，這樣也表示 $w’$ 喜歡某人( 可能是 $m’$ 也可能是另外一個 $m’’$ )勝過 $m$。<br>若 $m’=m’’$ ，則 $w’$ prefers $m’$ to $m$ ( $\rightarrow\leftarrow$ )<br>若 $m’\neq m’’$ ，則 $w’$ 喜歡 $m’$ 勝過 $m’’$，根據Case 2的推導， $w’$ 喜歡 $m’’$ 又勝過 $m$，那麼 $w’$ 喜歡 $m’$ 必然勝過 $m$ ( $\rightarrow\leftarrow$ )</p>
-<h3 id="3-Male-Optimality-of-Gale-amp-Shapley-Algorithm"><a href="#3-Male-Optimality-of-Gale-amp-Shapley-Algorithm" class="headerlink" title="3. Male-Optimality of Gale &amp; Shapley Algorithm"></a>3. Male-Optimality of Gale &amp; Shapley Algorithm</h3><p><strong>Claim : Assume <script type="math/tex">w^*=best(m)</script> is the best valid partner of m $\Longrightarrow$ Gale &amp; Shapley Algorithm return solution <script type="math/tex">S^* =\left\{(m, w^*)\ |\ \forall m\right\}</script> .</strong> </p>
-<p>對每一個男性 m 來說，一定會存在一些女性是可能的配對對象，之所以稱之為「可能」，意即在這樣的配對下是有可能達到全體 stable matching 的狀態。而在這個 property 下，可以確定每一個男性最後配對的對象必然是可能對象中最好的那一個。而這個 propertｙ　也間接證明了，Gale &amp; Shapley Algorithm　return 的必是唯一解<sup><a href="#fn_註1" id="reffn_註1">註1</a></sup>。</p>
-<p><strong><proof></proof></strong></p>
-<p>假設某次執行 Gale &amp; Shapley Algorithm $E$ 時 solution $S_E$ 中存在一組配對女方並非男方的 Best valid partner。</p>
-<p>$\Longrightarrow$ 既然女方並非男方的 Best valid partner,則可確定這配對中的男生，一定有被自己的 valid partner 拒絕的經驗</p>
-<p>$\Longrightarrow$ $W.L.O.G$ 假設 $m$ 是所有男性中第一個被 valid partner 拒絕的男性，則在 $S_E$ 中  $(m,w)$， $w\neq w^*$</p>
-<p>$\Longrightarrow$ $\exists$ a valid partner $w’$ s.t. $m$ 被 $w’$ 拒絕過 ，從 observation 3 可以確定第一個拒絕 $m$ 的 $w’=w^*$</p>
-<p>$\Longrightarrow$ $\exists$ $m’$ s.t. $w^*$ 喜歡他更勝於 $m$ $\cdots\cdots( 1 )$ </p>
-<p>$\Longrightarrow$ <script type="math/tex">w^*</script> 是 $m$ 的 valid partner，那麼必然在某一次執行 $E’$ 中的結果 $S_{E’}$ 是 stable matching ，且 $(m,w^*)\in S_{E’}$，而且在 $S_{E’}$ 之中一定有一個 $w’’$ 與 $m’$ 配對 $(m’,w’’)$</p>
-<p>$\Longrightarrow$  $m$ 之所以被 <script type="math/tex">w^*</script> 拒絕，是因為 $m’$ 的緣故。也就是說在 $m$ 對 <script type="math/tex">w^*</script> propose 以前，$m’$ 已先對 <script type="math/tex">w^*</script> propose。前面我們假設 $m$ 是第一個被 valid partner 拒絕的 Case，因此我們可以總結一下 : </p>
-<ol>
-<li>在 $m$ 對 <script type="math/tex">w^*</script> propose 的當下 ，<script type="math/tex">w^*</script> 已經先和 $m’$ 配對，所以才會拒絕他</li>
-<li>在 $m$ 對 <script type="math/tex">w^*</script> propose 之前，$m’$ 並未被任何的 valid partner 拒絕過 。( 因為 $m$ 被 <script type="math/tex">w^*</script> 拒絕是第一個 case )</li>
-</ol>
-<p>$\Longrightarrow$ 從 $m’$ 的 ranking ist 來看，排在 <script type="math/tex">w^*</script> 之前的都必然是 invalid partner，又 $w’’$ 是他的 valid partner，所以 $w’’$ 的 ranking 一定比 <script type="math/tex">w^*</script> 低</p>
-<p>$\Longrightarrow$  $m’$ 喜歡 <script type="math/tex">w^*</script> 更勝於 $w’’$ $\cdots\cdots( 2 )$</p>
-<p>從  ( 1 ) ( 2 ) 來看，在 Stable Matching solution $S_{E’}$ 中會存在一個 instable 的狀況 ( $\rightarrow\leftarrow$ )，得證。</p>
-<h2 id="註釋"><a href="#註釋" class="headerlink" title="註釋"></a>註釋</h2><blockquote id="fn_註1">
-<sup>註1</sup>. 這個部分有個邏輯性的問題待釐清，Stable Matching 的解並不會是唯一解，但 Gale &amp; Shapley Algorithm 會吐出的是對男性來說最優的解，也就是 Gale &amp; Shapley Algorithm 的解是唯一的。<a href="#reffn_註1" title="Jump back to footnote [註1] in the text."> &#8617;</a>
-</blockquote>
-
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2019/09/30/Chapter 1 – Introduction/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -1006,6 +796,29 @@
   <div class="theme-info">主題 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
 
         
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="訪客總數">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="總瀏覽次數">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+  
+</div>
 
 
 
@@ -1024,6 +837,9 @@
   </div>
 
   
+    
+  
+  <script color='0,0,255' opacity='0.7' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
   <script src="/lib/anime.min.js?v=3.1.0"></script>
   <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
   <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
