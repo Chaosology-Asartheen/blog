@@ -55,24 +55,27 @@
   };
 </script>
 
-  <meta name="description" content="What’s Anaconda ?在資料處理及機器學習的應用上，Python是大家所熟知的程式語言，而Anaconda便是實現Python的一個極受歡迎平台。這個平台之所以好用，最重要的一個原因便在於它內包了許許多多的資料科學套件，你不需要一個一個下載，靠著Anaconda的一鍵安裝幾乎就能讓你完成90%以上的資料處理工作。(不過相對來說你下載的套件也不見得都會用到就是了XD)">
+  <meta name="description" content="本文內容參考自Hung-yi Lee ,  Machine Learning(2017) 課程內容 : Tips for Training DNN 本文圖片部分來自於課程講義內容">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Anaconda 環境安裝 ( Win 10 )">
-<meta property="og:url" content="https://allen108108.github.io/blog/2019/10/03/Anaconda 環境安裝 ( Win 10 )/index.html">
+<meta property="og:title" content="Gradient Vanishing Problem --- 以 ReLU &#x2F; Maxout 取代 Sigmoid actvation function">
+<meta property="og:url" content="https://allen108108.github.io/blog/2019/10/05/Gradient Vanishing Problem --- 以 ReLU _ Maxout 取代 Sigmoid actvation function/index.html">
 <meta property="og:site_name" content="Math.py">
-<meta property="og:description" content="What’s Anaconda ?在資料處理及機器學習的應用上，Python是大家所熟知的程式語言，而Anaconda便是實現Python的一個極受歡迎平台。這個平台之所以好用，最重要的一個原因便在於它內包了許許多多的資料科學套件，你不需要一個一個下載，靠著Anaconda的一鍵安裝幾乎就能讓你完成90%以上的資料處理工作。(不過相對來說你下載的套件也不見得都會用到就是了XD)">
+<meta property="og:description" content="本文內容參考自Hung-yi Lee ,  Machine Learning(2017) 課程內容 : Tips for Training DNN 本文圖片部分來自於課程講義內容">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:image" content="https://i.imgur.com/uRqDkoN.png">
-<meta property="og:image" content="https://i.imgur.com/xJZJTeK.png">
-<meta property="og:image" content="https://i.imgur.com/SVBZaeI.png">
-<meta property="og:image" content="https://i.imgur.com/g3ocjEe.png">
-<meta property="og:image" content="https://i.imgur.com/aGcfAYP.png">
-<meta property="og:updated_time" content="2019-10-03T08:12:02.095Z">
+<meta property="og:image" content="https://i.imgur.com/mlzgQy1.png =450x">
+<meta property="og:image" content="https://i.imgur.com/XVCR5Wp.png">
+<meta property="og:image" content="https://i.imgur.com/di2NKzI.png">
+<meta property="og:image" content="https://i.imgur.com/OhIc8Xq.png">
+<meta property="og:image" content="https://i.imgur.com/eKJmGeq.png">
+<meta property="og:image" content="https://i.imgur.com/BOZPTjl.png">
+<meta property="og:image" content="https://i.imgur.com/0is8BGa.png">
+<meta property="og:image" content="https://i.imgur.com/T4tZkaW.png =450x">
+<meta property="og:updated_time" content="2019-10-04T17:53:09.828Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Anaconda 環境安裝 ( Win 10 )">
-<meta name="twitter:description" content="What’s Anaconda ?在資料處理及機器學習的應用上，Python是大家所熟知的程式語言，而Anaconda便是實現Python的一個極受歡迎平台。這個平台之所以好用，最重要的一個原因便在於它內包了許許多多的資料科學套件，你不需要一個一個下載，靠著Anaconda的一鍵安裝幾乎就能讓你完成90%以上的資料處理工作。(不過相對來說你下載的套件也不見得都會用到就是了XD)">
-<meta name="twitter:image" content="https://i.imgur.com/uRqDkoN.png">
-  <link rel="canonical" href="https://allen108108.github.io/blog/2019/10/03/Anaconda 環境安裝 ( Win 10 )/">
+<meta name="twitter:title" content="Gradient Vanishing Problem --- 以 ReLU &#x2F; Maxout 取代 Sigmoid actvation function">
+<meta name="twitter:description" content="本文內容參考自Hung-yi Lee ,  Machine Learning(2017) 課程內容 : Tips for Training DNN 本文圖片部分來自於課程講義內容">
+<meta name="twitter:image" content="https://i.imgur.com/mlzgQy1.png =450x">
+  <link rel="canonical" href="https://allen108108.github.io/blog/2019/10/05/Gradient Vanishing Problem --- 以 ReLU _ Maxout 取代 Sigmoid actvation function/">
 
 
 <script id="page-configurations">
@@ -86,7 +89,7 @@
   };
 </script>
 
-  <title>Anaconda 環境安裝 ( Win 10 ) | Math.py</title>
+  <title>Gradient Vanishing Problem --- 以 ReLU / Maxout 取代 Sigmoid actvation function | Math.py</title>
   
 
 
@@ -214,7 +217,7 @@
   
   
   <div class="post-block post">
-    <link itemprop="mainEntityOfPage" href="https://allen108108.github.io/blog/blog/2019/10/03/Anaconda 環境安裝 ( Win 10 )/">
+    <link itemprop="mainEntityOfPage" href="https://allen108108.github.io/blog/blog/2019/10/05/Gradient Vanishing Problem --- 以 ReLU _ Maxout 取代 Sigmoid actvation function/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Allen Tzeng">
@@ -226,7 +229,7 @@
       <meta itemprop="name" content="Math.py">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">Anaconda 環境安裝 ( Win 10 )
+        <h1 class="post-title" itemprop="name headline">Gradient Vanishing Problem --- 以 ReLU / Maxout 取代 Sigmoid actvation function
 
           
         </h1>
@@ -242,7 +245,7 @@
                 
               
 
-              <time title="創建時間：2019-10-03 16:11:00 / 修改時間：16:12:02" itemprop="dateCreated datePublished" datetime="2019-10-03T16:11:00+08:00">2019-10-03</time>
+              <time title="創建時間：2019-10-05 01:48:30 / 修改時間：01:53:09" itemprop="dateCreated datePublished" datetime="2019-10-05T01:48:30+08:00">2019-10-05</time>
             </span>
           
             
@@ -255,7 +258,7 @@
               </span>
               <span class="post-meta-item-text">分類於</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/軟體安裝/" itemprop="url" rel="index"><span itemprop="name">軟體安裝</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/李宏毅-Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">李宏毅 Machine Learning</span></a></span>
 
                 
                 
@@ -282,30 +285,41 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="What’s-Anaconda"><a href="#What’s-Anaconda" class="headerlink" title="What’s Anaconda ?"></a>What’s Anaconda ?</h1><p>在資料處理及機器學習的應用上，Python是大家所熟知的程式語言，而Anaconda便是實現Python的一個極受歡迎平台。<br>這個平台之所以好用，最重要的一個原因便在於它內包了許許多多的資料科學套件，你不需要一個一個下載，靠著Anaconda的一鍵安裝幾乎就能讓你完成90%以上的資料處理工作。(不過相對來說你下載的套件也不見得都會用到就是了XD)</p>
+        <blockquote>
+<ul>
+<li>本文內容參考自Hung-yi Lee ,  <a href="http://speech.ee.ntu.edu.tw/~tlkagk/courses_ML17_2.html" target="_blank" rel="noopener">Machine Learning</a>(2017) 課程內容 : Tips for Training DNN</li>
+<li>本文圖片部分來自於課程講義內容</li>
+</ul>
+</blockquote>
 <a id="more"></a>
-<p>其實我們也不需要先行安裝Pyhton，直接進Anaconda官網下載Anaconda就內含Pyhton了，是否真的很簡單XDDDD</p>
-<h1 id="安裝Anaconda"><a href="#安裝Anaconda" class="headerlink" title="安裝Anaconda"></a>安裝Anaconda</h1><ul>
-<li><strong>先至<a href="https://www.anaconda.com/distribution/" target="_blank" rel="noopener">官網下載頁面</a></strong></li>
-</ul>
-<p><img src="https://i.imgur.com/uRqDkoN.png" alt></p>
-<ul>
-<li><strong>選擇需要的Python版本(建議使用3.7)</strong></li>
-</ul>
-<p><img src="https://i.imgur.com/xJZJTeK.png" alt></p>
-<p>接下來的步驟其實就是無腦的一鍵安裝程序，一路安裝下去…..</p>
-<ul>
-<li><strong>打開 Anaconda Navigator確認安裝無誤</strong></li>
-</ul>
-<p><img src="https://i.imgur.com/SVBZaeI.png" alt></p>
-<p><img src="https://i.imgur.com/g3ocjEe.png" alt><br>出現以上畫面代表已經安裝完成</p>
-<ul>
-<li><p><strong>將Anaconda Prompt 及 jupyter notebook 拉至開始列</strong></p>
-<p>  其實大部分的工具在初期我們可能不一定會用到，用到最多的則是撰寫Python時候會用到的 jupyter notebook，所以我自己最後直接把 jupyter notebook 拉出來，不會每一次都開啟 Anaconda Navigator ，這樣其實可以省下一些不必要的步驟。</p>
-<p>  <img src="https://i.imgur.com/aGcfAYP.png" alt></p>
-<p>  這樣我們隨時要寫Python 或是需要利用Anaconda Prompt進行一些指令操作都比較方便。</p>
-</li>
-</ul>
+<h2 id="梯度消失-Gradient-Vanish"><a href="#梯度消失-Gradient-Vanish" class="headerlink" title="梯度消失 Gradient Vanish"></a>梯度消失 Gradient Vanish</h2><p>「類似」於 Sigmoid function 的激勵函數，普遍帶有梯度消失 ( Gradient Vanish ) 的隱憂，那究竟什麼是梯度消失?</p>
+<p>$Sigmoid\ function=\theta(s)=\displaystyle{\frac{1}{1+e^{-s}}}$</p>
+<p>此函數圖形為</p>
+<p><img src="https://i.imgur.com/mlzgQy1.png =450x" alt><br>(圖片取自 :　<a href="https://zh.wikipedia.org/wiki/S%E5%87%BD%E6%95%B0" target="_blank" rel="noopener">Wikipedia —- Sigmoid function</a>)</p>
+<p>從圖上可知，其圖形切線斜率 ( 導數 ) 不會超過0.25，如此情況當我們在進行 Gradient Descent 的過程中，隨著迭代次數的增加，參數的更新會越來越緩慢 而整個 train 不起來。<sup><a href="#fn_註1" id="reffn_註1">註1</a></sup></p>
+<h2 id="Rectified-Linear-Unit-ReLU"><a href="#Rectified-Linear-Unit-ReLU" class="headerlink" title="Rectified Linear Unit ( ReLU )"></a>Rectified Linear Unit ( ReLU )</h2><p>從上述對 Gradient Vanish 的觀察，以 Sigmoid 作為 actvation function 雖然是一個平滑便於求導數的函數且能壓縮資料到0-1之間，但是卻有梯度消失的問題，也因此衍生出了 Rectified Linear Unit ( ReLU ) 這樣的 activation function。</p>
+<p>$ReLU(x)=max(0,x)$</p>
+<p><img src="https://i.imgur.com/XVCR5Wp.png" alt><br>(圖片取自 : <a href="https://medium.com/@kanchansarkar/relu-not-a-differentiable-function-why-used-in-gradient-based-optimization-7fef3a4cecec" target="_blank" rel="noopener">ReLU : Not a Differentiable Function: Why used in Gradient Based Optimization? and Other Generalizations of ReLU.</a> )</p>
+<p>ReLU 的優點除了可以有效「減輕」梯度消失外<sup><a href="#fn_註2" id="reffn_註2">註2</a></sup>，計算成本也大幅下降，也有相關學者提出 ReLU 也很接近生物神經元的激活模型<sup><a href="#fn_註3" id="reffn_註3">註3</a></sup>，這種種優點也使 ReLU 在深度學習中被廣泛應用，成為 activation function 的優先選擇之一。</p>
+<p>ReLU 函數的稀疏性 ( Sparsity )，使得整個神經網路變得更輕巧、更多樣性，但卻不會使梯度變得越來越小。</p>
+<p><img src="https://i.imgur.com/di2NKzI.png" alt></p>
+<p>如同本文註釋<sup><a href="#fn_註2" id="reffn_註2">註2</a></sup>中提到的，ReLU 並非完全沒有缺點，為了改善大量神經元壞死的狀況，便有人提出了改進版本的 ReLU —- Leaky ReLU &amp; Parametric Relu。</p>
+<p><img src="https://i.imgur.com/OhIc8Xq.png" alt></p>
+<p>值得一提的是，這些改進版本並不一定會表現得比 ReLU 還要好，當 $\alpha$ 值過小時，仍然會有梯度消失的情況出現。再來，這兩者改進版本跟 Sigmoid 不同都是無上下界函數，如果遇到很深的神經網路，碰到極多的權重及連續乘積後，縱使 Leaky (Parametric) ReLU 導數為1或小於1的數，仍有可能造成梯度爆炸的狀況出現。</p>
+<h2 id="Maxout"><a href="#Maxout" class="headerlink" title="Maxout"></a>Maxout</h2><p><img src="https://i.imgur.com/eKJmGeq.png" alt></p>
+<p>Maxout 是一種可自行學習的 activation function，跟 ReLU 類似，但比 ReLU 更有彈性，我們只需設置要比較的 neurons 個數，Maxout 便能訓練出多樣化的 activation function。</p>
+<p>我們其實可以說， ReLU 或是任何一種 Convex activation function 都是 Maxout 的特例。</p>
+<p><img src="https://i.imgur.com/BOZPTjl.png" alt></p>
+<p><img src="https://i.imgur.com/0is8BGa.png" alt><br>(取自論文 Ian J. Goodfellow, David Warde-Farley, Mehdi Mirza, Aaron Courville, Yoshua Bengio (2013) . <em>Maxout Network</em>)</p>
+<p>Maxout 概念也衍生出了 Convolution Neural Network ( CNN )架構中的 Pooling Layer ( 池化層 )。</p>
+<p>總結來說，基本上，梯度消失的原因出現在 Backpropagation 中的連乘項，這當中導致梯度消失的原因不會只有 activation function 導數是否小於1，梯度消失算是一個非常綜合性的問題，即使改善 activation function 也只是稍微減緩某一個造成梯度消失的原因。就目前現有的 activation function 來說，ReLU 仍是一個不錯的優先選擇。</p>
+<h2 id="註釋"><a href="#註釋" class="headerlink" title="註釋"></a>註釋</h2><p><sup><a href="#fn_註1" id="reffn_註1">註1</a></sup>:<br>假如現在有一個 L 層 Deep Neural network ，activation function 為 sigmoid，<br>第 $l$ 層中，從前一層第 $i$ 個neuron到此層第 $j$ 個 neuron 之權重為 $w_{ij}^l$<br>第 $l$ 層第 $j$ 個neuron 輸入為 $s_j^l=\sum\limits_{i=0}^{d^{l-1}}w_{ij}^lx_i^{l-1}$，輸出為 $x_j^l=\theta(s_j^l)$<br><img src="https://i.imgur.com/T4tZkaW.png =450x" alt><br>根據反向傳播法 Backpropagation<br>針對某分量權重來看權重的更新 </p>
+<script type="math/tex; mode=display">
+w_{ij}^l\leftarrow w_{ij}^l-\eta\cdot\displaystyle{\frac{\partial L}{\partial w_{ij}^l}}</script><p>其中 </p>
+<script type="math/tex; mode=display">
+\displaystyle{\frac{\partial L}{\partial w_{ij}^l}}=\displaystyle{\frac{\partial L}{\partial s_j^l}\cdot\frac{\partial s_j^l}{\partial w_{ij}^l}}=\displaystyle{\frac{\partial L}{\partial s_j^l}}\cdot x_i^{l-1}=\sum\limits_{k=1}^{d^{l+1}}\displaystyle{\frac{\partial L}{\partial s_k^{l+1}}\cdot\frac{\partial s_k^{l+1}}{\partial x_j^l}\cdot\frac{\partial x_j^l}{\partial s_j^l}}=\sum\limits_{k=1}^{d^{l+1}}\displaystyle{\frac{\partial L}{\partial s_k^{l+1}}\cdot\frac{\partial s_k^{l+1}}{\partial x_j^l}}\cdot\theta'(s_j^l)</script><p>從上式我們可以知道，當我們層數很多的時候 ( $l$極大 ) ，$\displaystyle{\frac{\partial L}{\partial w_{ij}^l}}$ 這一項會產生非常多的 $\theta’$ 相乘，而每一個 $\theta’&lt;1$ ，最後這個項就會幾乎趨近於 0 ，導致權重的更新十分緩慢。</p>
+<p><sup><a href="#fn_註2" id="reffn_註2">註2</a></sup>:<br>ReLU 並非完全沒有梯度消失的問題，輸入值若為負數，輸出便為0，導致某些神經元不會被 activate，這是優點也是缺點，雖然能讓整個神經網路訓練速度、計算成本都大幅降低，也能讓整個神經網路更多樣性，但也會造成層數過多時，有很高比例的神經元將會沒有運作，造成跟梯度消失類似的效果。<br>參考 : <a href="https://www.jqr.com/article/000284" target="_blank" rel="noopener">深度学习解密：我的梯度怎么消失了？</a></p>
+<p><sup><a href="#fn_註3" id="reffn_註3">註3</a></sup>:<br>參考 <a href="https://www.cnblogs.com/neopenx/p/4453161.html" target="_blank" rel="noopener">ReLu(Rectified Linear Units)激活函数</a></p>
 
     </div>
 
@@ -322,7 +336,7 @@
     <strong>作者： </strong>Allen Tzeng</li>
   <li class="post-copyright-link">
     <strong>文章連結：</strong>
-    <a href="https://allen108108.github.io/blog/2019/10/03/Anaconda 環境安裝 ( Win 10 )/" title="Anaconda 環境安裝 ( Win 10 )">https://allen108108.github.io/blog/2019/10/03/Anaconda 環境安裝 ( Win 10 )/</a>
+    <a href="https://allen108108.github.io/blog/2019/10/05/Gradient Vanishing Problem --- 以 ReLU _ Maxout 取代 Sigmoid actvation function/" title="Gradient Vanishing Problem --- 以 ReLU / Maxout 取代 Sigmoid actvation function">https://allen108108.github.io/blog/2019/10/05/Gradient Vanishing Problem --- 以 ReLU _ Maxout 取代 Sigmoid actvation function/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！</li>
@@ -338,8 +352,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/blog/2019/10/03/Chapter 2 – Algorithm analysis/" rel="next" title="Chapter 2 -- Algorithm analysis">
-                  <i class="fa fa-chevron-left"></i> Chapter 2 -- Algorithm analysis
+                <a href="/blog/2019/10/05/Batch Size/" rel="next" title="Batch Size">
+                  <i class="fa fa-chevron-left"></i> Batch Size
                 </a>
               
             </div>
@@ -347,10 +361,6 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-              
-                <a href="/blog/2019/10/04/[論文] Gradient-Based Learning Applied to Document Recognition/" rel="prev" title="[ 論文 ] Gradient-Based Learning Applied to Document Recognition">
-                  [ 論文 ] Gradient-Based Learning Applied to Document Recognition <i class="fa fa-chevron-right"></i>
-                </a>
               
             </div>
           </div>
@@ -399,7 +409,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#What’s-Anaconda"><span class="nav-number">1.</span> <span class="nav-text">What’s Anaconda ?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安裝Anaconda"><span class="nav-number">2.</span> <span class="nav-text">安裝Anaconda</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#梯度消失-Gradient-Vanish"><span class="nav-number">1.</span> <span class="nav-text">梯度消失 Gradient Vanish</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Rectified-Linear-Unit-ReLU"><span class="nav-number">2.</span> <span class="nav-text">Rectified Linear Unit ( ReLU )</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maxout"><span class="nav-number">3.</span> <span class="nav-text">Maxout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#註釋"><span class="nav-number">4.</span> <span class="nav-text">註釋</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->

@@ -55,24 +55,30 @@
   };
 </script>
 
-  <meta name="description" content="What’s Anaconda ?在資料處理及機器學習的應用上，Python是大家所熟知的程式語言，而Anaconda便是實現Python的一個極受歡迎平台。這個平台之所以好用，最重要的一個原因便在於它內包了許許多多的資料科學套件，你不需要一個一個下載，靠著Anaconda的一鍵安裝幾乎就能讓你完成90%以上的資料處理工作。(不過相對來說你下載的套件也不見得都會用到就是了XD)">
+  <meta name="description" content="本文內容節錄自Hung-yi Lee ,  Machine Learning(2017) 課程內容 : Where does the error come from? 本文圖片均來自於課程講義內容">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Anaconda 環境安裝 ( Win 10 )">
-<meta property="og:url" content="https://allen108108.github.io/blog/2019/10/03/Anaconda 環境安裝 ( Win 10 )/index.html">
+<meta property="og:title" content="從統計學的角度 (Bias &amp; Variance) 來看 Machine Learning Error">
+<meta property="og:url" content="https://allen108108.github.io/blog/2019/10/05/從統計學的角度 (Bias & Variance) 來看 Machine Learning Error/index.html">
 <meta property="og:site_name" content="Math.py">
-<meta property="og:description" content="What’s Anaconda ?在資料處理及機器學習的應用上，Python是大家所熟知的程式語言，而Anaconda便是實現Python的一個極受歡迎平台。這個平台之所以好用，最重要的一個原因便在於它內包了許許多多的資料科學套件，你不需要一個一個下載，靠著Anaconda的一鍵安裝幾乎就能讓你完成90%以上的資料處理工作。(不過相對來說你下載的套件也不見得都會用到就是了XD)">
+<meta property="og:description" content="本文內容節錄自Hung-yi Lee ,  Machine Learning(2017) 課程內容 : Where does the error come from? 本文圖片均來自於課程講義內容">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:image" content="https://i.imgur.com/uRqDkoN.png">
-<meta property="og:image" content="https://i.imgur.com/xJZJTeK.png">
-<meta property="og:image" content="https://i.imgur.com/SVBZaeI.png">
-<meta property="og:image" content="https://i.imgur.com/g3ocjEe.png">
-<meta property="og:image" content="https://i.imgur.com/aGcfAYP.png">
-<meta property="og:updated_time" content="2019-10-03T08:12:02.095Z">
+<meta property="og:image" content="https://i.imgur.com/V94Axkb.png">
+<meta property="og:image" content="https://i.imgur.com/TRKqon9.png">
+<meta property="og:image" content="https://i.imgur.com/lYLJKn9.png">
+<meta property="og:image" content="https://i.imgur.com/S4NV4vi.png">
+<meta property="og:image" content="https://i.imgur.com/WIlYiAL.png">
+<meta property="og:image" content="https://i.imgur.com/WOArL0H.png">
+<meta property="og:image" content="https://i.imgur.com/MS8mWxT.png">
+<meta property="og:image" content="https://i.imgur.com/zWgARjS.png">
+<meta property="og:image" content="https://i.imgur.com/pPcbBNu.png">
+<meta property="og:image" content="https://i.imgur.com/K11dPAN.png">
+<meta property="og:image" content="https://i.imgur.com/HViuH6z.png">
+<meta property="og:updated_time" content="2019-10-04T17:51:20.714Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Anaconda 環境安裝 ( Win 10 )">
-<meta name="twitter:description" content="What’s Anaconda ?在資料處理及機器學習的應用上，Python是大家所熟知的程式語言，而Anaconda便是實現Python的一個極受歡迎平台。這個平台之所以好用，最重要的一個原因便在於它內包了許許多多的資料科學套件，你不需要一個一個下載，靠著Anaconda的一鍵安裝幾乎就能讓你完成90%以上的資料處理工作。(不過相對來說你下載的套件也不見得都會用到就是了XD)">
-<meta name="twitter:image" content="https://i.imgur.com/uRqDkoN.png">
-  <link rel="canonical" href="https://allen108108.github.io/blog/2019/10/03/Anaconda 環境安裝 ( Win 10 )/">
+<meta name="twitter:title" content="從統計學的角度 (Bias &amp; Variance) 來看 Machine Learning Error">
+<meta name="twitter:description" content="本文內容節錄自Hung-yi Lee ,  Machine Learning(2017) 課程內容 : Where does the error come from? 本文圖片均來自於課程講義內容">
+<meta name="twitter:image" content="https://i.imgur.com/V94Axkb.png">
+  <link rel="canonical" href="https://allen108108.github.io/blog/2019/10/05/從統計學的角度 (Bias & Variance) 來看 Machine Learning Error/">
 
 
 <script id="page-configurations">
@@ -86,7 +92,7 @@
   };
 </script>
 
-  <title>Anaconda 環境安裝 ( Win 10 ) | Math.py</title>
+  <title>從統計學的角度 (Bias & Variance) 來看 Machine Learning Error | Math.py</title>
   
 
 
@@ -214,7 +220,7 @@
   
   
   <div class="post-block post">
-    <link itemprop="mainEntityOfPage" href="https://allen108108.github.io/blog/blog/2019/10/03/Anaconda 環境安裝 ( Win 10 )/">
+    <link itemprop="mainEntityOfPage" href="https://allen108108.github.io/blog/blog/2019/10/05/從統計學的角度 (Bias & Variance) 來看 Machine Learning Error/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Allen Tzeng">
@@ -226,7 +232,7 @@
       <meta itemprop="name" content="Math.py">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">Anaconda 環境安裝 ( Win 10 )
+        <h1 class="post-title" itemprop="name headline">從統計學的角度 (Bias & Variance) 來看 Machine Learning Error
 
           
         </h1>
@@ -242,7 +248,7 @@
                 
               
 
-              <time title="創建時間：2019-10-03 16:11:00 / 修改時間：16:12:02" itemprop="dateCreated datePublished" datetime="2019-10-03T16:11:00+08:00">2019-10-03</time>
+              <time title="創建時間：2019-10-05 01:09:57 / 修改時間：01:51:20" itemprop="dateCreated datePublished" datetime="2019-10-05T01:09:57+08:00">2019-10-05</time>
             </span>
           
             
@@ -255,7 +261,7 @@
               </span>
               <span class="post-meta-item-text">分類於</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/軟體安裝/" itemprop="url" rel="index"><span itemprop="name">軟體安裝</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/李宏毅-Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">李宏毅 Machine Learning</span></a></span>
 
                 
                 
@@ -282,30 +288,56 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="What’s-Anaconda"><a href="#What’s-Anaconda" class="headerlink" title="What’s Anaconda ?"></a>What’s Anaconda ?</h1><p>在資料處理及機器學習的應用上，Python是大家所熟知的程式語言，而Anaconda便是實現Python的一個極受歡迎平台。<br>這個平台之所以好用，最重要的一個原因便在於它內包了許許多多的資料科學套件，你不需要一個一個下載，靠著Anaconda的一鍵安裝幾乎就能讓你完成90%以上的資料處理工作。(不過相對來說你下載的套件也不見得都會用到就是了XD)</p>
+        <blockquote>
+<ul>
+<li>本文內容節錄自Hung-yi Lee ,  <a href="http://speech.ee.ntu.edu.tw/~tlkagk/courses_ML17_2.html" target="_blank" rel="noopener">Machine Learning</a>(2017) 課程內容 : Where does the error come from?</li>
+<li>本文圖片均來自於課程講義內容</li>
+</ul>
+</blockquote>
 <a id="more"></a>
-<p>其實我們也不需要先行安裝Pyhton，直接進Anaconda官網下載Anaconda就內含Pyhton了，是否真的很簡單XDDDD</p>
-<h1 id="安裝Anaconda"><a href="#安裝Anaconda" class="headerlink" title="安裝Anaconda"></a>安裝Anaconda</h1><ul>
-<li><strong>先至<a href="https://www.anaconda.com/distribution/" target="_blank" rel="noopener">官網下載頁面</a></strong></li>
-</ul>
-<p><img src="https://i.imgur.com/uRqDkoN.png" alt></p>
+<p>在進行林軒田老師的課程時，有簡略的介紹 error 是來自於現實結果與預測結果的差異，但從李宏毅老師的課程中，我們可以清楚了解到 error 與統計學中 Bias(偏差)、Variance(變異數)的關係，從這些關係中清楚的定義 underfitting &amp; Overfitting，進而可以針對模型的 error 成因來對 model 進行適當的調整及改善。</p>
+<h2 id="Bias-amp-Variance"><a href="#Bias-amp-Variance" class="headerlink" title="Bias &amp; Variance"></a>Bias &amp; Variance</h2><h3 id="Bias"><a href="#Bias" class="headerlink" title="Bias"></a>Bias</h3><p>一般在統計學中，我們就是以樣本的統計量來對母體進行推估，而 Bias 便是度量我們樣本統計量與母體的差異程度。</p>
+<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 50%;"><img width="350" src="https://i.imgur.com/V94Axkb.png"></div><div class="group-picture-column" style="width: 50%;"><img width="100" src="https://i.imgur.com/TRKqon9.png"></div></div><div class="group-picture-row"></div></div></div>
+<p>以上圖為例，正常我們取樣的樣本平均值 $m$ 很大的機率不會等於母體平均值 $\mu$，如果我們對母體做了很多次的抽樣，其期望值 $E(m)=\mu$ 則我們稱這樣的抽樣是 ‘unbiased’ (無偏誤的)。</p>
+<p>我們由此可以有一個結論，越好的樣本，其 bias 越低，也就是離目標越近。從機器學習的角度來看，我們對於目標通常會選擇一個模型來進行訓練，針對此模型我們手上會有一整個 model set ( 從林軒田的角度來說就是 hypothesis set )，這一個 model set 的 bias 便是 error 的來源之一。</p>
+<h3 id="Variance"><a href="#Variance" class="headerlink" title="Variance"></a>Variance</h3><p>Variance (變異數) 在統計學來說便是一個度量樣本分散程度的統計量</p>
+<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 50%;"><img width="350" src="https://i.imgur.com/lYLJKn9.png"></div><div class="group-picture-column" style="width: 50%;"><img width="200" src="https://i.imgur.com/S4NV4vi.png"></div></div><div class="group-picture-row"></div></div></div>
+<p>當我們取樣的數量越多，分散程度便會縮小，可以更接近我們的目標，從機器學習的角度來看，當我們的模型選擇越複雜，整個 model set ( Hypothesis set ) 會有越多種各式各樣的選擇，其 variance 也會越高。</p>
+<p>總結來說，我們可以用箭靶來描述 Bias &amp; Variance</p>
+<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 50%;"><img src="https://i.imgur.com/WIlYiAL.png" alt></div><div class="group-picture-column" style="width: 50%;"><img width="350" src="https://i.imgur.com/WOArL0H.png"></div></div><div class="group-picture-row"></div></div></div>
+<h2 id="Model-V-S-Error-V-S-bias-and-variance"><a href="#Model-V-S-Error-V-S-bias-and-variance" class="headerlink" title="Model V.S. Error V.S. bias and variance"></a>Model V.S. Error V.S. bias and variance</h2><p>從上面針對 bias 與 variance 的介紹，其實我們可以說機器學習裡面的 error其實就來自於 bias 與 variance。說了這麼多，我們最終還是想知道，到底 model , error , bias and variance 的關係是什麼 ?</p>
+<h3 id="當我們選擇越複雜的模型，variance-越高"><a href="#當我們選擇越複雜的模型，variance-越高" class="headerlink" title="當我們選擇越複雜的模型，variance 越高"></a>當我們選擇越複雜的模型，variance 越高</h3><p><img src="https://i.imgur.com/MS8mWxT.png" alt></p>
+<h3 id="當我們選擇越複雜的模型，bias-越低"><a href="#當我們選擇越複雜的模型，bias-越低" class="headerlink" title="當我們選擇越複雜的模型，bias 越低"></a>當我們選擇越複雜的模型，bias 越低</h3><p><img src="https://i.imgur.com/zWgARjS.png" alt></p>
+<p>但是當我們選擇越複雜的模型，整個 variance 產生的 error 上升的速度遠高於 bias 產生的 error 下降速度，這也是為何當我們選擇越複雜的模型時，整個 test error 會飆得非常高的原因</p>
+<p><img src="https://i.imgur.com/pPcbBNu.png" alt></p>
+<p>由此我們也可以給 underfitting 與 overfitting 一個比較清楚的定義 : </p>
 <ul>
-<li><strong>選擇需要的Python版本(建議使用3.7)</strong></li>
+<li>Underfitting : Large bias and Small variance</li>
+<li>Overfitting : Small bias and Large variance</li>
 </ul>
-<p><img src="https://i.imgur.com/xJZJTeK.png" alt></p>
-<p>接下來的步驟其實就是無腦的一鍵安裝程序，一路安裝下去…..</p>
-<ul>
-<li><strong>打開 Anaconda Navigator確認安裝無誤</strong></li>
+<p>而我們在模型的選擇上便是期望在 bias 與 variance 中找到一個平衡點。</p>
+<h2 id="Model-Selection"><a href="#Model-Selection" class="headerlink" title="Model Selection"></a>Model Selection</h2><h3 id="當-bias-偏高時，我們可以怎麼做"><a href="#當-bias-偏高時，我們可以怎麼做" class="headerlink" title="當 bias 偏高時，我們可以怎麼做?"></a>當 bias 偏高時，我們可以怎麼做?</h3><ul>
+<li>加入更多 features</li>
+<li>選擇更複雜的模型</li>
 </ul>
-<p><img src="https://i.imgur.com/SVBZaeI.png" alt></p>
-<p><img src="https://i.imgur.com/g3ocjEe.png" alt><br>出現以上畫面代表已經安裝完成</p>
-<ul>
-<li><p><strong>將Anaconda Prompt 及 jupyter notebook 拉至開始列</strong></p>
-<p>  其實大部分的工具在初期我們可能不一定會用到，用到最多的則是撰寫Python時候會用到的 jupyter notebook，所以我自己最後直接把 jupyter notebook 拉出來，不會每一次都開啟 Anaconda Navigator ，這樣其實可以省下一些不必要的步驟。</p>
-<p>  <img src="https://i.imgur.com/aGcfAYP.png" alt></p>
-<p>  這樣我們隨時要寫Python 或是需要利用Anaconda Prompt進行一些指令操作都比較方便。</p>
+<h3 id="當-variance-偏高時，我們可以怎麼做"><a href="#當-variance-偏高時，我們可以怎麼做" class="headerlink" title="當 variance 偏高時，我們可以怎麼做?"></a>當 variance 偏高時，我們可以怎麼做?</h3><ul>
+<li>加入更多資料進行訓練</li>
+<li>Regularization</li>
+</ul>
+<p>如果我們只簡單將手中資料切分成 training data 與 testing data，<br>利用 training data 訓練出來的模型再根據 testing data 所產生的總 error 來進行 model selection 時，testing data 本身的 bias，會使選出的 model 放進 未知的 testing data 測試時，勢必會比我們在已知的 testing data 所計算出來的 error 還要高。</p>
+<p>在實務上我們很常會給一個目標誤差值，希望最後得到的 model 可以低於我們給定的目標誤差，但若按照上述的方式，雖然所選出的model在手邊的 testing data上可以達到我們要的目標，但在未知資料上的表現並不見得會低於我們的目標。</p>
+<p><img src="https://i.imgur.com/K11dPAN.png" alt></p>
+<p>因此我們實務上會將 training data 再切分出一個 validation data ，利用 validation data 來進行 model selection，如此一來，已知的 testing data 與 未知的 testing data 之間就不存在 bias，也就是說，我們利用 validation data 所選出來的 model 應用在 已知的 testing data 上面的效果將會跟未知 testing data 效果一樣。</p>
+<p><img src="https://i.imgur.com/HViuH6z.png" alt></p>
+<blockquote>
+<p>[ Remark ]</p>
+<ol>
+<li><p>千萬不要將 model 應用在手邊的 testing data 後又回頭對 model 進行調整，你會將手邊 testing data 的 bias 考慮進去，導致訓練出來的模型應用於未知的 testing data 再度產生落差。</p>
 </li>
-</ul>
+<li><p>為了避免 Validation data 與 整個原先的 Training data 有高 bias，我們會使用 N-fold cross validation，來平均因 validation data 的 bias 所造成的 error 差異。</p>
+</li>
+</ol>
+</blockquote>
 
     </div>
 
@@ -322,7 +354,7 @@
     <strong>作者： </strong>Allen Tzeng</li>
   <li class="post-copyright-link">
     <strong>文章連結：</strong>
-    <a href="https://allen108108.github.io/blog/2019/10/03/Anaconda 環境安裝 ( Win 10 )/" title="Anaconda 環境安裝 ( Win 10 )">https://allen108108.github.io/blog/2019/10/03/Anaconda 環境安裝 ( Win 10 )/</a>
+    <a href="https://allen108108.github.io/blog/2019/10/05/從統計學的角度 (Bias & Variance) 來看 Machine Learning Error/" title="從統計學的角度 (Bias & Variance) 來看 Machine Learning Error">https://allen108108.github.io/blog/2019/10/05/從統計學的角度 (Bias & Variance) 來看 Machine Learning Error/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！</li>
@@ -338,8 +370,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/blog/2019/10/03/Chapter 2 – Algorithm analysis/" rel="next" title="Chapter 2 -- Algorithm analysis">
-                  <i class="fa fa-chevron-left"></i> Chapter 2 -- Algorithm analysis
+                <a href="/blog/2019/10/05/卷積神經網路 Convolutional Neural Network ( CNN ) 與 全連接神經網路 Fully Connected Feedforward Network 於 MNIST 上之實作/" rel="next" title="卷積神經網路 Convolutional Neural Network ( CNN ) 與 全連接神經網路 Fully Connected Feedforward Network 於 MNIST 上之實作">
+                  <i class="fa fa-chevron-left"></i> 卷積神經網路 Convolutional Neural Network ( CNN ) 與 全連接神經網路 Fully Connected Feedforward Network 於 MNIST 上之實作
                 </a>
               
             </div>
@@ -348,8 +380,8 @@
 
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/blog/2019/10/04/[論文] Gradient-Based Learning Applied to Document Recognition/" rel="prev" title="[ 論文 ] Gradient-Based Learning Applied to Document Recognition">
-                  [ 論文 ] Gradient-Based Learning Applied to Document Recognition <i class="fa fa-chevron-right"></i>
+                <a href="/blog/2019/10/05/Adagrad、RMSprop、Momentum and Adam -- 特殊的學習率調整方式/" rel="prev" title="Adagrad、RMSprop、Momentum and Adam -- 特殊的學習率調整方式">
+                  Adagrad、RMSprop、Momentum and Adam -- 特殊的學習率調整方式 <i class="fa fa-chevron-right"></i>
                 </a>
               
             </div>
@@ -399,7 +431,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#What’s-Anaconda"><span class="nav-number">1.</span> <span class="nav-text">What’s Anaconda ?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安裝Anaconda"><span class="nav-number">2.</span> <span class="nav-text">安裝Anaconda</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Bias-amp-Variance"><span class="nav-number">1.</span> <span class="nav-text">Bias &amp; Variance</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Bias"><span class="nav-number">1.1.</span> <span class="nav-text">Bias</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Variance"><span class="nav-number">1.2.</span> <span class="nav-text">Variance</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Model-V-S-Error-V-S-bias-and-variance"><span class="nav-number">2.</span> <span class="nav-text">Model V.S. Error V.S. bias and variance</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#當我們選擇越複雜的模型，variance-越高"><span class="nav-number">2.1.</span> <span class="nav-text">當我們選擇越複雜的模型，variance 越高</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#當我們選擇越複雜的模型，bias-越低"><span class="nav-number">2.2.</span> <span class="nav-text">當我們選擇越複雜的模型，bias 越低</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Model-Selection"><span class="nav-number">3.</span> <span class="nav-text">Model Selection</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#當-bias-偏高時，我們可以怎麼做"><span class="nav-number">3.1.</span> <span class="nav-text">當 bias 偏高時，我們可以怎麼做?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#當-variance-偏高時，我們可以怎麼做"><span class="nav-number">3.2.</span> <span class="nav-text">當 variance 偏高時，我們可以怎麼做?</span></a></li></ol></li></ol></div>
         
       </div>
       <!--/noindex-->
