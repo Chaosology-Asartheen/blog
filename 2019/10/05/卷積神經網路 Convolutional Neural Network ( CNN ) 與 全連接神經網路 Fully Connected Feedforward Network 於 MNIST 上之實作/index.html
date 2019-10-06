@@ -74,7 +74,7 @@
 <meta property="og:image" content="https://i.imgur.com/9pWLHnU.png">
 <meta property="og:image" content="https://i.imgur.com/LAjMF7e.png">
 <meta property="og:image" content="https://i.imgur.com/TTxQXwg.png">
-<meta property="og:updated_time" content="2019-10-06T18:48:05.965Z">
+<meta property="og:updated_time" content="2019-10-06T19:24:45.776Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="卷積神經網路 Convolutional Neural Network ( CNN ) 與 全連接神經網路 Fully Connected Feedforward Network 於 MNIST 上之實作">
 <meta name="twitter:description" content="本文主要針對卷積神經網路 Convolution Neural Network ( CNN ) 與 全連接神經網路 Fully Connected Feedforward Network 於 MNIST 上的表現，並不會著墨太多在各參數的意義以及模型本身的架構上。">
@@ -270,7 +270,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2019-10-07 02:48:05" itemprop="dateModified" datetime="2019-10-07T02:48:05+08:00">2019-10-07</time>
+                <time title="修改時間：2019-10-07 03:24:45" itemprop="dateModified" datetime="2019-10-07T03:24:45+08:00">2019-10-07</time>
               </span>
             
           
@@ -311,7 +311,7 @@
 <a id="more"></a>
 <p>想要詳細了解 CNN 的運作概念，可參閱下面兩篇文章 : </p>
 <ol>
-<li><a href="/P3MdvO6OTcGolkAuJu8BMw">Convolutional Neural Network</a></li>
+<li><a href="https://allen108108.github.io/blog/2019/10/07/%E5%8D%B7%E7%A9%8D%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF%20(Convolutional%20Neural%20,%20CNN">Convolutional Neural Network</a>/)</li>
 <li><a href="https://allen108108.github.io/blog/2019/10/04/[%E8%AB%96%E6%96%87]%20Gradient-Based%20Learning%20Applied%20to%20Document%20Recognition/">[論文] Gradient-Based Learning Applied to Document Recognition</a></li>
 </ol>
 <h2 id="Convolutional-Neural-Network-CNN-on-MNIST"><a href="#Convolutional-Neural-Network-CNN-on-MNIST" class="headerlink" title="Convolutional Neural Network ( CNN ) on MNIST"></a>Convolutional Neural Network ( CNN ) on MNIST</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> keras.datasets <span class="keyword">import</span> mnist</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> keras.utils <span class="keyword">import</span> to_categorical</span><br><span class="line"><span class="keyword">from</span> keras <span class="keyword">import</span> layers</span><br><span class="line"><span class="keyword">from</span> keras <span class="keyword">import</span> models</span><br><span class="line"><span class="keyword">from</span> keras <span class="keyword">import</span> optimizers</span><br></pre></td></tr></table></figure>
