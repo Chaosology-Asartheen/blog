@@ -73,7 +73,7 @@
 <meta property="og:image" content="https://i.imgur.com/A21Tr8u.png =300x">
 <meta property="og:image" content="https://i.imgur.com/xP147ab.png =300x">
 <meta property="og:image" content="https://i.imgur.com/xJrAxfj.png">
-<meta property="og:updated_time" content="2019-10-01T17:50:07.991Z">
+<meta property="og:updated_time" content="2019-10-07T16:29:38.434Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="林軒田機器學習基石筆記 - 第五講、第六講">
 <meta name="twitter:description" content="本文為一系列課程之筆記，建議從” 機器學習基石筆記-1 “開始閱讀  本文討論內容請參考:機器學習基石第五講 : Training versus Testing機器學習基石第六講 : Theory of Generalization  本篇所有圖片部分由筆者製作，其它均為機器學習基石課程內容講義">
@@ -269,7 +269,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2019-10-02 01:50:07" itemprop="dateModified" datetime="2019-10-02T01:50:07+08:00">2019-10-02</time>
+                <time title="修改時間：2019-10-08 00:29:38" itemprop="dateModified" datetime="2019-10-08T00:29:38+08:00">2019-10-08</time>
               </span>
             
           
@@ -328,8 +328,7 @@
 <li><strong>如果 $\mathbb{H}$ 是 $infinite\ set$ ?</strong></li>
 </ol>
 <p>這兩個問題其實是一體兩面，解決了一個，另外一個也就能順利解決。<br>我們能不能找到一個足以代表 $infinite\ \mathbb{H}$ 的一個 $finite\ number\ -m_{\mathbb{H}}$ 替換掉 $M$ ，形成一個更逼近的上界，也可以處理 $infinite\ \mathbb{H}$沒有上界的情況 ?</p>
-<h3 id="2Me-2-epsilon-2N-這個上界夠好嗎"><a href="#2Me-2-epsilon-2N-這個上界夠好嗎" class="headerlink" title="$2Me^{-2\epsilon^2N}$這個上界夠好嗎?"></a>$2Me^{-2\epsilon^2N}$這個上界夠好嗎?</h3><p><br></p>
-<p><img src="https://i.imgur.com/GYAMpry.png =200x" alt></p>
+<h3 id="2Me-2-epsilon-2N-這個上界夠好嗎"><a href="#2Me-2-epsilon-2N-這個上界夠好嗎" class="headerlink" title="$2Me^{-2\epsilon^2N}$這個上界夠好嗎?"></a>$2Me^{-2\epsilon^2N}$這個上界夠好嗎?</h3><p><img src="https://i.imgur.com/GYAMpry.png =200x" alt></p>
 <p>這是一個簡單的文式圖，如果我們今天要算 $B_1\cup B_2\cup B_3$ 數量的上界，最簡單的莫過於直接把三者數量相加， $B_1+B_2+B_3$ 絕對是 $B_1\cup B_2\cup B_3$的其中一個上界，但我們也很清楚的知道，當三者重疊部分越多，這樣的上界越不逼近。</p>
 <p>但在上一篇的證明中，我們卻利用這樣的方法找出其上界</p>
 <p><img src="https://i.imgur.com/A7RzZrl.png" alt></p>
@@ -344,7 +343,7 @@
 </ul>
 <ul>
 <li><p><strong>shatter</strong><br>  我們說 $\mathbb{X}_1,\mathbb{X}_2,…,\mathbb{X}_N$ 可以被 $shatter$ $\implies m_\mathbb{H}(N)=2^N$ (所有的分類情況都會發生)。所以在 $\mathbb{R}^2$ 情況下，$\mathbb{X}_1,\mathbb{X}_2,…,\mathbb{X}_N$ 可以被 $shatter$ (當 $N\leq3$)</p>
-<p>  $Mathematical\ \ \ Definition\ :$<br>  $C\ shatters\ A\ \ if\  \ \forall a\in A，\exists c\in        C\ \ s.t\ \ a=c\cap A \\ i.e.\ \mathbb{P}(A)=\left\{        c\cap A \mid\ c\in C\right\}$<br>  <br></p>
+<p>  $Mathematical\ \ \ Definition\ :$<br>  $C\ shatters\ A\ \ if\  \ \forall a\in A，\exists c\in        C\ \ s.t\ \ a=c\cap A \\ i.e.\ \mathbb{P}(A)=\left\{        c\cap A \mid\ c\in C\right\}$</p>
 </li>
 <li><p><strong>Break Point</strong><br>  第一個不會被 $shatter$ 的 $N$，在 $\mathbb{R}^2$ 情況下，$break\ point=4$</p>
 <blockquote>
@@ -406,7 +405,8 @@
 <h3 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h3><p>$\mathbb{P}(\mid E_{in}(g)-E_{out}(g)\mid&gt;\epsilon)$<br>$\leq 4m_\mathbb{H}(2N)\cdot e^{-\frac{1}{8}\epsilon^2N}$<br>$\leq 4(2N)^{K-1}\cdot e^{-\frac{1}{8}\epsilon^2N}\ ,\ if\ N\ is\ large\ enough\ and\ K\ exists.$<br>($\because m_\mathbb{H}(N)\leq B(N,K)\leq N^{K-1}$)</p>
 <p>$\therefore$存在 $Break\ point$ 且 $N$ 夠大的情況下，即使 $infinite\ \mathbb{H}$，演算法從$E_{in}$很小的條件下挑出一個 $g$，都一定會有一個有限上界可以確保$E_{in}$跟$E_{out}$夠接近。</p>
 <h3 id="註釋"><a href="#註釋" class="headerlink" title="註釋"></a>註釋</h3><p><sup><a href="#fn_註1" id="reffn_註1">註1</a></sup>:<br>為什麼 $m_\mathbb{H}(N)$ 不一定會等於要取 $\max$ ? 為什麼不等於$2^N$?<br>從排列組合的觀點來看，$N$ 個點的二元分類應該要有 $2^N$ 種，但我們這裡要的是 $”Linear\ separable”$ 所以會有所差異。<br><img src="https://i.imgur.com/cuNoGXM.png" alt><br>從上圖可以看出來，$N=4$ 時，應該會有16種二分法，但是由於我們要求線性可分，因此一定「至少」有兩種 ( 圖中打 X 的狀況以及其對稱情況 )不符合我們的需求。 為什麼是「至少」? 如果這 $N$ 筆資料有特別的排列情況(EX:共線)，當然有可能有更多種狀況會被排除，但，$m_\mathbb{H}(N)$函數要的是「max」，也就是說我現在要看的是被排除最少的情況，所以在 $N=4$ 時，$m_\mathbb{H}(4)=14$ ( 那兩種被排除的狀況，就是不管四筆資料怎麼分布，絕對都會被排除 )<br>當然，$m_\mathbb{H}(N)$也會跟資料本身處的維度空間有關。</p>
-<p><sup><a href="#fn_註2" id="reffn_註2">註2</a></sup>:<br>林軒田教授在課堂上講了四種的資料空間及分類型態 :<br><strong>2-D Preceptron , 1-D Positive Ray , 1-D Positive interval and Convex Set</strong><br><br><br><img src="https://i.imgur.com/cuNoGXM.png =300x" alt><img src="https://i.imgur.com/hJOlpy9.png =300x" alt> <img src="https://i.imgur.com/SFDXhiD.png =300x" alt><img src="https://i.imgur.com/A21Tr8u.png =300x" alt></p>
+<p><sup><a href="#fn_註2" id="reffn_註2">註2</a></sup>:<br>林軒田教授在課堂上講了四種的資料空間及分類型態 :<br><strong>2-D Preceptron , 1-D Positive Ray , 1-D Positive interval and Convex Set</strong></p>
+<p><img src="https://i.imgur.com/cuNoGXM.png =300x" alt><img src="https://i.imgur.com/hJOlpy9.png =300x" alt> <img src="https://i.imgur.com/SFDXhiD.png =300x" alt><img src="https://i.imgur.com/A21Tr8u.png =300x" alt></p>
 <p><sup><a href="#fn_註3" id="reffn_註3">註3</a></sup>:<br>試證明 $B(N,K)=B(N-1,K)+B(N-1,K-1)$<br>Claim:$B(N,K)=\sum\limits_{j=0}^{K-1}{{N}\choose{j}}$<br>Proof :<br>$B(N,K)\\=2^N-{{N}\choose{K}}-{{N}\choose{K+1}}-…-{{N}\choose{N}}\\={{N}\choose{0}}+{{N}\choose{1}}+{{N}\choose{2}}+…+{{N}\choose{K-1}}\\=\sum\limits_{j=0}^{K-1}{{N}\choose{j}}$<br>$B(N,K)$的最高次項為$N^{K-1}$<br>因為最後一項為$\frac{N(N-1)(N-2)…(N-K+1)}{K!}$</p>
 <p>$\because B(N,K)=\sum\limits_{j=0}^{K-1}{{N}\choose{j}}={{N}\choose{0}}+{{N}\choose{1}}+{{N}\choose{2}}+…+{{N}\choose{K-1}}\\<br>={{N}\choose{0}}+({{N-1}\choose{1}}+{{N-1}\choose{0}})+({{N-1}\choose{2}}+{{N-1}\choose{1}})+…+({{N-1}\choose{k-1}}+{{N-1}\choose{k-2}})\\<br>={{N-1}\choose{0}}+({{N-1}\choose{1}}+{{N-1}\choose{2}}+..+{{N-1}\choose{k-1}})+({{N-1}\choose{0}}+{{N-1}\choose{1}}+..+{{N-1}\choose{k-2}})\\<br>=\sum\limits_{j=0}^{K-2}{{N}\choose{j}}+\sum\limits_{j=0}^{K-1}{{N-1}\choose{j}}$</p>
 <p><sup><a href="#fn_註4" id="reffn_註4">註4</a></sup>:<br>證明 $\mathbb{P}(\mid E_{out}(\mathbb{H})-E_{in}(\mathbb{H}) \mid&gt;\epsilon)\leq 4m_\mathbb{H}(N)e^{\frac{1}{8}\epsilon^2N}$<br>Proof :<br>Step1 :<br>Assume $D’$ iid with $D$ is a data set with size N (ghost data)<br>(若$E_{in}$與$E_{out}$離得很遠，則$D$裡面N筆資料大多沒選到error點，那母體種再取N個點($D’$)就會包含比較多的error，$E’_{in}$與$E_{out}$就會有較大機率會比較靠近)</p>
@@ -415,7 +415,8 @@
 <p>$\mathbb{P}(\sup\limits_{h\in\mathbb{H}}\mid E_{in}(h)-E’_{in}(h)\mid&gt;\frac{\epsilon}{2})$<br>$\geq\mathbb{P}(\sup\limits_{h\in\mathbb{H}}\mid E_{in}(h)-E’_{in}(h)\mid&gt;\frac{\epsilon}{2}\ and\ \sup\limits_{h\in\mathbb{H}}\mid E_{in}(h)-E_{out}(h)\mid&gt;\epsilon)$<br>$=\mathbb{P}(\sup\limits_{h\in\mathbb{H}}\mid E_{in}(h)-E_{out}(h)\mid&gt;\epsilon)\times\mathbb{P}(\sup\limits_{h\in\mathbb{H}}\mid E_{in}(h)-E’_{in}(h)\mid&gt;\frac{\epsilon}{2}\ \<br>\mid \ \sup\limits_{h\in\mathbb{H}}\mid E_{in}(h)-E_{out}(h)\mid&gt;\epsilon)$</p>
 <p><img src="https://i.imgur.com/xJrAxfj.png" alt></p>
 <p>$\therefore\mathbb{P}(\sup\limits_{h\in\mathbb{H}}\mid E_{in}(h)-E’_{in}(h)\mid&gt;\frac{\epsilon}{2})\geq(1-2e^{-2({\frac{\epsilon}{2}})^2N})\times\mathbb{P}(\sup\limits_{h\in\mathbb{H}}\mid E_{in}(h)-E_{out}(h)\mid&gt;\epsilon)$</p>
-<p>Step3 :<br>W.L.O.G assum : $e^{\frac{1}{2}\epsilon^2N}&lt; \frac{1}{4}$<br>(if not ,VC BOund 顯然為真)<br>$\therefore\mathbb{P}(\sup\limits_{h\in\mathbb{H}}\mid E_{in}(h)-E’_{in}(h)\mid&gt;\frac{\epsilon}{2})\geq\frac{1}{2}\times\mathbb{P}(\sup\limits_{h\in\mathbb{H}}\mid E_{in}(h)-E_{out}(h)\mid&gt;\epsilon)$<br>$\therefore 2\mathbb{P}(\sup\limits_{h\in\mathbb{H}}\mid E_{in}(h)-E’_{in}(h)\mid&gt;\frac{\epsilon}{2})\geq\mathbb{P}(\sup\limits_{h\in\mathbb{H}}\mid E_{in}(h)-E_{out}(h)\mid&gt;\epsilon)$<br><br><br>Step4 :<br>現在整個母體的機率已經被我們用$D\ and\ D’$限制住<br>$\mathbb{P}(\mid E_{in}(h)-E_{out}(h)\mid&gt;\epsilon)$<br>$\leq2\mathbb{P}(\sup\limits_{h\in\mathbb{H}}\mid E_{in}(h)-E’_{in}(h)\mid&gt;\frac{\epsilon}{2})$<br>$\leq 2\sum\limits_{h\in\mathbb{H}}\mathbb{P}(\mid E_{in}(h)-E’_{in}(h)\mid&gt;\frac{\epsilon}{2})$<br>$=2m_\mathbb{H}(2N)\times\mathbb{P}(\mid E_{in}(h)-E’_{in}(h)\mid&gt;\frac{\epsilon}{2})\mid)$<br>($\because$把$D,D’$作為一個母體來看)<br>$=2m_\mathbb{H}(2N)\times\mathbb{P}(\mid E_{in}(h)-\frac{E_{in}(h)-E’_{in}(h)}{2}\mid&gt;\frac{\epsilon}{2})&gt;\frac{\epsilon}{4}\mid)$<br>($\because E_{in}(h)-E’_{in}(h)&lt;\frac{\epsilon}{2}\implies\frac{E_{in}(h)-E’_{in}(h)}{2}&lt;\frac{\epsilon}{4}\implies E_{in}(h)-\frac{E_{in}(h)}{2}-\frac{E’_{in}(h)}{2}&lt;\frac{\epsilon}{4}$)<br>$\leq 2m_\mathbb{H}(2N)\cdot 2\cdot e^{-2e^{-2({\frac{\epsilon}{2}})^2N}}$($\because$針對單一$h$，所以$M=1$)<br>$=4m_\mathbb{H}(2N)e^{-\frac{1}{8}\epsilon^2N}$得證</p>
+<p>Step3 :<br>W.L.O.G assum : $e^{\frac{1}{2}\epsilon^2N}&lt; \frac{1}{4}$<br>(if not ,VC BOund 顯然為真)<br>$\therefore\mathbb{P}(\sup\limits_{h\in\mathbb{H}}\mid E_{in}(h)-E’_{in}(h)\mid&gt;\frac{\epsilon}{2})\geq\frac{1}{2}\times\mathbb{P}(\sup\limits_{h\in\mathbb{H}}\mid E_{in}(h)-E_{out}(h)\mid&gt;\epsilon)$<br>$\therefore 2\mathbb{P}(\sup\limits_{h\in\mathbb{H}}\mid E_{in}(h)-E’_{in}(h)\mid&gt;\frac{\epsilon}{2})\geq\mathbb{P}(\sup\limits_{h\in\mathbb{H}}\mid E_{in}(h)-E_{out}(h)\mid&gt;\epsilon)$</p>
+<p>Step4 :<br>現在整個母體的機率已經被我們用$D\ and\ D’$限制住<br>$\mathbb{P}(\mid E_{in}(h)-E_{out}(h)\mid&gt;\epsilon)$<br>$\leq2\mathbb{P}(\sup\limits_{h\in\mathbb{H}}\mid E_{in}(h)-E’_{in}(h)\mid&gt;\frac{\epsilon}{2})$<br>$\leq 2\sum\limits_{h\in\mathbb{H}}\mathbb{P}(\mid E_{in}(h)-E’_{in}(h)\mid&gt;\frac{\epsilon}{2})$<br>$=2m_\mathbb{H}(2N)\times\mathbb{P}(\mid E_{in}(h)-E’_{in}(h)\mid&gt;\frac{\epsilon}{2})\mid)$<br>($\because$把$D,D’$作為一個母體來看)<br>$=2m_\mathbb{H}(2N)\times\mathbb{P}(\mid E_{in}(h)-\frac{E_{in}(h)-E’_{in}(h)}{2}\mid&gt;\frac{\epsilon}{2})&gt;\frac{\epsilon}{4}\mid)$<br>($\because E_{in}(h)-E’_{in}(h)&lt;\frac{\epsilon}{2}\implies\frac{E_{in}(h)-E’_{in}(h)}{2}&lt;\frac{\epsilon}{4}\implies E_{in}(h)-\frac{E_{in}(h)}{2}-\frac{E’_{in}(h)}{2}&lt;\frac{\epsilon}{4}$)<br>$\leq 2m_\mathbb{H}(2N)\cdot 2\cdot e^{-2e^{-2({\frac{\epsilon}{2}})^2N}}$($\because$針對單一$h$，所以$M=1$)<br>$=4m_\mathbb{H}(2N)e^{-\frac{1}{8}\epsilon^2N}$得證</p>
 
     </div>
 
@@ -528,7 +529,7 @@
         
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-count">39</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
