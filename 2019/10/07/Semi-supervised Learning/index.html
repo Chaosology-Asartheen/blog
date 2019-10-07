@@ -56,23 +56,30 @@
   };
 </script>
 
-  <meta name="description" content="本文討論內容請參考:機器學習基石第一講 : The Learning Problem機器學習基石第二講 : Learning to Answer Yes/No  本篇所有圖片部分由筆者製作，其它均為機器學習基石課程內容講義">
+  <meta name="description" content="本文討論內容請參考:Machine Learning (2017) 第十二講 : Semi-supervised  本篇所有圖片部分由筆者製作， Machine Learning (2017) 課程內容講義">
 <meta property="og:type" content="article">
-<meta property="og:title" content="林軒田機器學習基石筆記 - 第一講、第二講">
-<meta property="og:url" content="https://allen108108.github.io/blog/2019/09/30/林軒田機器學習基石筆記 - 第一講、第二講/index.html">
+<meta property="og:title" content="Semi-supervised Learning">
+<meta property="og:url" content="https://allen108108.github.io/blog/2019/10/07/Semi-supervised Learning/index.html">
 <meta property="og:site_name" content="Math.py">
-<meta property="og:description" content="本文討論內容請參考:機器學習基石第一講 : The Learning Problem機器學習基石第二講 : Learning to Answer Yes/No  本篇所有圖片部分由筆者製作，其它均為機器學習基石課程內容講義">
+<meta property="og:description" content="本文討論內容請參考:Machine Learning (2017) 第十二講 : Semi-supervised  本篇所有圖片部分由筆者製作， Machine Learning (2017) 課程內容講義">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:image" content="https://i.imgur.com/MIslz7k.png">
-<meta property="og:image" content="https://i.imgur.com/z9lsd58.png">
-<meta property="og:image" content="https://i.imgur.com/6c5EOJg.png">
-<meta property="og:image" content="https://i.imgur.com/HvSXMny.png">
-<meta property="og:updated_time" content="2019-10-03T07:28:06.488Z">
+<meta property="og:image" content="https://i.imgur.com/8d3GgWD.png">
+<meta property="og:image" content="https://i.imgur.com/2AInKRi.png">
+<meta property="og:image" content="https://i.imgur.com/x2P9nWs.png =500x">
+<meta property="og:image" content="https://i.imgur.com/UBzwvIL.png">
+<meta property="og:image" content="https://i.imgur.com/hos5ud0.png =500x">
+<meta property="og:image" content="https://i.imgur.com/466qa2g.png">
+<meta property="og:image" content="https://i.imgur.com/YwEaB3I.png =450x">
+<meta property="og:image" content="https://i.imgur.com/4AHWn2h.png =450x">
+<meta property="og:image" content="https://i.imgur.com/xo8QwjH.png =300x">
+<meta property="og:image" content="https://i.imgur.com/dm1t4z4.png =400x">
+<meta property="og:image" content="https://i.imgur.com/Jidug86.png =500x">
+<meta property="og:updated_time" content="2019-10-07T07:59:54.939Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="林軒田機器學習基石筆記 - 第一講、第二講">
-<meta name="twitter:description" content="本文討論內容請參考:機器學習基石第一講 : The Learning Problem機器學習基石第二講 : Learning to Answer Yes/No  本篇所有圖片部分由筆者製作，其它均為機器學習基石課程內容講義">
-<meta name="twitter:image" content="https://i.imgur.com/MIslz7k.png">
-  <link rel="canonical" href="https://allen108108.github.io/blog/2019/09/30/林軒田機器學習基石筆記 - 第一講、第二講/">
+<meta name="twitter:title" content="Semi-supervised Learning">
+<meta name="twitter:description" content="本文討論內容請參考:Machine Learning (2017) 第十二講 : Semi-supervised  本篇所有圖片部分由筆者製作， Machine Learning (2017) 課程內容講義">
+<meta name="twitter:image" content="https://i.imgur.com/8d3GgWD.png">
+  <link rel="canonical" href="https://allen108108.github.io/blog/2019/10/07/Semi-supervised Learning/">
 
 
 <script id="page-configurations">
@@ -86,7 +93,7 @@
   };
 </script>
 
-  <title>林軒田機器學習基石筆記 - 第一講、第二講 | Math.py</title>
+  <title>Semi-supervised Learning | Math.py</title>
   
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-149442581-1"></script>
   <script>
@@ -224,7 +231,7 @@
   
   
   <div class="post-block post">
-    <link itemprop="mainEntityOfPage" href="https://allen108108.github.io/blog/blog/2019/09/30/林軒田機器學習基石筆記 - 第一講、第二講/">
+    <link itemprop="mainEntityOfPage" href="https://allen108108.github.io/blog/blog/2019/10/07/Semi-supervised Learning/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Allen Tzeng">
@@ -236,7 +243,7 @@
       <meta itemprop="name" content="Math.py">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">林軒田機器學習基石筆記 - 第一講、第二講
+        <h1 class="post-title" itemprop="name headline">Semi-supervised Learning
 
           
         </h1>
@@ -252,19 +259,11 @@
                 
               
 
-              <time title="創建時間：2019-09-30 20:38:20" itemprop="dateCreated datePublished" datetime="2019-09-30T20:38:20+08:00">2019-09-30</time>
+              <time title="創建時間：2019-10-07 15:54:56 / 修改時間：15:59:54" itemprop="dateCreated datePublished" datetime="2019-10-07T15:54:56+08:00">2019-10-07</time>
             </span>
           
             
 
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2019-10-03 15:28:06" itemprop="dateModified" datetime="2019-10-03T15:28:06+08:00">2019-10-03</time>
-              </span>
             
           
             <span class="post-meta-item">
@@ -273,7 +272,7 @@
               </span>
               <span class="post-meta-item-text">分類於</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/林軒田-機器學習基石/" itemprop="url" rel="index"><span itemprop="name">林軒田 機器學習基石</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/李宏毅-Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">李宏毅 Machine Learning</span></a></span>
 
                 
                 
@@ -302,47 +301,72 @@
       
         <blockquote>
 <ul>
-<li><p><strong>本文討論內容請參考:<br>機器學習基石第一講 : The Learning Problem<br>機器學習基石第二講 : Learning to Answer Yes/No</strong></p>
+<li><p><strong>本文討論內容請參考:<br>Machine Learning (2017) 第十二講 : Semi-supervised</strong></p>
 </li>
-<li><p><strong>本篇所有圖片部分由筆者製作，其它均為機器學習基石課程內容講義</strong></p>
+<li><p><strong>本篇所有圖片部分由筆者製作， Machine Learning (2017) 課程內容講義</strong></p>
 </li>
 </ul>
-<hr>
-<a id="more"></a>
 </blockquote>
+<a id="more"></a>
+<p>剛開始學習機器學習中，我們大多看到的是 Supervised learning : $\left\{(x_r,y_r)\right\}_{r=1}^R$，每一個 $x_r$，都有一個 Label $y_r$，而 Semi-Superviced Learning 便是只有一部分資料有標籤，而另外一部分的資料是沒有標籤的，實務上沒有標籤的資料遠多於已經標籤的資料 : $\left\{(x_r,y_r)\right\}_{r=1}^R$ and $\left\{x_u\right\}_{u=R}^{R+U}$， $U\gg R$。</p>
+<p>Semi-Superviced Learning 在實務上是非常常見的，收集資料這件事情並不是什麼難事，我們可以輕鬆就收集到足夠多的資料，然而要為這些資料進行標記卻是非常困難的，所以 Semi-Superviced Learning 在此時便能發揮其功能。</p>
+<p>Semi-Superviced Learning 又可分為兩種 : </p>
+<p><strong>1. Transductive learning : 未標記的資料亦為測試資料</strong><br><strong>2. Inductive learning : 未標記的資料不做為測試資料</strong></p>
+<p>一般來說，Transductive learning 的效果會比 Inductive learning 還要好。</p>
+<h2 id="Approach-1-Generative-Model"><a href="#Approach-1-Generative-Model" class="headerlink" title="Approach 1 : Generative Model"></a>Approach 1 : Generative Model</h2><p>我們知道，Generative Model (GM) 與 Discriminative Model (DM) 不同的地方在於 GM 會訓練出訓練資料 $\left\{x_r\right\}_{r=1}^{R}$ 對於每一個不同 class $C_1,C_2,\cdots$ 的機率分布模型。</p>
+<p>亦即 GM 學習到的會是 $\boldsymbol{P}(C_1),\boldsymbol{P}(C_2)\cdots \mu_1,\mu_2,\cdots,and\ \Sigma$，<br>而DM 學習到的會是 $\boldsymbol{P}(C_1\mid x),\boldsymbol{P}(C_2\mid x)\cdots$</p>
+<p>在 Supervised Learning 上，我們便可以直接利用這樣的分布來決定分類</p>
+<p><img src="https://i.imgur.com/8d3GgWD.png" alt></p>
+<p>但在 Semi-Supervised Learning 上我們必須利用未標籤的資料來輔助才能得到比較好的分類模型</p>
+<p><img src="https://i.imgur.com/2AInKRi.png" alt></p>
+<h3 id="如何利用未標籤資料進行生成模型推估"><a href="#如何利用未標籤資料進行生成模型推估" class="headerlink" title="如何利用未標籤資料進行生成模型推估 ?"></a>如何利用未標籤資料進行生成模型推估 ?</h3><p>我們使用迭代的方式進行模型的推估，也就是說利用一筆一筆的未標籤資料來調整模型</p>
+<p><img src="https://i.imgur.com/x2P9nWs.png =500x" alt></p>
+<p>理論上這樣的模型最後會收斂，但 Initialization 的設定會影響最後結果。</p>
+<p>這樣的演算法的理論其實用到的概念很簡單 : </p>
+<p><strong><em>我們先對有標記的資料計算出各自的 Maximum likelihood，再利用未標籤的資料來最大化 Maximum likelihood</em></strong></p>
+<p><img src="https://i.imgur.com/UBzwvIL.png" alt></p>
+<h2 id="Approach-2-Self-training"><a href="#Approach-2-Self-training" class="headerlink" title="Approach 2 : Self-training"></a>Approach 2 : Self-training</h2><p>Self-training 首先利用已標籤的資料進行訓練，再使用訓練出來的 model 對未標籤資料進行標記。然後我們再取一部分的未標籤資料加到 training data 中重新訓練一個 model，進行上述的迭代訓練來取得一個好的 model。</p>
+<p><img src="https://i.imgur.com/hos5ud0.png =500x" alt></p>
+<p>這是一個很直覺的方式，但這個方法要能夠取得一個夠好的 model 必須奠基在<font color="#dd0000"><strong>「各類別之間有明確的分野」</strong></font>，也就是說，每一個分類之間不存在模糊的地帶，有一個明顯的 gap。</p>
+<p>而且，從 Self-training 的步驟來看，有幾個狀況並不適用 Self-training : </p>
+<ol>
+<li>Regression 問題</li>
+<li>Soft label 的 Neural Network</li>
+</ol>
+<p>這兩個不適用於 Self-training 的理由都一樣，就是我們無法在這樣的演算法中迭代得到更好的 model。當 label 是實數，我們將加了 label 的未標籤資料放進 training data 中並不會改變 $f^*$。</p>
+<p>Soft-label 要進行 gradient descent 也會造成梯度不會改變的問題。</p>
+<p><img src="https://i.imgur.com/466qa2g.png" alt></p>
+<hr>
+<p>要解決 Neural Network 的問題，可以使用 Entropy-based reluarization 來處理。</p>
+<p>因為 Neural Network 輸出會是機率分布，我們可以加入 entropy 的 constrain 來規範，這直覺上來說是合理的，因為我們本來就希望資料本身要夠集中才有參考價值。</p>
+<p><img src="https://i.imgur.com/YwEaB3I.png =450x" alt></p>
+<p>這個演算法其實也延伸出了 Semi-Supervised SVM 。</p>
+<p>一般 Supervised SVM 的概念就是最大化 margin 且最小化 error 的分類方式，而 Semi-Supervised SVM 窮舉出所有未標籤資料的可能 label ，針對每一種可能性進行 SVM ，找出最小 error 狀況。</p>
+<p><img src="https://i.imgur.com/4AHWn2h.png =450x" alt></p>
+<p>而論文 <em>Transductive Inference for Text Classication using Support Vector Machines</em> 提出了近似的估計方式解決當未標籤資料過多，無法窮舉所有情況的解決方式。</p>
+<h2 id="Approach-3-Graph-Approach"><a href="#Approach-3-Graph-Approach" class="headerlink" title="Approach 3 : Graph Approach"></a>Approach 3 : Graph Approach</h2><p>為了瞭解圖論在這邊的應用，我們先給出一些定義 : </p>
+<p>首先，我們將所有的資料 $x_1,x_2,\cdots,x_R,\cdots,x_{R+U}$ 視為空間中的點</p>
 <ul>
-<li><p><strong>Learning :</strong> 從觀察開始，經由腦內轉化，形成有用的技能。<br>  <strong>Machine Learning :</strong> 利用電腦模擬上述的過程，稱之。</p>
-</li>
-<li><p><strong>Machine Learning 本質 :</strong><br>存在潛藏模式可以被學習，但我們無法明確給訂規則及定義，因此利用過往資料讓機器自行學習判斷。</p>
-</li>
+<li>$Similarity\ of\ x_i,x_j=s(x_i,x_j)=e^{-\gamma|x_i-x_j|^2}$ ( Gaussian Radial Basis Function )</li>
+<li>$Add\ edge\ with\ K-Nearest Neighbor$ ( $or\ e-Nearest Neighbor$ )</li>
+<li>$Edge\ weight\ of\ x_i,x_j \propto s(x_i,x_j)$</li>
+<li>$Smothness\ of\ the\ labels\ on\ the\ graph=S=\displaystyle{\frac{1}{2}}\sum\limits_{i,j}w_{i,j}(y_i-y_j)^2$<br>( $Smaller\ S\ means\ Smother$ )</li>
+<li>$\boldsymbol{Y}=\begin{bmatrix}\cdots y_i\cdots y_j\cdots\end{bmatrix}_{1\times (R+U)}^T$</li>
+<li>$\boldsymbol{W}=\begin{bmatrix}w_{i,j}\end{bmatrix}_{(R+U)\times (R+U)}$</li>
+<li>$\boldsymbol{D}\ is\ a\ diagonal\ matrix\ d_{i,i}=\sum\limits_{k=1}^{R+U} w_{i,k}$</li>
+<li>$Laplacian\ matrix=\boldsymbol{L}=\boldsymbol{D}-\boldsymbol{W}$</li>
 </ul>
-<h2 id="Componemts-of-Machine-Learning"><a href="#Componemts-of-Machine-Learning" class="headerlink" title="Componemts of Machine Learning"></a>Componemts of Machine Learning</h2><p><img src="https://i.imgur.com/MIslz7k.png" alt></p>
-<ul>
-<li><p><strong>Perceptron Hypothesis Set</strong><br>  Perceptron指的是一種簡單的二元分類器 $\left( y\in\left\{+1,-1,0\right\}\right)$ ，而機器學習許多的概念都是由這最簡單的二元分類器而來。</p>
-<p>  $h(\mathbb{X})=sign(\sum\limits_{i=1}^{N}w_ix_i+threshold)  =sign(\sum\limits_{i=0}^{N}w_ix_i)=sign(\mathbb{W}^T\mathbb{X})$</p>
-<p>  在此處可以清楚看見，決定 $h$ 的因素在於 $w_i$ 及 $threshold$，也就是 $\mathbb{W}$，因此在往後的課程中，討論hypothesis的重點將會放在 $\mathbb{W}$ 上面</p>
-</li>
-<li><p><strong>Geometric Meaning of </strong>$h$<strong> </strong></p>
-</li>
-</ul>
-<p><img src="https://i.imgur.com/z9lsd58.png" alt><br>    $\mathbb{W}$ 會很容易讓人誤會是那一條分類線(超平面)，嚴格說起來也是沒錯，但嚴謹一點來說，應該指的是其法向量，這也呼應到上面講的，任何一個$h$ ，都能唯一找到一個 $\mathbb{W}$，當我們要找 $h$，也就只要專注在找出對應的 $\mathbb{W}$ 即可。<br><br>    </p>
-<h2 id="Perceptron-Learning-Algorithm-PLA"><a href="#Perceptron-Learning-Algorithm-PLA" class="headerlink" title="Perceptron Learning Algorithm (PLA)"></a>Perceptron Learning Algorithm (PLA)</h2><p><img src="https://i.imgur.com/6c5EOJg.png" alt></p>
-<script type="math/tex; mode=display">PLA其實就是經由不斷的修正錯誤最終求得一個完美分類器的迭代過程。</script><p>在林軒田的課程中，講義的符號的一些細節常常會讓人忽略，然而讀到後面就會開始腦袋打結，例如 : 資料點 $X$ (我自己習慣用$\mathbb{X}$) 與 $x$ 的差別</p>
-<p>在Step2中，以數學的觀點來看，第 $t$ 次迭代找到的錯誤點 $\left(\mathbb{X}_{n_{t}},y_{n_{t}}\right)$ 並非剛好就會是原始資料中的第 $n$ 個資料，因此便在 $n$ 下方再多一個下標 $t$，以明確標示出每一個錯誤的點。</p>
-<ul>
-<li><p><strong>經過這樣一系列的迭代過程，PLA最終真的會停止(halt)嗎</strong>?<br>  是的，只要我們手中的 Dataset 是線性可分(Linear Separable)，最後 PLA 必然會收斂，這就是所謂的 “ Perceptron Convergence Theorem” </p>
-<p>  <img src="https://i.imgur.com/HvSXMny.png" alt><br><br></p>
-</li>
-<li><p>PLA其實是一個極為理想的狀態，是否真正存在一個理想的$f$ 我們不能確定，而且現實的dataset絕大多數都會因為noise而不會Linear Separable</p>
-<p>  如果我們真的找不到完美的分類器，那麼可以退而求其次，找出誤差最小的總可以了吧!<br>  <script type="math/tex">\mathbb{W}_g=arg\min\limits_{\forall\mathbb{W}}\sum\limits_{n=1}^{N}[\![y_n\neq(\mathbb{W}^T\mathbb{X}+b)]\!]</script><sup><a href="#fn_註1" id="reffn_註1">註1</a></sup><br>  很遺憾的，這是一個NP-Hard的問題看來也是無解。</p>
-</li>
-</ul>
-<h2 id="Pocket-Algorethm"><a href="#Pocket-Algorethm" class="headerlink" title="Pocket Algorethm"></a>Pocket Algorethm</h2><p>這是一種PLA的變形演算法，過程與PLA大致都相同，一樣要經過迭代程序，但不同的地方在於 : 「PLA目的在找出一個絕對好的分類器，但Pocket則是找出相對好的即可。」</p>
-<p>每一次的迭代過程，都把新的 $\mathbb{W}_t$ 跟上一個 $\mathbb{W}_{t-1}$ 做比較，誤差量相對小的就把她暫時當成目前最好的分類器 $\tilde{\mathbb{W}}$ 放在Pocket中，雖然經過不斷的迭代，但Pocket中的 $\tilde{\mathbb{W}}$ 絕對是”當下”最好的分類器。</p>
-<p><code>[Remark] Pocket演算法不見得最終會 halt (因為現實資料並不見得線性可分)，那麼停止的條件便只能用人為來判斷迭代次數，只要我們認為迭代次數夠多了就可以停止Pocket Algorithm</code></p>
-<p>這樣的演算法，便能克服在現實狀況中會遇到的問題。</p>
-<p>但是這也不是非常完美的方式，這樣的演算法的計算時間相對PLA要來的久 ( 因為要不斷儲存 $\tilde{\mathbb{W}}$，而且每一次迭代都必須重新計算誤差量 )。<br><br></p>
-<h2 id="註釋"><a href="#註釋" class="headerlink" title="註釋"></a>註釋</h2><p><sup><a href="#fn_註1" id="reffn_註1">註1</a></sup>:<br>$[\![a]\!]$ 雙方括號 :<br>可以表達為小於等於 a 的最大整數，但在此為 $Iverson\ bracket$ ，在括號內的邏輯條件為 True 則為 1，為 Flase 則為 0。</p>
+<p><img src="https://i.imgur.com/xo8QwjH.png =300x" alt></p>
+<p>從上面的定義我們可以推得 :  $S=\boldsymbol{Y}^T\boldsymbol{L}\boldsymbol{Y}$</p>
+<p>我們清楚了圖論的一些概念後，從圖論的方式來進行 Semi-Supervised Learning 跟 Self-training 奠基的假設完全不同。Graph Approach 必須基於一個 Smoothness 假設上才能確保這樣的方式可以做出一個夠好的 model。</p>
+<p>那什麼是 Smoothness 假設呢 ?</p>
+<p>簡單來說，$x_1,x_2$ 如果在一個稠密的區域裡面夠接近，那麼他們的 label 必然會相同。 ( 換句話說，$x_1,x_2$ 可藉由一個高密度的路徑相互連接 )</p>
+<p><img src="https://i.imgur.com/dm1t4z4.png =400x" alt></p>
+<p>最後我們可以利用上面的概念，重新將資料間的關係做一個定義，丟到 neural network 中進行訓練，而待訓練的當然就是 edge weight。</p>
+<p>然而我們一樣為了避免 overfitting 的問題，還有整個 graph 上對 smoothness 的要求，我們在 Loss function 上仍會加上一個 regularizer $=S$。</p>
+<p><img src="https://i.imgur.com/Jidug86.png =500x" alt></p>
+<h2 id="Approach-4-Better-Representation"><a href="#Approach-4-Better-Representation" class="headerlink" title="Approach 4 : Better Representation"></a>Approach 4 : Better Representation</h2><p>( 待 Unsupervised Learning 進行詳細說明 )</p>
+<p>簡而言之就是我們觀察到的現象通常都比較複雜，試圖去找出潛在因素，則可以讓訓練變得比較簡單。</p>
 
     </div>
 
@@ -359,7 +383,7 @@
     <strong>作者： </strong>Allen Tzeng</li>
   <li class="post-copyright-link">
     <strong>文章連結：</strong>
-    <a href="https://allen108108.github.io/blog/2019/09/30/林軒田機器學習基石筆記 - 第一講、第二講/" title="林軒田機器學習基石筆記 - 第一講、第二講">https://allen108108.github.io/blog/2019/09/30/林軒田機器學習基石筆記 - 第一講、第二講/</a>
+    <a href="https://allen108108.github.io/blog/2019/10/07/Semi-supervised Learning/" title="Semi-supervised Learning">https://allen108108.github.io/blog/2019/10/07/Semi-supervised Learning/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！</li>
@@ -375,8 +399,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/blog/2019/09/30/Chapter 1 – Introduction/" rel="next" title="Chapter 1 -- Introduction">
-                  <i class="fa fa-chevron-left"></i> Chapter 1 -- Introduction
+                <a href="/blog/2019/10/07/[論文] Going Deeper with Convolutions/" rel="next" title="[論文] Going Deeper with Convolutions">
+                  <i class="fa fa-chevron-left"></i> [論文] Going Deeper with Convolutions
                 </a>
               
             </div>
@@ -385,8 +409,8 @@
 
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/blog/2019/09/30/林軒田機器學習基石筆記 - 第三講、第四講/" rel="prev" title="林軒田機器學習基石筆記 - 第三講、第四講">
-                  林軒田機器學習基石筆記 - 第三講、第四講 <i class="fa fa-chevron-right"></i>
+                <a href="/blog/2019/10/07/林軒田機器學習基石筆記 - 第十二講/" rel="prev" title="林軒田機器學習基石筆記 - 第十二講">
+                  林軒田機器學習基石筆記 - 第十二講 <i class="fa fa-chevron-right"></i>
                 </a>
               
             </div>
@@ -436,7 +460,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Componemts-of-Machine-Learning"><span class="nav-number">1.</span> <span class="nav-text">Componemts of Machine Learning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Perceptron-Learning-Algorithm-PLA"><span class="nav-number">2.</span> <span class="nav-text">Perceptron Learning Algorithm (PLA)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pocket-Algorethm"><span class="nav-number">3.</span> <span class="nav-text">Pocket Algorethm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#註釋"><span class="nav-number">4.</span> <span class="nav-text">註釋</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Approach-1-Generative-Model"><span class="nav-number">1.</span> <span class="nav-text">Approach 1 : Generative Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何利用未標籤資料進行生成模型推估"><span class="nav-number">1.1.</span> <span class="nav-text">如何利用未標籤資料進行生成模型推估 ?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Approach-2-Self-training"><span class="nav-number">2.</span> <span class="nav-text">Approach 2 : Self-training</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Approach-3-Graph-Approach"><span class="nav-number">3.</span> <span class="nav-text">Approach 3 : Graph Approach</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Approach-4-Better-Representation"><span class="nav-number">4.</span> <span class="nav-text">Approach 4 : Better Representation</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
