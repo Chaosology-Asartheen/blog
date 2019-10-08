@@ -67,7 +67,10 @@
 <meta property="og:image" content="https://i.imgur.com/DJ94uo0.png">
 <meta property="og:image" content="https://i.imgur.com/EiqkSEO.png">
 <meta property="og:image" content="https://i.imgur.com/TWAlTbV.png">
-<meta property="og:updated_time" content="2019-10-04T17:00:00.473Z">
+<meta property="og:image" content="https://i.imgur.com/e1bl4Cj.jpg">
+<meta property="og:image" content="https://i.imgur.com/eXO3cRZ.png">
+<meta property="og:image" content="https://i.imgur.com/BMXqxRA.png">
+<meta property="og:updated_time" content="2019-10-08T08:14:43.967Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 3 -- Graph ( 1 )">
 <meta name="twitter:description" content="CAR TheoremCAR Theorem 作為本章節的開頭，提供了我們解決問題的思維流程，而 CAR 包含三個主要的部份 : Criticality、Abstraction 以及 Restriction">
@@ -252,11 +255,19 @@
                 
               
 
-              <time title="創建時間：2019-10-05 00:45:08 / 修改時間：01:00:00" itemprop="dateCreated datePublished" datetime="2019-10-05T00:45:08+08:00">2019-10-05</time>
+              <time title="創建時間：2019-10-05 00:45:08" itemprop="dateCreated datePublished" datetime="2019-10-05T00:45:08+08:00">2019-10-05</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2019-10-08 16:14:43" itemprop="dateModified" datetime="2019-10-08T16:14:43+08:00">2019-10-08</time>
+              </span>
             
           
             <span class="post-meta-item">
@@ -342,14 +353,41 @@
 <p><img src="https://i.imgur.com/EiqkSEO.png" alt></p>
 <p>BFS 有一個重要的性質如下 : </p>
 <p><strong>Claim : Assume $T$ is a BFS Tree , $x\in L_i\ ,\ y\in L_j$ are vertices of $T$. If $e=(x,y)$ is an edge of $G$, then $\mid i-j\mid\leq1$.</strong><br>$x,y$ 為一個 BFS Tree 的兩個相異頂點，若存在一個 edge $e=(x,y)$ ，那麼 $x,y$ 在 BFS 的層數相差不超過 1。</p>
-<p><strong>Proof : </strong><br>Suppose to  the contrary that $\mid i-j\mid &gt; 1$ , $W.L.O.G$ assume $j-1&gt;1$<br>$\because x\in L_i\Longrightarrow$ the neighbors of $x$ in $L_{k}$ , where $k\leq i+1$<br>$\because e=(x,y)$ is an edge of $G$ and $y\in L_j$<br>$\Longrightarrow y$ is a neighbor of $x$ and $y\in L_j$<br>$\Longrightarrow j\leq i+1$<br>$\Longrightarrow j-i\leq 1$ ( $\rightarrow\leftarrow$ )</p>
+<p><strong>Proof :</strong><br>Suppose to  the contrary that $\mid i-j\mid &gt; 1$ , $W.L.O.G$ assume $j-1&gt;1$<br>$\because x\in L_i\Longrightarrow$ the neighbors of $x$ in $L_{k}$ , where $k\leq i+1$<br>$\because e=(x,y)$ is an edge of $G$ and $y\in L_j$<br>$\Longrightarrow y$ is a neighbor of $x$ and $y\in L_j$<br>$\Longrightarrow j\leq i+1$<br>$\Longrightarrow j-i\leq 1$ ( $\rightarrow\leftarrow$ )</p>
 <p>從一開始的 BFS 圖片我們也可以定義 $Connected\ Component$ : </p>
 <ul>
 <li>Connected component contain vertex s is the largest set of vertices that are reachable from s.<br>包含 s 的 connected component 指的就是 s 可以到達的最大點集合</li>
 </ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">def connected-component(s):</span><br><span class="line">    initial R=&#123;s&#125;</span><br><span class="line">    while ∃ edge(u,v) where u∈R and v∉R :</span><br><span class="line">        R+=&#123;v&#125;</span><br><span class="line">    return R</span><br></pre></td></tr></table></figure>
+<p><strong>Claim : $R = connected-componont(s)$</strong></p>
+<p><strong>Proof :</strong></p>
+<p>(Case 1) $R\subseteq connected-componont(s)$</p>
+<p>By Definition, clearly.</p>
+<p>(Case 2) $R\supseteq connected-componont(s)$</p>
+<p>Suppose to the contrary that $R\not\supseteq connected-componont(s)$<br>$\therefore \exists x\in connected−componont(s)$ and $x\not\in R$<br>$\because x\in connected−componont(s)\Longrightarrow \exists\ path\ P=(s,x_1,x_2,\cdots,x_n,x)$</p>
+<p>initial $R=\{s\}$<br>$\because (s,x_1)\in E\Longrightarrow x_1\in R$<br>$\because (x_1,x_2)\in E\Longrightarrow x_2\in R$</p>
+<p>Continue this process …..</p>
+<p>$\because (x_n,x)\in E\Longrightarrow x\in R$ ($\rightarrow\leftarrow$)</p>
 <p>我們常常在繪圖軟體要進行大面積著色時，很常會用到這樣的工具</p>
 <p><img width="300" src="https://i.imgur.com/TWAlTbV.png"></p>
 <p>這便是將每一個 pixel 當作 vertex，利用 Connected component 來快速著色。</p>
+<h3 id="Depth-First-Search-DFS-深度優先搜尋"><a href="#Depth-First-Search-DFS-深度優先搜尋" class="headerlink" title="Depth-First Search ( DFS , 深度優先搜尋 )"></a>Depth-First Search ( DFS , 深度優先搜尋 )</h3><p>DFS 的概念比較像是走迷宮，先進行無腦的直衝，等到走進死胡同再退回前一個節點選擇另外一條路前進。</p>
+<p>拿前面的圖片為例，DFS 的過程如下 : </p>
+<p><img src="https://i.imgur.com/e1bl4Cj.jpg" alt></p>
+<p>這裡面最後一步雖然說結束，但事實上它還是會一路退回到上一個節點確定都沒有其他路徑可以走，就這樣一直退到 vertex 1。</p>
+<p>可以寫成下列的 procedure</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">DFS(s) :</span><br><span class="line"></span><br><span class="line">1. mark s and R+&#123;s&#125;</span><br><span class="line">2. if ∃ non-marked smallest v s.t. (s,v)∈E ,then DFS(v)</span><br></pre></td></tr></table></figure>
+<p>從 DFS 的過程來看，有一個特性是每一條路徑都一定會被 check 兩次 (來回)，不管有沒有被 skip 掉都一樣。這也可以推得 DFS 整個過程中，在每一個節點都會有一個進出的過程</p>
+<p><img width="400" src="https://i.imgur.com/eXO3cRZ.png"></p>
+<p>又如同 BFS 一樣，經過 DFS 後都會形成一棵 DFS Tree，走過的路徑便是 Tree Edge，而被忽略的則是 Non-Tree Edge。</p>
+<p><img src="https://i.imgur.com/BMXqxRA.png" alt></p>
+<p><strong>Claim : Assume $T$ is a DFS Tree , $(x,y)$ is a non-tree edge of $T$, then $x,y$ is ancester (descendant) of the other. $(x,y)$ 為一個 DFS Tree 的 non-tree edge，則 $x,y$ 必為祖孫層級(上下至少跨兩個層)的關係。</strong></p>
+<p><strong>Proof</strong><br>$W.L.O.G.$ suppose $x$ is reached earlier by DFS.<br>$(x,y)$ 是 Non-Tree edge (被忽略的 edge)<br>$\Longrightarrow (x,y)$ 這條 edge 第一次check沒有被選中，而第二次被判斷要被忽略<br>$\Longrightarrow y$ 在第二次 check $(x,y)$ 這條路徑時，$y$ 已經被 marked 。<br>$\Longrightarrow y$ 一定是在 DFS 進入 $x$ 到退出 $x$ 這中間被 marked。<br>$\Longrightarrow x$ must be the ancester of $y$</p>
+<h3 id="Summary-of-BFS-amp-DFS"><a href="#Summary-of-BFS-amp-DFS" class="headerlink" title="Summary of BFS &amp; DFS"></a>Summary of BFS &amp; DFS</h3><ul>
+<li>BFS 或 DFS 均可以找出 Connected-Component</li>
+<li>BFS Tree　寬且淺，DFS Tree 窄且深。</li>
+<li>DFS Tree 的 Non-Tree Edge 連結上下層級且至少相差兩層以上的 vertex ;<br>BFS Tree 的 Non-Tree Edge 連結上下一層或是同層的 vertex。</li>
+</ul>
 <h2 id="註釋"><a href="#註釋" class="headerlink" title="註釋"></a>註釋</h2><p><sup><a href="#fn_註1" id="reffn_註1">註1</a></sup>:<br>證明可參閱 <a href="https://web.math.sinica.edu.tw/math_media/d364/36404.pdf" target="_blank" rel="noopener"><em>數學傳播 36卷4期 pp. 42-47</em></a> </p>
 
     </div>
@@ -444,7 +482,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#CAR-Theorem"><span class="nav-number">1.</span> <span class="nav-text">CAR Theorem</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Criticality"><span class="nav-number">1.1.</span> <span class="nav-text">Criticality</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Abstraction"><span class="nav-number">1.2.</span> <span class="nav-text">Abstraction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Restriction"><span class="nav-number">1.3.</span> <span class="nav-text">Restriction</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Seven-Bridge-Problem"><span class="nav-number">2.</span> <span class="nav-text">Seven Bridge Problem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Definition-amp-Application-of-Graph"><span class="nav-number">3.</span> <span class="nav-text">Definition &amp; Application of Graph</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Definition"><span class="nav-number">3.1.</span> <span class="nav-text">Definition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tree"><span class="nav-number">3.2.</span> <span class="nav-text">Tree</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Graph-Connectivity-and-Graph-Traversal"><span class="nav-number">4.</span> <span class="nav-text">Graph Connectivity and Graph Traversal</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Breadth-First-Search-BFS-廣度優先搜尋"><span class="nav-number">4.1.</span> <span class="nav-text">Breadth-First Search ( BFS , 廣度優先搜尋 )</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#註釋"><span class="nav-number">5.</span> <span class="nav-text">註釋</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#CAR-Theorem"><span class="nav-number">1.</span> <span class="nav-text">CAR Theorem</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Criticality"><span class="nav-number">1.1.</span> <span class="nav-text">Criticality</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Abstraction"><span class="nav-number">1.2.</span> <span class="nav-text">Abstraction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Restriction"><span class="nav-number">1.3.</span> <span class="nav-text">Restriction</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Seven-Bridge-Problem"><span class="nav-number">2.</span> <span class="nav-text">Seven Bridge Problem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Definition-amp-Application-of-Graph"><span class="nav-number">3.</span> <span class="nav-text">Definition &amp; Application of Graph</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Definition"><span class="nav-number">3.1.</span> <span class="nav-text">Definition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tree"><span class="nav-number">3.2.</span> <span class="nav-text">Tree</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Graph-Connectivity-and-Graph-Traversal"><span class="nav-number">4.</span> <span class="nav-text">Graph Connectivity and Graph Traversal</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Breadth-First-Search-BFS-廣度優先搜尋"><span class="nav-number">4.1.</span> <span class="nav-text">Breadth-First Search ( BFS , 廣度優先搜尋 )</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Depth-First-Search-DFS-深度優先搜尋"><span class="nav-number">4.2.</span> <span class="nav-text">Depth-First Search ( DFS , 深度優先搜尋 )</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Summary-of-BFS-amp-DFS"><span class="nav-number">4.3.</span> <span class="nav-text">Summary of BFS &amp; DFS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#註釋"><span class="nav-number">5.</span> <span class="nav-text">註釋</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->

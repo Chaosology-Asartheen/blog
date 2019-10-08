@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://allen108108.github.io/blog/2019/10/05/Chapter%203%20%E2%80%93%20Graph%20(%201%20)/</loc>
+    
+    <lastmod>2019-10-08T08:14:43.967Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://allen108108.github.io/blog/2019/10/08/Win10%20%E7%B3%BB%E7%B5%B1%E4%B8%8B%E9%80%B2%E8%A1%8C%20XGBoost%20CPU%20_%20GPU%20%E7%9A%84%E5%AE%89%E8%A3%9D/</loc>
     
     <lastmod>2019-10-07T18:25:07.760Z</lastmod>
@@ -327,13 +334,6 @@
     <loc>https://allen108108.github.io/blog/2019/10/05/Adagrad%E3%80%81RMSprop%E3%80%81Momentum%20and%20Adam%20--%20%E7%89%B9%E6%AE%8A%E7%9A%84%E5%AD%B8%E7%BF%92%E7%8E%87%E8%AA%BF%E6%95%B4%E6%96%B9%E5%BC%8F/</loc>
     
     <lastmod>2019-10-04T17:37:04.671Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://allen108108.github.io/blog/2019/10/05/Chapter%203%20%E2%80%93%20Graph%20(%201%20)/</loc>
-    
-    <lastmod>2019-10-04T17:00:00.473Z</lastmod>
     
   </url>
   
