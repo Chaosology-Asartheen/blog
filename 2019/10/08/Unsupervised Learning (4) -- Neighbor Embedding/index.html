@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-TW">
+<head>
+  <meta name="google-site-verification" content="exmdvS3MT1hVojBxSEZZZ8TIBBOg6pJ2POTtzNuecqs" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/blog/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Gemini',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","width":280,"display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '複製',
+      copy_success: '複製成功',
+      copy_failure: '複製失敗'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="有了前面 Word Embedding 的概念後，我們可以把問題想得更 generalization 一些 : 「面對流形 ( Manifold )或其他 非線性 ( Non-Linear ) 的狀況，我們是否能嵌入 (Embedding) 到更低維度的空間中並且保留其特性呢 ?」">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unsupervised Learning (4) -- Neighbor Embedding">
+<meta property="og:url" content="https://allen108108.github.io/blog/2019/10/08/Unsupervised Learning (4) -- Neighbor Embedding/index.html">
+<meta property="og:site_name" content="Math.py">
+<meta property="og:description" content="有了前面 Word Embedding 的概念後，我們可以把問題想得更 generalization 一些 : 「面對流形 ( Manifold )或其他 非線性 ( Non-Linear ) 的狀況，我們是否能嵌入 (Embedding) 到更低維度的空間中並且保留其特性呢 ?」">
+<meta property="og:locale" content="zh-TW">
+<meta property="og:image" content="https://i.imgur.com/0J9l8ZP.png">
+<meta property="og:image" content="https://i.imgur.com/F6ko75K.png">
+<meta property="og:image" content="https://i.imgur.com/Iwp78WR.png">
+<meta property="og:image" content="https://i.imgur.com/hFBtzaq.jpg =250x">
+<meta property="og:image" content="https://i.imgur.com/hw07j2V.jpg">
+<meta property="og:image" content="https://i.imgur.com/g2nZn5j.png">
+<meta property="og:image" content="https://i.imgur.com/xmUSJVK.png">
+<meta property="og:image" content="https://i.imgur.com/0urcL31.png">
+<meta property="og:updated_time" content="2019-10-07T17:01:39.643Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Unsupervised Learning (4) -- Neighbor Embedding">
+<meta name="twitter:description" content="有了前面 Word Embedding 的概念後，我們可以把問題想得更 generalization 一些 : 「面對流形 ( Manifold )或其他 非線性 ( Non-Linear ) 的狀況，我們是否能嵌入 (Embedding) 到更低維度的空間中並且保留其特性呢 ?」">
+<meta name="twitter:image" content="https://i.imgur.com/0J9l8ZP.png">
+  <link rel="canonical" href="https://allen108108.github.io/blog/2019/10/08/Unsupervised Learning (4) -- Neighbor Embedding/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Unsupervised Learning (4) -- Neighbor Embedding | Math.py</title>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-149442581-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-149442581-1');
+    }
+  </script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-TW">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Math.py</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Wir müssen wissen , wir werden wissen</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切換導航欄">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/blog/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首頁</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/blog/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分類</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/blog/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>歸檔</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://allen108108.github.io/blog/blog/2019/10/08/Unsupervised Learning (4) -- Neighbor Embedding/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Allen Tzeng">
+      <meta itemprop="description" content="Study about Mathematics , Programming and Data Science">
+      <meta itemprop="image" content="/blog/images/allen.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Math.py">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Unsupervised Learning (4) -- Neighbor Embedding
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              
+                
+              
+
+              <time title="創建時間：2019-10-08 00:44:38 / 修改時間：01:01:39" itemprop="dateCreated datePublished" datetime="2019-10-08T00:44:38+08:00">2019-10-08</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/李宏毅-Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">李宏毅 Machine Learning</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="閱讀次數" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">閱讀次數：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/blog/2019/10/08/Unsupervised Learning (4) -- Neighbor Embedding/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/10/08/Unsupervised Learning (4) -- Neighbor Embedding/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>有了前面 Word Embedding 的概念後，我們可以把問題想得更 generalization 一些 : 「面對流形 ( Manifold )或其他 非線性 ( Non-Linear ) 的狀況，我們是否能嵌入 (Embedding) 到更低維度的空間中並且保留其特性呢 ?」</p>
+<a id="more"></a>
+<p><img width="500" src="https://i.imgur.com/0J9l8ZP.png"></p>
+<h2 id="Locally-Linear-Embedding-LLE"><a href="#Locally-Linear-Embedding-LLE" class="headerlink" title="Locally Linear Embedding ( LLE )"></a>Locally Linear Embedding ( LLE )</h2><p>LLE 的核心概念是這樣 ，原本的資料中，任一筆資料 $x_i$ 假設可由周圍的 資料點 $x_j$ 線性組合而來，其係數 $w_{ij}$ 即為 $x_i$ 與 $x_j$ 之間的關係 (relation)。而我希望 Embedding 後的 $z_i$ 與 $z_j$ 仍保有 $w_{ij}$ 這樣的關係，藉此來找出 $z_i$ 與 $z_j$。</p>
+<p><img src="https://i.imgur.com/F6ko75K.png" alt></p>
+<p>要解決這樣的問題，可以經由兩段最優化過程而得 : </p>
+<p>Step 1 : 周圍 $k$ 個資料點線性組合後的向量與 $x_i$ 的差距 (2-norm) 最小化找出 $w_{ij}$</p>
+<p>Step 2 : 利用周圍 $k$ 個資料點線性組合 ( 共用相同的 $w_{ij}$ ) 後的向量與 $z_i$ 的差距 (2-norm) 最小化找出 $z$-set</p>
+<p>轉換的優劣其實取決於 $k$ 值。</p>
+<p><img src="https://i.imgur.com/Iwp78WR.png" alt></p>
+<p>當我們 $k$ 取的太大、太小時，都很容易造成轉換後的資料有不同形態的重疊。$k$ 值的選取仍要視資料的分布狀況而定。</p>
+<p><img src="https://i.imgur.com/hFBtzaq.jpg =250x" alt></p>
+<h2 id="Laplacain-Eigenmap"><a href="#Laplacain-Eigenmap" class="headerlink" title="Laplacain Eigenmap"></a>Laplacain Eigenmap</h2><p>我們也可以利用於 “ <a href="http://bit.ly/2MoSVHB" target="_blank" rel="noopener">Semi-supervised Learning</a> “ 中所提到的 Graph Theory 來對非線性資料做轉換。</p>
+<p><img src="https://i.imgur.com/hw07j2V.jpg" alt></p>
+<p>一但我們將資料利用 Graph Theory 的方式連結成為 Graph 後，我們便可以計算其 $Smoothness$ and $Laplacian\ matrix$。</p>
+<p>但這裡是 Unsupervised Learning ，所以我們要將原本的 Loss Function </p>
+<script type="math/tex; mode=display">
+L=\sum\limits_{x_r}C(y_r,\hat{y_r})+\lambda S</script><p>去掉 Supervied 項</p>
+<script type="math/tex; mode=display">
+L=\lambda S=\lambda\sum\limits_{i,j}w_{ij}\|z_i-z_j\|_2</script><p>但又因為沒有了 Supervised 項，這會導致我們在進行最小化的同時，或使得最後的解必然會是 $z_i=z_j=0$ ，因此我們必須要另外給予一個 Constrain : </p>
+<script type="math/tex; mode=display">
+Span\left\{z_1,z_2,\cdots,z_N\right\}=R^M,\ where\ dim(Z)=M</script><p>這其實在講說，當我們投射到 Z 空間時，這個 Z 空間必然是「最小」的空間。</p>
+<h2 id="T-Distributed-Stochastic-Neighbor-Embedding-t-SNE"><a href="#T-Distributed-Stochastic-Neighbor-Embedding-t-SNE" class="headerlink" title="T-Distributed Stochastic Neighbor Embedding (t-SNE)"></a>T-Distributed Stochastic Neighbor Embedding (t-SNE)</h2><p>從 LLE 的演算過程可以看出來，它要做的事情是，把距離近的資料點，經過轉換後可以依然保持得很近。但是它卻沒有確保原本距離遠的資料點經過轉換後會一樣離的很遠。</p>
+<p>因此，很多時候利用 LLE 轉換後，容易有大量重疊的現象發生。</p>
+<p><img src="https://i.imgur.com/g2nZn5j.png" alt></p>
+<p>而 t-SNE 則是試圖解決這樣的問題的一種方法。<br>它的概念簡單來說就是，原本的分布，經過轉換後，分布狀況要盡可能的相同。</p>
+<p>首先我們要先對轉換前後的資料空間定義出距離 ( 在這裡，我們將距離定義成為相似度 ) : </p>
+<script type="math/tex; mode=display">
+S(x_i,x_j)=e^{-\|x_i-x_j\|_2} \\
+S'(z_i,z_j)=\displaystyle{\frac{1}{1+\|z_i-z_j\|_2}}</script><p>利用轉換前後空間不同的距離定義，來使資料間遠近能在轉換後更加明顯。</p>
+<p><img src="https://i.imgur.com/xmUSJVK.png" alt></p>
+<p>再來便可以定義轉換前後的分布為</p>
+<script type="math/tex; mode=display">
+P(x_j|x_i)=\displaystyle{\frac{S(x_i,x_j)}{\sum\limits_{k\neq i}S(x_i,x_k)}}\\
+Q(x_j|x_i)=\displaystyle{\frac{S'(z_i,z_j)}{\sum\limits_{k\neq i}S'(z_i,z_k)}}</script><p>一切就緒後，Loss function 便為兩個分布之間的差距，在數學上使用 KL 散度 ( 相對熵 )來計算，接著再找最優解即可 : </p>
+<script type="math/tex; mode=display">
+L=\sum\limits_{i}KL\Big(P(*|x_i)\|Q(*|z_i)\Big)=\sum\limits_{i}\sum\limits_{j}P(x_j|x_i)\log\displaystyle{\frac{P(x_j|x_i)}{Q(z_j|z_i)}}</script><p>經過 t-SNE 處理，很明顯的改善了 LLE 的問題</p>
+<p><img src="https://i.imgur.com/0urcL31.png" alt></p>
+<p>各個類別，經過轉換後都可以將各群距離拉開。</p>
+
+    </div>
+
+    
+    
+    
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>作者： </strong>Allen Tzeng</li>
+  <li class="post-copyright-link">
+    <strong>文章連結：</strong>
+    <a href="https://allen108108.github.io/blog/2019/10/08/Unsupervised Learning (4) -- Neighbor Embedding/" title="Unsupervised Learning (4) -- Neighbor Embedding">https://allen108108.github.io/blog/2019/10/08/Unsupervised Learning (4) -- Neighbor Embedding/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/blog/2019/10/08/Unsupervised Learning (3) -- Word Embedding/" rel="next" title="Unsupervised Learning (3) -- Word Embedding">
+                  <i class="fa fa-chevron-left"></i> Unsupervised Learning (3) -- Word Embedding
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/blog/2019/10/08/Unsupervised Learning (5) -- Generation ( 初探 Generative Adversarial Network ( GAN ) )/" rel="prev" title="Unsupervised Learning (5) -- Generation ( 初探 Generative Adversarial Network ( GAN ) )">
+                  Unsupervised Learning (5) -- Generation ( 初探 Generative Adversarial Network ( GAN ) ) <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    
+  <div class="comments" id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Locally-Linear-Embedding-LLE"><span class="nav-number">1.</span> <span class="nav-text">Locally Linear Embedding ( LLE )</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Laplacain-Eigenmap"><span class="nav-number">2.</span> <span class="nav-text">Laplacain Eigenmap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T-Distributed-Stochastic-Neighbor-Embedding-t-SNE"><span class="nav-number">3.</span> <span class="nav-text">T-Distributed Stochastic Neighbor Embedding (t-SNE)</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/blog/images/allen.jpg"
+      alt="Allen Tzeng">
+  <p class="site-author-name" itemprop="name">Allen Tzeng</p>
+  <div class="site-description" itemprop="description">Study about Mathematics , Programming and Data Science</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/blog/archives/">
+        
+          <span class="site-state-item-count">56</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/blog/categories/">
+          
+        
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分類</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://allen108108.github.io/" title="Github page &rarr; https://allen108108.github.io/"><i class="fa fa-fw fa-github-alt"></i>Github page</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/allen108108" title="GitHub &rarr; https://github.com/allen108108" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:allen108108@hotmail.com" title="E-Mail &rarr; mailto:allen108108@hotmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://www.facebook.com/Mathpy-257929091666547/" title="FB Page &rarr; https://www.facebook.com/Mathpy-257929091666547/" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB Page</a>
+      </span>
+    
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Allen Tzeng</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主題 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="訪客總數">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="總瀏覽次數">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+    
+  
+  <script color='255, 80, 219' opacity='1' zIndex='-1' count='100' src="/blog/lib/canvas-nest/canvas-nest-nomobile.min.js"></script>
+  <script src="/blog/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/blog/js/utils.js?v=7.4.0"></script><script src="/blog/js/motion.js?v=7.4.0"></script>
+<script src="/blog/js/schemes/pisces.js?v=7.4.0"></script>
+
+<script src="/blog/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: 21351,
+      el: 'wpac-rating',
+      color: 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://math-py.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  function disqus_config() {
+    this.page.url = "https://allen108108.github.io/blog/2019/10/08/Unsupervised Learning (4) -- Neighbor Embedding/";
+    this.page.identifier = "2019/10/08/Unsupervised Learning (4) -- Neighbor Embedding/";
+    this.page.title = 'Unsupervised Learning (4) -- Neighbor Embedding';};
+  function loadComments() {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://math-py.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  }
+    window.addEventListener('load', loadComments, false);
+  
+</script>
+
+</body>
+</html>
