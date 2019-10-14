@@ -56,30 +56,20 @@
   };
 </script>
 
-  <meta name="description" content="本文內容節錄自Hung-yi Lee ,  Machine Learning(2017) 課程內容 : Where does the error come from? 本文圖片均來自於課程講義內容">
+  <meta name="description" content="作者 : Jean Gallier and Jocelyn Quaintance網址 : https://www.cis.upenn.edu/~jean/gbooks/geomath.html">
 <meta property="og:type" content="article">
-<meta property="og:title" content="從統計學的角度 (Bias and Variance) 來看 Machine Learning Error">
-<meta property="og:url" content="https://allen108108.github.io/blog/2019/10/05/從統計學的角度 (Bias and Variance) 來看 Machine Learning Error/index.html">
+<meta property="og:title" content="[新書] Algebra, Topology, Differential Calculus, and Optimization Theory for Computer Science and Machine Learning">
+<meta property="og:url" content="https://allen108108.github.io/blog/2019/10/14/[新書] Algebra, Topology, Differential Calculus, and Optimization Theory for Computer Science and Machine Learning/index.html">
 <meta property="og:site_name" content="Math.py">
-<meta property="og:description" content="本文內容節錄自Hung-yi Lee ,  Machine Learning(2017) 課程內容 : Where does the error come from? 本文圖片均來自於課程講義內容">
+<meta property="og:description" content="作者 : Jean Gallier and Jocelyn Quaintance網址 : https://www.cis.upenn.edu/~jean/gbooks/geomath.html">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:image" content="https://i.imgur.com/V94Axkb.png">
-<meta property="og:image" content="https://i.imgur.com/TRKqon9.png">
-<meta property="og:image" content="https://i.imgur.com/lYLJKn9.png">
-<meta property="og:image" content="https://i.imgur.com/S4NV4vi.png">
-<meta property="og:image" content="https://i.imgur.com/WIlYiAL.png">
-<meta property="og:image" content="https://i.imgur.com/WOArL0H.png">
-<meta property="og:image" content="https://i.imgur.com/MS8mWxT.png">
-<meta property="og:image" content="https://i.imgur.com/zWgARjS.png">
-<meta property="og:image" content="https://i.imgur.com/pPcbBNu.png">
-<meta property="og:image" content="https://i.imgur.com/K11dPAN.png">
-<meta property="og:image" content="https://i.imgur.com/HViuH6z.png">
-<meta property="og:updated_time" content="2019-10-06T20:47:06.392Z">
+<meta property="og:image" content="https://i.imgur.com/QsCdRVq.jpg">
+<meta property="og:updated_time" content="2019-10-14T02:35:50.072Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="從統計學的角度 (Bias and Variance) 來看 Machine Learning Error">
-<meta name="twitter:description" content="本文內容節錄自Hung-yi Lee ,  Machine Learning(2017) 課程內容 : Where does the error come from? 本文圖片均來自於課程講義內容">
-<meta name="twitter:image" content="https://i.imgur.com/V94Axkb.png">
-  <link rel="canonical" href="https://allen108108.github.io/blog/2019/10/05/從統計學的角度 (Bias and Variance) 來看 Machine Learning Error/">
+<meta name="twitter:title" content="[新書] Algebra, Topology, Differential Calculus, and Optimization Theory for Computer Science and Machine Learning">
+<meta name="twitter:description" content="作者 : Jean Gallier and Jocelyn Quaintance網址 : https://www.cis.upenn.edu/~jean/gbooks/geomath.html">
+<meta name="twitter:image" content="https://i.imgur.com/QsCdRVq.jpg">
+  <link rel="canonical" href="https://allen108108.github.io/blog/2019/10/14/[新書] Algebra, Topology, Differential Calculus, and Optimization Theory for Computer Science and Machine Learning/">
 
 
 <script id="page-configurations">
@@ -93,7 +83,7 @@
   };
 </script>
 
-  <title>從統計學的角度 (Bias and Variance) 來看 Machine Learning Error | Math.py</title>
+  <title>[新書] Algebra, Topology, Differential Calculus, and Optimization Theory for Computer Science and Machine Learning | Math.py</title>
   
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-149442581-1"></script>
   <script>
@@ -231,7 +221,7 @@
   
   
   <div class="post-block post">
-    <link itemprop="mainEntityOfPage" href="https://allen108108.github.io/blog/blog/2019/10/05/從統計學的角度 (Bias and Variance) 來看 Machine Learning Error/">
+    <link itemprop="mainEntityOfPage" href="https://allen108108.github.io/blog/blog/2019/10/14/[新書] Algebra, Topology, Differential Calculus, and Optimization Theory for Computer Science and Machine Learning/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Allen Tzeng">
@@ -243,7 +233,7 @@
       <meta itemprop="name" content="Math.py">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">從統計學的角度 (Bias and Variance) 來看 Machine Learning Error
+        <h1 class="post-title" itemprop="name headline">[新書] Algebra, Topology, Differential Calculus, and Optimization Theory for Computer Science and Machine Learning
 
           
         </h1>
@@ -259,19 +249,11 @@
                 
               
 
-              <time title="創建時間：2019-10-05 01:09:57" itemprop="dateCreated datePublished" datetime="2019-10-05T01:09:57+08:00">2019-10-05</time>
+              <time title="創建時間：2019-10-14 10:24:01 / 修改時間：10:35:50" itemprop="dateCreated datePublished" datetime="2019-10-14T10:24:01+08:00">2019-10-14</time>
             </span>
           
             
 
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2019-10-07 04:47:06" itemprop="dateModified" datetime="2019-10-07T04:47:06+08:00">2019-10-07</time>
-              </span>
             
           
             <span class="post-meta-item">
@@ -280,7 +262,7 @@
               </span>
               <span class="post-meta-item-text">分類於</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/李宏毅-Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">李宏毅 Machine Learning</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/雜記-Essay/" itemprop="url" rel="index"><span itemprop="name">雜記 Essay</span></a></span>
 
                 
                 
@@ -307,7 +289,7 @@
       
       <span class="post-meta-item-text">Disqus：</span>
     
-    <a title="disqus" href="/blog/2019/10/05/從統計學的角度 (Bias and Variance) 來看 Machine Learning Error/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/10/05/從統計學的角度 (Bias and Variance) 來看 Machine Learning Error/" itemprop="commentCount"></span></a>
+    <a title="disqus" href="/blog/2019/10/14/[新書] Algebra, Topology, Differential Calculus, and Optimization Theory for Computer Science and Machine Learning/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/10/14/[新書] Algebra, Topology, Differential Calculus, and Optimization Theory for Computer Science and Machine Learning/" itemprop="commentCount"></span></a>
   </span>
   
   
@@ -322,55 +304,31 @@
 
       
         <blockquote>
-<ul>
-<li>本文內容節錄自Hung-yi Lee ,  <a href="http://speech.ee.ntu.edu.tw/~tlkagk/courses_ML17_2.html" target="_blank" rel="noopener">Machine Learning</a>(2017) 課程內容 : Where does the error come from?</li>
-<li>本文圖片均來自於課程講義內容</li>
-</ul>
+<p>作者 : Jean Gallier and Jocelyn Quaintance<br>網址 : <a href="https://www.cis.upenn.edu/~jean/gbooks/geomath.html" target="_blank" rel="noopener">https://www.cis.upenn.edu/~jean/gbooks/geomath.html</a></p>
 </blockquote>
 <a id="more"></a>
-<p>在進行林軒田老師的課程時，有簡略的介紹 error 是來自於現實結果與預測結果的差異，但從李宏毅老師的課程中，我們可以清楚了解到 error 與統計學中 Bias(偏差)、Variance(變異數)的關係，從這些關係中清楚的定義 underfitting &amp; Overfitting，進而可以針對模型的 error 成因來對 model 進行適當的調整及改善。</p>
-<h2 id="Bias-amp-Variance"><a href="#Bias-amp-Variance" class="headerlink" title="Bias &amp; Variance"></a>Bias &amp; Variance</h2><h3 id="Bias"><a href="#Bias" class="headerlink" title="Bias"></a>Bias</h3><p>一般在統計學中，我們就是以樣本的統計量來對母體進行推估，而 Bias 便是度量我們樣本統計量與母體的差異程度。</p>
-<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 50%;"><img width="350" src="https://i.imgur.com/V94Axkb.png"></div><div class="group-picture-column" style="width: 50%;"><img width="100" src="https://i.imgur.com/TRKqon9.png"></div></div><div class="group-picture-row"></div></div></div>
-<p>以上圖為例，正常我們取樣的樣本平均值 $m$ 很大的機率不會等於母體平均值 $\mu$，如果我們對母體做了很多次的抽樣，其期望值 $E(m)=\mu$ 則我們稱這樣的抽樣是 ‘unbiased’ (無偏誤的)。</p>
-<p>我們由此可以有一個結論，越好的樣本，其 bias 越低，也就是離目標越近。從機器學習的角度來看，我們對於目標通常會選擇一個模型來進行訓練，針對此模型我們手上會有一整個 model set ( 從林軒田的角度來說就是 hypothesis set )，這一個 model set 的 bias 便是 error 的來源之一。</p>
-<h3 id="Variance"><a href="#Variance" class="headerlink" title="Variance"></a>Variance</h3><p>Variance (變異數) 在統計學來說便是一個度量樣本分散程度的統計量</p>
-<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 50%;"><img width="350" src="https://i.imgur.com/lYLJKn9.png"></div><div class="group-picture-column" style="width: 50%;"><img width="200" src="https://i.imgur.com/S4NV4vi.png"></div></div><div class="group-picture-row"></div></div></div>
-<p>當我們取樣的數量越多，分散程度便會縮小，可以更接近我們的目標，從機器學習的角度來看，當我們的模型選擇越複雜，整個 model set ( Hypothesis set ) 會有越多種各式各樣的選擇，其 variance 也會越高。</p>
-<p>總結來說，我們可以用箭靶來描述 Bias &amp; Variance</p>
-<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 50%;"><img src="https://i.imgur.com/WIlYiAL.png" alt></div><div class="group-picture-column" style="width: 50%;"><img width="350" src="https://i.imgur.com/WOArL0H.png"></div></div><div class="group-picture-row"></div></div></div>
-<h2 id="Model-V-S-Error-V-S-bias-and-variance"><a href="#Model-V-S-Error-V-S-bias-and-variance" class="headerlink" title="Model V.S. Error V.S. bias and variance"></a>Model V.S. Error V.S. bias and variance</h2><p>從上面針對 bias 與 variance 的介紹，其實我們可以說機器學習裡面的 error其實就來自於 bias 與 variance。說了這麼多，我們最終還是想知道，到底 model , error , bias and variance 的關係是什麼 ?</p>
-<h3 id="當我們選擇越複雜的模型，variance-越高"><a href="#當我們選擇越複雜的模型，variance-越高" class="headerlink" title="當我們選擇越複雜的模型，variance 越高"></a>當我們選擇越複雜的模型，variance 越高</h3><p><img src="https://i.imgur.com/MS8mWxT.png" alt></p>
-<h3 id="當我們選擇越複雜的模型，bias-越低"><a href="#當我們選擇越複雜的模型，bias-越低" class="headerlink" title="當我們選擇越複雜的模型，bias 越低"></a>當我們選擇越複雜的模型，bias 越低</h3><p><img src="https://i.imgur.com/zWgARjS.png" alt></p>
-<p>但是當我們選擇越複雜的模型，整個 variance 產生的 error 上升的速度遠高於 bias 產生的 error 下降速度，這也是為何當我們選擇越複雜的模型時，整個 test error 會飆得非常高的原因</p>
-<p><img src="https://i.imgur.com/pPcbBNu.png" alt></p>
-<p>由此我們也可以給 underfitting 與 overfitting 一個比較清楚的定義 : </p>
+<h2 id="廢話"><a href="#廢話" class="headerlink" title="廢話"></a>廢話</h2><p>從自學資料科學以來，一直認為資料科學涵蓋的數學領域極為廣泛，若以目前台灣數學系所的課程規劃來看，若非一路念到數學研究所大概很難對於這些領域都有一個全盤的理解。</p>
+<p>或許是我看得不夠多，目前坊間似乎也極少有針對電腦科學、資料科學的數學部分做一個統整性的課程或書籍，目前有看到的就屬中國雷鋒網上面出的一門課程 “<a href="http://www.mooc.ai/course/276" target="_blank" rel="noopener"><em>机器学习必修之数学基础系列课程</em></a> “ 看起來算是比較全面的課程。</p>
+<p>的確，要出這樣一套課程或是書籍，不管在技術還是理念上都不算是一個很容易做到的事情，總還是希望能夠有這樣的東西出版，在我有限的能力範圍內盡可能地將數學在資料科學、機器學習或是深度學習中的運作做一個通盤的理解。</p>
+<p>今天一早在 Reddit 上看到這本書的連結，點開一下，發現這本將近 2000 頁的書蠻符合我的期待 ( 但是不是真的有辦法嗑完又是另一個故事了….. )，如果以林軒田的課程來看，這本書也算是涵蓋的很全面了。( 不過也是有可惜的地方，就是差一個機率統計的部分，或許這不是作者的專長? )</p>
+<h2 id="本書架構"><a href="#本書架構" class="headerlink" title="本書架構"></a>本書架構</h2><p>本書共分九個章節 (不含 Appendices) : </p>
 <ul>
-<li>Underfitting : Large bias and Small variance</li>
-<li>Overfitting : Small bias and Large variance</li>
+<li>Linear Algebra 線性代數</li>
+<li>Affine and Projective Geometry 仿射變換與投影幾何</li>
+<li>The Geometry of Bilinear Forms 雙線性型中的幾何</li>
+<li>Algebra: PID’s, UFD’s, Noetherian Rings, Tensors,Modules over a PID, Normal Forms 抽象代數</li>
+<li>Topology, Differential Calculus 拓樸以及微積分</li>
+<li>Preliminaries for Optimization Theory 優化論</li>
+<li>Linear Optimization 線性優化</li>
+<li>NonLinear Optimization 非線性優化</li>
+<li>Applications to Machine Learning 機器學習上面的應用</li>
 </ul>
-<p>而我們在模型的選擇上便是期望在 bias 與 variance 中找到一個平衡點。</p>
-<h2 id="Model-Selection"><a href="#Model-Selection" class="headerlink" title="Model Selection"></a>Model Selection</h2><h3 id="當-bias-偏高時，我們可以怎麼做"><a href="#當-bias-偏高時，我們可以怎麼做" class="headerlink" title="當 bias 偏高時，我們可以怎麼做?"></a>當 bias 偏高時，我們可以怎麼做?</h3><ul>
-<li>加入更多 features</li>
-<li>選擇更複雜的模型</li>
-</ul>
-<h3 id="當-variance-偏高時，我們可以怎麼做"><a href="#當-variance-偏高時，我們可以怎麼做" class="headerlink" title="當 variance 偏高時，我們可以怎麼做?"></a>當 variance 偏高時，我們可以怎麼做?</h3><ul>
-<li>加入更多資料進行訓練</li>
-<li>Regularization</li>
-</ul>
-<p>如果我們只簡單將手中資料切分成 training data 與 testing data，<br>利用 training data 訓練出來的模型再根據 testing data 所產生的總 error 來進行 model selection 時，testing data 本身的 bias，會使選出的 model 放進 未知的 testing data 測試時，勢必會比我們在已知的 testing data 所計算出來的 error 還要高。</p>
-<p>在實務上我們很常會給一個目標誤差值，希望最後得到的 model 可以低於我們給定的目標誤差，但若按照上述的方式，雖然所選出的model在手邊的 testing data上可以達到我們要的目標，但在未知資料上的表現並不見得會低於我們的目標。</p>
-<p><img src="https://i.imgur.com/K11dPAN.png" alt></p>
-<p>因此我們實務上會將 training data 再切分出一個 validation data ，利用 validation data 來進行 model selection，如此一來，已知的 testing data 與 未知的 testing data 之間就不存在 bias，也就是說，我們利用 validation data 所選出來的 model 應用在 已知的 testing data 上面的效果將會跟未知 testing data 效果一樣。</p>
-<p><img src="https://i.imgur.com/HViuH6z.png" alt></p>
-<blockquote>
-<p>[ Remark ]</p>
-<ol>
-<li><p>千萬不要將 model 應用在手邊的 testing data 後又回頭對 model 進行調整，你會將手邊 testing data 的 bias 考慮進去，導致訓練出來的模型應用於未知的 testing data 再度產生落差。</p>
-</li>
-<li><p>為了避免 Validation data 與 整個原先的 Training data 有高 bias，我們會使用 N-fold cross validation，來平均因 validation data 的 bias 所造成的 error 差異。</p>
-</li>
-</ol>
-</blockquote>
+<p>整本書的內容會跟數學系用的教科書型態類似，以定義跟引理定理所構成，大略看了一下，內容都不算是太艱深，應該還算是一本易讀好懂的書。</p>
+<p>我認為這本書還有一個很不錯的部分是在一些圖解上面做的也算是美觀且詳細</p>
+<p><img src="https://i.imgur.com/QsCdRVq.jpg" alt></p>
+<h2 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h2><p>我認為要踏進資料科學這一個領域，最終還是得面對數學。</p>
+<p>我不認為對於資料科學所涵蓋的數學領域都必須要讀到通透，即使一個數學博士都不見得可以做到，但至少我們可以針對有觸及的部分稍微能夠有個粗略的概念跟理解，我想這也就足夠了。</p>
+<p>雖然以台灣現在的教育體制下，數學已然成為讓人「聞風喪膽」的恐怖惡魔，但既然進了廚房也就不要再怕熱了，基礎數學還是得穩紮穩打，而這本書或許可以做為你我奠定基礎的一本好書。</p>
 
     </div>
 
@@ -387,7 +345,7 @@
     <strong>作者： </strong>Allen Tzeng</li>
   <li class="post-copyright-link">
     <strong>文章連結：</strong>
-    <a href="https://allen108108.github.io/blog/2019/10/05/從統計學的角度 (Bias and Variance) 來看 Machine Learning Error/" title="從統計學的角度 (Bias and Variance) 來看 Machine Learning Error">https://allen108108.github.io/blog/2019/10/05/從統計學的角度 (Bias and Variance) 來看 Machine Learning Error/</a>
+    <a href="https://allen108108.github.io/blog/2019/10/14/[新書] Algebra, Topology, Differential Calculus, and Optimization Theory for Computer Science and Machine Learning/" title="[新書] Algebra, Topology, Differential Calculus, and Optimization Theory for Computer Science and Machine Learning">https://allen108108.github.io/blog/2019/10/14/[新書] Algebra, Topology, Differential Calculus, and Optimization Theory for Computer Science and Machine Learning/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！</li>
@@ -409,8 +367,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/blog/2019/10/05/卷積神經網路 Convolutional Neural Network ( CNN ) 與 全連接神經網路 Fully Connected Feedforward Network 於 MNIST 上之實作/" rel="next" title="卷積神經網路 Convolutional Neural Network ( CNN ) 與 全連接神經網路 Fully Connected Feedforward Network 於 MNIST 上之實作">
-                  <i class="fa fa-chevron-left"></i> 卷積神經網路 Convolutional Neural Network ( CNN ) 與 全連接神經網路 Fully Connected Feedforward Network 於 MNIST 上之實作
+                <a href="/blog/2019/10/13/將 VS Code 終端機預設成為 Anaconda Prompt/" rel="next" title="將 VS Code 終端機預設成為 Anaconda Prompt">
+                  <i class="fa fa-chevron-left"></i> 將 VS Code 終端機預設成為 Anaconda Prompt
                 </a>
               
             </div>
@@ -418,10 +376,6 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-              
-                <a href="/blog/2019/10/05/Adagrad、RMSprop、Momentum and Adam -- 特殊的學習率調整方式/" rel="prev" title="Adagrad、RMSprop、Momentum and Adam -- 特殊的學習率調整方式">
-                  Adagrad、RMSprop、Momentum and Adam -- 特殊的學習率調整方式 <i class="fa fa-chevron-right"></i>
-                </a>
               
             </div>
           </div>
@@ -479,7 +433,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Bias-amp-Variance"><span class="nav-number">1.</span> <span class="nav-text">Bias &amp; Variance</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Bias"><span class="nav-number">1.1.</span> <span class="nav-text">Bias</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Variance"><span class="nav-number">1.2.</span> <span class="nav-text">Variance</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Model-V-S-Error-V-S-bias-and-variance"><span class="nav-number">2.</span> <span class="nav-text">Model V.S. Error V.S. bias and variance</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#當我們選擇越複雜的模型，variance-越高"><span class="nav-number">2.1.</span> <span class="nav-text">當我們選擇越複雜的模型，variance 越高</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#當我們選擇越複雜的模型，bias-越低"><span class="nav-number">2.2.</span> <span class="nav-text">當我們選擇越複雜的模型，bias 越低</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Model-Selection"><span class="nav-number">3.</span> <span class="nav-text">Model Selection</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#當-bias-偏高時，我們可以怎麼做"><span class="nav-number">3.1.</span> <span class="nav-text">當 bias 偏高時，我們可以怎麼做?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#當-variance-偏高時，我們可以怎麼做"><span class="nav-number">3.2.</span> <span class="nav-text">當 variance 偏高時，我們可以怎麼做?</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#廢話"><span class="nav-number">1.</span> <span class="nav-text">廢話</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本書架構"><span class="nav-number">2.</span> <span class="nav-text">本書架構</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小結"><span class="nav-number">3.</span> <span class="nav-text">小結</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -756,9 +710,9 @@
 </script>
 <script>
   function disqus_config() {
-    this.page.url = "https://allen108108.github.io/blog/2019/10/05/從統計學的角度 (Bias and Variance) 來看 Machine Learning Error/";
-    this.page.identifier = "2019/10/05/從統計學的角度 (Bias and Variance) 來看 Machine Learning Error/";
-    this.page.title = '從統計學的角度 (Bias and Variance) 來看 Machine Learning Error';};
+    this.page.url = "https://allen108108.github.io/blog/2019/10/14/[新書] Algebra, Topology, Differential Calculus, and Optimization Theory for Computer Science and Machine Learning/";
+    this.page.identifier = "2019/10/14/[新書] Algebra, Topology, Differential Calculus, and Optimization Theory for Computer Science and Machine Learning/";
+    this.page.title = '[新書] Algebra, Topology, Differential Calculus, and Optimization Theory for Computer Science and Machine Learning';};
   function loadComments() {
     if (window.DISQUS) {
       DISQUS.reset({
