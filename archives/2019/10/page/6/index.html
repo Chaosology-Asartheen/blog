@@ -56,21 +56,17 @@
   };
 </script>
 
-  <meta name="description" content="由林軒田機器學習第十講 Logistic Regression 的基礎配合李宏毅的 Machine Learning Lecture 5 來思考 ，為何我們推薦使用 Cross-Entropy 作為error measure 而不是沿用 Linear Regression 的 Square error ?">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Why can we use Squre Error in Logistic Regression ?">
-<meta property="og:url" content="https://allen108108.github.io/blog/2019/10/05/Why can we use Squre Error in Logistic Regression _/index.html">
+  <meta name="description" content="Study about Mathematics , Programming and Data Science">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Math.py">
+<meta property="og:url" content="https://allen108108.github.io/blog/archives/2019/10/page/6/index.html">
 <meta property="og:site_name" content="Math.py">
-<meta property="og:description" content="由林軒田機器學習第十講 Logistic Regression 的基礎配合李宏毅的 Machine Learning Lecture 5 來思考 ，為何我們推薦使用 Cross-Entropy 作為error measure 而不是沿用 Linear Regression 的 Square error ?">
+<meta property="og:description" content="Study about Mathematics , Programming and Data Science">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:image" content="https://i.imgur.com/UauyPgR.png">
-<meta property="og:image" content="https://i.imgur.com/llhP9yg.png">
-<meta property="og:updated_time" content="2019-10-04T17:39:24.582Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Why can we use Squre Error in Logistic Regression ?">
-<meta name="twitter:description" content="由林軒田機器學習第十講 Logistic Regression 的基礎配合李宏毅的 Machine Learning Lecture 5 來思考 ，為何我們推薦使用 Cross-Entropy 作為error measure 而不是沿用 Linear Regression 的 Square error ?">
-<meta name="twitter:image" content="https://i.imgur.com/UauyPgR.png">
-  <link rel="canonical" href="https://allen108108.github.io/blog/2019/10/05/Why can we use Squre Error in Logistic Regression _/">
+<meta name="twitter:title" content="Math.py">
+<meta name="twitter:description" content="Study about Mathematics , Programming and Data Science">
+  <link rel="canonical" href="https://allen108108.github.io/blog/archives/2019/10/page/6/">
 
 
 <script id="page-configurations">
@@ -78,13 +74,13 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: true,
+    isPost: false,
     isPage: false,
-    isArchive: false
+    isArchive: true
   };
 </script>
 
-  <title>Why can we use Squre Error in Logistic Regression ? | Math.py</title>
+  <title>歸檔 | Math.py</title>
   
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-149442581-1"></script>
   <script>
@@ -213,184 +209,87 @@
         <div class="content-wrap">
             
 
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+  
+
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-      <article itemscope itemtype="http://schema.org/Article">
   
   
   
-  <div class="post-block post">
-    <link itemprop="mainEntityOfPage" href="https://allen108108.github.io/blog/blog/2019/10/05/Why can we use Squre Error in Logistic Regression _/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Allen Tzeng">
-      <meta itemprop="description" content="Study about Mathematics , Programming and Data Science">
-      <meta itemprop="image" content="/blog/images/allen.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Math.py">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">Why can we use Squre Error in Logistic Regression ?
-
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              
-                
-              
-
-              <time title="創建時間：2019-10-05 01:38:52 / 修改時間：01:39:24" itemprop="dateCreated datePublished" datetime="2019-10-05T01:38:52+08:00">2019-10-05</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/李宏毅-Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">李宏毅 Machine Learning</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            <span class="post-meta-item" title="閱讀次數" id="busuanzi_container_page_pv" style="display: none;">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">閱讀次數：</span>
-              <span id="busuanzi_value_page_pv"></span>
-            </span>
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
+  <div class="post-block archive">
+    <div id="posts" class="posts-collapse">
+      <div class="collection-title">
         
-      
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/blog/2019/10/05/Why can we use Squre Error in Logistic Regression _/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/10/05/Why can we use Squre Error in Logistic Regression _/" itemprop="commentCount"></span></a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-        <p>由林軒田機器學習第十講 Logistic Regression 的基礎配合李宏毅的 Machine Learning Lecture 5 來思考 ，為何我們推薦使用 Cross-Entropy 作為error measure 而不是沿用 Linear Regression 的 Square error ?</p>
-<a id="more"></a>
-<p><img src="https://i.imgur.com/UauyPgR.png" alt></p>
-<p>假定我們現在使用的是 Square Error : $E_{in}(h)=\frac{1}{N}\sum\limits_{n=0}^{N}(\theta(\mathbb{W}^T\mathbb{X})-y_n)^2$</p>
-<p>當我們要進行 Gradient Descent ，要計算 Gradient 而對各變數進行偏微分時會發現一個狀況 : </p>
-<p>$y_n=1\Longrightarrow\begin{cases}<br>\theta(\mathbb{W}^T\mathbb{X})=1\ (close\ to\ target)  &amp; \frac{\partial E_{in}}{\partial w_i}=0 \\<br>\theta(\mathbb{W}^T\mathbb{X})=0\ (far\ from\ target) &amp; \frac{\partial E_{in}}{\partial w_i}=0<br>\end{cases}$</p>
-<p>同理，當 $y_n=0$ 時也會有一樣的情況。</p>
-<p>我們可以將整個 Loss 視覺化出來如下圖 : </p>
-<p><img src="https://i.imgur.com/llhP9yg.png" alt></p>
-<p>當距離目標值很遠的部分，使用 Squre error 可能會因為整個 Loss 變化量太小，斜率太小而導致 Gradient Descent 跑不出來，但反觀 Cross-Entropy 便可完美的將每一次迭代的步伐依照隨機選取的點的坡度來進行適當的調整，這也是為什麼在 Logistic Regression 中大多會建議使用 Cross-Entropy 的原因了。</p>
-
-    </div>
-
-    
-    
-    
         
+         
+          
+        <span class="collection-header">好! 目前共有 58 篇文章。 繼續努力。</span>
+      </div>
       
-        
-
-<div>
-<ul class="post-copyright">
-  <li class="post-copyright-author">
-    <strong>作者： </strong>Allen Tzeng</li>
-  <li class="post-copyright-link">
-    <strong>文章連結：</strong>
-    <a href="https://allen108108.github.io/blog/2019/10/05/Why can we use Squre Error in Logistic Regression _/" title="Why can we use Squre Error in Logistic Regression ?">https://allen108108.github.io/blog/2019/10/05/Why can we use Squre Error in Logistic Regression _/</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！</li>
-</ul>
-</div>
 
       
 
-      <footer class="post-footer">
+  
+  
 
-        
-  <div class="post-widgets">
-    <div class="wp_rating">
-      <div id="wpac-rating"></div>
+  
+    
+    <div class="collection-year">
+      <h1 class="collection-header">2019</h1>
     </div>
   
-  </div>
 
-          <div class="post-nav">
-            <div class="post-nav-next post-nav-item">
-              
-                <a href="/blog/2019/10/05/Adagrad、RMSprop、Momentum and Adam -- 特殊的學習率調整方式/" rel="next" title="Adagrad、RMSprop、Momentum and Adam -- 特殊的學習率調整方式">
-                  <i class="fa fa-chevron-left"></i> Adagrad、RMSprop、Momentum and Adam -- 特殊的學習率調整方式
-                </a>
-              
-            </div>
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
 
-            <span class="post-nav-divider"></span>
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2019-10-01T22:45:04+08:00"
+              content="2019-10-01">
+          10-01
+        </time>
+      </div>
 
-            <div class="post-nav-prev post-nav-item">
-              
-                <a href="/blog/2019/10/05/Batch Size/" rel="prev" title="Batch Size">
-                  Batch Size <i class="fa fa-chevron-right"></i>
-                </a>
-              
-            </div>
-          </div>
+      <h2 class="post-title">
         
-      </footer>
-    
-  </div>
-  
-  
-  
+          <a class="post-title-link" href="/blog/2019/10/01/林軒田機器學習基石筆記 - 第八講/" itemprop="url">
+            <span itemprop="name">林軒田機器學習基石筆記 - 第八講</span>
+          </a>
+        
+      </h2>
+
+    </header>
   </article>
 
-  </div>
 
 
-          </div>
-          
-    
-    
-  <div class="comments" id="comments">
-    <div id="disqus_thread">
-      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+
     </div>
   </div>
   
   
+  
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/blog/archives/2019/10/page/5/"><i class="fa fa-angle-left" aria-label="上一頁"></i></a><a class="page-number" href="/blog/archives/2019/10/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/archives/2019/10/page/5/">5</a><span class="page-number current">6</span>
+  </nav>
+
+
+
+          </div>
+          
 
         </div>
           
@@ -405,11 +304,6 @@
 
   <aside class="sidebar">
     <div class="sidebar-inner">
-        
-        
-        
-        
-      
 
       <ul class="sidebar-nav motion-element">
         <li class="sidebar-nav-toc">
@@ -630,56 +524,6 @@
   
 
   
-    
-      
-<script type="text/x-mathjax-config">
-
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
-      processEscapes: true,
-      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-      equationNumbers: {
-        autoNumber: 'AMS'
-      }
-    }
-  });
-
-  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
-    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
-      if (data.display) {
-        var next = data.script.nextSibling;
-        while (next && next.nodeName.toLowerCase() === '#text') {
-          next = next.nextSibling;
-        }
-        if (next && next.nodeName.toLowerCase() === 'br') {
-          next.parentNode.removeChild(next);
-        }
-      }
-    });
-  });
-
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for (i = 0; i < all.length; i += 1) {
-      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
-      if (element.nodeName.toLowerCase() == 'li') {
-        element = element.parentNode;
-      }
-      element.classList.add('has-jax');
-    }
-  });
-</script>
-<script>
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
-    MathJax.Hub.Typeset();
-  }, window.MathJax);
-</script>
-
-    
-  
 
   
 
@@ -694,27 +538,6 @@
   }
   // defer loading until the whole page loading is completed
   window.addEventListener('load', loadCount, false);
-</script>
-<script>
-  function disqus_config() {
-    this.page.url = "https://allen108108.github.io/blog/2019/10/05/Why can we use Squre Error in Logistic Regression _/";
-    this.page.identifier = "2019/10/05/Why can we use Squre Error in Logistic Regression _/";
-    this.page.title = 'Why can we use Squre Error in Logistic Regression ?';};
-  function loadComments() {
-    if (window.DISQUS) {
-      DISQUS.reset({
-        reload: true,
-        config: disqus_config
-      });
-    } else {
-      var d = document, s = d.createElement('script');
-      s.src = 'https://math-py.disqus.com/embed.js';
-      s.setAttribute('data-timestamp', '' + +new Date());
-      (d.head || d.body).appendChild(s);
-    }
-  }
-    window.addEventListener('load', loadComments, false);
-  
 </script>
 
 </body>
