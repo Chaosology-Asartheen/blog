@@ -73,7 +73,7 @@
 <meta property="og:image" content="https://i.imgur.com/qJR1Rm6.png">
 <meta property="og:image" content="https://i.imgur.com/5UcHSnc.jpg">
 <meta property="og:image" content="https://i.imgur.com/bNZmeNI.jpg">
-<meta property="og:updated_time" content="2019-10-22T08:01:56.217Z">
+<meta property="og:updated_time" content="2019-10-23T07:42:44.316Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 3 -- Graph ( 2 )">
 <meta name="twitter:description" content="Representing Graph$G=(V,E)$ is a graph  $\mid V\mid=$ the number of nodes $\overset{let}{=} n$$\mid E\mid=$ the number of edges $\overset{let}{=} m$$\Longrightarrow n-1\leq m\leq \displaystyle{\binom{">
@@ -269,7 +269,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2019-10-22 16:01:56" itemprop="dateModified" datetime="2019-10-22T16:01:56+08:00">2019-10-22</time>
+                <time title="修改時間：2019-10-23 15:42:44" itemprop="dateModified" datetime="2019-10-23T15:42:44+08:00">2019-10-23</time>
               </span>
             
           
@@ -374,6 +374,59 @@ Adj[i]=\{j\mid (i,j)\in E\}\\
 <ul>
 <li>iterative code 使用的是 stack 形式做處理，而 recursive code 其實也是 stack，因為 recursive 本身就是一個 stack 形式。</li>
 <li>Time Complexity : $O(m+n)$ …. Adjacency List</li>
+</ul>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><h3 id="Adjacency-matrix-VS-Adjacency-list-for-graph"><a href="#Adjacency-matrix-VS-Adjacency-list-for-graph" class="headerlink" title="Adjacency matrix VS. Adjacency list for graph"></a>Adjacency matrix VS. Adjacency list for graph</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Choice</th>
+<th>Complexity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Find an edge</td>
+<td>Adjacency matrix</td>
+<td>$O(1)$</td>
+</tr>
+<tr>
+<td>Find degree</td>
+<td>Adjacency list</td>
+<td>$&lt;O(n)$</td>
+</tr>
+<tr>
+<td>Traverse the graph</td>
+<td>Adjacency list</td>
+<td>$O(m+n)$</td>
+</tr>
+<tr>
+<td>Storage for sparse graph</td>
+<td>Adjacency list</td>
+<td>$&lt;O(n^2)$</td>
+</tr>
+<tr>
+<td>Storage for dense graph</td>
+<td>Adjacency matrix</td>
+<td>$O(n^2)$</td>
+</tr>
+<tr>
+<td>Edge insertion/deletion</td>
+<td>Adjacency matrix</td>
+<td>$O(1)$</td>
+</tr>
+<tr>
+<td>Most application</td>
+<td>Adjacency list</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="Graph-traversal"><a href="#Graph-traversal" class="headerlink" title="Graph traversal"></a>Graph traversal</h3><ul>
+<li>Data structure of BFS : queue / stack</li>
+<li>Data structure of DFS : stack</li>
+<li>Implementation of BFS/DFS with Adjacency list : $O(n+m)$</li>
 </ul>
 
     </div>
@@ -483,7 +536,7 @@ Adj[i]=\{j\mid (i,j)\in E\}\\
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Representing-Graph"><span class="nav-number">1.</span> <span class="nav-text">Representing Graph</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Adjacency-Matrix"><span class="nav-number">1.1.</span> <span class="nav-text">Adjacency Matrix</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Adjacency-List"><span class="nav-number">1.2.</span> <span class="nav-text">Adjacency List</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Implementation"><span class="nav-number">2.</span> <span class="nav-text">Implementation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Queue"><span class="nav-number">2.1.</span> <span class="nav-text">Queue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stack"><span class="nav-number">2.2.</span> <span class="nav-text">Stack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Implementing-BFS"><span class="nav-number">2.3.</span> <span class="nav-text">Implementing BFS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Implementing-DFS"><span class="nav-number">2.4.</span> <span class="nav-text">Implementing DFS</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Representing-Graph"><span class="nav-number">1.</span> <span class="nav-text">Representing Graph</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Adjacency-Matrix"><span class="nav-number">1.1.</span> <span class="nav-text">Adjacency Matrix</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Adjacency-List"><span class="nav-number">1.2.</span> <span class="nav-text">Adjacency List</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Implementation"><span class="nav-number">2.</span> <span class="nav-text">Implementation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Queue"><span class="nav-number">2.1.</span> <span class="nav-text">Queue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stack"><span class="nav-number">2.2.</span> <span class="nav-text">Stack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Implementing-BFS"><span class="nav-number">2.3.</span> <span class="nav-text">Implementing BFS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Implementing-DFS"><span class="nav-number">2.4.</span> <span class="nav-text">Implementing DFS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary"><span class="nav-number">3.</span> <span class="nav-text">Summary</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Adjacency-matrix-VS-Adjacency-list-for-graph"><span class="nav-number">3.1.</span> <span class="nav-text">Adjacency matrix VS. Adjacency list for graph</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Graph-traversal"><span class="nav-number">3.2.</span> <span class="nav-text">Graph traversal</span></a></li></ol></li></ol></div>
         
       </div>
       <!--/noindex-->
