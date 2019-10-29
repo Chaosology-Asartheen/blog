@@ -63,21 +63,35 @@
   };
 </script>
 
-  <meta name="description" content="本文為一系列課程之筆記，建議從” 機器學習基石筆記-1 “開始閱讀  本文討論內容請參考:機器學習基石第七講 : The VC Dimension  本篇所有圖片部分由筆者製作，其它均為機器學習基石課程內容講義">
+  <meta name="description" content="Text to Image在某一些情境下，我們會希望有一個 model 可以吃進一個字或是一串句子，然後生成一張相對應的圖片。這樣的 Text to image 的目標，我們其實有機會可以用 NN 來做一個 Superviced Learning 來達成。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="林軒田機器學習基石筆記 - 第七講">
-<meta property="og:url" content="https://allen108108.github.io/blog/2019/10/01/林軒田機器學習基石筆記 - 第七講/index.html">
+<meta property="og:title" content="Generative Adversarial Network (2) --- Conditional GAN">
+<meta property="og:url" content="https://allen108108.github.io/blog/2019/10/29/Generative Adversarial Network (2) — Conditional GAN/index.html">
 <meta property="og:site_name" content="Math.py">
-<meta property="og:description" content="本文為一系列課程之筆記，建議從” 機器學習基石筆記-1 “開始閱讀  本文討論內容請參考:機器學習基石第七講 : The VC Dimension  本篇所有圖片部分由筆者製作，其它均為機器學習基石課程內容講義">
+<meta property="og:description" content="Text to Image在某一些情境下，我們會希望有一個 model 可以吃進一個字或是一串句子，然後生成一張相對應的圖片。這樣的 Text to image 的目標，我們其實有機會可以用 NN 來做一個 Superviced Learning 來達成。">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:image" content="https://i.imgur.com/3ZZ099u.png">
-<meta property="og:image" content="https://i.imgur.com/CdqQidL.png">
-<meta property="og:updated_time" content="2019-10-22T07:57:43.140Z">
+<meta property="og:image" content="https://i.imgur.com/EESwg8e.jpg">
+<meta property="og:image" content="https://i.imgur.com/EjKXS1m.jpg">
+<meta property="og:image" content="https://i.imgur.com/AgjCU1e.png">
+<meta property="og:image" content="https://i.imgur.com/qmaDWoT.png">
+<meta property="og:image" content="https://i.imgur.com/CrG8NuV.png">
+<meta property="og:image" content="https://i.imgur.com/CfahGx2.png">
+<meta property="og:image" content="https://i.imgur.com/7TmDMRb.jpg">
+<meta property="og:image" content="https://i.imgur.com/F09phne.jpg">
+<meta property="og:image" content="https://i.imgur.com/MtnuoCr.png">
+<meta property="og:image" content="https://i.imgur.com/Qbsk9IR.png">
+<meta property="og:image" content="https://i.imgur.com/Ha80tAh.jpg">
+<meta property="og:image" content="https://i.imgur.com/nfEjU6M.png">
+<meta property="og:image" content="https://i.imgur.com/CSVORtT.png">
+<meta property="og:image" content="https://i.imgur.com/bZLUy5p.png">
+<meta property="og:image" content="https://i.imgur.com/uBrQRgZ.gif">
+<meta property="og:image" content="https://i.imgur.com/1T8FYwy.gif">
+<meta property="og:updated_time" content="2019-10-29T00:51:16.587Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="林軒田機器學習基石筆記 - 第七講">
-<meta name="twitter:description" content="本文為一系列課程之筆記，建議從” 機器學習基石筆記-1 “開始閱讀  本文討論內容請參考:機器學習基石第七講 : The VC Dimension  本篇所有圖片部分由筆者製作，其它均為機器學習基石課程內容講義">
-<meta name="twitter:image" content="https://i.imgur.com/3ZZ099u.png">
-  <link rel="canonical" href="https://allen108108.github.io/blog/2019/10/01/林軒田機器學習基石筆記 - 第七講/">
+<meta name="twitter:title" content="Generative Adversarial Network (2) --- Conditional GAN">
+<meta name="twitter:description" content="Text to Image在某一些情境下，我們會希望有一個 model 可以吃進一個字或是一串句子，然後生成一張相對應的圖片。這樣的 Text to image 的目標，我們其實有機會可以用 NN 來做一個 Superviced Learning 來達成。">
+<meta name="twitter:image" content="https://i.imgur.com/EESwg8e.jpg">
+  <link rel="canonical" href="https://allen108108.github.io/blog/2019/10/29/Generative Adversarial Network (2) — Conditional GAN/">
 
 
 <script id="page-configurations">
@@ -91,7 +105,7 @@
   };
 </script>
 
-  <title>林軒田機器學習基石筆記 - 第七講 | Math.py</title>
+  <title>Generative Adversarial Network (2) --- Conditional GAN | Math.py</title>
   
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-149442581-1"></script>
   <script>
@@ -229,7 +243,7 @@
   
   
   <div class="post-block post">
-    <link itemprop="mainEntityOfPage" href="https://allen108108.github.io/blog/blog/2019/10/01/林軒田機器學習基石筆記 - 第七講/">
+    <link itemprop="mainEntityOfPage" href="https://allen108108.github.io/blog/blog/2019/10/29/Generative Adversarial Network (2) — Conditional GAN/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Allen Tzeng">
@@ -241,7 +255,7 @@
       <meta itemprop="name" content="Math.py">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">林軒田機器學習基石筆記 - 第七講
+        <h1 class="post-title" itemprop="name headline">Generative Adversarial Network (2) --- Conditional GAN
 
           
         </h1>
@@ -257,19 +271,11 @@
                 
               
 
-              <time title="創建時間：2019-10-01 22:45:04" itemprop="dateCreated datePublished" datetime="2019-10-01T22:45:04+08:00">2019-10-01</time>
+              <time title="創建時間：2019-10-29 08:43:43 / 修改時間：08:51:16" itemprop="dateCreated datePublished" datetime="2019-10-29T08:43:43+08:00">2019-10-29</time>
             </span>
           
             
 
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2019-10-22 15:57:43" itemprop="dateModified" datetime="2019-10-22T15:57:43+08:00">2019-10-22</time>
-              </span>
             
           
             <span class="post-meta-item">
@@ -285,7 +291,7 @@
                   ，
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/課程筆記-Course/林軒田-機器學習基石/" itemprop="url" rel="index"><span itemprop="name">林軒田 機器學習基石</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/課程筆記-Course/李宏毅-Machine-Learning-and-having-it-Deep-and-Structured/" itemprop="url" rel="index"><span itemprop="name">李宏毅 Machine Learning and having it Deep and Structured</span></a></span>
 
                 
                 
@@ -312,7 +318,7 @@
       
       <span class="post-meta-item-text">Disqus：</span>
     
-    <a title="disqus" href="/blog/2019/10/01/林軒田機器學習基石筆記 - 第七講/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/10/01/林軒田機器學習基石筆記 - 第七講/" itemprop="commentCount"></span></a>
+    <a title="disqus" href="/blog/2019/10/29/Generative Adversarial Network (2) — Conditional GAN/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/10/29/Generative Adversarial Network (2) — Conditional GAN/" itemprop="commentCount"></span></a>
   </span>
   
   
@@ -326,109 +332,78 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <blockquote>
-<ul>
-<li><p><strong>本文為一系列課程之筆記，建議從” <a href="hhttps://allen108108.github.io/2019/09/30/%E6%9E%97%E8%BB%92%E7%94%B0%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E5%9F%BA%E7%9F%B3%E7%AD%86%E8%A8%98%20-%20%E7%AC%AC%E4%B8%80%E8%AC%9B%E3%80%81%E7%AC%AC%E4%BA%8C%E8%AC%9B/">機器學習基石筆記-1</a> “開始閱讀</strong></p>
-</li>
-<li><p><strong>本文討論內容請參考:<br>機器學習基石第七講 : The VC Dimension</strong></p>
-</li>
-<li><p><strong>本篇所有圖片部分由筆者製作，其它均為機器學習基石課程內容講義</strong></p>
-</li>
-</ul>
-</blockquote>
-<hr>
+        <h2 id="Text-to-Image"><a href="#Text-to-Image" class="headerlink" title="Text to Image"></a>Text to Image</h2><p>在某一些情境下，我們會希望有一個 model 可以吃進一個字或是一串句子，然後生成一張相對應的圖片。這樣的 Text to image 的目標，我們其實有機會可以用 NN 來做一個 Superviced Learning 來達成。</p>
 <a id="more"></a>
-<p>我們先來看一下上一篇的結論 :<br>存在 $Break\ point$ ( 好的$\mathbb{H}$ ) 且 $N$ 夠大的情況下 ( 好的$\mathbb{D}$ )，即使 $infinite\ \mathbb{H}$，演算法從$E_{in}$很小的條件下挑出一個 $g$ ( 好的$algorithm$ )，都一定會有一個有限上界可以確保$E_{in}$跟$E_{out}$夠接近。</p>
-<h2 id="About-mathbb-H"><a href="#About-mathbb-H" class="headerlink" title="About $\mathbb{H}$"></a>About $\mathbb{H}$</h2><p>在我們往下討論這一講的內容前，我覺得我們必須花一點時間了解 $\mathbb{H}$。<br>在<a href="https://allen108108.github.io/2019/09/30/%E6%9E%97%E8%BB%92%E7%94%B0%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E5%9F%BA%E7%9F%B3%E7%AD%86%E8%A8%98%20-%20%E7%AC%AC%E4%B8%80%E8%AC%9B%E3%80%81%E7%AC%AC%E4%BA%8C%E8%AC%9B/">機器學習基石筆記-1</a>的時候，我們曾經有說，在探討 $\mathbb{H}$ 時，我們會把重點放在 $\mathbb{W}$的討論上，但是我們會什麼要探討 $\mathbb{H}$ 呢? $\mathbb{H}$ 對於我們的學習有什麼意義?</p>
-<p>$\mathbb{H}$ 是一個 hypothesis set，但是這些假設都是怎麼來的呢?</p>
-<p>從一個二元分類問題來看，我們曾經有說過，一個平面中，任何一條「直線」都是一個 hypothesis $h\in\mathbb{H}$，所以 $\mathbb{H}$ 裡面就是裝著無限多條「直線」。因為我們預先假定了這個分類器是「直線」，所以 $\mathbb{H}$ 裡面不會有非線性的hypothesis在裡面。</p>
-<p>所以，在我們進行 Machine Learning 時，我們會決定我們要用什麼樣子的分類器，而這也決定了我們的  $\mathbb{H}$ 長什麼樣子，當然， $\mathbb{W}$ 也在這時候決定了。</p>
-<p>$Algorithm\ (model)\longleftrightarrow \mathbb{H}\longleftrightarrow \mathbb{W}$ </p>
-<p>所以這就是為什麼往後的課程都會討論 $\mathbb{H}$ ， 因為這樣的一個 hypothesis set 也足以代表了你的分類器。</p>
-<h2 id="VC-dimension"><a href="#VC-dimension" class="headerlink" title="VC dimension"></a>VC dimension</h2><p>OK，了解了 $\mathbb{H}$ 所代表的意義後，我們需要有一個衡量這個 $\mathbb{H}$ 的方法，於是有了以下 VC dimension 的定義 : </p>
+<p><img src="https://i.imgur.com/EESwg8e.jpg" alt></p>
+<p>然而這裡其實有一個問題，利用這種方式機器所生成的圖往往都是模糊的，其原因是因為通常要符合輸入的圖片可能有很多種，那麼在不確定要用哪一張圖做為生成的對象持，機器會傾向於生成一張圖片是這些可能圖片的「平均」。</p>
+<p><img src="https://i.imgur.com/EjKXS1m.jpg" alt></p>
+<p>想要解決這樣的問題，這邊引進了一種 GAN 的變體 : Conditional GAN</p>
+<h3 id="Conditional-GAN"><a href="#Conditional-GAN" class="headerlink" title="Conditional GAN"></a>Conditional GAN</h3><p>CGAN 與一般的 Normal GAN 不同的地方在於餵給 Generator 與 Discriminator 的輸入不同。</p>
+<p><img src="https://i.imgur.com/AgjCU1e.png" alt></p>
 <ul>
-<li>Vapnik-Chervonenkis Dimension $d_{vc}(\mathbb{H})\ or\ VC(\mathbb{H}):$<br>  $The\ largest\ value\ of\ N\  s.t.\ m_\mathbb{H}(N)=2^N$<br>  $d_{vc}(\mathbb{H})=$ 能被shatter的最大N值 $=\ break point\ k-1$ </li>
+<li>Generator 的輸入除了本來就有的 $z$ 之外，還多了一個 constraing $c$。Constrain 的作用便是要讓電腦知道我們想要一個什麼樣子的圖。</li>
+<li>而 Discrimiantor 的輸入也不只有 generator 的輸出 $x$，一樣要加進 Constrain $c$。如果我們只有輸入 $x$ 給 discriminator，那麼 generator 就會學到只要生成一個足夠好的照片即可，並不用管 constrain 是什麼。</li>
 </ul>
-<p>根據這樣的定義我們可以知道以下幾個特性 : </p>
+<p>Generator 的 constrain $c$ 不難理解，但為什麼在 Discriminator 上也要加上一個 constrain 呢 ?</p>
+<p>可以試想一下，如果沒有 Discriminator 的 $c$，那麼整個 machine 只要讓 Generator 生成一張跟 constrain 完全沒有關係但是足夠好的圖就可以騙過 Discriminator 了。所以，在 Discriminator 上不僅要檢查這張照片夠不夠好，也同時要檢查是否符合 constrain。</p>
+<p>值得注意的是，在整個 Discriminator 訓練上，當然要讓它除了可以將 constrain 跟正確的圖像正確判定為 True</p>
+<p><img src="https://i.imgur.com/qmaDWoT.png" alt></p>
+<p>然後將不符合 constrain 的圖像判定為 False </p>
+<p><img src="https://i.imgur.com/CrG8NuV.png" alt></p>
+<p>除此之外，還要讓正確圖像配上隨機的文字判定為 False</p>
+<p><img src="https://i.imgur.com/CfahGx2.png" alt></p>
+<p>我們可以將上述的整個過程寫成演算法如下 ( 其實就是調整一下基本的 GAN 演算法 )</p>
 <ul>
-<li>$N\leq d_{vc}\ \implies\ For\ some\ detaset\ \mathbb{D}\ with\ size\ N\ can\ be\ shatter\ by\ \mathbb{H}$</li>
-<li>$N&gt;d_{vc}\implies\ \forall\ dataset\ \mathbb{D}\ with\ size\ N\ can’t\ be\ shatter\ by\ \mathbb{H}$</li>
-<li>$N\geq 2\ , d_{vc}\geq 2\implies\ m_{\mathbb{H}}(N)\leq 2^{d_{vc}}$</li>
-</ul>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>資料空間 &amp;分類型態</th>
-<th>Break Point</th>
-<th>$m_\mathbb{H}(N)$</th>
-<th>O(N)</th>
-<th>$d_{vc}$</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1-D Positive ray</td>
-<td>2</td>
-<td>N+1</td>
-<td>$O(N)$</td>
-<td>1</td>
-</tr>
-<tr>
-<td>1-D Positive interval</td>
-<td>3</td>
-<td>$\frac{1}{2}N^2+\frac{1}{2}N+1$</td>
-<td>$O(N^2)$</td>
-<td>2</td>
-</tr>
-<tr>
-<td>Convex Set</td>
-<td>$\infty$</td>
-<td>$2^N$</td>
-<td>—</td>
-<td>$\infty$</td>
-</tr>
-<tr>
-<td>2-D Perceptron</td>
-<td>4</td>
-<td>$&lt;2^N$ (in some cases)</td>
-<td>$O(N^3)$</td>
-<td>3</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>休息一下，<br>我們整理一下至今的幾個概念 :<br>$m_{\mathbb{H}}(N)=$ N筆資料可以被切出幾個 $dichotomies$<br>$B(N,K)=$ N筆資料，且break point=K 的情況下，最大的$m_{\mathbb{H}}(N)$<br>$d_{vc}(\mathbb{H})=\ hypotesis\ \mathbb{H}$ 可以shatter的最大N值</p>
-<p>前兩個概念，基本上是一個過渡概念，主要為了證明出 VC Bound ，真正的著眼點應該在$d_{vc}(\mathbb{H})$，因為它可以確實對 $\mathbb{H}$做出量化測量。<br>一個真正夠好的 $hypothesis\ \mathbb{H}$<br>$\implies d_{vc}(\mathbb{H})\ is\ finite\implies K\ exists\implies VC\ Bound\ exists\implies E_{in}\approx E_{out}$</p>
-<blockquote>
-<p>在這裡，VC Dimension與 Algorithm , Distribution 或是 target function都無關</p>
-</blockquote>
-<p>不管是直觀<sup><a href="#fn_註1" id="reffn_註1">註1</a></sup>或經由繁雜的證明<sup><a href="#fn_註2" id="reffn_註2">註2</a></sup>，我們都不難確認 $d_{vc}(\mathbb{H})= d+1$ ( $d$ 為資料 $\mathbb{X}$ 的維度 )</p>
-<p>總的來說，<br>$h\in \mathbb{H}\ ,\ h(\mathbb{X})=Sign(\sum\limits_{i=1}^{d}w_ix_i+w_0)$</p>
+<li>初始化 $G$ 與 $D$ 的參數 $\theta_g$ 與 $\theta_d$</li>
+<li><p>循環迭代進行</p>
 <ul>
-<li>$h$ 是由 $(w_1,w_2,w_3,…,w_d)$ 所決定，我們可以將 $d_{vc}(\mathbb{H})=d+1$視為自由度</li>
-<li>$d_{vc}(\mathbb{H})$ 即為 $\mathbb{H}$ 的能力指標</li>
-<li>$\mid\mathbb{H}\mid=M\ is\ finite\implies$ 可以利用 $M$ 來控制VC bound<br>$\mid\mathbb{H}\mid=M\ is\ infinite\implies$ 可以利用 $(2N)^{d_{vc}}$ 取代 $M$ 來控制 VC bound  </li>
+<li>Updeate $D$<ul>
+<li>從 database 中隨機抽取 $m$ 個真實樣本 $\{(c^1, x^1),(c^2,x^2),\cdots,(c^m,x^m)\}$</li>
+<li>從我們給定的分布中隨機抽取 $m$ 個向量 $\{z^1,z^2,\cdots,z^m\}$</li>
+<li>藉由 $\tilde{x}^i=G(c^i,z^i)$ 生成 $\{\tilde{x}^1,\tilde{x}^2,\cdots,\tilde{x}^m\}$</li>
+<li>從 database 中隨機抽取 $m$ 個真實物體 $\{\hat{x}^1,\hat{x}^2,\cdots,\hat{x}^m\}$</li>
+<li>Loss Function $\tilde{V}=\displaystyle{\frac{1}{m}\sum\limits_{i=1}^{m}\log D(c^i,x^i)+\frac{1}{m}\sum\limits_{i=1}^{m}\log\big(1-D(c^i,\hat{x}^i)\big)}$</li>
+<li>藉由最大化 $\tilde{V}$ ( Gradient Ascent ) 來更新權重 $\theta_d$ : <script type="math/tex; mode=display">
+\theta_d = \theta_d + \eta\cdot\nabla\tilde{V}(\theta_d)</script></li>
 </ul>
-<p><strong>[ Remark ] 讓我們來重新審視一下 VC Bound</strong></p>
-<p>$\mathbb{P}_{\mathbb{D}}[\![\mid E_{in}(g)-E_{out}(g)\mid&gt;\epsilon]\!]\leq 4(2N)^{d_{vc}}e^{-\frac{1}{8}\epsilon^2N}$</p>
-<p>$\Longleftrightarrow\mathbb{P}_{\mathbb{D}}[\![\mid E_{in}(g)-E_{out}(g)\mid\leq\epsilon]\!]\geq 1-\delta$ , where  $\delta=4(2N)^{d_{vc}}e^{-\frac{1}{8}\epsilon^2N}$</p>
-<p> 有很高的機率 ( $\geq1-\delta$ )，$E_{in}$ 與 $E_{out}$ 會很接近 ( $\mid E_{in}(g)-E_{out}(g)\mid\leq\epsilon$ )</p>
-<p>$\because\delta=4(2N)^{d_{vc}}e^{-\frac{1}{8}\epsilon^2N}$<br>$\therefore\epsilon=\sqrt{\frac{8}{N}\ln(\frac{4(2N)^{d_vc}}{\delta})}$</p>
-<p>$\therefore\ \mid E_{in}(g)-E_{out}(g)\mid\leq\epsilon=\sqrt{\frac{8}{N}\ln(\frac{4(2N)^{d_vc}}{\delta})}\overset{defn}{=}\Omega(N,\mathbb{H},\delta)=penalty\ for\ model$</p>
-<p>$\Longrightarrow \begin{matrix} \underbrace{ E_{in}(g)-\sqrt{\frac{8}{N}\ln(\frac{4(2N)^{d_vc}}{\delta})} } \\ We\ don’t\ care\ this\ part\end{matrix}\leq E_{out}(g)\leq E_{in}(g)+\sqrt{\frac{8}{N}\ln(\frac{4(2N)^{d_vc}}{\delta})}$</p>
-<p>$\overset{High\ Prob.}{\Longrightarrow}E_{out}(g)\leq E_{in}(g)+\sqrt{\frac{8}{N}\ln(\frac{4(2N)^{d_vc}}{\delta})}$</p>
-<p><img src="https://i.imgur.com/3ZZ099u.png" alt></p>
-<p>從上面推導出的不等式，配合 $Error - d_{vc}$ 圖來看，我們會發現最好的解出現在中間。</p>
-<h2 id="註釋"><a href="#註釋" class="headerlink" title="註釋"></a>註釋</h2><p><sup><a href="#fn_註1" id="reffn_註1">註1</a></sup>:<br>從 Linear Algebra 的角度來看，我們可以如下定義出「dimension」:<br>$V\ is\ a\ vector\ space\ ,dim(V)=the\ cardinal\ number\ of\ B$<br>$where\ B\ is\ a\ basis\ of\ V\ i.e.\ V=span(B)\ and\ B\ is\ a\ linear\ independent\ set.$<br>對比到我們的hypothesis set $\mathbb{H}$，之前我們才說過，$\mathbb{H}$ 可以唯一由 $\left\{w_0,w_1,…,w_d\right\}$ 決定，且 $w_i$之間互相獨立，如若我們把 VC dimension 看成是 $\mathbb{H}$ 這個空間的維度，那麼也可以把 $\left\{w_0,w_1,…,w_d\right\}$ 看成是他的一組基底，那麼 VC dimension很明顯的就是 $d+1$。<br><img src="https://i.imgur.com/CdqQidL.png" alt><br>其實意義上跟課程的這個圖是一樣的。</p>
-<p><sup><a href="#fn_註2" id="reffn_註2">註2</a></sup>:<br>試證明 $VC\ dimension=d+1$</p>
-<p><p.f><br>$Claim:d_{vc}\geq d+1$<br>$Assume\ \mathbb{D}=\left\{\mathbb{X}_0,\mathbb{X}_1,…,\mathbb{X}_d\right\}$<br>$where\ \mathbb{X}_0=(0,0,…,0)$<br>$\mathbb{X}_1=(1,0,…,0)$<br>$\vdots$<br>$\mathbb{X}_d=(0,0,…,1)$</p.f></p>
-<p>$\forall\ \mathbb{Y}=(y_0,y_1,…,y_d)\ where\ y_i\in\left\{+1,-1\right\}$<br>$\exists\ \mathbb{W}=(y_1-y_0,y_2-y_0,…,y_d-y_0)$ $s.t.\ h(\mathbb{X}_i)=Sign(\mathbb{W}^T \mathbb{X}_i + y_0)=Sign(y_i-y_0+y_0)=y_i\ ,\ \forall i=0,1,…,d$<br>$\implies$無論這個 $\mathbb{D}$ 怎麼分類 ( 意即不管 $\mathbb{X}_i$ 對應到怎樣的 $y_i$)，我們都能找到一個 $h$<br>$\implies$ $\mathbb{D}$可以被$\mathbb{H}$ shatter<br>$d_{vc}(\mathbb{H})\geq d+1$</p>
-<p>$Claim:d_{vc}\leq d+1\implies\mathbb{D}\ with\ size-d+2\ cannot\ be\ shatter$<br>$Suppose\ to\ the\ contrary\ that$<br>$\exists \mathbb{D}=\left\{\mathbb{X}_0,\mathbb{X}_1,…,\mathbb{X}_d,\mathbb{X}_{d+1},\mathbb{X}_{d+2}\right\}\ can\ be\ shattered$</p>
-<p>$\because\mathbb{D}\subseteq\mathbb{R}^d$<br>$\therefore \mathbb{X}_i=\sum\limits_{j\neq i}a_j\mathbb{X}_j$<br>$\implies\mathbb{W}^T \mathbb{X}_i=\sum\limits_{j\neq i}a_j\mathbb{W}^T\mathbb{X}_j$</p>
-<p>$\because \mathbb{D}\ can\ be\ shattered$<br>$\therefore \forall\ \mathbb{Y}=\left\{y_1,…,y_{d+2}\right\}\subseteq\left\{+1,-1\right\}$ (不管 $\mathbb{X}_k$ 怎麼被分類)<br>$\exists\ \mathbb{W}\ s.t.\ y_k=Sign(\mathbb{W}^T\mathbb{X}_k)$ (我們都可以找到 $\mathbb{W}$ 來滿足)</p>
-<p>那我們指定一個特殊的分類 :<br>$\mathbb{X}_i=y_i=-1$ 且 $\mathbb{X}_j=y_j=Sign(a_j)\ ,\ \forall j\neq i$<br>$\implies \mathbb{W}^T\mathbb{X}<0\ and\ (\mathbb{w}^t\mathbb{x}_j)\cdot(sign(a_j))>0$ (兩者同號)<br>$\implies\mathbb{W}^T\mathbb{X}=\sum\limits<br>_{j\neq i}a_j\mathbb{W}^T\mathbb{X}_j&gt;0$ (Contradiction!)</0\></p>
-<p>$\therefore\forall\mathbb{D}\ with\ size-d+2\ cannot\ be\ shattered$<br>$\implies d_{vc}(\mathbb{H})\leq d+1$</p>
+</li>
+<li>Update $G$<ul>
+<li>從我們給定的分布中隨機抽取 $m$ 個向量 $\{z’^1,z’^2,\cdots,z’^m\}$</li>
+<li>從 database 中隨機抽取 $m$ 個 constain $\{c^1,c^2,\cdots,c^m\}$</li>
+<li>Loss Function $\tilde{V}=\displaystyle{\frac{1}{m}\sum\limits_{i=1}^{m}\log D(G(c^i,z’^i))}$</li>
+<li>藉由最小化 $\tilde{V}$ ( Gradient descent ) 來更新權重 $\theta_g$ : <script type="math/tex; mode=display">
+\theta_g = \theta_g - \eta\cdot\nabla\tilde{V}(\theta_g)</script></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>目前絕大多數的 paper 設計的 Discriminator 架構如下<br><img src="https://i.imgur.com/7TmDMRb.jpg" alt></p>
+<p>這樣的架構雖然很直覺，但是卻不太合邏輯，當我們將 object 跟 constrain 合在一起訓練，機器給的高低分數很難確定是來自什麼原因，可能是 object 圖像並不夠好，也可能是跟 constrain 不搭配導致。</p>
+<p><img src="https://i.imgur.com/F09phne.jpg" alt></p>
+<p>少數的 paper 將架構設計成這樣，看起來比較符合邏輯，將 object 品質與 constrain 和 object 符合的程度脫鉤處理，這樣可以確定究竟是哪一個因素導致高/低分，也可以藉此調整其中一個網路即可。</p>
+<h3 id="Stack-GAN"><a href="#Stack-GAN" class="headerlink" title="Stack GAN"></a>Stack GAN</h3><p>這是另一個 GAN 的變體，利用兩組 Generator-Discriminator 來輸出大尺寸圖像。</p>
+<p><img src="https://i.imgur.com/MtnuoCr.png" alt></p>
+<h2 id="Image-to-Image"><a href="#Image-to-Image" class="headerlink" title="Image to Image"></a>Image to Image</h2><p>藉由上面的討論，我們可以將 Constrain 從文字改為圖像，來達到 Image to Image 的目標。</p>
+<p><img src="https://i.imgur.com/Qbsk9IR.png" alt></p>
+<ul>
+<li>上圖左二 : 單純利用 NN 輸出跟真實圖片的 loss 最小化而得，這樣的圖通常會很模糊，原因在於最後的輸出會採各種可能的平均值。</li>
+<li>上圖右二 : 利用 Conditional GAN 來做會得到清晰的圖片，但仍然可能會有一些奇怪的輸出，例如圖中左上角類似煙囪的奇怪圖形。</li>
+<li>上圖右一 : 同樣利用 GAN，但在 Generator 輸出多加了一個部分 : 最小化其與真實圖片的 loss。這樣的方式可以視為上面兩種方式的結合，可以確保輸出的圖片夠清晰，並且不會有一些奇怪的產出。</li>
+</ul>
+<p><img src="https://i.imgur.com/Ha80tAh.jpg" alt></p>
+<h3 id="Patch-GAN-Pixel-GAN"><a href="#Patch-GAN-Pixel-GAN" class="headerlink" title="Patch GAN / Pixel GAN"></a>Patch GAN / Pixel GAN</h3><p>在圖片尺寸稍大的狀況下，如果用整張圖片丟進 Discriminator 來做檢查很容易導致訓練時間過長、Overfitting 或是 performance 不好等狀況，因此 Patch GAN 便是只採取整張圖片的 patch 做檢查。</p>
+<p>這邊我想補充一點，單就課程內容來看，好像很容易會誤以為我們只要針對某一個 patch 丟給 Discriminator 就好，但是我查了一下似乎並非如此。</p>
+<p><img width="500" src="https://i.imgur.com/nfEjU6M.png"></p>
+<p>在 “<a href="https://blog.csdn.net/xiaoxifei/article/details/86506955" target="_blank" rel="noopener">关于PatchGAN的理解</a>“ 一文中有談到， Patch GAN 事實上是輸出一個 $N\times N$ 矩陣，而每一個矩陣內元素是代表著一個大的感受野，亦即代表一個圖像的 patch。這樣的實現其實也就是藉由 CNN 來完成。</p>
+<p>Patch GAN 的 Discriminator 輸出尺寸就是一張 CNN 的 feature map 尺寸，然後內部元素對應的就是對於此 feature map 的相似度判定。</p>
+<p>Image to Image 的模式，可以適用於任何以圖像表示的任務上，例如 Speech Enhancement ( 語音增強 ) 上。目前的語音任務大多利用 spectrum 來進行分析，而 spectrum 也跟一般圖像任務一樣具有結構性，使用 conditional GAN 當然沒有什麼問題。</p>
+<p><img src="https://i.imgur.com/CSVORtT.png" alt></p>
+<p>當然對於影片( 連續 frame )來說亦是如此，利用 conditional GAN 可以預測連續 frame 後的下一個 frame 是什麼。</p>
+<p><img src="https://i.imgur.com/bZLUy5p.png" alt></p>
+<p>拿來打電動也是可以的啦 </p>
+<p><img src="https://i.imgur.com/uBrQRgZ.gif" alt><br><img src="https://i.imgur.com/1T8FYwy.gif" alt></p>
+<p>不過還是會有點 bug，譬如說突然消失或是變出分身之類的，主要是因為遇到分叉路時，小精靈就會有走不同道路的可能性，於是下一步就可能會分身走不同方向的狀況出現。</p>
 
     </div>
 
@@ -445,7 +420,7 @@
     <strong>作者： </strong>Allen Tzeng</li>
   <li class="post-copyright-link">
     <strong>文章連結：</strong>
-    <a href="https://allen108108.github.io/blog/2019/10/01/林軒田機器學習基石筆記 - 第七講/" title="林軒田機器學習基石筆記 - 第七講">https://allen108108.github.io/blog/2019/10/01/林軒田機器學習基石筆記 - 第七講/</a>
+    <a href="https://allen108108.github.io/blog/2019/10/29/Generative Adversarial Network (2) — Conditional GAN/" title="Generative Adversarial Network (2) --- Conditional GAN">https://allen108108.github.io/blog/2019/10/29/Generative Adversarial Network (2) — Conditional GAN/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！</li>
@@ -467,8 +442,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/blog/2019/10/01/林軒田機器學習基石筆記 - 第八講/" rel="next" title="林軒田機器學習基石筆記 - 第八講">
-                  <i class="fa fa-chevron-left"></i> 林軒田機器學習基石筆記 - 第八講
+                <a href="/blog/2019/10/29/[論文] Deep Residual Learning for Image Recognition/" rel="next" title="[論文] Deep Residual Learning for Image Recognition">
+                  <i class="fa fa-chevron-left"></i> [論文] Deep Residual Learning for Image Recognition
                 </a>
               
             </div>
@@ -477,8 +452,8 @@
 
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/blog/2019/10/03/Chapter 2 – Algorithm analysis/" rel="prev" title="Chapter 2 -- Algorithm analysis">
-                  Chapter 2 -- Algorithm analysis <i class="fa fa-chevron-right"></i>
+                <a href="/blog/2019/10/29/Generative Adversarial Network (3) — Unsupervised Conditional GAN/" rel="prev" title="Generative Adversarial Network (3) --- Unsupervised Conditional GAN">
+                  Generative Adversarial Network (3) --- Unsupervised Conditional GAN <i class="fa fa-chevron-right"></i>
                 </a>
               
             </div>
@@ -537,7 +512,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#About-mathbb-H"><span class="nav-number">1.</span> <span class="nav-text">About $\mathbb{H}$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VC-dimension"><span class="nav-number">2.</span> <span class="nav-text">VC dimension</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#註釋"><span class="nav-number">3.</span> <span class="nav-text">註釋</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Text-to-Image"><span class="nav-number">1.</span> <span class="nav-text">Text to Image</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Conditional-GAN"><span class="nav-number">1.1.</span> <span class="nav-text">Conditional GAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stack-GAN"><span class="nav-number">1.2.</span> <span class="nav-text">Stack GAN</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Image-to-Image"><span class="nav-number">2.</span> <span class="nav-text">Image to Image</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Patch-GAN-Pixel-GAN"><span class="nav-number">2.1.</span> <span class="nav-text">Patch GAN / Pixel GAN</span></a></li></ol></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -814,9 +789,9 @@
 </script>
 <script>
   function disqus_config() {
-    this.page.url = "https://allen108108.github.io/blog/2019/10/01/林軒田機器學習基石筆記 - 第七講/";
-    this.page.identifier = "2019/10/01/林軒田機器學習基石筆記 - 第七講/";
-    this.page.title = '林軒田機器學習基石筆記 - 第七講';};
+    this.page.url = "https://allen108108.github.io/blog/2019/10/29/Generative Adversarial Network (2) — Conditional GAN/";
+    this.page.identifier = "2019/10/29/Generative Adversarial Network (2) — Conditional GAN/";
+    this.page.title = 'Generative Adversarial Network (2) --- Conditional GAN';};
   function loadComments() {
     if (window.DISQUS) {
       DISQUS.reset({

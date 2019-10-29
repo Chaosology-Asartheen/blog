@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-TW">
+<head>
+  <meta name="google-site-verification" content="exmdvS3MT1hVojBxSEZZZ8TIBBOg6pJ2POTtzNuecqs" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+
+
+<meta property="og:site_name" content="">
+<meta property="og:title" content="categories">
+<meta property="og:url" content="http://">
+<meta property="og:image" content="">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/blog/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Gemini',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","width":280,"display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '複製',
+      copy_success: '複製成功',
+      copy_failure: '複製失敗'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="當我們在使用 GAN 進行生成時，其實有一個很大的問題是，帶有 label 的訓練資料並不容易取得。 舉例來說，如果我們想要讓一張照片利用 Generator 生成梵谷畫風格，訓練資料根本無法取得，因為我們可以有很多的照片，但卻沒有梵谷畫這些風景的資料 ; 又或者，我們想做一個A轉換成B人聲的模型，通常很難讓 B 照著 A 所念的文字照著念一次 ( 可能不同語言、或是收集上有困難…等因素 )，這時">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Generative Adversarial Network (3) --- Unsupervised Conditional GAN">
+<meta property="og:url" content="https://allen108108.github.io/blog/2019/10/29/Generative Adversarial Network (3) — Unsupervised Conditional GAN/index.html">
+<meta property="og:site_name" content="Math.py">
+<meta property="og:description" content="當我們在使用 GAN 進行生成時，其實有一個很大的問題是，帶有 label 的訓練資料並不容易取得。 舉例來說，如果我們想要讓一張照片利用 Generator 生成梵谷畫風格，訓練資料根本無法取得，因為我們可以有很多的照片，但卻沒有梵谷畫這些風景的資料 ; 又或者，我們想做一個A轉換成B人聲的模型，通常很難讓 B 照著 A 所念的文字照著念一次 ( 可能不同語言、或是收集上有困難…等因素 )，這時">
+<meta property="og:locale" content="zh-TW">
+<meta property="og:image" content="https://i.imgur.com/F8nWYYg.png">
+<meta property="og:image" content="https://i.imgur.com/s5LUyst.jpg">
+<meta property="og:image" content="https://i.imgur.com/kq9QcQ0.png">
+<meta property="og:image" content="https://i.imgur.com/pz4yjXV.png">
+<meta property="og:image" content="https://i.imgur.com/IFRPguM.png">
+<meta property="og:image" content="https://i.imgur.com/Y12U9wi.png =400x">
+<meta property="og:image" content="https://i.imgur.com/xgPxQaK.png">
+<meta property="og:image" content="https://i.imgur.com/WoGa5Jd.png">
+<meta property="og:image" content="https://i.imgur.com/A0WnnNA.png">
+<meta property="og:image" content="https://i.imgur.com/NWxs70y.png">
+<meta property="og:image" content="https://i.imgur.com/SoWAq20.png">
+<meta property="og:image" content="https://i.imgur.com/PBdASOI.jpg">
+<meta property="og:image" content="https://i.imgur.com/V49Dr5e.jpg">
+<meta property="og:image" content="https://i.imgur.com/BXwWDgF.jpg">
+<meta property="og:updated_time" content="2019-10-29T00:52:43.079Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Generative Adversarial Network (3) --- Unsupervised Conditional GAN">
+<meta name="twitter:description" content="當我們在使用 GAN 進行生成時，其實有一個很大的問題是，帶有 label 的訓練資料並不容易取得。 舉例來說，如果我們想要讓一張照片利用 Generator 生成梵谷畫風格，訓練資料根本無法取得，因為我們可以有很多的照片，但卻沒有梵谷畫這些風景的資料 ; 又或者，我們想做一個A轉換成B人聲的模型，通常很難讓 B 照著 A 所念的文字照著念一次 ( 可能不同語言、或是收集上有困難…等因素 )，這時">
+<meta name="twitter:image" content="https://i.imgur.com/F8nWYYg.png">
+  <link rel="canonical" href="https://allen108108.github.io/blog/2019/10/29/Generative Adversarial Network (3) — Unsupervised Conditional GAN/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Generative Adversarial Network (3) --- Unsupervised Conditional GAN | Math.py</title>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-149442581-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-149442581-1');
+    }
+  </script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-TW">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Math.py</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Wir müssen wissen , wir werden wissen</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切換導航欄">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/blog/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首頁</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/blog/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分類</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/blog/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>歸檔</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://allen108108.github.io/blog/blog/2019/10/29/Generative Adversarial Network (3) — Unsupervised Conditional GAN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Allen Tzeng">
+      <meta itemprop="description" content="Study about Mathematics , Programming and Data Science">
+      <meta itemprop="image" content="/blog/images/allen.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Math.py">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Generative Adversarial Network (3) --- Unsupervised Conditional GAN
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              
+                
+              
+
+              <time title="創建時間：2019-10-29 08:45:04 / 修改時間：08:52:43" itemprop="dateCreated datePublished" datetime="2019-10-29T08:45:04+08:00">2019-10-29</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/課程筆記-Course/" itemprop="url" rel="index"><span itemprop="name">課程筆記 Course</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/課程筆記-Course/李宏毅-Machine-Learning-and-having-it-Deep-and-Structured/" itemprop="url" rel="index"><span itemprop="name">李宏毅 Machine Learning and having it Deep and Structured</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="閱讀次數" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">閱讀次數：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/blog/2019/10/29/Generative Adversarial Network (3) — Unsupervised Conditional GAN/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/10/29/Generative Adversarial Network (3) — Unsupervised Conditional GAN/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>當我們在使用 GAN 進行生成時，其實有一個很大的問題是，帶有 label 的訓練資料並不容易取得。</p>
+<p>舉例來說，如果我們想要讓一張照片利用 Generator 生成梵谷畫風格，訓練資料根本無法取得，因為我們可以有很多的照片，但卻沒有梵谷畫這些風景的資料 ; 又或者，我們想做一個A轉換成B人聲的模型，通常很難讓 B 照著 A 所念的文字照著念一次 ( 可能不同語言、或是收集上有困難…等因素 )，這時候的 GAN 就如同 Unsupervised Learning 任務一般。</p>
+<a id="more"></a>
+<p><img src="https://i.imgur.com/F8nWYYg.png" alt></p>
+<p>現在實務上大多使用兩種方式來達成這種 Unsupervised Conditional GAN</p>
+<ol>
+<li>Directed Transformation<br>比較簡單的轉換 ( input 及 output 差別不大 ) 在實務上利用這種直接轉換的方式是很可能成功的，像是畫風轉換、質地上的轉換或文本的轉換這種都屬於比較簡單的轉換。</li>
+<li>Projection to Common Space<br>倘若 input 及 output 差別很大，那我們就要先訓練一個 encoder 那我們就要先訓練一個 encoder 萃取出 input 特徵後再利用一個 decoder 來進行轉換。</li>
+</ol>
+<h2 id="Directed-Transformation"><a href="#Directed-Transformation" class="headerlink" title="Directed Transformation"></a>Directed Transformation</h2><p>利用 GAN 直接轉換，有時候會遇到之前提到的問題 : Generator 只要騙過 Discriminator 即可，並不用考慮 input。因此我們勢必要在 GAN 架構下做一些處理。</p>
+<h3 id="1-Ignore"><a href="#1-Ignore" class="headerlink" title="1. Ignore"></a>1. Ignore</h3><p>不管上述的問題，直接訓練，這在某些狀況下其實是有機會可以成功的。原因在於，我們經過 Generator 生成的圖像，正常應該不會跟 input 相差太多才是。因此直接處理應該有機會可以得到還算不錯的成果。</p>
+<h3 id="2-Embedding"><a href="#2-Embedding" class="headerlink" title="2. Embedding"></a>2. Embedding</h3><p>將輸入及輸出通過一個 pre-train 好的 encoder ，讓它們各自產生一組 CODE。在整個訓練過程中，除了要騙過 Discriminator 之外，也要讓兩個 CODE 的 Loss 越小越好。</p>
+<p><img src="https://i.imgur.com/s5LUyst.jpg" alt></p>
+<h3 id="3-Cycle-GAN-Disco-GAN-Dual-GAN"><a href="#3-Cycle-GAN-Disco-GAN-Dual-GAN" class="headerlink" title="3. Cycle GAN ( Disco GAN, Dual GAN )"></a>3. Cycle GAN ( Disco GAN, Dual GAN )</h3><p>Cycle GAN 在許多領域中都被廣泛使用，其概念還算直覺。</p>
+<p>既然怕生成出來的圖像跟 input 不同，那麼我們就利用另外一個 Generator 來將生成圖像還原回去。最後我們最小化輸入圖像以及最後還原的圖像之間的 Loss 來限制中間的生成圖像要跟 input 相似。</p>
+<p><img src="https://i.imgur.com/kq9QcQ0.png" alt></p>
+<p>計算還原後圖像與 input 的 Loss 我們稱之為 Cycle Consistency。</p>
+<p>兩個 Generators $G_{X\rightarrow Y},G_{Y\rightarrow X}$ 確保轉換後的圖像不會生成出與 input 完全無關的圖像。而 Discriminator $D_Y$ 則確保生成出來的圖像會是我們想要的目標 ( 風格 )。</p>
+<p>有趣的是，在同時間有另外兩篇 Paper 提出了幾乎同樣概念的 GAN 變體 :  Disco GAN, Dual GAN，名稱雖不同，但做法幾乎一樣。</p>
+<p>我們也可以利用雙向的 GAN 來訓練出一組兩 domains 之間互轉的 Generators<br>，以及可以判定是否為兩個 domains 圖像的 Discriminators。</p>
+<p><img src="https://i.imgur.com/pz4yjXV.png" alt></p>
+<p>但，Cycle GAN 在使用上其實有一個疑慮 : Steganography</p>
+<p><img src="https://i.imgur.com/IFRPguM.png" alt></p>
+<p>上圖是一個空拍圖轉成地圖再轉回空拍圖的 Cycle GAN，我們可以發現紅框處竟然可以幾乎無差別的還原出原本 input 的細節。這不免讓人懷疑是否在生成的時候，並不是真正的對圖像進行 reconstruct (重構)，而只是對 input 的資訊進行隱藏而已。</p>
+<p>這樣有什麼問題 ?</p>
+<p>我們原本的假設是，如果 cycle consistency 很低，那麼我們應該可以確保中間生成的圖象跟原圖像很接近。但如果 Generator 善於把資訊藏起來待還原時再恢復，那它便可以在中間生成時隱藏許多的資訊，讓中間生成的圖像跟 input 相差很多，但還原出來還是可以夠接近 input。</p>
+<p>這還是一個尚待解決的問題。</p>
+<h3 id="4-Star-GAN"><a href="#4-Star-GAN" class="headerlink" title="4. Star GAN"></a>4. Star GAN</h3><p>如果我們要進行兩個以上的 Domain 互轉，使用 Cycle GAN 則必須要訓練出 $2\cdot{{n} \choose {2}}$ 個 Generators。但 Star GAN 則是利用一個 Generator 便可以進行互轉。</p>
+<p><img src="https://i.imgur.com/Y12U9wi.png =400x" alt></p>
+<p>整個 Star GAN 的過程大概如下圖所示 : </p>
+<p><img src="https://i.imgur.com/xgPxQaK.png" alt></p>
+<ul>
+<li>先初始化一個 Generator 及 Discriminator</li>
+<li>先利用初始化的 Generator 隨意生成圖片然後對 Discriminator 做訓練，可以判斷圖像的真偽並且進行 domain 的分類判定。</li>
+<li>此 Discriminator 不動，讓 Generator 訓練對輸入圖像進行 domain 的轉換 ( 輸入是一張圖像及指定的 domain )，並且再利用同一個 Generator 把轉換後的圖像再還原回去 ( 輸入為轉換後的圖像以及最初的 domain )，最後計算還原後的圖片以及最初的圖片之間的 Loss，並使其最小化。( 這不就是 Cycle Consistency 嗎? )</li>
+<li>最後把轉換後的圖片丟給 Disriminator 來做判定，試圖要騙過這個 Discriminator，藉此訓練 Generator。</li>
+<li>重複上述步驟進行對抗生成的訓練。</li>
+</ul>
+<p>從上面可以知道，其實跟 Cycle GAN 差不多，最主要的差異就是 Generator 變成一個可以一對多的網路結構。</p>
+<p>下圖是一個性別以及外觀上互換 (Celeb label) 的實例</p>
+<p><img src="https://i.imgur.com/WoGa5Jd.png" alt></p>
+<p>我們先要了解，每一個 Celeb label 相當於是一個 domain，因此真正要計算的話，這一個例子裡面應該有 32 個 domains 可以進行互換。</p>
+<p>在這個例子中，目標是要將一個棕色髮色的女人轉換成黑色頭髮的年輕男子，因此先訓練一個可以進行辨別的 Discriminator，再訓練可以多個 domain 互轉的 Generator 試圖騙過 Discriminator。</p>
+<p>同樣的方法也可以用來生成表情 ( RaFD label )。</p>
+<p><img src="https://i.imgur.com/A0WnnNA.png" alt></p>
+<h2 id="Projection-to-Common-Space"><a href="#Projection-to-Common-Space" class="headerlink" title="Projection to Common Space"></a>Projection to Common Space</h2><p>如果 input domain 跟 output domain 相差很大，使用上述直接轉換的方式要成功並不容易，因此這邊介紹第二種方法 : Projection to Common Space</p>
+<p>這個方法的想法是，將兩個 domains 各自圖像利用 Auto Encoder 將隱含特徵抽取出來，並且希望這兩個隱含特徵向量可以一樣，這樣我們就可以藉由這樣相同的隱含特徵進行轉換。</p>
+<p>當然，我們也可以加上一個 Discriminator 來使輸出圖像更加清楚。( VAE GAN )</p>
+<p><img src="https://i.imgur.com/NWxs70y.png" alt></p>
+<p>現在的問題就是，兩個 domains 各自訓練出來的 Auto Encoder 怎麼將中間的 CODE 使其一樣，或是越接近越好 ? </p>
+<h3 id="權重共享-Couple-GAN"><a href="#權重共享-Couple-GAN" class="headerlink" title="權重共享 : Couple GAN"></a>權重共享 : Couple GAN</h3><p>一個方法是將各自的 Encoder 跟 Decoder 在 CODE 附近的權重共享</p>
+<p><img src="https://i.imgur.com/SoWAq20.png" alt></p>
+<p>藉由這樣的方式，我們可以期待產生的 Latent Space 會是夠接近的，這樣的方式最極端的狀況就是共用同一個 Encoder，只是在輸入圖像時，同時給一個 flag，讓 Machine 知道這張圖片是來自哪一個 domain。</p>
+<h3 id="在-CODE-處加上-Discriminator"><a href="#在-CODE-處加上-Discriminator" class="headerlink" title="在 CODE 處加上 Discriminator"></a>在 CODE 處加上 Discriminator</h3><p>我們可以在 CODE 地方加上一個 Discriminator 來便是這一個 CODE 是來自哪一個 domain。在各自訓練 Auto Encoder 的同時也可以一起訓練，試圖讓各自 CODE 可以騙過 Discriminator。</p>
+<p><img src="https://i.imgur.com/PBdASOI.jpg" alt></p>
+<h3 id="Cycle-Consistency-Combo-GAN"><a href="#Cycle-Consistency-Combo-GAN" class="headerlink" title="Cycle Consistency : Combo GAN"></a>Cycle Consistency : Combo GAN</h3><p>或是利用 Cycle GAN 的概念，將兩個 Auto Encoder 視為 $G_{X\rightarrow Y},G_{Y\rightarrow X}$ 串在一起做訓練，並計算最後的 Cycle Consistency。</p>
+<p><img src="https://i.imgur.com/V49Dr5e.jpg" alt></p>
+<h3 id="Sementic-Consistency-X-GAN"><a href="#Sementic-Consistency-X-GAN" class="headerlink" title="Sementic Consistency : X GAN"></a>Sementic Consistency : X GAN</h3><p>Cycle Consistency 計算的是 Pixel level 的差異，對於圖像來說，計算的是「表象」上的差異性。但如果將 consistency 的計算改在 Latent CODE 上面進行，則會偏向於計算「語義上」、「特徵上」的差異性。</p>
+<p>所以大致上跟上述的 Cycle Consistency 概念差不多，只是將 consistency 計算移至 CODE 上計算，稱為 Sementic Consistency</p>
+<p><img src="https://i.imgur.com/BXwWDgF.jpg" alt></p>
+<p>Projection to Common Space 這樣的方法，我們可以應用在聲音轉換的領域，保留被轉換者的語調、聲音特徵，進行人聲的轉換。</p>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ol>
+<li><a href="https://zhuanlan.zhihu.com/p/26332365" target="_blank" rel="noopener">异父异母的三胞胎：CycleGAN, DiscoGAN, DualGAN</a></li>
+<li><a href="https://blog.csdn.net/openSUSE1995/article/details/79235374" target="_blank" rel="noopener">GAN论文研读(四)——-Cycle GAN 与 Star GAN</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>作者： </strong>Allen Tzeng</li>
+  <li class="post-copyright-link">
+    <strong>文章連結：</strong>
+    <a href="https://allen108108.github.io/blog/2019/10/29/Generative Adversarial Network (3) — Unsupervised Conditional GAN/" title="Generative Adversarial Network (3) --- Unsupervised Conditional GAN">https://allen108108.github.io/blog/2019/10/29/Generative Adversarial Network (3) — Unsupervised Conditional GAN/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/blog/2019/10/29/Generative Adversarial Network (2) — Conditional GAN/" rel="next" title="Generative Adversarial Network (2) --- Conditional GAN">
+                  <i class="fa fa-chevron-left"></i> Generative Adversarial Network (2) --- Conditional GAN
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    
+  <div class="comments" id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Directed-Transformation"><span class="nav-number">1.</span> <span class="nav-text">Directed Transformation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Ignore"><span class="nav-number">1.1.</span> <span class="nav-text">1. Ignore</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Embedding"><span class="nav-number">1.2.</span> <span class="nav-text">2. Embedding</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Cycle-GAN-Disco-GAN-Dual-GAN"><span class="nav-number">1.3.</span> <span class="nav-text">3. Cycle GAN ( Disco GAN, Dual GAN )</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Star-GAN"><span class="nav-number">1.4.</span> <span class="nav-text">4. Star GAN</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Projection-to-Common-Space"><span class="nav-number">2.</span> <span class="nav-text">Projection to Common Space</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#權重共享-Couple-GAN"><span class="nav-number">2.1.</span> <span class="nav-text">權重共享 : Couple GAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在-CODE-處加上-Discriminator"><span class="nav-number">2.2.</span> <span class="nav-text">在 CODE 處加上 Discriminator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cycle-Consistency-Combo-GAN"><span class="nav-number">2.3.</span> <span class="nav-text">Cycle Consistency : Combo GAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sementic-Consistency-X-GAN"><span class="nav-number">2.4.</span> <span class="nav-text">Sementic Consistency : X GAN</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考資料"><span class="nav-number">3.</span> <span class="nav-text">參考資料</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/blog/images/allen.jpg"
+      alt="Allen Tzeng">
+  <p class="site-author-name" itemprop="name">Allen Tzeng</p>
+  <div class="site-description" itemprop="description">Study about Mathematics , Programming and Data Science</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/blog/archives/">
+        
+          <span class="site-state-item-count">64</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/blog/categories/">
+          
+        
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分類</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://allen108108.github.io/" title="Github page &rarr; https://allen108108.github.io/"><i class="fa fa-fw fa-github-alt"></i>Github page</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/allen108108" title="GitHub &rarr; https://github.com/allen108108" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:allen108108@hotmail.com" title="E-Mail &rarr; mailto:allen108108@hotmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://www.facebook.com/Mathpy-257929091666547/" title="FB Page &rarr; https://www.facebook.com/Mathpy-257929091666547/" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB Page</a>
+      </span>
+    
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Allen Tzeng</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主題 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="訪客總數">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="總瀏覽次數">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+    
+  
+  <script color='255, 80, 219' opacity='1' zIndex='-1' count='100' src="/blog/lib/canvas-nest/canvas-nest-nomobile.min.js"></script>
+  <script src="/blog/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/blog/js/utils.js?v=7.4.0"></script><script src="/blog/js/motion.js?v=7.4.0"></script>
+<script src="/blog/js/schemes/pisces.js?v=7.4.0"></script>
+
+<script src="/blog/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: 21351,
+      el: 'wpac-rating',
+      color: 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://math-py.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  function disqus_config() {
+    this.page.url = "https://allen108108.github.io/blog/2019/10/29/Generative Adversarial Network (3) — Unsupervised Conditional GAN/";
+    this.page.identifier = "2019/10/29/Generative Adversarial Network (3) — Unsupervised Conditional GAN/";
+    this.page.title = 'Generative Adversarial Network (3) --- Unsupervised Conditional GAN';};
+  function loadComments() {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://math-py.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  }
+    window.addEventListener('load', loadComments, false);
+  
+</script>
+
+</body>
+</html>
