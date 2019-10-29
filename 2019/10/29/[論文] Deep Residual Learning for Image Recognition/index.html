@@ -76,7 +76,8 @@
 <meta property="og:image" content="https://i.imgur.com/TNwzuNP.png">
 <meta property="og:image" content="https://i.imgur.com/600joXK.png">
 <meta property="og:image" content="https://i.imgur.com/7fDJQwO.png">
-<meta property="og:updated_time" content="2019-10-29T00:35:35.875Z">
+<meta property="og:image" content="https://i.imgur.com/X7Oj5Bv.png">
+<meta property="og:updated_time" content="2019-10-29T02:37:33.077Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[論文] Deep Residual Learning for Image Recognition">
 <meta name="twitter:description" content="概要 Abstrct當深度逐漸增加，神經網路的訓練就會越來越困難。在這篇論文中，作者們提出了一個殘差學習 (residual Learning) 框架來使極深層的網路結構訓練變得更簡單。原本神經網路中的層 (layer) 目的在學習出一個未知的函數，研究團隊則根據輸入來將其目的改成學習一個殘差函數。論文中許多的實驗證明了無論在 ImageNet,CIFAR-10 或是 COCO 資料集上，這樣的方">
@@ -261,7 +262,7 @@
                 
               
 
-              <time title="創建時間：2019-10-29 08:25:14 / 修改時間：08:35:35" itemprop="dateCreated datePublished" datetime="2019-10-29T08:25:14+08:00">2019-10-29</time>
+              <time title="創建時間：2019-10-29 08:25:14 / 修改時間：10:37:33" itemprop="dateCreated datePublished" datetime="2019-10-29T08:25:14+08:00">2019-10-29</time>
             </span>
           
             
@@ -384,6 +385,7 @@
 <li>輸入與輸出尺寸相同時，直接使用 Shortcut connections (下圖實線 Shortcut connection)</li>
 <li>輸出尺寸增加時，我們利用兩種方式來解決維度不同的問題，並後續進行實驗比較 :<br>  (1)增加的維度利用 zero-padding 來處理<br>  (2)利用投影矩陣來進行維度調整 </li>
 </ul>
+<p><img src="https://i.imgur.com/X7Oj5Bv.png" alt>   </p>
 <h3 id="具體實現-Implementation"><a href="#具體實現-Implementation" class="headerlink" title="具體實現 Implementation"></a>具體實現 Implementation</h3><p>此論文遵循著 “ <em>Imagenet Classification with Deep Convolutional Neural Networks</em> “ 以及 “ <em>Very deep convolutional networks for large-scale image recognition.</em> “ 兩篇論文來進行網路架構的實現。</p>
 <ul>
 <li>從 $[256,480]$ 中隨機抽取進行尺寸增強</li>
