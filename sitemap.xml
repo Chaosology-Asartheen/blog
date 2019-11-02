@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://allen108108.github.io/blog/2019/10/08/Unsupervised%20Learning%20(6)%20--%20Generation%20(%20PixelRNN%E3%80%81Variational%20Auto-Encoder%20(%20VAE%20)%20)/</loc>
+    
+    <lastmod>2019-11-02T17:54:00.856Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://allen108108.github.io/blog/2019/11/02/Chapter%203%20%E2%80%93%20Graph%20(%204%20)/</loc>
     
     <lastmod>2019-11-02T08:34:33.486Z</lastmod>
@@ -96,13 +103,6 @@
     <loc>https://allen108108.github.io/blog/2019/10/11/Transfer%20Learning%20%E9%81%B7%E7%A7%BB%E5%AD%B8%E7%BF%92/</loc>
     
     <lastmod>2019-10-22T08:01:07.515Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://allen108108.github.io/blog/2019/10/08/Unsupervised%20Learning%20(6)%20--%20Generation%20(%20PixelRNN%E3%80%81Variational%20Auto-Encoder%20(%20VAE%20)%20)/</loc>
-    
-    <lastmod>2019-10-22T08:00:45.471Z</lastmod>
     
   </url>
   
