@@ -77,7 +77,7 @@
 <meta property="og:image" content="https://i.imgur.com/e1bl4Cj.jpg">
 <meta property="og:image" content="https://i.imgur.com/eXO3cRZ.png">
 <meta property="og:image" content="https://i.imgur.com/BMXqxRA.png">
-<meta property="og:updated_time" content="2019-10-23T16:52:58.475Z">
+<meta property="og:updated_time" content="2019-11-02T03:57:32.790Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 3 -- Graph ( 1 )">
 <meta name="twitter:description" content="CAR TheoremCAR Theorem 作為本章節的開頭，提供了我們解決問題的思維流程，而 CAR 包含三個主要的部份 : Criticality、Abstraction 以及 Restriction">
@@ -273,7 +273,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2019-10-24 00:52:58" itemprop="dateModified" datetime="2019-10-24T00:52:58+08:00">2019-10-24</time>
+                <time title="修改時間：2019-11-02 11:57:32" itemprop="dateModified" datetime="2019-11-02T11:57:32+08:00">2019-11-02</time>
               </span>
             
           
@@ -386,7 +386,7 @@
 <ul>
 <li>Connected component contain vertex s is the largest set of vertices that are reachable from s.<br>包含 s 的 connected component 指的就是 s 可以到達的最大點集合</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">def connected-component(s):</span><br><span class="line">    initial R=&#123;s&#125;</span><br><span class="line">    while ∃ edge(u,v) where u∈R and v∉R :</span><br><span class="line">        R+=&#123;v&#125;</span><br><span class="line">    return R</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Connected-component(s):</span><br><span class="line">1. initial R=&#123;s&#125;</span><br><span class="line">2. while ∃ edge(u,v) where u∈R and v∉R, then R+=&#123;v&#125;</span><br><span class="line">3. return R</span><br></pre></td></tr></table></figure>
 <p><strong>Claim : $R = connected-componont(s)$</strong></p>
 <p><strong>Proof :</strong></p>
 <p>(Case 1) $R\subseteq connected-componont(s)$</p>
@@ -404,7 +404,7 @@
 <p><img src="https://i.imgur.com/e1bl4Cj.jpg" alt></p>
 <p>這裡面最後一步雖然說結束，但事實上它還是會一路退回到上一個節點確定都沒有其他路徑可以走，就這樣一直退到 vertex 1。</p>
 <p>可以寫成下列的 procedure</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">DFS(s) :</span><br><span class="line"></span><br><span class="line">1. mark s and R+&#123;s&#125;</span><br><span class="line">2. if ∃ non-marked smallest v s.t. (s,v)∈E ,then DFS(v)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">DFS(s) :</span><br><span class="line">1. mark s and R+&#123;s&#125;</span><br><span class="line">2. if ∃ non-marked smallest v s.t. (s,v)∈E ,then DFS(v)</span><br></pre></td></tr></table></figure>
 <p>從 DFS 的過程來看，有一個特性是每一條路徑都一定會被 check 兩次 (來回)，不管有沒有被 skip 掉都一樣。這也可以推得 DFS 整個過程中，在每一個節點都會有一個進出的過程</p>
 <p><img width="400" src="https://i.imgur.com/eXO3cRZ.png"></p>
 <p>又如同 BFS 一樣，經過 DFS 後都會形成一棵 DFS Tree，走過的路徑便是 Tree Edge，而被忽略的則是 Non-Tree Edge。</p>

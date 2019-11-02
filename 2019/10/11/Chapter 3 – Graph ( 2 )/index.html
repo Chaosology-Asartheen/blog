@@ -73,7 +73,7 @@
 <meta property="og:image" content="https://i.imgur.com/qJR1Rm6.png">
 <meta property="og:image" content="https://i.imgur.com/5UcHSnc.jpg">
 <meta property="og:image" content="https://i.imgur.com/bNZmeNI.jpg">
-<meta property="og:updated_time" content="2019-10-23T07:42:44.316Z">
+<meta property="og:updated_time" content="2019-11-02T04:00:54.124Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 3 -- Graph ( 2 )">
 <meta name="twitter:description" content="Representing Graph$G=(V,E)$ is a graph  $\mid V\mid=$ the number of nodes $\overset{let}{=} n$$\mid E\mid=$ the number of edges $\overset{let}{=} m$$\Longrightarrow n-1\leq m\leq \displaystyle{\binom{">
@@ -269,7 +269,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2019-10-23 15:42:44" itemprop="dateModified" datetime="2019-10-23T15:42:44+08:00">2019-10-23</time>
+                <time title="修改時間：2019-11-02 12:00:54" itemprop="dateModified" datetime="2019-11-02T12:00:54+08:00">2019-11-02</time>
               </span>
             
           
@@ -360,7 +360,7 @@ Adj[i]=\{j\mid (i,j)\in E\}\\
 <p>不論是 Queue 還是 Stack，我們都可以利用 Linked List 來進行 implement。</p>
 <h3 id="Implementing-BFS"><a href="#Implementing-BFS" class="headerlink" title="Implementing BFS"></a>Implementing BFS</h3><p>在要進行 BFS 的 implementation 以前，我們得先決定 Garaph representation，在 BFS 裡面我們使用的是 Adjacency List 來表現一個 Graph，其原因是 Adjacency List 的儲存方式跟 BFS 的搜索方式是吻合的，如此一來可以有效降低 Complexity。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// T is a BFS tree rooted s</span><br><span class="line">// Layers count i</span><br><span class="line">// L[i] is Layer_list</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">BFS(s)</span><br><span class="line">init i=0, L[0]=&#123;s&#125;, T=&#123;&#125; and mark[s]=True, marked[others] are False</span><br><span class="line"># 設定各項初始值</span><br><span class="line">while L[i] is not empty then</span><br><span class="line">    L[i+1]=&#123;&#125;</span><br><span class="line">    for each u in L[i] </span><br><span class="line">        for each (u,v) in E :</span><br><span class="line">            if marked[v] = false then</span><br><span class="line">                marked[v] = true</span><br><span class="line">                T = T + &#123;(u,v)&#125;</span><br><span class="line">                L[i+1] = L[i+1] + &#123;v&#125;</span><br><span class="line">    i+=1</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">BFS(s)</span><br><span class="line">1. init i=0, L[0]=&#123;s&#125;, T=&#123;&#125; and mark[s]=True, marked[others] are False</span><br><span class="line"># 設定各項初始值</span><br><span class="line">2. while L[i] is not empty then L[i+1]=&#123;&#125;</span><br><span class="line">       for each u in L[i] </span><br><span class="line">           for each (u,v) in E :</span><br><span class="line">               if marked[v] = false then</span><br><span class="line">                   marked[v] = true</span><br><span class="line">                   T = T + &#123;(u,v)&#125;</span><br><span class="line">                   L[i+1] = L[i+1] + &#123;v&#125;</span><br><span class="line">       i+=1</span><br></pre></td></tr></table></figure>
 <ul>
 <li><p>對於 $L[i]$ ，我們應該要用什麼資料結構來處理 ?<br>事實上，Queue / Stack 均可，這兩者差異在於資料處理的順序，但在 BFS 中，每個 Layer 內部的順序性並非那麼重要。( 但若我們今天只想要用一條 List 儲存所有的 Layer 那就必須使用 Queue，因為層與層之間的順序性必須被考慮進去。 )</p>
 </li>
@@ -370,7 +370,7 @@ Adj[i]=\{j\mid (i,j)\in E\}\\
 <p>但倘若我們選擇的是 Adjacency Matrix，則複雜度會趨近於 $n^2$ 。</p>
 <h3 id="Implementing-DFS"><a href="#Implementing-DFS" class="headerlink" title="Implementing DFS"></a>Implementing DFS</h3><p>之前我們給的 DFS 是一個 recursive code，也可以將其譯為一個 iterative 的版本。</p>
 <p>這裡我們使用的是 stack 的型態來處理 vertex set S。<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// S is a stack of vertice its neighbors haven&apos;t been marked entirely.</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">DFS(s)</span><br><span class="line">init S=&#123;s&#125;</span><br><span class="line">while S is not empty then</span><br><span class="line">    remove a vertex u from S</span><br><span class="line">    if marked[u] = false then</span><br><span class="line">        marked[u] = true</span><br><span class="line">        for each (u,v) in E </span><br><span class="line">            S+=&#123;v&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">DFS(s)</span><br><span class="line">1. init S=&#123;s&#125;</span><br><span class="line">2. while S is not empty then</span><br><span class="line">       remove a vertex u from S</span><br><span class="line">       if marked[u] = false then</span><br><span class="line">           marked[u] = true</span><br><span class="line">           for each (u,v) in E </span><br><span class="line">               S+=&#123;v&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>iterative code 使用的是 stack 形式做處理，而 recursive code 其實也是 stack，因為 recursive 本身就是一個 stack 形式。</li>
 <li>Time Complexity : $O(m+n)$ …. Adjacency List</li>

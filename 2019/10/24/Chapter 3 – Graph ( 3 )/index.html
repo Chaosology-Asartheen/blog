@@ -73,7 +73,8 @@
 <meta property="og:image" content="https://i.imgur.com/HIRe8wh.png">
 <meta property="og:image" content="https://i.imgur.com/wx1NDSE.png">
 <meta property="og:image" content="https://i.imgur.com/79x2j7a.png">
-<meta property="og:updated_time" content="2019-10-24T08:06:51.849Z">
+<meta property="og:image" content="https://i.imgur.com/YZJEmIi.png">
+<meta property="og:updated_time" content="2019-11-02T04:08:55.647Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 3 -- Graph ( 3 )">
 <meta name="twitter:description" content="Application of BFS — Testing BipartitenessDefinitionThe nodes of graph can be partitioned into two sets $X$ and $Y$ and one every edge has one end in $X$ and the other end in $Y$.We call it bipartite">
@@ -258,11 +259,19 @@
                 
               
 
-              <time title="創建時間：2019-10-24 16:03:34 / 修改時間：16:06:51" itemprop="dateCreated datePublished" datetime="2019-10-24T16:03:34+08:00">2019-10-24</time>
+              <time title="創建時間：2019-10-24 16:03:34" itemprop="dateCreated datePublished" datetime="2019-10-24T16:03:34+08:00">2019-10-24</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2019-11-02 12:08:55" itemprop="dateModified" datetime="2019-11-02T12:08:55+08:00">2019-11-02</time>
+              </span>
             
           
             <span class="post-meta-item">
@@ -329,7 +338,7 @@
 <p>了解其定義後，我們要問的問題是，給定一個 graph，我們如何判定是否為 bipartite graph ? 直覺一點的方式就是直接將每一個 edge 的兩個端點塗上兩個不同的顏色，然後看看是否會有衝突的地方。</p>
 <p><img src="https://i.imgur.com/HIRe8wh.png" alt></p>
 <p>如果寫成 procedure 的話 (假設 $G$ 是 connected graph以簡化運算)</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">先任選一點 s∈V,並且將其著色成紅色</span><br><span class="line">對它的所有 neighbors 著色成藍色</span><br><span class="line">重複對 neighbors 塗 紅/藍 色直至所有點都被著色完成</span><br><span class="line">若為 bipartite graph 則所有 edges 的兩端都為不同顏色</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. 先任選一點 s∈V,並且將其著色成紅色</span><br><span class="line">2. 對它的所有 neighbors 著色成藍色</span><br><span class="line">3. 重複對 neighbors 塗 紅/藍 色直至所有點都被著色完成</span><br><span class="line">4. 若為 bipartite graph 則所有 edges 的兩端都為不同顏色</span><br></pre></td></tr></table></figure>
 <p>這個 procedure 要 implement 其實就是用 BFS，只是在 BFS procedure 中每一個 layer 再多加一個著色的動作即可。</p>
 <p>[ 補充 ]</p>
 <p>實際上，有一個定理可以幫助我們更方便來做判定 : </p>
@@ -349,12 +358,26 @@
 <h2 id="Connectivity-in-directed-graphs"><a href="#Connectivity-in-directed-graphs" class="headerlink" title="Connectivity in directed graphs"></a>Connectivity in directed graphs</h2><h3 id="Definition-1"><a href="#Definition-1" class="headerlink" title="Definition"></a>Definition</h3><ul>
 <li>Nodes $u,v$ are mutually reachable if $\exists$ a path from $u$ to $v$ and also $\exists$ a path from $v$ to $u$<br>若兩點間互相存在一條 path 可以從一點到另一點，則稱之為 mutmally reachable。</li>
 <li>A directed graph is strongly connected if $\forall$ pairs of nodes are mutually reachable.<br>一個有向圖若任兩點均為 mutually reachable，則稱其為 stronglly connected。</li>
+<li>The strongly (connected) component $S$ containing $s$ in a directed graph is the maximal set if $\forall v\in S$ s.t. $v$ and $s$ are mutually reachable.<br>所有和 $s$ 為 mutually reachable 的 nodes 形成一個 strongly component。</li>
 </ul>
 <h3 id="Lemma"><a href="#Lemma" class="headerlink" title="Lemma"></a>Lemma</h3><p>$If\ u\ and\ v\ are\ mutually\ reachable,\ and\ v\ and\ w\ are\ mutually\ reachable,\ then\ u\ and\ w\ are\ mutually\ rea  chable.$</p>
 <h3 id="Testing-strongly-connectivity"><a href="#Testing-strongly-connectivity" class="headerlink" title="Testing strongly connectivity"></a>Testing strongly connectivity</h3><p>如果給定一個 directed graph ，我們可以如何檢查它是否為 strongly connected ? 最直覺也是最笨的方式就是做兩次 BFS，第一次先檢查 $s$ 可以到達的點有哪些，第二次再檢查這些點能不能回到 $s$。</p>
 <p>然而這樣的複雜度太高，因此稍微調整一下。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">選擇任一點作為起始點 s</span><br><span class="line">R=BFS(s,G)  </span><br><span class="line">#針對此起始點對 G 做BFS</span><br><span class="line">R&apos;=BFS(s,G&apos;) where G&apos; = the graph that it&apos;s edges are reverse direction of all edges of G</span><br><span class="line">#製造一個方向與 G 完全相反的有向圖 G&apos;，並做一次 BFS</span><br><span class="line">若 R=V=R&apos;，則 return true else false</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">TestStronglyConnectivity(G):</span><br><span class="line"></span><br><span class="line">1. 選擇任一點作為起始點 s</span><br><span class="line">2. R=BFS(s,G)  </span><br><span class="line">#針對此起始點對 G 做BFS</span><br><span class="line">3. R&apos;=BFS(s,G&apos;) where G&apos; = the graph that it&apos;s edges are reverse direction of all edges of G</span><br><span class="line">#製造一個方向與 G 完全相反的有向圖 G&apos;，並做一次 BFS</span><br><span class="line">4. 若 R=V=R&apos;，則 return true else false</span><br></pre></td></tr></table></figure>
 <p>這裡每一個步驟都是 linear time complexity，最後的總時間複雜度為 $O(m+n)$</p>
+<p>關於 strongly (connected) component 有一些蠻有趣的性質</p>
+<ul>
+<li>任一個 directed graph 必可以拆出數個 strongly (connected) component。</li>
+<li>將 directed graph 的所有 strongly (connected) component 都各自視為一個點，那麼必會形成一個 directed acyclic graph。</li>
+</ul>
+<p><img width="500" src="https://i.imgur.com/YZJEmIi.png"></p>
+<h3 id="Theorem"><a href="#Theorem" class="headerlink" title="Theorem"></a>Theorem</h3><p>$For\ any\ two\ nodes\ s\ and\ t\ in\ a\ directed\ graph,\ their\ strongly\ component\ are\ identical\ or\ disjoint.$<br>在一個有向圖中任取兩個 nodes，這兩個 nodes 必在相同的 Strongly Component 不然就各在互斥的兩個 strongly component 中。</p>
+<p><strong>Proof :</strong></p>
+<p>( Case 1. ) $s$ and $t$ are mutually reachable.</p>
+<p>Clearly be definition.</p>
+<p>( Case 2. ) $s$ and $t$ are not mutually reachable.</p>
+<p>Suppose to the contrary that $\exists v$ s.t. $s$ and $v$ are mutually reachable and $t$ and $v$ are mutually reachable</p>
+<p>$\Longrightarrow$ $s$ and $t$ are mutually reachable. ($\rightarrow\leftarrow$)</p>
 
     </div>
 
@@ -463,7 +486,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Application-of-BFS-—-Testing-Bipartiteness"><span class="nav-number">1.</span> <span class="nav-text">Application of BFS — Testing Bipartiteness</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Definition"><span class="nav-number">1.1.</span> <span class="nav-text">Definition</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Connectivity-in-directed-graphs"><span class="nav-number">2.</span> <span class="nav-text">Connectivity in directed graphs</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Definition-1"><span class="nav-number">2.1.</span> <span class="nav-text">Definition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lemma"><span class="nav-number">2.2.</span> <span class="nav-text">Lemma</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Testing-strongly-connectivity"><span class="nav-number">2.3.</span> <span class="nav-text">Testing strongly connectivity</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Application-of-BFS-—-Testing-Bipartiteness"><span class="nav-number">1.</span> <span class="nav-text">Application of BFS — Testing Bipartiteness</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Definition"><span class="nav-number">1.1.</span> <span class="nav-text">Definition</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Connectivity-in-directed-graphs"><span class="nav-number">2.</span> <span class="nav-text">Connectivity in directed graphs</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Definition-1"><span class="nav-number">2.1.</span> <span class="nav-text">Definition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lemma"><span class="nav-number">2.2.</span> <span class="nav-text">Lemma</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Testing-strongly-connectivity"><span class="nav-number">2.3.</span> <span class="nav-text">Testing strongly connectivity</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Theorem"><span class="nav-number">2.4.</span> <span class="nav-text">Theorem</span></a></li></ol></li></ol></div>
         
       </div>
       <!--/noindex-->
