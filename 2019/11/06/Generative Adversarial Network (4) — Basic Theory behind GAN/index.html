@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-TW">
+<head>
+  <meta name="google-site-verification" content="exmdvS3MT1hVojBxSEZZZ8TIBBOg6pJ2POTtzNuecqs" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+
+
+<meta property="og:site_name" content="">
+<meta property="og:title" content="categories">
+<meta property="og:url" content="http://">
+<meta property="og:image" content="">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/blog/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Gemini',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","width":280,"display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '複製',
+      copy_success: '複製成功',
+      copy_failure: '複製失敗'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="在正式進入 Generative Adversarial Network ( GAN, 生成對抗網路 )的理論基礎以前，我覺得必須要先簡單定義出一些概念，以利後面的理論探討。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Generative Adversarial Network (4) --- Basic Theory behind GAN">
+<meta property="og:url" content="https://allen108108.github.io/blog/2019/11/06/Generative Adversarial Network (4) — Basic Theory behind GAN/index.html">
+<meta property="og:site_name" content="Math.py">
+<meta property="og:description" content="在正式進入 Generative Adversarial Network ( GAN, 生成對抗網路 )的理論基礎以前，我覺得必須要先簡單定義出一些概念，以利後面的理論探討。">
+<meta property="og:locale" content="zh-TW">
+<meta property="og:image" content="https://i.imgur.com/4ke0YHI.png">
+<meta property="og:image" content="https://i.imgur.com/12A2V5P.png">
+<meta property="og:image" content="https://i.imgur.com/RulPo3N.png">
+<meta property="og:image" content="https://i.imgur.com/wbolNgo.png">
+<meta property="og:image" content="https://i.imgur.com/Q43Ho5d.jpg">
+<meta property="og:image" content="https://i.imgur.com/jsUCCQW.jpg">
+<meta property="og:updated_time" content="2019-11-06T08:35:57.924Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Generative Adversarial Network (4) --- Basic Theory behind GAN">
+<meta name="twitter:description" content="在正式進入 Generative Adversarial Network ( GAN, 生成對抗網路 )的理論基礎以前，我覺得必須要先簡單定義出一些概念，以利後面的理論探討。">
+<meta name="twitter:image" content="https://i.imgur.com/4ke0YHI.png">
+  <link rel="canonical" href="https://allen108108.github.io/blog/2019/11/06/Generative Adversarial Network (4) — Basic Theory behind GAN/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Generative Adversarial Network (4) --- Basic Theory behind GAN | Math.py</title>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-149442581-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-149442581-1');
+    }
+  </script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-TW">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Math.py</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Wir müssen wissen , wir werden wissen</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切換導航欄">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/blog/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首頁</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/blog/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分類</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/blog/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>歸檔</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://allen108108.github.io/blog/blog/2019/11/06/Generative Adversarial Network (4) — Basic Theory behind GAN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Allen Tzeng">
+      <meta itemprop="description" content="Study about Mathematics , Programming and Data Science">
+      <meta itemprop="image" content="/blog/images/allen.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Math.py">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Generative Adversarial Network (4) --- Basic Theory behind GAN
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              
+                
+              
+
+              <time title="創建時間：2019-11-06 16:29:34 / 修改時間：16:35:57" itemprop="dateCreated datePublished" datetime="2019-11-06T16:29:34+08:00">2019-11-06</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/課程筆記-Course/" itemprop="url" rel="index"><span itemprop="name">課程筆記 Course</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/課程筆記-Course/李宏毅-Machine-Learning-and-having-it-Deep-and-Structured/" itemprop="url" rel="index"><span itemprop="name">李宏毅 Machine Learning and having it Deep and Structured</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="閱讀次數" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">閱讀次數：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/blog/2019/11/06/Generative Adversarial Network (4) — Basic Theory behind GAN/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/11/06/Generative Adversarial Network (4) — Basic Theory behind GAN/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>在正式進入 Generative Adversarial Network ( GAN, 生成對抗網路 )的理論基礎以前，我覺得必須要先簡單定義出一些概念，以利後面的理論探討。</p>
+<a id="more"></a>
+<h2 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h2><ul>
+<li>隨機變量 Random Variable<br>在現實生活中，有一些是隨機且可重複出現的現象 ( 例如 : 股市指數、車流量、骰子點數、… ) ，我們將所有可能的重複現象稱作隨機試驗，而樣本空間 $S$ 就是這個隨機試驗的所有可能結果。以樣本空間為定義域的實質函數我們稱之為「隨機變量」$X$<script type="math/tex; mode=display">
+X:S\rightarrow\mathbb{R}</script></li>
+<li><p>機率分佈 Probability Distribution<br>在數學上，以隨機變量為定義域、$[0,1]$ 為對應域的函數我們稱為機率密度函數 ( Probability density function )，我們也會稱其為機率分佈函數，簡稱「機率分佈」或是「分佈」。而更廣義的來說，機率分佈指的就是一種利用事件機率來描述隨機現象的一種方式。值得注意的地方是，我們可以將「同分佈」(Identically Distributed) 視為是一種特殊的等價關係，兩個分佈相同，其隨機變量並不一定會相同。</p>
+</li>
+<li><p>KL散度 Kullback–Leibler divergence (KL divergence)<br>可以參考 “ <a href="http://bit.ly/35nij9b" target="_blank" rel="noopener">Unsupervised Learning – Generation ( PixelRNN、Variational Auto-Encoder ( VAE ) )</a> “一文，在VAE 的討論中，我們有對 KL 散度有簡單的特性描述。</p>
+<script type="math/tex; mode=display">
+KL( P\|Q)= KL\ Divergence\ of\ Q\ with\ respect\ to\ P\  \overset{defn}{=}-\sum P(x)\log\Big(\displaystyle{\frac{Q(x)}{P(x)}}\Big)</script></li>
+<li><p>JS散度 Jensen-Shannon divergence (JS divergence)<br>JS 散度改善了 KL 散度不對稱的缺點，並且將對應域限制在 $[0,1]$ 之間，更能清楚表述兩個不同分佈的異質關係，當 $PQ$兩個分佈越接近，JS值會越接近 $0$，反之，則 JS 會越趨近於 $1$。</p>
+<script type="math/tex; mode=display">
+  JS(P\|Q)=\frac{1}{2}KL(P\|M)+\frac{1}{2}KL(Q\|M)\\
+  \text{where }M=\frac{P+Q}{2}</script></li>
+</ul>
+<h2 id="Before-GAN"><a href="#Before-GAN" class="headerlink" title="Before GAN"></a>Before GAN</h2><p>在 GAN 之前，人們對於「生成」這件事情已經有一定的期待，當時使用的方法大多是用最大似然估計 ( Maximum Likelihood Estimation, MLE )來進行生成。</p>
+<p>最大似然估計的概念很簡單，任何一個機率分佈都可以由一組參數決定，那我們就利用一組抽樣來去試著去找出一組參數可以使這個抽樣的發生機率最大。</p>
+<p>為什麼使抽樣發生機率最大就可以了呢 ?簡單來說，抽樣之所以會被抽出來，就是因為這組抽樣發生的機率「應該」要很大，所以才會這麼容易被我們抽出來。</p>
+<p>於是我們便可以利用這樣的概念來進行 MLE</p>
+<script type="math/tex; mode=display">
+\theta^*=\arg\max_{\theta}\prod\limits_{i=1}^{m}P_G(x^i;\theta)=\arg\max_{\theta}\log\prod\limits_{i=1}^{m}P_G(x^i;\theta)=\arg\max_{\theta}\log\sum\limits_{i=1}^{m}P_G(x^i;\theta)</script><p>因為似然估計函數通常都是一連串機率函數的乘積，我們會取對數來將其化為連加型態。</p>
+<p>我們繼續把上面的 MLE 式子做一點調整</p>
+<script type="math/tex; mode=display">
+\arg\max_{\theta}\log\sum\limits_{i=1}^{m}P_G(x^i;\theta)\\\approx \arg\max_{\theta}\mathbb{E}_{x\sim P_{data}}[\log P(x;\theta)]\\
+=\arg\max_{\theta}\int\limits_{x}P_{data}(x)\log P_G(x;\theta)dx\\
+=\arg\max_{\theta}\int\limits_{x}P_{data}(x)\log P_G(x;\theta)dx-\int\limits_{x}P_{data}(x)\log P_{data}(x)dx\\
+=\arg\min_{\theta}KL(P_{data}\|P_G)</script><p>從這裡我們可以知道，最大似然估計其實就是等價於最小化 KL 散度。</p>
+<p>MLE 的一個衍生應用就是用來做圖像生成。單純以圖像生成的任務來說，早在 80年代就開始有人進行相關研究，當時使用 Gaussian Mixture Model<sup><a href="#fn_註1" id="reffn_註1">註1</a></sup>來對手邊有的圖像進行 MLE 估測真實的分佈。</p>
+<p>但這樣的方式其實並無法準確地逼近真實的分佈，導致生成出來的圖像無法做得太清楚。一個可能的原因是我們使用了 Gaussian Mixture Model 實在不太能逼近太複雜的分佈函數，不管我們怎麼調整 Mean 跟 Variance 都很難貼近真實的分佈。</p>
+<h2 id="GAN"><a href="#GAN" class="headerlink" title="GAN"></a>GAN</h2><p>然而，MLE 卻有一些困難點是很難克服的，舉例來說，在一個極為複雜的任務中，$P_G$ 這樣的生成分佈是非常難以估計的，即使我們利用 Gaussain Mixture Model 也仍然無法逼近真實分佈。既然 $P_G$難以計算，那我們整個 MLE 也就無法計算出來，因此，在「生成」這件事情上面，我們需要有更一般化的作法。</p>
+<h3 id="Generator-of-GAN"><a href="#Generator-of-GAN" class="headerlink" title="Generator of GAN"></a>Generator of GAN</h3><p>在 GAN 中，Generator 其實就是一個 network，而其概念就是希望將一個先驗分佈 ( prior distribution ) 經過 network 進行轉換後，變成另外一個不同的分佈，然後期待這個轉換後的分佈可以逼近真實的分佈。</p>
+<p><img src="https://i.imgur.com/4ke0YHI.png" alt></p>
+<p>先驗分佈有沒有限制 ? 這倒是不太重要，因為整個 network 會做調整，因此照理來說，任一種先驗分佈應該最後訓練出來的 $P_G$ 應該不會相差太多。</p>
+<p>所以我們可以把上圖這個 Generator 公式化呈現</p>
+<script type="math/tex; mode=display">
+G^*=\arg\min Div(P_{data},P_G)</script><p>但現在 $P_G$ 以及 $P_{data}$ 這兩個分佈我們完全不知道它們長得什麼樣子 ( 但我們可以從這兩個未知分佈中取樣 )，也當然無法計算這兩個分佈間的 divergence。GAN 解決這個困境的方式就是使用 Discriminator。</p>
+<h3 id="Discriminator-of-GAN"><a href="#Discriminator-of-GAN" class="headerlink" title="Discriminator of GAN"></a>Discriminator of GAN</h3><p>前文 “ <a href="http://bit.ly/2pFLIve" target="_blank" rel="noopener">Generative Adversarial Network (1) —- Introduction</a> “ 一文中我們有介紹 Discriminator 的作用 其實就是利用一個神經網路來對 $P_G$ 以及 $P_{data}$ 的抽樣來進行判斷，看看能不能分辨輸入圖像是生成圖像還是原圖像資料。</p>
+<p>在實際操作上，Discriminator 會針對輸入圖像給予一個分數，分數越高就表示圖像越真實，我們最終希望這個 Discriminator 無法判斷此固定的 Generator 生成的圖像。</p>
+<p>但其實我們也可以換一個角度來看，當我們在訓練 Discriminator 時，會希望兩種圖像的分數最後會越來越接近，直至分不出來，那麼這樣的分數是不是其實也是某一種 divergence 的量化分數 ?</p>
+<p>當我們在針對 Discriminator 做訓練時，其實就是在最大化整個 Loss ( 因為是希望 discriminator 分不出來圖像的真實度 )</p>
+<script type="math/tex; mode=display">
+\max V(G, D)=\max\Big(\mathbb{E}_{x\sim P_{data}}\log D(x)+\mathbb{E}_{x\sim P_G}\log\big(1-D(x)\big)\Big)\\
+=\max\Big(\int\limits_{x}P_{data}(x)\log D(x)dx+\int\limits_{x}P_G(x)\log(1-D(x))dx\Big)\\
+=\max\Big(\int\limits_{x}\big(P_{data}(x)\log D(x)+P_G(x)\log(1-D(x))\big)dx\Big)</script><p>因為 $D$ 是一個 neural network，所以其實可以逼近任一函數 ( 理想上 )，那麼上述的最大化式，我們可以單看隨機變量 $x$ 即可。簡單來說，我要完成上述的最大化，那其實只要讓 $D$ 在每一個 $x$ 都最大化即可。</p>
+<script type="math/tex; mode=display">
+\max\Big(P_{data}(x)\log D(x)+P_G(x)\log(1-D(x)\Big)\overset{let}{=}\max\mathcal{L}(D)</script><p>簡單從微積分可知，只要令 $\frac{\partial\mathcal{L}}{\partial D}=0$，我們便可以求出可以使其最大化的 $D^*$</p>
+<script type="math/tex; mode=display">
+D^*(x)=\frac{P_{data}(x)}{P_{data}(x)+P_G(x)}</script><p>也可以知道若 $D=D^*$ 則整個 Loss則為</p>
+<script type="math/tex; mode=display">
+V(D^*,G)=\mathbb{E}_{x\sim P_{data}}\log D^*(x)+\mathbb{E}_{x\sim P_G}\log\big(1-D^*(x)\big)\\
+=\int\limits_{x}P_{data}(x)\log \frac{P_{data}(x)}{P_{data}(x)+P_G(x)}dx+\int\limits_{x}P_G(x)\log(1-\frac{P_{data}(x)}{P_{data}(x)+P_G(x)})dx\\
+=\int\limits_{x}P_{data}(x)\log \frac{P_{data}(x)\cdot\frac{1}{2}}{(P_{data}(x)+P_G(x))\cdot\frac{1}{2}}dx+\int\limits_{x}P_G(x)\log(1-\frac{P_{data}(x)\cdot\frac{1}{2}}{(P_{data}(x)+P_G(x))\cdot\frac{1}{2}}dx\\
+=-2\log2+\int\limits_{x}P_{data}(x)\log \frac{P_{data}(x)}{(P_{data}(x)+P_G(x))\cdot\frac{1}{2}}dx+\int\limits_{x}P_G(x)\log(1-\frac{P_{data}(x)}{(P_{data}(x)+P_G(x))\cdot\frac{1}{2}}dx\\
+=-2\log2+KL(P_{data}(x)\|\frac{P_{data}(x)+P_G}{2})+KL(P_G(x)\|\frac{P_{data}(x)+P_G}{2})\\
+=-2\log2+2JS(P_{data}(x)\|P_G)</script><p>從上面的推導我們可以確定，整個 Discriminator 與 JS-Divergence 有直接的相關，當我們在對 Discriminator 做訓練時，其實就是在對 $P_G$ 與 $P_{data}$ 做 divergence 的計算，這也是為什麼我們會說 discriminator 可以處理 generator 無法計算 divergence 的問題。</p>
+<p>推導至此，我們可以把求解 Generator 的式子整理一下</p>
+<script type="math/tex; mode=display">
+G^*=\arg\min_{G}\max_{D} V(G,D)</script><p>每一個 $G_i$，它跟各種不同的 $D$，會產生各種不同的 $V(G_i,D)$，我們也可以從中找到最大的 $V_{max}(G_i,D_i^*)$，真正我們要找的 $G^*$，便是這些 $V_{max}(G^i,D_i^*)$ 中最小的那一個。</p>
+<p><img src="https://i.imgur.com/12A2V5P.png" alt></p>
+<h3 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h3><p>我們已經了解 Generator 跟 Discriminator 的運作過程以及其意義，但整個 GAN 的演算法是藉由 $G$、$D$ 互相更新來進行，這樣的演算法跟 $G^*=\arg\min_{G}\max_{D} V(G,D)$ 是等價的嗎 ?</p>
+<p>我們要尋找 $G^*$，上式的 $\min$ 可以用 Gradient Descent 迭代進行，但現在問題在於，要使用 Gradient Descent 的目標函數是一個 $\max$ 函數。雖然這樣的函數整體不可微分，但可以切分成為許多可微分的區間，再針對不同的區間來作微分。</p>
+<p>因此，在每一個 Gradient Descent 前，我們都要先找出現在位在哪一個區間段確定微分式，再來做權重更新。</p>
+<p><img src="https://i.imgur.com/RulPo3N.png" alt></p>
+<ul>
+<li><strong>初始化 $G_0$、$D_0$</strong></li>
+<li><strong>固定 $G_0$ 訓練出一個可以最大化 $V(G_0,D)$ 的 $D_1^*$</strong><br>(<em>這步驟就是要確定我們該用哪一個部份來微分已進行梯度下降</em>)</li>
+<li><strong>利用梯度下降法更新 $G_0$ 的參數產生 $G_1$</strong><script type="math/tex; mode=display">
+\theta_{G_1}=\theta_{G_0}-\eta\cdot\frac{\partial V(G,D_1^*)}{\partial\theta_G}</script></li>
+<li><strong>固定 $G_1$ 訓練出一個可以最大化 $V(G_1,D)$ 的 $D_2^*$</strong><br>(<em>$G$ 更新後，可能會進入另一個區間，採取不同的微分式，所以我們要重新確認一次</em>)</li>
+<li><strong>利用梯度下降法更新 $G_1$ 的參數產生 $G_2$</strong><script type="math/tex; mode=display">
+\theta_{G_2}=\theta_{G_1}-\eta\cdot\frac{\partial V(G,D_2^*)}{\partial\theta_G}</script></li>
+<li><strong>重複上述步驟</strong></li>
+</ul>
+<h3 id="In-Practice"><a href="#In-Practice" class="headerlink" title="In Practice"></a>In Practice</h3><p><img src="https://i.imgur.com/wbolNgo.png" alt></p>
+<ol>
+<li><strong>$G$ 的訓練僅更新一次參數，$D$ 的訓練可更新 $k$ 次參數</strong></li>
+</ol>
+<p>從上面的演算法，我們可以直覺地認為，當我們在尋找 $G^*$ 的過程中，其實也是在減少 JS-divergence。<br>但真的是如此嗎 ? 如果我們 $D$ 與 $G$ 的訓練在每一輪都更新多次參數，其實是很有可能導致整個 JS-divergence 是會上升的。</p>
+<p><img width="500" src="https://i.imgur.com/Q43Ho5d.jpg"></p>
+<p>從 $G$ 的角度來看，因為更新多次，$G$ 的型態可能會有很大的變化，所以 JS-divergence 會很不穩定，為了避免這樣的狀況，我們對 $G$ 的更新就不要這麼多次，以確保整個 $G$ 不會有太大的變化，可以維持 JS-divergence 的穩定下降。</p>
+<p>從 $D$ 的角度來看，雖然理想中的 $D$ 可以是任意函數，所以我們一定可以 train 到極致來得到我們真正想要的 $D$。但現實中，Neural Network 的參數是有限的，根本不可能 train 到那個理想中的 $D$，因此在這個步驟中，或許我們根本不用 train 到極致，只需 $k$ 次更新權重即可。</p>
+<p>換一個角度想，GAN 的概念就是要讓 $G$ 跟 $D$ 互相追趕，既然如此，每一方都不能跑得出奇地快，讓另一方追不到，這樣是無法達到 GAN 所期待的目標，所以我們必須控制 $G$、$D$ 的更新速度，讓彼此是可以互相追的到的。</p>
+<ol>
+<li><strong>Generator Loss function 的調整</strong></li>
+</ol>
+<script type="math/tex; mode=display">
+G^*=\arg\min_{G}\max_{D} V(G,D)</script><p>從上式，我們可以知道整個 Generator 的 Loss function 應該就是 Discriminator Loss funtion 的其中一個特例。</p>
+<script type="math/tex; mode=display">
+\tilde{V}=\mathbb{E}_{x\sim P_{data}}\log D(x^i)+\mathbb{E}_{x\sim P_G}\log\big(1-D(x)\big)</script><p>但第一項與 Generator 無關，所以我們的目標只有第二項，Loss function 可以再簡化成</p>
+<script type="math/tex; mode=display">
+\tilde{V}=\mathbb{E}_{x\sim P_G}\log\big(1-D(x)\big)</script><p>然而，GAN 的創始人 Ian Goodfellow 認為這樣的 Loss function (下圖紅色曲線) 會對訓練造成困難。</p>
+<p><img width="400" src="https://i.imgur.com/jsUCCQW.jpg"></p>
+<p>從上圖來看，初期容易會有 train 不下去的狀況，因此 Ian Goodfellow 將其稍作調整</p>
+<script type="math/tex; mode=display">
+\tilde{V}=\mathbb{E}_{x\sim P_G}-\log\big(D(x)\big)</script><p>哪一種 Loss function 較好 ? 其實針對這個問題是眾說紛紜，調整後的 Loss function 雖然解決初期梯度趨近於 0 而導致訓練困難的狀況，但是卻容易造成整個 JS-divergence 呈現不穩定的狀態。</p>
+<p>有人試圖針對兩種 Loss function 進行比較，結論是兩者都可以 train 得起來，而且 performance 會是接近的。</p>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ol>
+<li><a href="https://angnotes.wordpress.com/2017/12/04/gan%e7%b3%bb%e5%88%97%e6%96%871-distance-of-distribution/" target="_blank" rel="noopener">GAN系列文(1)–distance of distribution</a></li>
+<li><a href="https://blog.csdn.net/FrankieHello/article/details/80614422" target="_blank" rel="noopener">KL散度、JS散度以及交叉熵对比</a></li>
+</ol>
+<h2 id="註釋"><a href="#註釋" class="headerlink" title="註釋"></a>註釋</h2><p><sup><a href="#fn_註1" id="reffn_註1">註1</a></sup>:<br>參考 “ <a href="http://bit.ly/35nij9b" target="_blank" rel="noopener">Unsupervised Learning – Generation ( PixelRNN、Variational Auto-Encoder ( VAE ) )</a> “一文</p>
+
+    </div>
+
+    
+    
+    
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>作者： </strong>Allen Tzeng</li>
+  <li class="post-copyright-link">
+    <strong>文章連結：</strong>
+    <a href="https://allen108108.github.io/blog/2019/11/06/Generative Adversarial Network (4) — Basic Theory behind GAN/" title="Generative Adversarial Network (4) --- Basic Theory behind GAN">https://allen108108.github.io/blog/2019/11/06/Generative Adversarial Network (4) — Basic Theory behind GAN/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/blog/2019/11/05/Chapter 4 – Greedy algorithms ( 1 )/" rel="next" title="Chapter 4 -- Greedy algorithms ( 1 )">
+                  <i class="fa fa-chevron-left"></i> Chapter 4 -- Greedy algorithms ( 1 )
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    
+  <div class="comments" id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Definition"><span class="nav-number">1.</span> <span class="nav-text">Definition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Before-GAN"><span class="nav-number">2.</span> <span class="nav-text">Before GAN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GAN"><span class="nav-number">3.</span> <span class="nav-text">GAN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Generator-of-GAN"><span class="nav-number">3.1.</span> <span class="nav-text">Generator of GAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Discriminator-of-GAN"><span class="nav-number">3.2.</span> <span class="nav-text">Discriminator of GAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Algorithm"><span class="nav-number">3.3.</span> <span class="nav-text">Algorithm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#In-Practice"><span class="nav-number">3.4.</span> <span class="nav-text">In Practice</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考資料"><span class="nav-number">4.</span> <span class="nav-text">參考資料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#註釋"><span class="nav-number">5.</span> <span class="nav-text">註釋</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/blog/images/allen.jpg"
+      alt="Allen Tzeng">
+  <p class="site-author-name" itemprop="name">Allen Tzeng</p>
+  <div class="site-description" itemprop="description">Study about Mathematics , Programming and Data Science</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/blog/archives/">
+        
+          <span class="site-state-item-count">68</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/blog/categories/">
+          
+        
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分類</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://allen108108.github.io/" title="Github page &rarr; https://allen108108.github.io/"><i class="fa fa-fw fa-github-alt"></i>Github page</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/allen108108" title="GitHub &rarr; https://github.com/allen108108" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:allen108108@hotmail.com" title="E-Mail &rarr; mailto:allen108108@hotmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://www.facebook.com/Mathpy-257929091666547/" title="FB Page &rarr; https://www.facebook.com/Mathpy-257929091666547/" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB Page</a>
+      </span>
+    
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Allen Tzeng</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主題 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="訪客總數">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="總瀏覽次數">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+    
+  
+  <script color='255, 80, 219' opacity='1' zIndex='-1' count='100' src="/blog/lib/canvas-nest/canvas-nest-nomobile.min.js"></script>
+  <script src="/blog/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/blog/js/utils.js?v=7.4.0"></script><script src="/blog/js/motion.js?v=7.4.0"></script>
+<script src="/blog/js/schemes/pisces.js?v=7.4.0"></script>
+
+<script src="/blog/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: 21351,
+      el: 'wpac-rating',
+      color: 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://math-py.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  function disqus_config() {
+    this.page.url = "https://allen108108.github.io/blog/2019/11/06/Generative Adversarial Network (4) — Basic Theory behind GAN/";
+    this.page.identifier = "2019/11/06/Generative Adversarial Network (4) — Basic Theory behind GAN/";
+    this.page.title = 'Generative Adversarial Network (4) --- Basic Theory behind GAN';};
+  function loadComments() {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://math-py.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  }
+    window.addEventListener('load', loadComments, false);
+  
+</script>
+
+</body>
+</html>
