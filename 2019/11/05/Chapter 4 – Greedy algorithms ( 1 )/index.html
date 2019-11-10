@@ -73,7 +73,7 @@
 <meta property="og:image" content="https://i.imgur.com/dGLn0Si.png">
 <meta property="og:image" content="https://i.imgur.com/fUZ4NHd.png">
 <meta property="og:image" content="https://i.imgur.com/mOdtdlC.gif">
-<meta property="og:updated_time" content="2019-11-04T16:34:23.667Z">
+<meta property="og:updated_time" content="2019-11-08T11:52:25.358Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 4 -- Greedy algorithms ( 1 )">
 <meta name="twitter:description" content="Greedy algorithm當我們在設計演算法時，往往都是一個一個步驟累積而成，而每一個步驟往往都必須要對某些狀況做決定。Greedy Algorithm 在每一個步驟都選擇「當下」「最好」的決定。也就是說，Greedy Algorithm 在每一步驟下都必須要去試著最優化我們所訂定的規範 (criterion)。而且，這樣的演算法不會回頭、不會反悔、不會猶豫。">
@@ -258,11 +258,19 @@
                 
               
 
-              <time title="創建時間：2019-11-05 00:31:21 / 修改時間：00:34:23" itemprop="dateCreated datePublished" datetime="2019-11-05T00:31:21+08:00">2019-11-05</time>
+              <time title="創建時間：2019-11-05 00:31:21" itemprop="dateCreated datePublished" datetime="2019-11-05T00:31:21+08:00">2019-11-05</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2019-11-08 19:52:25" itemprop="dateModified" datetime="2019-11-08T19:52:25+08:00">2019-11-08</time>
+              </span>
             
           
             <span class="post-meta-item">
@@ -327,7 +335,7 @@
 <li>The Greedy Algorithm stays ahead.<br>利用 Greedy Algorithm 可以一路最佳化。</li>
 <li>The exchange argument.<br>預設有一個最佳解，將其中與 Greedy Algorithm 不符的 criterions 交換，試圖證明這樣交換後仍然可得最優解。</li>
 </ol>
-<h2 id="Interval-Scheduling"><a href="#Interval-Scheduling" class="headerlink" title="Interval Scheduling"></a>Interval Scheduling</h2><h3 id="Scenario"><a href="#Scenario" class="headerlink" title="Scenario"></a>Scenario</h3><p>$Let\ \{I(i)=\big[s(i),f(i)\big)\mid i=1,2,3,\cdots,n\}\ is\ a\ set\ of\ requests\ interval.$<br>$Find\ a\ compatible(no\ overlap)\ requests\ woth\ maximim\ size.$<br>給定一個區間，以及 $n$ 個子區間，試圖在這個區間中找出最多不重複的子區間。</p>
+<h2 id="Interval-Scheduling"><a href="#Interval-Scheduling" class="headerlink" title="Interval Scheduling"></a>Interval Scheduling</h2><h3 id="Scenario"><a href="#Scenario" class="headerlink" title="Scenario"></a>Scenario</h3><p>$Let\ \{I(i)=\big[s(i),f(i)\big)\mid i=1,2,3,\cdots,n\}\ is\ a\ set\ of\ requests\ interval.$<br>$Find\ a\ compatible(no\ overlap)\ requests\ with\ maximim\ size.$<br>給定一個區間，以及 $n$ 個子區間，試圖在這個區間中找出最多不重複的子區間。</p>
 <p><img src="https://i.imgur.com/dGLn0Si.png" alt></p>
 <h3 id="Criterion-Greedy-Rule"><a href="#Criterion-Greedy-Rule" class="headerlink" title="Criterion ( Greedy Rule )"></a>Criterion ( Greedy Rule )</h3><p>前面有提到，Greedy Algorithm 在每一步驟下都必須要去試著最優化我們所訂定的規範 (criterion)，在 Interval Scheduling 問題來說，就是先選出一個在當下比較「好的 interval」，刪除掉 overlap 的選擇，之後再選擇一個「好的 interval」…..，一值重複下去。</p>
 <p>或許我們可以思考一下，最好的 interval 的可能有哪些 : </p>
@@ -489,7 +497,7 @@
         
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">68</span>
+          <span class="site-state-item-count">71</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>

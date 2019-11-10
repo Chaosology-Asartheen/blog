@@ -70,7 +70,6 @@
 <meta property="og:site_name" content="Math.py">
 <meta property="og:description" content="本篇為此系列文中第三篇，若還沒有讀過前文的讀者，建議從” Kaggle Case - Santander Customer Transaction Prediction (1) “開始閱讀唷 !">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:image" content="https://i.imgur.com/hjnxrvN.png">
 <meta property="og:image" content="https://i.imgur.com/eq96nyK.png">
 <meta property="og:image" content="https://i.imgur.com/fGgEufQ.png">
 <meta property="og:image" content="https://i.imgur.com/buKRzve.png">
@@ -78,11 +77,13 @@
 <meta property="og:image" content="https://i.imgur.com/AA3nNNN.png">
 <meta property="og:image" content="https://i.imgur.com/yy03rsH.png">
 <meta property="og:image" content="https://i.imgur.com/fd7I6lH.png">
-<meta property="og:updated_time" content="2019-10-07T18:10:19.202Z">
+<meta property="og:image" content="https://i.imgur.com/pv7OUwJ.png">
+<meta property="og:image" content="https://i.imgur.com/hjnxrvN.png">
+<meta property="og:updated_time" content="2019-11-08T18:26:47.980Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kaggle Case - Santander Customer Transaction Prediction (3)">
 <meta name="twitter:description" content="本篇為此系列文中第三篇，若還沒有讀過前文的讀者，建議從” Kaggle Case - Santander Customer Transaction Prediction (1) “開始閱讀唷 !">
-<meta name="twitter:image" content="https://i.imgur.com/hjnxrvN.png">
+<meta name="twitter:image" content="https://i.imgur.com/eq96nyK.png">
   <link rel="canonical" href="https://allen108108.github.io/blog/2019/10/08/Kaggle Case - Santander Customer Transaction Prediction (3)/">
 
 
@@ -263,11 +264,19 @@
                 
               
 
-              <time title="創建時間：2019-10-08 02:08:06 / 修改時間：02:10:19" itemprop="dateCreated datePublished" datetime="2019-10-08T02:08:06+08:00">2019-10-08</time>
+              <time title="創建時間：2019-10-08 02:08:06" itemprop="dateCreated datePublished" datetime="2019-10-08T02:08:06+08:00">2019-10-08</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2019-11-09 02:26:47" itemprop="dateModified" datetime="2019-11-09T02:26:47+08:00">2019-11-09</time>
+              </span>
             
           
             <span class="post-meta-item">
@@ -323,8 +332,7 @@
 <a id="more"></a>
 <h2 id="Feature-Correlation"><a href="#Feature-Correlation" class="headerlink" title="Feature Correlation"></a>Feature Correlation</h2><p>雖說Feature Correlation 以及下一部分的 Duplicate values 在Kernel作者的觀點都還算是 Data Exploration的一部分，但是畢竟它已經跨到特徵處理了，我就把這兩部分併到這邊一起來看。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">%%time</span><br><span class="line">correlations = train_df[features].corr().abs().unstack().sort_values(kind=<span class="string">"quicksort"</span>).reset_index()</span><br><span class="line"><span class="comment"># DataFrame.倆倆算相關係數.取絕對值.排列(?).排序.重新編號</span></span><br><span class="line">correlations = correlations[correlations[<span class="string">'level_0'</span>] != correlations[<span class="string">'level_1'</span>]]</span><br><span class="line">correlations.head(<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
-<p>在這裡，我嘗試過中間的<code>.unstack()</code>替換成<code>.stack()</code>似乎不會影響這部分特徵相關係數的排序，但是不管何者，都不能省略，它是將<code>train_df[features].corr().abs()</code>這個DataFrame變成可排序的一個重要的媒介。<sup><a href="#fn_1" id="reffn_1">1</a></sup></p>
-<p>這樣的表格其實無法排序，所以<code>.unstack()</code>可以說是將整個表格換做可以排序的方式<br><img src="https://i.imgur.com/hjnxrvN.png" alt></p>
+<p>在這裡，我嘗試過中間的<code>.unstack()</code>替換成<code>.stack()</code>似乎不會影響這部分特徵相關係數的排序，但是不管何者，都不能省略，它是將<code>train_df[features].corr().abs()</code>這個DataFrame變成可排序的一個重要的媒介。<sup><a href="#fn_註1" id="reffn_註1">註1</a></sup></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">correlations.tail(<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">correlations.head(<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
 <p>上面輸出的結果(略)，可以發現到除了特徵自己本身的相關係數為1外，其他不同的特徵配對的相關性都非常低 ( 最高也差不多千分之9.9左右 )</p>
@@ -366,6 +374,10 @@
 <h2 id="後記"><a href="#後記" class="headerlink" title="後記"></a>後記</h2><p>這一篇 kernel 在kaggle上面獲得了500多的按讚，應該會是在這題所有分享kernel裡面的最高分，說真的，的確實至名歸，在講解以及整個處理的流程都非常的順暢。</p>
 <p>如果要拿這一篇當作第一篇kaggle Study的題材也算是蠻適合的，可以了解到流程，也可以知道Kaggler到底都在幹些什麼事情。</p>
 <p>不過，簡單易懂也有相對來說的可惜，可惜並沒有遇到比較接近現實的資料狀況 ( EX: 缺失值、異常值、特徵的選擇及縮放…. )，不過對於第一次接觸的新手來說，如果一開始就這麼刺激，<del>可能看完就放棄了</del>XDDD</p>
+<h2 id="註釋"><a href="#註釋" class="headerlink" title="註釋"></a>註釋</h2><p><sup><a href="#fn_註1" id="reffn_註1">註1</a></sup>:<br>這個部份我想了有一段時間，若將<code>.unstack()</code>整個拿掉則會出現Traceback,主要還是跟<code>train_df[features].corr().abs()</code>的型態有關</p>
+<p><img src="https://i.imgur.com/pv7OUwJ.png" alt></p>
+<p>這樣的表格其實無法排序，所以<code>.unstack()</code>可以說是將整個表格換做可以排序的方式</p>
+<p><img src="https://i.imgur.com/hjnxrvN.png" alt></p>
 
     </div>
 
@@ -474,7 +486,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Feature-Correlation"><span class="nav-number">1.</span> <span class="nav-text">Feature Correlation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Duplicate-values"><span class="nav-number">2.</span> <span class="nav-text">Duplicate values</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Feature-Engineering"><span class="nav-number">3.</span> <span class="nav-text">Feature Engineering</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Model"><span class="nav-number">4.</span> <span class="nav-text">Model</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#後記"><span class="nav-number">5.</span> <span class="nav-text">後記</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Feature-Correlation"><span class="nav-number">1.</span> <span class="nav-text">Feature Correlation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Duplicate-values"><span class="nav-number">2.</span> <span class="nav-text">Duplicate values</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Feature-Engineering"><span class="nav-number">3.</span> <span class="nav-text">Feature Engineering</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Model"><span class="nav-number">4.</span> <span class="nav-text">Model</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#後記"><span class="nav-number">5.</span> <span class="nav-text">後記</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#註釋"><span class="nav-number">6.</span> <span class="nav-text">註釋</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -493,7 +505,7 @@
         
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">68</span>
+          <span class="site-state-item-count">71</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
