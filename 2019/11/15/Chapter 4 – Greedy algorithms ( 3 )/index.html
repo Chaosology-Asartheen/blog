@@ -63,21 +63,21 @@
   };
 </script>
 
-  <meta name="description" content="由林軒田機器學習第十講 Logistic Regression 的基礎配合李宏毅的 Machine Learning Lecture 5 來思考 ，為何我們推薦使用 Cross-Entropy 作為error measure 而不是沿用 Linear Regression 的 Square error ?">
+  <meta name="description" content="Shortest Paths ( DijKstra’s Algorithm )Scenario$G=(V,E)\ is\ a\ directed\ graph\ and\ I(e)=lenth\ of\ edge\ e\in E,\\ where\ I(e)\geq0\ can\ be\ distance,time\ or\ cost.$$Find\ the\ shortest\ path\ P(">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Why can we use Squre Error in Logistic Regression ?">
-<meta property="og:url" content="https://allen108108.github.io/blog/2019/10/05/Why can we use Squre Error in Logistic Regression _/index.html">
+<meta property="og:title" content="Chapter 4 -- Greedy algorithms ( 3 )">
+<meta property="og:url" content="https://allen108108.github.io/blog/2019/11/15/Chapter 4 – Greedy algorithms ( 3 )/index.html">
 <meta property="og:site_name" content="Math.py">
-<meta property="og:description" content="由林軒田機器學習第十講 Logistic Regression 的基礎配合李宏毅的 Machine Learning Lecture 5 來思考 ，為何我們推薦使用 Cross-Entropy 作為error measure 而不是沿用 Linear Regression 的 Square error ?">
+<meta property="og:description" content="Shortest Paths ( DijKstra’s Algorithm )Scenario$G=(V,E)\ is\ a\ directed\ graph\ and\ I(e)=lenth\ of\ edge\ e\in E,\\ where\ I(e)\geq0\ can\ be\ distance,time\ or\ cost.$$Find\ the\ shortest\ path\ P(">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:image" content="https://i.imgur.com/UauyPgR.png">
-<meta property="og:image" content="https://i.imgur.com/llhP9yg.png">
-<meta property="og:updated_time" content="2019-10-22T07:59:18.976Z">
+<meta property="og:image" content="https://i.imgur.com/ddDe69H.jpg">
+<meta property="og:image" content="https://i.imgur.com/HCOBZQp.png">
+<meta property="og:updated_time" content="2019-11-14T19:23:48.410Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Why can we use Squre Error in Logistic Regression ?">
-<meta name="twitter:description" content="由林軒田機器學習第十講 Logistic Regression 的基礎配合李宏毅的 Machine Learning Lecture 5 來思考 ，為何我們推薦使用 Cross-Entropy 作為error measure 而不是沿用 Linear Regression 的 Square error ?">
-<meta name="twitter:image" content="https://i.imgur.com/UauyPgR.png">
-  <link rel="canonical" href="https://allen108108.github.io/blog/2019/10/05/Why can we use Squre Error in Logistic Regression _/">
+<meta name="twitter:title" content="Chapter 4 -- Greedy algorithms ( 3 )">
+<meta name="twitter:description" content="Shortest Paths ( DijKstra’s Algorithm )Scenario$G=(V,E)\ is\ a\ directed\ graph\ and\ I(e)=lenth\ of\ edge\ e\in E,\\ where\ I(e)\geq0\ can\ be\ distance,time\ or\ cost.$$Find\ the\ shortest\ path\ P(">
+<meta name="twitter:image" content="https://i.imgur.com/ddDe69H.jpg">
+  <link rel="canonical" href="https://allen108108.github.io/blog/2019/11/15/Chapter 4 – Greedy algorithms ( 3 )/">
 
 
 <script id="page-configurations">
@@ -91,7 +91,7 @@
   };
 </script>
 
-  <title>Why can we use Squre Error in Logistic Regression ? | Math.py</title>
+  <title>Chapter 4 -- Greedy algorithms ( 3 ) | Math.py</title>
   
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-149442581-1"></script>
   <script>
@@ -229,7 +229,7 @@
   
   
   <div class="post-block post">
-    <link itemprop="mainEntityOfPage" href="https://allen108108.github.io/blog/blog/2019/10/05/Why can we use Squre Error in Logistic Regression _/">
+    <link itemprop="mainEntityOfPage" href="https://allen108108.github.io/blog/blog/2019/11/15/Chapter 4 – Greedy algorithms ( 3 )/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Allen Tzeng">
@@ -241,7 +241,7 @@
       <meta itemprop="name" content="Math.py">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">Why can we use Squre Error in Logistic Regression ?
+        <h1 class="post-title" itemprop="name headline">Chapter 4 -- Greedy algorithms ( 3 )
 
           
         </h1>
@@ -257,19 +257,11 @@
                 
               
 
-              <time title="創建時間：2019-10-05 01:38:52" itemprop="dateCreated datePublished" datetime="2019-10-05T01:38:52+08:00">2019-10-05</time>
+              <time title="創建時間：2019-11-15 03:22:14 / 修改時間：03:23:48" itemprop="dateCreated datePublished" datetime="2019-11-15T03:22:14+08:00">2019-11-15</time>
             </span>
           
             
 
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2019-10-22 15:59:18" itemprop="dateModified" datetime="2019-10-22T15:59:18+08:00">2019-10-22</time>
-              </span>
             
           
             <span class="post-meta-item">
@@ -285,7 +277,7 @@
                   ，
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/課程筆記-Course/李宏毅-Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">李宏毅 Machine Learning</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/課程筆記-Course/江蕙如-Algorithm/" itemprop="url" rel="index"><span itemprop="name">江蕙如 Algorithm</span></a></span>
 
                 
                 
@@ -312,7 +304,7 @@
       
       <span class="post-meta-item-text">Disqus：</span>
     
-    <a title="disqus" href="/blog/2019/10/05/Why can we use Squre Error in Logistic Regression _/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/10/05/Why can we use Squre Error in Logistic Regression _/" itemprop="commentCount"></span></a>
+    <a title="disqus" href="/blog/2019/11/15/Chapter 4 – Greedy algorithms ( 3 )/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/11/15/Chapter 4 – Greedy algorithms ( 3 )/" itemprop="commentCount"></span></a>
   </span>
   
   
@@ -326,16 +318,21 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>由林軒田機器學習第十講 Logistic Regression 的基礎配合李宏毅的 Machine Learning Lecture 5 來思考 ，為何我們推薦使用 Cross-Entropy 作為error measure 而不是沿用 Linear Regression 的 Square error ?</p>
+        <h2 id="Shortest-Paths-DijKstra’s-Algorithm"><a href="#Shortest-Paths-DijKstra’s-Algorithm" class="headerlink" title="Shortest Paths ( DijKstra’s Algorithm )"></a>Shortest Paths ( DijKstra’s Algorithm )</h2><h3 id="Scenario"><a href="#Scenario" class="headerlink" title="Scenario"></a>Scenario</h3><p>$G=(V,E)\ is\ a\ directed\ graph\ and\ I(e)=lenth\ of\ edge\ e\in E,\\ where\ I(e)\geq0\ can\ be\ distance,time\ or\ cost.$<br>$Find\ the\ shortest\ path\ P(v)\ from\ s\ to\ each\ other\ v\in V-\{s\},\ where\ I(P)=lenth\ of\ P=\sum_{e\in P} I(e)$<br>給定一個有向圖以及每個 edge 的 “長度”( 可以是距離、花費時間、花費成本…)，試圖找出從 s 出發距離最短的路徑。</p>
 <a id="more"></a>
-<p><img src="https://i.imgur.com/UauyPgR.png" alt></p>
-<p>假定我們現在使用的是 Square Error : $E_{in}(h)=\frac{1}{N}\sum\limits_{n=0}^{N}(\theta(\mathbb{W}^T\mathbb{X})-y_n)^2$</p>
-<p>當我們要進行 Gradient Descent ，要計算 Gradient 而對各變數進行偏微分時會發現一個狀況 : </p>
-<p>$y_n=1\Longrightarrow\begin{cases}<br>\theta(\mathbb{W}^T\mathbb{X})=1\ (close\ to\ target)  &amp; \frac{\partial E_{in}}{\partial w_i}=0 \\<br>\theta(\mathbb{W}^T\mathbb{X})=0\ (far\ from\ target) &amp; \frac{\partial E_{in}}{\partial w_i}=0<br>\end{cases}$</p>
-<p>同理，當 $y_n=0$ 時也會有一樣的情況。</p>
-<p>我們可以將整個 Loss 視覺化出來如下圖 : </p>
-<p><img src="https://i.imgur.com/llhP9yg.png" alt></p>
-<p>當距離目標值很遠的部分，使用 Squre error 可能會因為整個 Loss 變化量太小，斜率太小而導致 Gradient Descent 跑不出來，但反觀 Cross-Entropy 便可完美的將每一次迭代的步伐依照隨機選取的點的坡度來進行適當的調整，這也是為什麼在 Logistic Regression 中大多會建議使用 Cross-Entropy 的原因了。</p>
+<p>這邊比較特殊的是，這邊不預設終點。因這個演算法不單單可以找出給定起終點的最短路徑問題，也可以更廣泛的解決給定起點不限終點的最短路徑問題。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">DijKstra(G,I)</span><br><span class="line">// S = the set of exploded nodes</span><br><span class="line">// d(u) = the shortest path distance from s to u</span><br><span class="line">1. initial S = &#123;s&#125; and d(s)=0</span><br><span class="line">2. while S ≠ V then do</span><br><span class="line">       choose node v ∉ S 但存在至少一條　edge 與 S 相連</span><br><span class="line">       且 d&apos;(v) = min &#123; d(u)+I(e) &#125; , u ∈ S and e = (u,v) </span><br><span class="line">       S = S + &#123;v&#125; and  d(v)=d&apos;(v)</span><br></pre></td></tr></table></figure>
+<h3 id="Correctness"><a href="#Correctness" class="headerlink" title="Correctness"></a>Correctness</h3><p>在證明正確性之前，我們先了解一下在演算法證明中的一些小技巧。之前說過，Greedy Algorithm 證明的兩個方向 : The Greedy Algorithm stays ahead 與 The exchange argument，在這個部份我們使用的是前者。</p>
+<p>此外，在有 Loop 迴圈的演算法中，有時候我們會先試圖證明 Loop invariant property，在嘗試推出結果。所謂的 Loop invariant property 指的是在每一個迴圈中保持不變的性質。</p>
+<p><strong>Loop invariant : 在演算法執行過程中，對所有 $u\in\ S$，且 $d(u)$ 是 $s-u$ 的最短路徑 $P(u)$ 的長度。</strong></p>
+<p>S 的迴圈過程是一次又一次的迭代添加元素，所以我們可以用歸納法來進行證明。<br>Step 1. : 當 $|S|=1$，顯然成立。<br>Step 2. : 假設 $|S|=k\geq1$ 亦成立。<br>當 $|S|=k+1$ :<br>假設在這個迴圈中我們添加的是 $v$，且令 $(u,v)$ 為 $s-v$ 的路徑 $P(v)$ 中的最後的 edge。</p>
+<p><img src="https://i.imgur.com/ddDe69H.jpg" alt></p>
+<p>對其他的 $s-v$ 路徑 $P$ 來說，在 $s,v$ 之間一定有一個路徑是從 $S$ 內的 node $x$ 指到 $S$ 外的 node $y$。<br>從演算法可以知道 $d(u) + I(u,v) \leq d(x) + I(x,y)+I(y,u)$<br>又，$d(u)$ 是 $s-u$ 的最短路徑長度。<br>所以，對所有的 $s-v$ 路徑來說，$s-u-v$ 這樣的路徑一定是最短路徑。<br>$\Longrightarrow d(v)=d(u) + I(u,v)\leq I(P)$</p>
+<p>從上面的證明可以知道，DijKstra’s Algorithm 必須要在所有 edge 權重非負的條件下才能成立。</p>
+<h2 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h2><p>在 DijKstra’s Algorithm 中，implementation 最困難的部分就是 while loop 迴圈中的第一二行，必須配合適當的資料結構才能夠真正有效率的運行 DijKstra’s Algorithm。</p>
+<h3 id="Min-Prior-Queue"><a href="#Min-Prior-Queue" class="headerlink" title="Min Prior Queue"></a>Min Prior Queue</h3><p>Prior Queue ( 優先佇列 ) 在進行需要提取最大或最小元素的演算法中十分有用，除了 DijKstra’s Algorithm 外，還有許多演算法會建議使用 Prior Queue 來配合。</p>
+<p>以下使用 Cormen 的 “Introduction to Algorithm” 一書中的圖例來更了解整個 DijKstra’s Algorithm 的 implementation  : </p>
+<p><img src="https://i.imgur.com/HCOBZQp.png" alt></p>
 
     </div>
 
@@ -352,7 +349,7 @@
     <strong>作者： </strong>Allen Tzeng</li>
   <li class="post-copyright-link">
     <strong>文章連結：</strong>
-    <a href="https://allen108108.github.io/blog/2019/10/05/Why can we use Squre Error in Logistic Regression _/" title="Why can we use Squre Error in Logistic Regression ?">https://allen108108.github.io/blog/2019/10/05/Why can we use Squre Error in Logistic Regression _/</a>
+    <a href="https://allen108108.github.io/blog/2019/11/15/Chapter 4 – Greedy algorithms ( 3 )/" title="Chapter 4 -- Greedy algorithms ( 3 )">https://allen108108.github.io/blog/2019/11/15/Chapter 4 – Greedy algorithms ( 3 )/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！</li>
@@ -374,8 +371,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/blog/2019/10/05/Adagrad、RMSprop、Momentum and Adam -- 特殊的學習率調整方式/" rel="next" title="Adagrad、RMSprop、Momentum and Adam -- 特殊的學習率調整方式">
-                  <i class="fa fa-chevron-left"></i> Adagrad、RMSprop、Momentum and Adam -- 特殊的學習率調整方式
+                <a href="/blog/2019/11/14/[論文] Identity Mappings in Deep Residual Networks/" rel="next" title="[論文] Identity Mappings in Deep Residual Networks">
+                  <i class="fa fa-chevron-left"></i> [論文] Identity Mappings in Deep Residual Networks
                 </a>
               
             </div>
@@ -383,10 +380,6 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-              
-                <a href="/blog/2019/10/05/Batch Size/" rel="prev" title="Batch Size">
-                  Batch Size <i class="fa fa-chevron-right"></i>
-                </a>
               
             </div>
           </div>
@@ -444,6 +437,8 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Shortest-Paths-DijKstra’s-Algorithm"><span class="nav-number">1.</span> <span class="nav-text">Shortest Paths ( DijKstra’s Algorithm )</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Scenario"><span class="nav-number">1.1.</span> <span class="nav-text">Scenario</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Correctness"><span class="nav-number">1.2.</span> <span class="nav-text">Correctness</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Implementation"><span class="nav-number">2.</span> <span class="nav-text">Implementation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Min-Prior-Queue"><span class="nav-number">2.1.</span> <span class="nav-text">Min Prior Queue</span></a></li></ol></li></ol></div>
+        
       </div>
       <!--/noindex-->
 
@@ -719,9 +714,9 @@
 </script>
 <script>
   function disqus_config() {
-    this.page.url = "https://allen108108.github.io/blog/2019/10/05/Why can we use Squre Error in Logistic Regression _/";
-    this.page.identifier = "2019/10/05/Why can we use Squre Error in Logistic Regression _/";
-    this.page.title = 'Why can we use Squre Error in Logistic Regression ?';};
+    this.page.url = "https://allen108108.github.io/blog/2019/11/15/Chapter 4 – Greedy algorithms ( 3 )/";
+    this.page.identifier = "2019/11/15/Chapter 4 – Greedy algorithms ( 3 )/";
+    this.page.title = 'Chapter 4 -- Greedy algorithms ( 3 )';};
   function loadComments() {
     if (window.DISQUS) {
       DISQUS.reset({
