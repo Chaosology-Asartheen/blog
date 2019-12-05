@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://allen108108.github.io/blog/2019/12/05/Deep%20Reinforcement%20Learning%20(5)%20%E2%80%94%20Q-learning%20(Continuous%20Action)/</loc>
+    
+    <lastmod>2019-12-05T04:14:18.498Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://allen108108.github.io/blog/2019/12/05/Deep%20Reinforcement%20Learning%20(4)%20%E2%80%94%20Q-learning%20(Advanced%20Tips)/</loc>
+    
+    <lastmod>2019-12-05T04:13:47.351Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://allen108108.github.io/blog/2019/12/04/Deep%20Reinforcement%20Learning%20(3)%20%E2%80%94%20Q-learning%20(Basic%20Idea)/</loc>
     
     <lastmod>2019-12-04T04:13:35.988Z</lastmod>
