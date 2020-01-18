@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://allen108108.github.io/blog/2020/01/18/%E7%94%A8%20YOLO%20v3%20(Pytorch)%20%E9%80%B2%E8%A1%8C%20Gesture%20Recognition/</loc>
+    
+    <lastmod>2020-01-18T01:45:42.520Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://allen108108.github.io/blog/2020/01/11/%5B%E8%AB%96%E6%96%87%5D%20%E9%80%9F%E8%AE%80%E8%AB%96%E6%96%87%20Accurate%20Hand%20Keypoint%20Localization%20on%20Mobile%20Devices/</loc>
     
     <lastmod>2020-01-11T06:59:35.725Z</lastmod>
