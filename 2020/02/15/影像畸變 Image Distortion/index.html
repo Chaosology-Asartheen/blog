@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-TW">
+<head>
+  <meta name="google-site-verification" content="exmdvS3MT1hVojBxSEZZZ8TIBBOg6pJ2POTtzNuecqs" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+
+
+<meta property="og:site_name" content="">
+<meta property="og:title" content="categories">
+<meta property="og:url" content="http://">
+<meta property="og:image" content="">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/blog/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Gemini',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","width":280,"display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '複製',
+      copy_success: '複製成功',
+      copy_failure: '複製失敗'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="在前面的文章 “針孔相機模型 Pinhole Camera Model“ 中我們有提到在一個理想的針孔相機中，一個 3D 目標怎麼投影到 2D 平面上。 但是，實際上一個光學系統必須經由多組鏡頭所組成，在這樣的系統下，單純理想的針孔相機模型便無法擬合真實情況。加入鏡頭、透鏡後，成像必然會有某些程度上的失真、變形，這樣的情況我們稱之為「畸變」(Distortion)。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="影像畸變 Image Distortion">
+<meta property="og:url" content="https://allen108108.github.io/blog/2020/02/15/影像畸變 Image Distortion/index.html">
+<meta property="og:site_name" content="Math.py">
+<meta property="og:description" content="在前面的文章 “針孔相機模型 Pinhole Camera Model“ 中我們有提到在一個理想的針孔相機中，一個 3D 目標怎麼投影到 2D 平面上。 但是，實際上一個光學系統必須經由多組鏡頭所組成，在這樣的系統下，單純理想的針孔相機模型便無法擬合真實情況。加入鏡頭、透鏡後，成像必然會有某些程度上的失真、變形，這樣的情況我們稱之為「畸變」(Distortion)。">
+<meta property="og:locale" content="zh-TW">
+<meta property="og:image" content="https://i.imgur.com/IF1bVRK.png">
+<meta property="og:image" content="https://i.imgur.com/toxBP6v.png">
+<meta property="og:image" content="https://i.imgur.com/cW2BdrY.png">
+<meta property="og:image" content="https://i.imgur.com/HZYU5iW.png">
+<meta property="og:image" content="https://i.imgur.com/R1H5TPQ.png">
+<meta property="og:image" content="https://i.imgur.com/Xsy9pXO.png">
+<meta property="og:image" content="https://i.imgur.com/oup3eMh.png">
+<meta property="og:image" content="https://i.imgur.com/Stdq5dx.png">
+<meta property="og:updated_time" content="2020-02-15T00:49:42.644Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="影像畸變 Image Distortion">
+<meta name="twitter:description" content="在前面的文章 “針孔相機模型 Pinhole Camera Model“ 中我們有提到在一個理想的針孔相機中，一個 3D 目標怎麼投影到 2D 平面上。 但是，實際上一個光學系統必須經由多組鏡頭所組成，在這樣的系統下，單純理想的針孔相機模型便無法擬合真實情況。加入鏡頭、透鏡後，成像必然會有某些程度上的失真、變形，這樣的情況我們稱之為「畸變」(Distortion)。">
+<meta name="twitter:image" content="https://i.imgur.com/IF1bVRK.png">
+  <link rel="canonical" href="https://allen108108.github.io/blog/2020/02/15/影像畸變 Image Distortion/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>影像畸變 Image Distortion | Math.py</title>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-149442581-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-149442581-1');
+    }
+  </script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-TW">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Math.py</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Wir müssen wissen , wir werden wissen</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切換導航欄">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/blog/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首頁</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/blog/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分類</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/blog/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>歸檔</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://allen108108.github.io/blog/blog/2020/02/15/影像畸變 Image Distortion/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Allen Tzeng">
+      <meta itemprop="description" content="Study about Mathematics , Programming and Data Science">
+      <meta itemprop="image" content="/blog/images/allen.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Math.py">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">影像畸變 Image Distortion
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              
+                
+              
+
+              <time title="創建時間：2020-02-15 08:43:40 / 修改時間：08:49:42" itemprop="dateCreated datePublished" datetime="2020-02-15T08:43:40+08:00">2020-02-15</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/知識庫-Knowledge-Base/" itemprop="url" rel="index"><span itemprop="name">知識庫 Knowledge Base</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="閱讀次數" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">閱讀次數：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/blog/2020/02/15/影像畸變 Image Distortion/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/02/15/影像畸變 Image Distortion/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>在前面的文章 “<a href="https://allen108108.github.io/blog/2020/02/06/%E9%87%9D%E5%AD%94%E7%9B%B8%E6%A9%9F%E6%A8%A1%E5%9E%8B%20%20Pinhole%20Camera%20Model/#more">針孔相機模型 Pinhole Camera Model</a>“ 中我們有提到在一個理想的針孔相機中，一個 3D 目標怎麼投影到 2D 平面上。</p>
+<p>但是，實際上一個光學系統必須經由多組鏡頭所組成，在這樣的系統下，單純理想的針孔相機模型便無法擬合真實情況。加入鏡頭、透鏡後，成像必然會有某些程度上的失真、變形，這樣的情況我們稱之為「畸變」(Distortion)。</p>
+<a id="more"></a>
+<p>以下，我們將畸變區分成三種形式 ： 輻射畸變 (Redial Distortion)、離心畸變 ( Decentering Distortion ) 以及薄透鏡畸變 ( Thin Prism Distortion )。</p>
+<h2 id="輻射畸變-Radial-Distortion"><a href="#輻射畸變-Radial-Distortion" class="headerlink" title="輻射畸變 Radial Distortion"></a>輻射畸變 Radial Distortion</h2><p>當光線進入透鏡時，由邊緣射入的光線會比從中心射入的光線有著更大的偏折，這便是造成輻射畸變的主要原因，而這樣的現象在透鏡越小時，會越加明顯。</p>
+<p>輻射畸變又分為兩種 ： 桶狀畸變 Barrel Distortion &amp; 枕狀畸變 Pincushion Distortion</p>
+<p><img src="https://i.imgur.com/IF1bVRK.png" alt></p>
+<p>在攝影的領域來看，通常使用廣角鏡頭容易出現桶狀畸變，而使用長焦段鏡頭則易產生枕狀畸變。這兩者其實就是一體兩面，如果我們拿廣角鏡頭來作為投放鏡頭，便會產生枕狀畸變，反之亦然。</p>
+<p>因此，這樣的畸變我們可以利用相同的參數來進行控制 $k_1, k_2,k_3,\cdots$，在一班的狀況下，利用 $k_1,k_2$ 已經可以量化絕大多數的畸變狀況，除非程度真的很嚴重才會利用更多的參數來表徵。</p>
+<h2 id="離心畸變-Decentering-Distortion"><a href="#離心畸變-Decentering-Distortion" class="headerlink" title="離心畸變 Decentering Distortion"></a>離心畸變 Decentering Distortion</h2><p>前面說過，一個光學系統由多種鏡頭組合而成，在現實狀況中，這些鏡頭的在現實狀況中，這些鏡頭的光軸不見得都能完全重合在同一條中心線上，因為這樣的原因而造成成像的畸變，我們稱之為 「離心畸變」。</p>
+<p>離心畸變係數 (Decentering Distortion Coeddicient) 我們通常以 $p_1,p_2$ 來表示。</p>
+<p>值得注意的是，在很多的技術文章中會把離心畸變的部分直接以正切畸變 (Tangential Distortion) 來表示，包含 Open CV document 亦是如此。</p>
+<p>但在這篇文章中我不選用這樣的名稱主要是因為，正切畸變應該是一個畸變的「組成要素」，如同任一個方向向量都可以由切線方向跟法線方向兩種向量組成，而輻射畸變與正切畸變也應該是這樣的要素。</p>
+<p>在論文 “ <em>Camera Calibration with Distortion Models and Accuracy Evaluation.</em> “ 中也提到，離心畸變應該是包含輻射畸變與正切畸變的。</p>
+<h2 id="薄透鏡畸變-Thin-Prism-Distortion"><a href="#薄透鏡畸變-Thin-Prism-Distortion" class="headerlink" title="薄透鏡畸變 Thin Prism Distortion"></a>薄透鏡畸變 Thin Prism Distortion</h2><p>當相機的 CCD 與鏡頭透鏡沒有平行，也會造成成像的變形。</p>
+<p><img src="https://i.imgur.com/toxBP6v.png" alt></p>
+<p>薄透鏡畸變主要發生在鏡頭設計與零組件組合的瑕疵上，如同離心畸變，薄透鏡畸變也同時存在輻射與正切兩種畸變量</p>
+<p>我們利用薄透鏡畸變係數 (Thin Prism Distortion Coefficient ) $s_1\sim s_4$ 來計算出畸變的狀況。</p>
+<h2 id="畸變相機模型-Camera-Model-with-Distortion"><a href="#畸變相機模型-Camera-Model-with-Distortion" class="headerlink" title="畸變相機模型 Camera Model with Distortion"></a>畸變相機模型 Camera Model with Distortion</h2><p>從許多研究中，發展出一套完整的相機模型，可以將畸變的因素計算在其中，假定某點其世界<br>座標為 $(X_c,Y_c,Z_c)$ ，則未考量畸變因素時我們可以計算出其成像座標 $(x’,y’)$ 為 ：</p>
+<script type="math/tex; mode=display">
+x' = \displaystyle{\frac{X_c}{Z_c}}\text{ and }y'= \displaystyle{\frac{Y_c}{Z_c}}</script><p>若考量畸變因素進去，則必須再一次修正成像座標為 $(x’’,y’’)$ : </p>
+<script type="math/tex; mode=display">
+x'' = x'(k_1r^2+k_2r^4+k_3r^6+\cdots)+p_1(2x'^2+r^2)+2p_2x'y'+s_1r^2+s_3r^4\\
+y'' = y'(k_1r^2+k_2r^4+k_3r^6+\cdots)+2p_1x'y'+p_2(2y'^2+r^2)+s_2r^2+s_4r^4\\
+\text{where } r^2=x'^2+y'^2</script><p>若，我們忽略 $k_3,k_4,\cdots,s_3,s_4$ 所造成的影響，上式可以整理成：</p>
+<script type="math/tex; mode=display">
+x'' = x'(k_1r^2+k_2r^4)+p_1(2x'^2+r^2)+2p_2x'y'+s_1r^2\\
+y'' = y'(k_1r^2+k_2r^4)+p_2(2y'^2+r^2)+2p_1x'y'+s_2r^2\\</script><p>最後再轉換成以像素為單位的座標</p>
+<script type="math/tex; mode=display">
+u=f_xx''+c_x\\
+v=f_yy''+c_y\\</script><p>以上便是一個通用的畸變相機模型。</p>
+<h2 id="Open-CV-中的畸變相機模型"><a href="#Open-CV-中的畸變相機模型" class="headerlink" title="Open CV 中的畸變相機模型"></a>Open CV 中的畸變相機模型</h2><p>在 Open CV <a href="https://docs.opencv.org/master/d9/d0c/group__calib3d.html" target="_blank" rel="noopener">document</a> 中有將整個畸變參數及其方程式列出 ：</p>
+<p>差異的部份僅在於 $k_1\sim k_6$ 的部分</p>
+<script type="math/tex; mode=display">
+x''=\displaystyle{\frac{1+k_1r^2+k_2r^4+k_3r^6}{1+k_4r^2+k_5r^4+k_6r^6}}x'+2p_1x'y'+p_2(r^2+2x'^2)+s_1r^2+s_2r^4\\
+y''=\displaystyle{\frac{1+k_1r^2+k_2r^4+k_3r^6}{1+k_4r^2+k_5r^4+k_6r^6}}y'+p_1(r^2+2y'^2)+2p_2x'y'+s_3r^2+s_4r^4\\
+\text{where }r^2=x'^2+y'^2</script><p>但在一般的情況下，即不考慮 $k_3\sim k_6,s_3,s_4$ 的影響，Open CV 所提供的相機模型與一般通用的畸變相機模型其實是等價的。</p>
+<h2 id="畸變視覺化-Distortion-Visualization"><a href="#畸變視覺化-Distortion-Visualization" class="headerlink" title="畸變視覺化 Distortion Visualization"></a>畸變視覺化 Distortion Visualization</h2><p>這麼多不同的畸變參數，造成的成因也都不一樣．光是看上面敘述可能會很難理解，究竟圖像「畸變」過後會變成什麼樣的圖像？</p>
+<p>因為我們已經知道了整個畸變模型，引此我們就可以直接定義出畸變的函式如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">distortion</span><span class="params">(x,y,k1=<span class="number">0</span>,k2=<span class="number">0</span>,p1=<span class="number">0</span>,p2=<span class="number">0</span>,s1=<span class="number">0</span>,s2=<span class="number">0</span>)</span>:</span></span><br><span class="line">    r_square = x**<span class="number">2</span> + y**<span class="number">2</span></span><br><span class="line">    k = <span class="number">1</span> + k1*r_square + k2*(r_square**<span class="number">2</span>)</span><br><span class="line">    u = x*k + <span class="number">2</span>*p2*x*y + p1*(r_square + <span class="number">2</span>*(x**<span class="number">2</span>)) + s1*r_square</span><br><span class="line">    v = y*k + p2*(r_square + <span class="number">2</span>*(y**<span class="number">2</span>)) + <span class="number">2</span>*p1*x*y + s2*r_square</span><br><span class="line">    <span class="keyword">return</span> u, v</span><br></pre></td></tr></table></figure>
+<p>經過不同參數調整後的變化我們呈現如下</p>
+<p><img src="https://i.imgur.com/cW2BdrY.png" alt><br><img src="https://i.imgur.com/HZYU5iW.png" alt><br><img src="https://i.imgur.com/R1H5TPQ.png" alt><br><img src="https://i.imgur.com/Xsy9pXO.png" alt><br><img src="https://i.imgur.com/oup3eMh.png" alt></p>
+<p>藉由畸變相機模型我們可以掌握整個成像的狀況，更重要的是，我們可以藉由這樣的方程式進行逆轉，也就是進行圖像的校準 ( calibration )，進而取得我們希望的圖像平面座標。</p>
+<h2 id="結論-Conclusion"><a href="#結論-Conclusion" class="headerlink" title="結論 Conclusion"></a>結論 Conclusion</h2><p>“ <em><a href="https://" target="_blank" rel="noopener">針孔相機模型 Pinhole Camera Model</a></em> “ 與本文主要簡介了整個從 3D 立體空間投影到 2D 平面圖像空間的整個過程 ：</p>
+<p><img src="https://i.imgur.com/Stdq5dx.png" alt></p>
+<p>當然，這都還是以比較單純的狀況下來討論，畢竟畸變只是多種像差的其中一種 ( 初級像差分為五種 ： 球面像差、彗型像差、像散、場曲及畸變 ) 。但從這兩篇文章的討論中，也大致上描繪出整個相機校準及3D重建的整體樣貌。</p>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ol>
+<li><a href="https://medium.com/@DroneDeployEng/reconstruction-the-mighty-camera-624619bf8cf6" target="_blank" rel="noopener">Reconstruction: The Mighty Camera</a></li>
+<li><a href="https://docs.opencv.org/master/d9/d0c/group__calib3d.html" target="_blank" rel="noopener">Camera Calibration and 3D Reconstruction</a></li>
+<li>Juyang Weng, Paul Cohen, and Marc Herniou. 1992. Camera Calibration with Distortion Models and Accuracy Evaluation. IEEE Trans. Pattern Anal. Mach. Intell. 14, 10 (October 1992), 965–980.</li>
+<li>Jianhua Wang, Fanhuai Shi, Jing Zhang, and Yuncai Liu. 2008. A new calibration model of camera lens distortion. Pattern Recogn. 41, 2 (February 2008), 607–615.</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>作者： </strong>Allen Tzeng</li>
+  <li class="post-copyright-link">
+    <strong>文章連結：</strong>
+    <a href="https://allen108108.github.io/blog/2020/02/15/影像畸變 Image Distortion/" title="影像畸變 Image Distortion">https://allen108108.github.io/blog/2020/02/15/影像畸變 Image Distortion/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/blog/2020/02/06/針孔相機模型  Pinhole Camera Model/" rel="next" title="針孔相機模型  Pinhole Camera Model">
+                  <i class="fa fa-chevron-left"></i> 針孔相機模型  Pinhole Camera Model
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/blog/2020/02/15/[論文] YOLOv3 _ An Incremental Improvement/" rel="prev" title="[論文] YOLOv3 : An Incremental Improvement">
+                  [論文] YOLOv3 : An Incremental Improvement <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    
+  <div class="comments" id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#輻射畸變-Radial-Distortion"><span class="nav-number">1.</span> <span class="nav-text">輻射畸變 Radial Distortion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#離心畸變-Decentering-Distortion"><span class="nav-number">2.</span> <span class="nav-text">離心畸變 Decentering Distortion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#薄透鏡畸變-Thin-Prism-Distortion"><span class="nav-number">3.</span> <span class="nav-text">薄透鏡畸變 Thin Prism Distortion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#畸變相機模型-Camera-Model-with-Distortion"><span class="nav-number">4.</span> <span class="nav-text">畸變相機模型 Camera Model with Distortion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Open-CV-中的畸變相機模型"><span class="nav-number">5.</span> <span class="nav-text">Open CV 中的畸變相機模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#畸變視覺化-Distortion-Visualization"><span class="nav-number">6.</span> <span class="nav-text">畸變視覺化 Distortion Visualization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#結論-Conclusion"><span class="nav-number">7.</span> <span class="nav-text">結論 Conclusion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考資料"><span class="nav-number">8.</span> <span class="nav-text">參考資料</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/blog/images/allen.jpg"
+      alt="Allen Tzeng">
+  <p class="site-author-name" itemprop="name">Allen Tzeng</p>
+  <div class="site-description" itemprop="description">Study about Mathematics , Programming and Data Science</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/blog/archives/">
+        
+          <span class="site-state-item-count">90</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/blog/categories/">
+          
+        
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分類</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://allen108108.github.io/" title="Github page &rarr; https://allen108108.github.io/"><i class="fa fa-fw fa-github-alt"></i>Github page</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/allen108108" title="GitHub &rarr; https://github.com/allen108108" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:allen108108@hotmail.com" title="E-Mail &rarr; mailto:allen108108@hotmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://www.facebook.com/Mathpy-257929091666547/" title="FB Page &rarr; https://www.facebook.com/Mathpy-257929091666547/" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB Page</a>
+      </span>
+    
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Allen Tzeng</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主題 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="訪客總數">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="總瀏覽次數">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+    
+  
+  <script color='255, 80, 219' opacity='1' zIndex='-1' count='100' src="/blog/lib/canvas-nest/canvas-nest-nomobile.min.js"></script>
+  <script src="/blog/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/blog/js/utils.js?v=7.4.0"></script><script src="/blog/js/motion.js?v=7.4.0"></script>
+<script src="/blog/js/schemes/pisces.js?v=7.4.0"></script>
+
+<script src="/blog/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: 21351,
+      el: 'wpac-rating',
+      color: 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://math-py.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  function disqus_config() {
+    this.page.url = "https://allen108108.github.io/blog/2020/02/15/影像畸變 Image Distortion/";
+    this.page.identifier = "2020/02/15/影像畸變 Image Distortion/";
+    this.page.title = '影像畸變 Image Distortion';};
+  function loadComments() {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://math-py.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  }
+    window.addEventListener('load', loadComments, false);
+  
+</script>
+
+</body>
+</html>
