@@ -71,12 +71,12 @@
 <meta property="og:description" content="光學基本平面 Cardinal Plane在搞清楚 Pinhole Camera Model 以前，或許我們要先理解一些專有名詞 ：   光學基本平面 (Cardinal Plane) 基點（cardinal points） 主平面（principle plane） 主點（principle point） 焦平面（focal plane） 焦點（focal point）">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https://i.imgur.com/Hn4cVyP.png">
-<meta property="og:image" content="https://i.imgur.com/T3cORCs.png">
+<meta property="og:image" content="https://i.imgur.com/RwYTful.png">
 <meta property="og:image" content="https://i.imgur.com/KqZ4UQy.jpg">
 <meta property="og:image" content="https://i.imgur.com/LCvcD1Z.png">
 <meta property="og:image" content="https://i.imgur.com/muXKisw.png">
 <meta property="og:image" content="https://i.imgur.com/XzsNHeT.png">
-<meta property="og:updated_time" content="2020-02-06T10:36:39.017Z">
+<meta property="og:updated_time" content="2020-02-15T01:01:41.361Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="針孔相機模型  Pinhole Camera Model">
 <meta name="twitter:description" content="光學基本平面 Cardinal Plane在搞清楚 Pinhole Camera Model 以前，或許我們要先理解一些專有名詞 ：   光學基本平面 (Cardinal Plane) 基點（cardinal points） 主平面（principle plane） 主點（principle point） 焦平面（focal plane） 焦點（focal point）">
@@ -261,11 +261,19 @@
                 
               
 
-              <time title="創建時間：2020-02-06 18:35:16 / 修改時間：18:36:39" itemprop="dateCreated datePublished" datetime="2020-02-06T18:35:16+08:00">2020-02-06</time>
+              <time title="創建時間：2020-02-06 18:35:16" itemprop="dateCreated datePublished" datetime="2020-02-06T18:35:16+08:00">2020-02-06</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-02-15 09:01:41" itemprop="dateModified" datetime="2020-02-15T09:01:41+08:00">2020-02-15</time>
+              </span>
             
           
             <span class="post-meta-item">
@@ -335,7 +343,7 @@
 m=K\begin{bmatrix}R|T\end{bmatrix}M\\
 \Longrightarrow \begin{bmatrix}u\\v\\1\end{bmatrix}=\begin{bmatrix}f_x & s &c_x\\0 & f_y & c_y\\0&0&1 \end{bmatrix}\begin{bmatrix}r_{11}&r_{12}&r_{13}&t_x\\r_{21}&r_{22}&r_{23}&t_y\\r_{31}&r_{32}&r_{33}&t_z\end{bmatrix}\begin{bmatrix}X_w\\Y_w\\Z_w\\1\end{bmatrix}</script><p>其中</p>
 <p>$(X_w,Y_w,Z_w):$ 世界座標，即一絕對座標系<br>$(X_c,Y_c,Z_c):$ 相機座標，以相機為中心的相對坐標系<br>$s:$ 投射平面若兩軸非垂直的調整參數<br>$(u,v):$ 投射平面上的座標 ( 單位為像素 )<br>$(c_x,c_y):$ 主點 Principle Point<br>$\begin{bmatrix}R|T\end{bmatrix}:$ 將世界座標轉換為相機座標之轉換矩陣，其實就是一個旋轉平移的線性變換</p>
-<p><img width="500" src="https://i.imgur.com/T3cORCs.png"></p>
+<p><img width="500" src="https://i.imgur.com/RwYTful.png"></p>
 <h3 id="數學推導-Derivative-of-Formula"><a href="#數學推導-Derivative-of-Formula" class="headerlink" title="數學推導 Derivative of Formula"></a>數學推導 Derivative of Formula</h3><p><strong>Step 1.</strong></p>
 <p>假設物體的世界座標為 $(X_w,Y_w,Z_w)$，那我們必須先做一個線性變換，轉換成以相機為主的相機座標。</p>
 <script type="math/tex; mode=display">
