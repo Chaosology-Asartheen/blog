@@ -78,7 +78,7 @@
 <meta property="og:image" content="https://i.imgur.com/Xsy9pXO.png">
 <meta property="og:image" content="https://i.imgur.com/oup3eMh.png">
 <meta property="og:image" content="https://i.imgur.com/Stdq5dx.png">
-<meta property="og:updated_time" content="2020-02-15T00:49:42.644Z">
+<meta property="og:updated_time" content="2020-02-17T01:50:22.023Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="影像畸變 Image Distortion">
 <meta name="twitter:description" content="在前面的文章 “針孔相機模型 Pinhole Camera Model“ 中我們有提到在一個理想的針孔相機中，一個 3D 目標怎麼投影到 2D 平面上。 但是，實際上一個光學系統必須經由多組鏡頭所組成，在這樣的系統下，單純理想的針孔相機模型便無法擬合真實情況。加入鏡頭、透鏡後，成像必然會有某些程度上的失真、變形，這樣的情況我們稱之為「畸變」(Distortion)。">
@@ -263,11 +263,19 @@
                 
               
 
-              <time title="創建時間：2020-02-15 08:43:40 / 修改時間：08:49:42" itemprop="dateCreated datePublished" datetime="2020-02-15T08:43:40+08:00">2020-02-15</time>
+              <time title="創建時間：2020-02-15 08:43:40" itemprop="dateCreated datePublished" datetime="2020-02-15T08:43:40+08:00">2020-02-15</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-02-17 09:50:22" itemprop="dateModified" datetime="2020-02-17T09:50:22+08:00">2020-02-17</time>
+              </span>
             
           
             <span class="post-meta-item">
@@ -369,6 +377,10 @@ y''=\displaystyle{\frac{1+k_1r^2+k_2r^4+k_3r^6}{1+k_4r^2+k_5r^4+k_6r^6}}y'+p_1(r
 <li>Juyang Weng, Paul Cohen, and Marc Herniou. 1992. Camera Calibration with Distortion Models and Accuracy Evaluation. IEEE Trans. Pattern Anal. Mach. Intell. 14, 10 (October 1992), 965–980.</li>
 <li>Jianhua Wang, Fanhuai Shi, Jing Zhang, and Yuncai Liu. 2008. A new calibration model of camera lens distortion. Pattern Recogn. 41, 2 (February 2008), 607–615.</li>
 </ol>
+<h2 id="系列文章"><a href="#系列文章" class="headerlink" title="系列文章"></a>系列文章</h2><ul>
+<li><a href="https://allen108108.github.io/blog/2020/02/06/%E9%87%9D%E5%AD%94%E7%9B%B8%E6%A9%9F%E6%A8%A1%E5%9E%8B%20%20Pinhole%20Camera%20Model/">針孔相機模型 Pinhole Camera Model</a></li>
+<li><a href="https://allen108108.github.io/blog/2020/02/15/%E5%BD%B1%E5%83%8F%E7%95%B8%E8%AE%8A%20Image%20Distortion/">影像畸變 Image Distortion</a></li>
+</ul>
 
     </div>
 
@@ -477,7 +489,7 @@ y''=\displaystyle{\frac{1+k_1r^2+k_2r^4+k_3r^6}{1+k_4r^2+k_5r^4+k_6r^6}}y'+p_1(r
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#輻射畸變-Radial-Distortion"><span class="nav-number">1.</span> <span class="nav-text">輻射畸變 Radial Distortion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#離心畸變-Decentering-Distortion"><span class="nav-number">2.</span> <span class="nav-text">離心畸變 Decentering Distortion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#薄透鏡畸變-Thin-Prism-Distortion"><span class="nav-number">3.</span> <span class="nav-text">薄透鏡畸變 Thin Prism Distortion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#畸變相機模型-Camera-Model-with-Distortion"><span class="nav-number">4.</span> <span class="nav-text">畸變相機模型 Camera Model with Distortion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Open-CV-中的畸變相機模型"><span class="nav-number">5.</span> <span class="nav-text">Open CV 中的畸變相機模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#畸變視覺化-Distortion-Visualization"><span class="nav-number">6.</span> <span class="nav-text">畸變視覺化 Distortion Visualization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#結論-Conclusion"><span class="nav-number">7.</span> <span class="nav-text">結論 Conclusion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考資料"><span class="nav-number">8.</span> <span class="nav-text">參考資料</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#輻射畸變-Radial-Distortion"><span class="nav-number">1.</span> <span class="nav-text">輻射畸變 Radial Distortion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#離心畸變-Decentering-Distortion"><span class="nav-number">2.</span> <span class="nav-text">離心畸變 Decentering Distortion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#薄透鏡畸變-Thin-Prism-Distortion"><span class="nav-number">3.</span> <span class="nav-text">薄透鏡畸變 Thin Prism Distortion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#畸變相機模型-Camera-Model-with-Distortion"><span class="nav-number">4.</span> <span class="nav-text">畸變相機模型 Camera Model with Distortion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Open-CV-中的畸變相機模型"><span class="nav-number">5.</span> <span class="nav-text">Open CV 中的畸變相機模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#畸變視覺化-Distortion-Visualization"><span class="nav-number">6.</span> <span class="nav-text">畸變視覺化 Distortion Visualization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#結論-Conclusion"><span class="nav-number">7.</span> <span class="nav-text">結論 Conclusion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考資料"><span class="nav-number">8.</span> <span class="nav-text">參考資料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系列文章"><span class="nav-number">9.</span> <span class="nav-text">系列文章</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -496,7 +508,7 @@ y''=\displaystyle{\frac{1+k_1r^2+k_2r^4+k_3r^6}{1+k_4r^2+k_5r^4+k_6r^6}}y'+p_1(r
         
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">90</span>
+          <span class="site-state-item-count">93</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -509,7 +521,7 @@ y''=\displaystyle{\frac{1+k_1r^2+k_2r^4+k_3r^6}{1+k_4r^2+k_5r^4+k_6r^6}}y'+p_1(r
             <a href="/blog/categories/">
           
         
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">分類</span>
         </a>
       </div>

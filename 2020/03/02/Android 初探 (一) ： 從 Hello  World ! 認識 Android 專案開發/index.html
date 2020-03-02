@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-TW">
+<head>
+  <meta name="google-site-verification" content="exmdvS3MT1hVojBxSEZZZ8TIBBOg6pJ2POTtzNuecqs" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+
+
+<meta property="og:site_name" content="">
+<meta property="og:title" content="categories">
+<meta property="og:url" content="http://">
+<meta property="og:image" content="">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/blog/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Gemini',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","width":280,"display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '複製',
+      copy_success: '複製成功',
+      copy_failure: '複製失敗'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="前言在電腦視覺 ( 或是整個 AI 領域 ) 中，針對問題來進行建模，經過不斷的調整參數及模型結構來找出最能解決任務的模型，這些就是工作的全部 ？  其實並不然。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 初探 (一) ： 從 Hello  World ! 認識 Android 專案開發">
+<meta property="og:url" content="https://allen108108.github.io/blog/2020/03/02/Android 初探 (一) ： 從 Hello  World ! 認識 Android 專案開發/index.html">
+<meta property="og:site_name" content="Math.py">
+<meta property="og:description" content="前言在電腦視覺 ( 或是整個 AI 領域 ) 中，針對問題來進行建模，經過不斷的調整參數及模型結構來找出最能解決任務的模型，這些就是工作的全部 ？  其實並不然。">
+<meta property="og:locale" content="zh-TW">
+<meta property="og:image" content="https://i.imgur.com/TDLWHOq.jpg">
+<meta property="og:image" content="https://i.imgur.com/7YeW7Qb.png">
+<meta property="og:image" content="https://i.imgur.com/CIysWiq.png">
+<meta property="og:image" content="https://i.imgur.com/6maQAdp.png">
+<meta property="og:image" content="https://i.imgur.com/GkGvS7j.png">
+<meta property="og:image" content="https://i.imgur.com/0tJcVIg.png">
+<meta property="og:image" content="https://i.imgur.com/HwooGxD.png">
+<meta property="og:image" content="https://i.imgur.com/6SOTHql.png">
+<meta property="og:image" content="https://i.imgur.com/UNlnWxK.png">
+<meta property="og:image" content="https://i.imgur.com/Z5iIez0.png">
+<meta property="og:image" content="https://i.imgur.com/zhIrxvx.png">
+<meta property="og:updated_time" content="2020-03-02T07:35:10.186Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android 初探 (一) ： 從 Hello  World ! 認識 Android 專案開發">
+<meta name="twitter:description" content="前言在電腦視覺 ( 或是整個 AI 領域 ) 中，針對問題來進行建模，經過不斷的調整參數及模型結構來找出最能解決任務的模型，這些就是工作的全部 ？  其實並不然。">
+<meta name="twitter:image" content="https://i.imgur.com/TDLWHOq.jpg">
+  <link rel="canonical" href="https://allen108108.github.io/blog/2020/03/02/Android 初探 (一) ： 從 Hello  World ! 認識 Android 專案開發/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Android 初探 (一) ： 從 Hello  World ! 認識 Android 專案開發 | Math.py</title>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-149442581-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-149442581-1');
+    }
+  </script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-TW">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Math.py</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Wir müssen wissen , wir werden wissen</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切換導航欄">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/blog/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首頁</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/blog/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分類</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/blog/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>歸檔</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://allen108108.github.io/blog/blog/2020/03/02/Android 初探 (一) ： 從 Hello  World ! 認識 Android 專案開發/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Allen Tzeng">
+      <meta itemprop="description" content="Study about Mathematics , Programming and Data Science">
+      <meta itemprop="image" content="/blog/images/allen.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Math.py">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Android 初探 (一) ： 從 Hello  World ! 認識 Android 專案開發
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              
+                
+              
+
+              <time title="創建時間：2020-03-02 15:35:09 / 修改時間：15:35:10" itemprop="dateCreated datePublished" datetime="2020-03-02T15:35:09+08:00">2020-03-02</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="閱讀次數" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">閱讀次數：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/blog/2020/03/02/Android 初探 (一) ： 從 Hello  World ! 認識 Android 專案開發/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/03/02/Android 初探 (一) ： 從 Hello  World ! 認識 Android 專案開發/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在電腦視覺 ( 或是整個 AI 領域 ) 中，針對問題來進行建模，經過不斷的調整參數及模型結構來找出最能解決任務的模型，這些就是工作的全部 ？ </p>
+<p>其實並不然。</p>
+<a id="more"></a>
+<p>真正工作之後，發現建模並不是最困難及麻煩的，真正的大挑戰會是在模型訓練完成的部屬工作，依照不同的設備需求，將模型載入系統之中，還能順利進行每一次預測，這才會是真正算完成一個完整的專案。但若在部署上發生了無法解決的問題，再好的模型、再優異的性能表現，最後都只能淪為空談。因此，根據不同的設備、作業系統，都必須要有初步的了解，才能順利的將模型正確部署。</p>
+<p>這篇文章也不是要分享什麼多專業的部分，畢竟筆者對於 Android 基本上就是 0 基礎    ，先從工作的專案邊做邊學習，然後單純想記錄一下自己工作上面遇到的狀況做個簡單的紀錄，如此而已。</p>
+<h2 id="Java-開發工具組-Java-Development-Kit"><a href="#Java-開發工具組-Java-Development-Kit" class="headerlink" title="Java 開發工具組 Java Development Kit"></a>Java 開發工具組 Java Development Kit</h2><p>Android 是一個奠基於 Java 語言上的作業系統，當我們要進行 Android 開發時，必然需要 Java 的整體技術以及各種支援，因此，在進行開發之前，我們必須要先準備好這些工具，以便於後續的開發作業。</p>
+<p>JDK，全名為 Java Development Kit，就是一整個 Java 開發工具組，整組的內容物如下圖</p>
+<p><img src="https://i.imgur.com/TDLWHOq.jpg" alt></p>
+<p>其中比較多人會提到的大概就是 JVM 以及 JRE。</p>
+<p>JVM ( Java Visual Machine )，的工作在於將 Java 語言可以在各個作業系統中運作，地位就像是一個翻譯人員，將 Java 這個外國人翻譯給每一個不同國籍的人聽。而 JRE ( Java Runtime Environment ) 的角色便是提供一個環境來執行 Java。</p>
+<p>這些通通包在 JDK 裡面。</p>
+<h2 id="專屬於你的第一個-Android-專案"><a href="#專屬於你的第一個-Android-專案" class="headerlink" title="專屬於你的第一個 Android 專案"></a>專屬於你的第一個 Android 專案</h2><p><img src="https://i.imgur.com/7YeW7Qb.png" alt></p>
+<h3 id="下載並安裝-JDK-及-Android-Studio"><a href="#下載並安裝-JDK-及-Android-Studio" class="headerlink" title="下載並安裝 JDK 及 Android Studio"></a>下載並安裝 JDK 及 Android Studio</h3><p>上面簡單解釋了 JDK ，不難了解到 JDK 便是在開發以 Java 為基礎的程式所必需要的工具，當然也包括 Android，在下載 Android Studio 以前，我們必須要先下載 JDK。</p>
+<p>JDK 下載直接至 Oracle <a href="https://www.oracle.com/java/technologies/javase-jdk13-downloads.html" target="_blank" rel="noopener">官網</a> 依照目前的作業系統選擇適當版本下載，安裝也非常簡單，照著步驟一步一步進行即可。</p>
+<p>接下來進入到重點的 Android Studio 下載及安裝，一樣至官網<a href="https://developer.android.com/studio" target="_blank" rel="noopener">下載</a>，安裝一樣跟著步驟走就好。</p>
+<h3 id="新增-Android-專案"><a href="#新增-Android-專案" class="headerlink" title="新增 Android 專案"></a>新增 Android 專案</h3><p>按照步驟安裝完成以後，系統會問你是要開新的專案還是選擇一個已經有的舊專案，這邊我們選擇 <code>Start a new Android Studio project</code></p>
+<p><img src="https://i.imgur.com/CIysWiq.png" alt></p>
+<p>選擇界面，第一次開發我們就選擇 <code>Empty Activity</code> 或是 <code>Basic Activity</code></p>
+<p><img src="https://i.imgur.com/6maQAdp.png" alt></p>
+<p>可以簡單設定一下專案的內容 : 專案名稱、安裝位址、要用 <code>Kotlin</code> 或是 <code>Java</code> 語言</p>
+<p><img src="https://i.imgur.com/GkGvS7j.png" alt></p>
+<p>最後，系統會進行專案的建置 (build)，左下角紅框處會顯示建置的狀況，等到都打上綠色勾勾後就表示專案建置已經完成，我們可以開始著手進行專案內容的建構。</p>
+<p>當然，這是一個完全新建立的專案，在 build 的過程不太可能會報錯。但若我們是拿別人的專案來用，就會有很高的機會會碰到 build 專案過程發生錯誤，這個時候就要根據報錯的內容進行調整，這又會是 case by case 的狀況，只能遇到一個坑就想辦法填一個坑來進行。</p>
+<p><img src="https://i.imgur.com/0tJcVIg.png" alt></p>
+<h3 id="專案架構"><a href="#專案架構" class="headerlink" title="專案架構"></a>專案架構</h3><p>當我們完成了專案的建置後，一個專案的架構就會如下圖呈現在 Android Studio 之中，以下我們會依序介紹一下整體架構的內容為何</p>
+<p><img src="https://i.imgur.com/HwooGxD.png" alt></p>
+<ol>
+<li><code>app &gt; java &gt; com.example.myfirstapp &gt; MainActivity</code></li>
+</ol>
+<p>當我們點開 APP 時，整個 APP 會根據這一個檔案的內容啟動 <a href="https://developer.android.com/guide/components/activities?hl=zh-tw" target="_blank" rel="noopener">Activity</a>，並且載入整體版面配置 (layout) 。</p>
+<ol>
+<li><code>app &gt; res &gt; layout &gt; activity_main.xml</code></li>
+</ol>
+<p>這個檔案便清楚描述了整個使用者介面 (UI, Users Interface) 的<a href="https://developer.android.com/guide/topics/ui/declaring-layout?hl=zh-tw" target="_blank" rel="noopener">版面配置 (layout)</a>，</p>
+<ol>
+<li><code>app &gt; manifests &gt; AndroidManifest.xml</code></li>
+</ol>
+<p>此檔案描述了整個 APP 的基本特徵，並定義每一個組成。</p>
+<ol>
+<li><code>Gradle Scripts &gt; build.gradle</code></li>
+</ol>
+<p><code>Gradle Scripts</code>內會有兩個相同名稱的 <code>build.gradle</code> ，一個用於此專案，另外一個則是用於 APP 模組。這個檔案則是告訴系統應該如何進行建置這個專案，詳細內容可以參閱 “ <em><a href="https://developer.android.com/studio/build/index#module-level" target="_blank" rel="noopener">Configure your build</a></em> “</p>
+<h3 id="利用-emulator-檢視執行成果"><a href="#利用-emulator-檢視執行成果" class="headerlink" title="利用 emulator 檢視執行成果"></a>利用 emulator 檢視執行成果</h3><p>在 <code>Tools &gt; AVD Manager</code> 中我們可以設置用來跑 APP 的系統模擬器 ( 當然，也可以直接接上有 Android 系統的移動設備 )。</p>
+<p>先選擇我們想要的移動設備尺寸及型號</p>
+<p><img src="https://i.imgur.com/6SOTHql.png" alt></p>
+<p>再來安裝我們想要使用的系統</p>
+<p><img src="https://i.imgur.com/UNlnWxK.png" alt></p>
+<p>最後作一些基本設定就完成了可以用來跑 APP 的模擬器，這邊的設置通常可以完全不用調整，但如果像筆者本人的專案會希望利用筆電的 Webcam 模擬手機前後鏡頭，在這邊就必須要進行設定，不然會無法使用鏡頭。</p>
+<p><img src="https://i.imgur.com/Z5iIez0.png" alt></p>
+<p>我們不是只能設置一台模擬器，我們可以加入多種不同尺寸、系統的模擬器來針對專案進行測試，但也要注意，這樣其實會占掉蠻多電腦內部的硬碟容量。若電腦本身的硬碟容量不大，則在這個部分必須要多注意。</p>
+<p>我們也可以從紅框處看看現有的虛擬設備，最後選定要用來執行專案的模擬器後按下箭頭進行執行</p>
+<p><img src="https://i.imgur.com/zhIrxvx.png" alt></p>
+<p>完全新增的專案中，若我們沒有調整專案內容，執行後則會出現 “Hello World!” 字樣。 </p>
+<center>
+
+![](https://i.imgur.com/YjGHycp.png =300x)
+
+</center>
+
+
+
+<h2 id="結語"><a href="#結語" class="headerlink" title="結語 "></a>結語 </h2><p>很多的技術文章會帶著大家一步一步地進行專案開發，這樣很好，應該說非常好。因為經過幾篇文章之後，便可能可以做出一個像樣的 Android APP。</p>
+<p>然而，這一篇文章中，筆者並沒有介紹太多專案開發的詳細過程，反而花一些時間把重點放在 Android 的基礎概念以及整個 Android 專案的架構。正如同文章開頭所說的，在完全 0 基礎的前提下，筆者希望在進行專案開發的過程中，也能了解基礎的專業知識，而不是單純的只有按照步驟來做 APP 開發而已。</p>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ol>
+<li><a href="https://developer.android.com/docs" target="_blank" rel="noopener">Android Developers Documentation</a></li>
+<li><a href="https://ithelp.ithome.com.tw/users/20105694/ironman/1642" target="_blank" rel="noopener">2019 iT 邦幫忙鐵人賽 - [Andriod] Andriod Studio 從入門到進入狀況 系列</a></li>
+<li><a href="https://openhome.cc/Gossip/Java/JDK.html" target="_blank" rel="noopener">JDK 安裝與認識</a></li>
+</ol>
+<h2 id="系列文章"><a href="#系列文章" class="headerlink" title="系列文章"></a>系列文章</h2><ul>
+<li><a href="https://" target="_blank" rel="noopener">Android 初探 (一) ： Android 初探 (一) ： 從 Hello  World ! 認識 Android 專案開發</a></li>
+<li><a href="https://" target="_blank" rel="noopener">Android 初探 (二) ： 從 “Hi, Android !” 了解 Activity 與 UI</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>作者： </strong>Allen Tzeng</li>
+  <li class="post-copyright-link">
+    <strong>文章連結：</strong>
+    <a href="https://allen108108.github.io/blog/2020/03/02/Android 初探 (一) ： 從 Hello  World ! 認識 Android 專案開發/" title="Android 初探 (一) ： 從 Hello  World ! 認識 Android 專案開發">https://allen108108.github.io/blog/2020/03/02/Android 初探 (一) ： 從 Hello  World ! 認識 Android 專案開發/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/blog/2020/02/15/[論文] YOLOv3 _ An Incremental Improvement/" rel="next" title="[論文] YOLOv3 : An Incremental Improvement">
+                  <i class="fa fa-chevron-left"></i> [論文] YOLOv3 : An Incremental Improvement
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/blog/2020/03/02/Android 初探 (二) ： 從 Hi, Android ! 來認識 Activity 與 UI/" rel="prev" title="Android 初探 (二) ： 從 Hi, Android ! 來認識 Activity 與 UI">
+                  Android 初探 (二) ： 從 Hi, Android ! 來認識 Activity 與 UI <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    
+  <div class="comments" id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-開發工具組-Java-Development-Kit"><span class="nav-number">2.</span> <span class="nav-text">Java 開發工具組 Java Development Kit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#專屬於你的第一個-Android-專案"><span class="nav-number">3.</span> <span class="nav-text">專屬於你的第一個 Android 專案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下載並安裝-JDK-及-Android-Studio"><span class="nav-number">3.1.</span> <span class="nav-text">下載並安裝 JDK 及 Android Studio</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新增-Android-專案"><span class="nav-number">3.2.</span> <span class="nav-text">新增 Android 專案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#專案架構"><span class="nav-number">3.3.</span> <span class="nav-text">專案架構</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#利用-emulator-檢視執行成果"><span class="nav-number">3.4.</span> <span class="nav-text">利用 emulator 檢視執行成果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#結語"><span class="nav-number">4.</span> <span class="nav-text">結語 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考資料"><span class="nav-number">5.</span> <span class="nav-text">參考資料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系列文章"><span class="nav-number">6.</span> <span class="nav-text">系列文章</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/blog/images/allen.jpg"
+      alt="Allen Tzeng">
+  <p class="site-author-name" itemprop="name">Allen Tzeng</p>
+  <div class="site-description" itemprop="description">Study about Mathematics , Programming and Data Science</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/blog/archives/">
+        
+          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/blog/categories/">
+          
+        
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分類</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://allen108108.github.io/" title="Github page &rarr; https://allen108108.github.io/"><i class="fa fa-fw fa-github-alt"></i>Github page</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/allen108108" title="GitHub &rarr; https://github.com/allen108108" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:allen108108@hotmail.com" title="E-Mail &rarr; mailto:allen108108@hotmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://www.facebook.com/Mathpy-257929091666547/" title="FB Page &rarr; https://www.facebook.com/Mathpy-257929091666547/" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB Page</a>
+      </span>
+    
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Allen Tzeng</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主題 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="訪客總數">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="總瀏覽次數">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+    
+  
+  <script color='255, 80, 219' opacity='1' zIndex='-1' count='100' src="/blog/lib/canvas-nest/canvas-nest-nomobile.min.js"></script>
+  <script src="/blog/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/blog/js/utils.js?v=7.4.0"></script><script src="/blog/js/motion.js?v=7.4.0"></script>
+<script src="/blog/js/schemes/pisces.js?v=7.4.0"></script>
+
+<script src="/blog/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: 21351,
+      el: 'wpac-rating',
+      color: 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://math-py.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  function disqus_config() {
+    this.page.url = "https://allen108108.github.io/blog/2020/03/02/Android 初探 (一) ： 從 Hello  World ! 認識 Android 專案開發/";
+    this.page.identifier = "2020/03/02/Android 初探 (一) ： 從 Hello  World ! 認識 Android 專案開發/";
+    this.page.title = 'Android 初探 (一) ： 從 Hello  World ! 認識 Android 專案開發';};
+  function loadComments() {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://math-py.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  }
+    window.addEventListener('load', loadComments, false);
+  
+</script>
+
+</body>
+</html>
