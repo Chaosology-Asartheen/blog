@@ -72,10 +72,16 @@
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https://i.imgur.com/kFA6Ybj.png">
 <meta property="og:image" content="https://i.imgur.com/3iAgWFW.png">
+<meta property="og:image" content="https://i.imgur.com/G9udy32.png">
+<meta property="og:image" content="https://i.imgur.com/ONwhkTZ.png">
 <meta property="og:image" content="https://i.imgur.com/hw3WrV2.png">
 <meta property="og:image" content="https://i.imgur.com/diwgXEG.png">
 <meta property="og:image" content="https://i.imgur.com/RlthrqR.png">
+<meta property="og:image" content="https://i.imgur.com/qLxsVk6.png">
+<meta property="og:image" content="https://i.imgur.com/kheJjIg.png">
 <meta property="og:image" content="https://i.imgur.com/j0kkrQe.gif">
+<meta property="og:image" content="https://i.imgur.com/6mRX0XB.png">
+<meta property="og:image" content="https://i.imgur.com/7rFWhVT.png">
 <meta property="og:image" content="https://i.imgur.com/Gt764WQ.png">
 <meta property="og:image" content="https://i.imgur.com/JogDUW9.png">
 <meta property="og:image" content="https://i.imgur.com/rBJqMEq.png">
@@ -83,7 +89,7 @@
 <meta property="og:image" content="https://i.imgur.com/Xphzd2T.png">
 <meta property="og:image" content="https://i.imgur.com/1XH0PBj.jpg">
 <meta property="og:image" content="https://i.imgur.com/rHt0iU3.png">
-<meta property="og:updated_time" content="2020-03-02T07:35:15.761Z">
+<meta property="og:updated_time" content="2020-03-25T16:16:19.277Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android 初探 (二) ： 從 Hi, Android ! 來認識 Activity 與 UI">
 <meta name="twitter:description" content="前言上一篇文章 “ Android 初探 (一) ： Android 初探 (一) ： 從 Hello  World ! 認識 Android 專案開發 “ 簡單介紹了一個 Android 專案的主要架構以及如何在模擬器上 run 出整個結果，這一篇會著重在一個 Android app是怎麼運作的，以及可以怎麼簡單設計使用者介面。">
@@ -268,11 +274,19 @@
                 
               
 
-              <time title="創建時間：2020-03-02 15:35:14 / 修改時間：15:35:15" itemprop="dateCreated datePublished" datetime="2020-03-02T15:35:14+08:00">2020-03-02</time>
+              <time title="創建時間：2020-03-02 15:35:14" itemprop="dateCreated datePublished" datetime="2020-03-02T15:35:14+08:00">2020-03-02</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-03-26 00:16:19" itemprop="dateModified" datetime="2020-03-26T00:16:19+08:00">2020-03-26</time>
+              </span>
             
           
             <span class="post-meta-item">
@@ -322,7 +336,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>上一篇文章 “ <a href="https://" target="_blank" rel="noopener">Android 初探 (一) ： Android 初探 (一) ： 從 Hello  World ! 認識 Android 專案開發</a> “ 簡單介紹了一個 Android 專案的主要架構以及如何在模擬器上 run 出整個結果，這一篇會著重在一個 Android app是怎麼運作的，以及可以怎麼簡單設計使用者介面。</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>上一篇文章 “ <a href="https://bit.ly/3bouPaB" target="_blank" rel="noopener">Android 初探 (一) ： Android 初探 (一) ： 從 Hello  World ! 認識 Android 專案開發</a> “ 簡單介紹了一個 Android 專案的主要架構以及如何在模擬器上 run 出整個結果，這一篇會著重在一個 Android app是怎麼運作的，以及可以怎麼簡單設計使用者介面。</p>
 <a id="more"></a>
 <p>這兩篇文章主要都是以 <a href="https://developer.android.com/docs" target="_blank" rel="noopener">Android Developers Documentation</a> 為主，另外補充一些資料進來，如果已有紮實的基礎，或許可以直接跟著 Android Developers Documentation 進行也是不錯的方向。</p>
 <h2 id="Activity"><a href="#Activity" class="headerlink" title="Activity"></a>Activity</h2><p>Android apps 基本上可以說是由各種可被獨立調用的不同部件所組合而成，其中一種與使用者最直接相關的就是 <code>Activity</code>。</p>
@@ -343,21 +357,10 @@
 <h4 id="關閉自動約束-Autoconnect-，設定預設間距"><a href="#關閉自動約束-Autoconnect-，設定預設間距" class="headerlink" title="關閉自動約束 (Autoconnect)，設定預設間距"></a>關閉自動約束 (Autoconnect)，設定預設間距</h4><p>在 <code>Design Editor</code> 上方有一個馬蹄鐵形狀的圖示，如果有一條斜線表示已經開啟自動約束，自動約束的意義在於，當我們將元件放置在版面中，系統就會自動加上約束。不過在這裡我們希望可以自行手動設置約束，因此先將其關閉 ( 沒有斜線的馬蹄鐵圖示 )。</p>
 <p>再來將馬蹄鐵圖示旁邊的 <code>Default Margin</code> 設定為 16dp。</p>
 <p>我們將 <code>Palette &gt; Text &gt; Plain Text</code> 拖曳至 <code>Design Editor</code> </p>
-<center>
-
-
-![](https://i.imgur.com/G9udy32.png =400x)
-
-</center>
-
+<p><img width="500" src="https://i.imgur.com/G9udy32.png"></p>
 <p>我們可以看見每一個頂點上會有一個方形的 handler 可以調整其大小，然後每一條邊上也有一個圓形的錨點是用來進行約束的。</p>
 <p>我們將上面及左邊的錨點各自往上面及左邊的 layout 邊緣拉過去即會產生約束。 這個約束也就是我們剛才設定的 default margin 16dp。</p>
-<center>
-
-![](https://i.imgur.com/ONwhkTZ.png =400x)
-
-</center>
-
+<p><img width="500" src="https://i.imgur.com/ONwhkTZ.png"> </p>
 <p>利用相同的方法我們可以拖曳一個 <code>Button</code> 到輸入框的右邊，並且讓 <code>Button</code> 右側與 <code>EditText</code> 左側形成約束，間距一樣是 16dp。此外，在 <code>Button</code> 按下滑鼠右鍵選擇 <code>Show Baseline</code> 即會出現 Baseline Bar，拖曳此 Baseline Bar 到輸入框就可以讓兩筐進行 Baseline 水平對齊。</p>
 <p><img src="https://i.imgur.com/hw3WrV2.png" alt></p>
 <h4 id="定義字串"><a href="#定義字串" class="headerlink" title="定義字串"></a>定義字串</h4><p>在 Android 專案中，將每個元件所使用的字串通通定義在 <code>app &gt; res &gt; values &gt; strings.xml</code> 中，這樣的好處是未來如果要進行 app 字串的更改，只要更改從這裡就可以進行統一更改，不用耗時去尋找應該更改的地方。</p>
@@ -366,38 +369,18 @@
 <p>在按下左上方的『＋』號即可進行字串的新增</p>
 <p><img src="https://i.imgur.com/RlthrqR.png" alt></p>
 <p>首先輸入 <code>Key</code> 為 <code>edit_name</code>，而 <code>default value</code> (會顯示在視窗上) 為 <code>Enter a name ~</code>，按下 OK 後即新增一個新的字串資料</p>
-<center>
-
-![](https://i.imgur.com/qLxsVk6.png =400x)
-
-</center>
-
+<p><img width="500" src="https://i.imgur.com/qLxsVk6.png"> </p>
 <p>利用同樣方法新增一個 <code>Key</code> 為 <code>button_send</code>，而 <code>default value</code> 為 <code>Send</code> 的字串資料。新增完成之後，我們就可以在剛剛設置的 layout 上面進行這些字串的配置。</p>
 <p>選取 <code>EditText</code> 後，至右側的 <code>Attributes &gt; text</code> 刪除其值 “Name”，再至 <code>Attributes &gt; hint</code> 按下右側長條選擇我們剛剛新增的字串 <code>edit_name</code></p>
-<center>
-
-![](https://i.imgur.com/kheJjIg.png =300x)
-
-</center>
-
+<p><img width="500" src="https://i.imgur.com/kheJjIg.png"> </p>
 <p>同樣的方式我們可以選擇 <code>Button</code> 的 <code>Attributes &gt; text</code> 之值為剛剛新增的 <code>button_send</code> 字串。</p>
 <h4 id="利用-chain-進行配置"><a href="#利用-chain-進行配置" class="headerlink" title="利用 chain 進行配置"></a>利用 chain 進行配置</h4><p><code>chain</code> 的功用在於將多個 <code>view</code> 進行剩餘空間的平均分配</p>
 <p><img src="https://i.imgur.com/j0kkrQe.gif" alt></p>
 <p>在建造 <code>chain</code> 時並不會影響原來的約束，所以由上圖可以看到原本左右的約束仍在。我們利用相同的 <code>horizontal chain</code> 來對 <code>EditText</code> 與 <code>Button</code> 最水平方向的分配。</p>
-<center>
-
-![](https://i.imgur.com/6mRX0XB.png)
-
-</center>
-
+<p><img src="https://i.imgur.com/6mRX0XB.png" alt></p>
 <p>我們再經由 <code>Attributes &gt; Layout</code> 面板來紅框處調整為 <code>Match Constraints</code> 強制將 <code>EditText</code> 左側約束均維持在 16dp。</p>
 <p><code>Button</code> 右側也加上 16dp 的約束，有趣的地方是，如果將紅框處一樣設定為 <code>Match Constraints</code> 那麼 <code>EditText</code> 與 <code>Button</code> 的寬度會變得一樣寬。( 這樣的版面配置實在不是太好看，因此設定在 <code>Wrap Content</code> 即可 )</p>
-<center>
-
-![](https://i.imgur.com/7rFWhVT.png =300x)
-
-</center>
-
+<p><img width="500" src="https://i.imgur.com/7rFWhVT.png"> </p>
 <p>而這也表示整個文字框寬度會變寬。</p>
 <p><img src="https://i.imgur.com/Gt764WQ.png" alt></p>
 <h3 id="Activity-設定"><a href="#Activity-設定" class="headerlink" title="Activity 設定"></a>Activity 設定</h3><h4 id="Main-Activity-定義操作"><a href="#Main-Activity-定義操作" class="headerlink" title="Main Activity 定義操作"></a>Main Activity 定義操作</h4><p>我們上面的種種動作，都僅只是在對整個畫面作配置，然而這樣並不能讓整個 app 作動，要完成這樣的工作，就必須要做 Activity 的設置。</p>
@@ -440,8 +423,8 @@
 <li><a href="https://biaomingzhong.github.io/2017/constraintlayout-basics-chains-2/" target="_blank" rel="noopener">[译] ConstraintLayout基础系列之Chains链</a></li>
 </ol>
 <h2 id="系列文章"><a href="#系列文章" class="headerlink" title="系列文章"></a>系列文章</h2><ul>
-<li><a href="https://" target="_blank" rel="noopener">Android 初探 (一) ： Android 初探 (一) ： 從 Hello  World ! 認識 Android 專案開發</a></li>
-<li><a href="https://" target="_blank" rel="noopener">Android 初探 (二) ： 從 Hi, Android ! 了解 Activity 與 UI</a></li>
+<li><a href="https://bit.ly/3bouPaB" target="_blank" rel="noopener">Android 初探 (一) ： Android 初探 (一) ： 從 Hello  World ! 認識 Android 專案開發</a></li>
+<li><a href="https://bit.ly/2vOoFlb" target="_blank" rel="noopener">Android 初探 (二) ： 從 Hi, Android ! 了解 Activity 與 UI</a></li>
 </ul>
 
     </div>
@@ -570,7 +553,7 @@
         
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">94</span>
+          <span class="site-state-item-count">95</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>

@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-TW">
+<head>
+  <meta name="google-site-verification" content="exmdvS3MT1hVojBxSEZZZ8TIBBOg6pJ2POTtzNuecqs" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+
+
+<meta property="og:site_name" content="">
+<meta property="og:title" content="categories">
+<meta property="og:url" content="http://">
+<meta property="og:image" content="">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/blog/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Gemini',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","width":280,"display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '複製',
+      copy_success: '複製成功',
+      copy_failure: '複製失敗'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="(2019.06)  自學深度學習與 Python 將近一年，也該為這一段學習做一個階段性的總整理。而最好的方式便是試著實作一個專案，大概在今年中我便決定了兩個主要的專題方向 — LINE Bot 與 人臉辨識。 本篇文章主要以建構一個可用且符合自己需求的 LINE Bot 的過程紀錄，因此會持續更新文章，直到整個 LINE Bot 達到我自己想要的標準為止。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MoBot : LINE Bot 開發紀錄 ( LINE &#x2F; Heroku ) ">
+<meta property="og:url" content="https://allen108108.github.io/blog/2020/03/26/MoBot _ LINE Bot 開發紀錄 ( LINE _ Heroku )/index.html">
+<meta property="og:site_name" content="Math.py">
+<meta property="og:description" content="(2019.06)  自學深度學習與 Python 將近一年，也該為這一段學習做一個階段性的總整理。而最好的方式便是試著實作一個專案，大概在今年中我便決定了兩個主要的專題方向 — LINE Bot 與 人臉辨識。 本篇文章主要以建構一個可用且符合自己需求的 LINE Bot 的過程紀錄，因此會持續更新文章，直到整個 LINE Bot 達到我自己想要的標準為止。">
+<meta property="og:locale" content="zh-TW">
+<meta property="og:image" content="https://i.imgur.com/haTp0nw.jpg">
+<meta property="og:image" content="https://i.imgur.com/lWHkqdV.jpg">
+<meta property="og:image" content="https://i.imgur.com/SyUJxL1.jpg">
+<meta property="og:image" content="https://i.imgur.com/TSzHT27.png">
+<meta property="og:image" content="https://i.imgur.com/CeLeY3w.png">
+<meta property="og:image" content="https://i.imgur.com/cY1oP4e.png">
+<meta property="og:image" content="https://i.imgur.com/oOwCpcJ.png">
+<meta property="og:image" content="https://i.imgur.com/J3KBxpn.png">
+<meta property="og:image" content="https://i.imgur.com/kjMqvuY.png">
+<meta property="og:image" content="https://i.imgur.com/ihnsuHV.png">
+<meta property="og:image" content="https://i.imgur.com/IlQSPKm.png">
+<meta property="og:image" content="https://i.imgur.com/Kx98ocs.png">
+<meta property="og:image" content="https://i.imgur.com/ahPZDeK.png">
+<meta property="og:image" content="https://i.imgur.com/kgTalrm.jpg">
+<meta property="og:image" content="https://i.imgur.com/qqm0Zvi.png">
+<meta property="og:image" content="https://i.imgur.com/ve1qLyn.png">
+<meta property="og:image" content="https://i.imgur.com/fNF5KO6.png">
+<meta property="og:image" content="https://i.imgur.com/5S5glc3.png">
+<meta property="og:image" content="https://i.imgur.com/1gGjUGp.png">
+<meta property="og:image" content="https://i.imgur.com/ICztWOv.png">
+<meta property="og:image" content="https://i.imgur.com/C0nR95f.png">
+<meta property="og:image" content="https://i.imgur.com/clSlAC9.png">
+<meta property="og:image" content="https://i.imgur.com/SJJSnoN.png">
+<meta property="og:updated_time" content="2020-03-25T16:14:26.865Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MoBot : LINE Bot 開發紀錄 ( LINE &#x2F; Heroku ) ">
+<meta name="twitter:description" content="(2019.06)  自學深度學習與 Python 將近一年，也該為這一段學習做一個階段性的總整理。而最好的方式便是試著實作一個專案，大概在今年中我便決定了兩個主要的專題方向 — LINE Bot 與 人臉辨識。 本篇文章主要以建構一個可用且符合自己需求的 LINE Bot 的過程紀錄，因此會持續更新文章，直到整個 LINE Bot 達到我自己想要的標準為止。">
+<meta name="twitter:image" content="https://i.imgur.com/haTp0nw.jpg">
+  <link rel="canonical" href="https://allen108108.github.io/blog/2020/03/26/MoBot _ LINE Bot 開發紀錄 ( LINE _ Heroku )/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>MoBot : LINE Bot 開發紀錄 ( LINE / Heroku )  | Math.py</title>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-149442581-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-149442581-1');
+    }
+  </script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-TW">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Math.py</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Wir müssen wissen , wir werden wissen</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切換導航欄">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/blog/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首頁</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/blog/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分類</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/blog/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>歸檔</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://allen108108.github.io/blog/blog/2020/03/26/MoBot _ LINE Bot 開發紀錄 ( LINE _ Heroku )/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Allen Tzeng">
+      <meta itemprop="description" content="Study about Mathematics , Programming and Data Science">
+      <meta itemprop="image" content="/blog/images/allen.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Math.py">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">MoBot : LINE Bot 開發紀錄 ( LINE / Heroku ) 
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              
+                
+              
+
+              <time title="創建時間：2020-03-26 00:05:12 / 修改時間：00:14:26" itemprop="dateCreated datePublished" datetime="2020-03-26T00:05:12+08:00">2020-03-26</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/專案-Project/" itemprop="url" rel="index"><span itemprop="name">專案 Project</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="閱讀次數" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">閱讀次數：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/blog/2020/03/26/MoBot _ LINE Bot 開發紀錄 ( LINE _ Heroku )/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/03/26/MoBot _ LINE Bot 開發紀錄 ( LINE _ Heroku )/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>(2019.06) </p>
+<p>自學深度學習與 Python 將近一年，也該為這一段學習做一個階段性的總整理。而最好的方式便是試著實作一個專案，大概在今年中我便決定了兩個主要的專題方向 — LINE Bot 與 人臉辨識。</p>
+<p>本篇文章主要以建構一個可用且符合自己需求的 LINE Bot 的過程紀錄，因此會持續更新文章，直到整個 LINE Bot 達到我自己想要的標準為止。</p>
+<a id="more"></a>
+<p>(2020.03)</p>
+<p>這篇文章的撰寫，從開始到完成，中間隔了近半年，主要是因為筆者這段期間適逢求職以及就職的過程，加上工作上的專案以及領域的論文閱讀，導致此篇開發記錄一直沒有機會完成，一直到現在才抽空將其補完。</p>
+<h2 id="MoBot-功能"><a href="#MoBot-功能" class="headerlink" title="MoBot 功能"></a>MoBot 功能</h2><p>MoBot 主要都是以自己以及家人為需求進行開發，因此目前 ( 2019.09.20 ) 先完成幾個功能 : </p>
+<ol>
+<li>提供當下36小時的氣象預報</li>
+<li>查詢當日電影場次</li>
+<li>當週星座運勢</li>
+</ol>
+<p><img width="500" src="https://i.imgur.com/haTp0nw.jpg"></p>
+<h2 id="MoBot-架構"><a href="#MoBot-架構" class="headerlink" title="MoBot 架構"></a>MoBot 架構</h2><ul>
+<li><p>平台 — LINE<br>MoBot 是這個 ChatBot 的名稱，而 MoBot 是一個建立在 LINE 平台之上的 ChatBot。之所以選擇以 LINE 為平台，主要原因也是台灣對於 LINE 的高度依賴性所致。</p>
+</li>
+<li><p>架構 — Django<br>能夠實現 LINE Bot 的方式有很多，由於我是參照書上指示進行建構，因此便以 Django 為 MoBot 的設計架構。</p>
+</li>
+<li><p>伺服器 — heroku<br>目前非自架伺服器的選擇大多是 ngrok 以及 heroku，前者重新執行後都會改變網址，對於要常態性使用上會相對不是這麼好用。heroku 有免費的方案，在架構上只要滿足其要求，往後的更動都只須調整代碼即可，其餘的都不太需要多操心，可以算是初級 LINE Bot 開發者的首選。</p>
+</li>
+<li><p>語句理解 — LUIS<br>LUIS ( <em>Language Understanding Intelligent Service</em> )，是微軟開發的一套雲端 NLP 服務，可藉由使用者輸入語句及實體標識來進行訓練，訓練完成後，我們便可以將接收到的訊息藉由 API 判斷訊息的意象 ( Intent ) 做語句上的 NER ，進而針對接收到的訊息來做出適當的回覆。</p>
+</li>
+<li><p>資料擷取 — 中央氣象局 API<br>現階段 (2019.09.19) MoBot 開發出來的功能有二 :<br>( 1 ) 當日天氣查詢 ( 2 ) 電影場次查詢(限大台北地區) 。<br>天氣查詢部分接收到訊息後確認待查詢縣市後依靠中央氣象局公開資料 API 擷取「36小時天氣預報資料」資訊，將我們要的縣市資訊抓出來再回覆給使用者。</p>
+</li>
+<li><p>資料擷取 — imgur API<br>這部分算是很額外的部分，電影場次查詢本來只預計從「開眼電影網」抓到當日台北各戲院場次網址回覆就好，但我希望可以將電影的海報也一併回覆出去，因此必須要多繞一圈。由於 LINE 圖片回覆網址必須要是 https，但許多的圖片都是 http，因此必須將擷取出來的圖片網址上傳到 imgur 後，再傳回給使用者，這部分就需要經過 imgur API 來完成。</p>
+</li>
+<li><p>Google YouTube API ( 2019.09.20 新增 )<br>增加了可以查詢當周運勢的部分，以唐綺陽的分析為爬蟲對象，原本想要從臉書粉絲專業來進行資料爬取，但最後發現由 YouTube 來爬會相對簡單很多。利用 google API 可以用簡單的方式來取得 YouTube 內容。</p>
+</li>
+</ul>
+<h2 id="LINE-平台佈屬"><a href="#LINE-平台佈屬" class="headerlink" title="LINE 平台佈屬"></a>LINE 平台佈屬</h2><p>要在 LINE 上製作 ChatBot，首先必須先申請 LINE 開發者帳號。申請過程不算太困難。</p>
+<h3 id="1-先至-https-developers-line-biz-en-進行註冊"><a href="#1-先至-https-developers-line-biz-en-進行註冊" class="headerlink" title="1. 先至 https://developers.line.biz/en/ 進行註冊"></a>1. 先至 <a href="https://developers.line.biz/en/" target="_blank" rel="noopener">https://developers.line.biz/en/</a> 進行註冊</h3><p><img src="https://i.imgur.com/lWHkqdV.jpg" alt></p>
+<h3 id="2-建立新的-Provider"><a href="#2-建立新的-Provider" class="headerlink" title="2. 建立新的 Provider"></a>2. 建立新的 Provider</h3><p>於 Provider 頁面按下右上角 <code>Create New Provider</code></p>
+<p><img src="https://i.imgur.com/SyUJxL1.jpg" alt></p>
+<h3 id="3-填入-Provider-名稱後便成功建立了一個新的-Provider"><a href="#3-填入-Provider-名稱後便成功建立了一個新的-Provider" class="headerlink" title="3. 填入 Provider 名稱後便成功建立了一個新的 Provider"></a>3. 填入 Provider 名稱後便成功建立了一個新的 Provider</h3><p><img src="https://i.imgur.com/TSzHT27.png" alt></p>
+<h3 id="4-選取-Messageing-API-以建立一個-LINE-Bot"><a href="#4-選取-Messageing-API-以建立一個-LINE-Bot" class="headerlink" title="4. 選取 Messageing API 以建立一個 LINE Bot"></a>4. 選取 <code>Messageing API</code> 以建立一個 LINE Bot</h3><p><img src="https://i.imgur.com/CeLeY3w.png" alt></p>
+<h3 id="5-設定-LINE-Bot-基本資料"><a href="#5-設定-LINE-Bot-基本資料" class="headerlink" title="5. 設定 LINE Bot 基本資料"></a>5. 設定 LINE Bot 基本資料</h3><p><img src="https://i.imgur.com/cY1oP4e.png" alt><br><img src="https://i.imgur.com/oOwCpcJ.png" alt></p>
+<h3 id="6-確認建立-Provider"><a href="#6-確認建立-Provider" class="headerlink" title="6. 確認建立 Provider"></a>6. 確認建立 Provider</h3><p>版權部分按下同意鍵後，於 Confirm 步驟最下方兩個選項均打勾後按下 <code>Create</code></p>
+<p><img src="https://i.imgur.com/J3KBxpn.png" alt></p>
+<h3 id="7-設定-LINE-Bot"><a href="#7-設定-LINE-Bot" class="headerlink" title="7. 設定 LINE Bot"></a>7. 設定 LINE Bot</h3><p>完成上述過程後，便會跳到剛剛建好的 Provider 頁面，此時你也可以看到剛建立的 LINE Bot 已經出現，此時點選 LINE Bot 進行設定。</p>
+<p><img src="https://i.imgur.com/kjMqvuY.png" alt></p>
+<h3 id="設定-LINE-Bot-有幾個部分需要注意的地方-其他部分都不需更動"><a href="#設定-LINE-Bot-有幾個部分需要注意的地方-其他部分都不需更動" class="headerlink" title="設定 LINE Bot 有幾個部分需要注意的地方 ( 其他部分都不需更動 ) :"></a>設定 LINE Bot 有幾個部分需要注意的地方 ( 其他部分都不需更動 ) :</h3><ul>
+<li><h4 id="Channel-ID、Channel-secret、Channel-access-token-long-lived"><a href="#Channel-ID、Channel-secret、Channel-access-token-long-lived" class="headerlink" title="Channel ID、Channel secret、Channel access token (long-lived)"></a><strong>Channel ID、Channel secret、Channel access token (long-lived)</strong></h4>這三個部分務必記住，之後在 LINE Bot 程式碼以及 Heroku 佈署中都會使用到，其中 Channel secret、Channel access token 旁邊的 issue 鍵每按一次就會變更一次，因此不要隨便按，issue 鍵按下後會跳出視窗，可以設定權限 key 的時效，如果為 0 便表示沒有時效限制。</li>
+</ul>
+<p><img src="https://i.imgur.com/ihnsuHV.png" alt></p>
+<ul>
+<li><h4 id="Use-webhooks"><a href="#Use-webhooks" class="headerlink" title="Use webhooks"></a><strong>Use webhooks</strong></h4>按下右邊 Edit 鍵，將值從 <code>Disaled</code> 改為 <code>Enabled</code></li>
+</ul>
+<ul>
+<li><h4 id="Webhook-URL"><a href="#Webhook-URL" class="headerlink" title="Webhook URL"></a><strong>Webhook URL</strong></h4>這部分暫時先保留，待佈署 Heroku 後會需要回填進 URL 來跟 Heroku 做連結。</li>
+</ul>
+<p><img src="https://i.imgur.com/IlQSPKm.png" alt></p>
+<ul>
+<li><h4 id="Auto-reply-messages、Greeting-messages"><a href="#Auto-reply-messages、Greeting-messages" class="headerlink" title="Auto-reply messages、Greeting messages"></a><strong>Auto-reply messages、Greeting messages</strong></h4>這兩個部分都可以將值先改為 <code>Disaled</code> ，這樣方便在測試時不會有太多額外的干擾存在。</li>
+</ul>
+<p><img src="https://i.imgur.com/Kx98ocs.png" alt></p>
+<p><img width="500" src="https://i.imgur.com/ahPZDeK.png"></p>
+<p>設定完成後也代表 LINE 上面的佈署告一段落，接著我們要進行 Django 的架構佈署。</p>
+<h2 id="Django-架構佈屬"><a href="#Django-架構佈屬" class="headerlink" title="Django 架構佈屬"></a>Django 架構佈屬</h2><p>這邊我不多介紹 Django ，簡而言之 Django 就是為了網站開發人員所設計的以 Python 所編寫的網站框架<sup><a href="#fn_1" id="reffn_1">1</a></sup>。</p>
+<h3 id="1-安裝-Django-及-LINE-Bot-API"><a href="#1-安裝-Django-及-LINE-Bot-API" class="headerlink" title="1. 安裝 Django 及 LINE Bot API"></a>1. <strong>安裝 Django 及 LINE Bot API</strong></h3><p>於終端機上利用 <code>pip install django</code>、<code>pip install line-bot-sdk</code> 進行安裝</p>
+<h3 id="2-建立-Django-專案"><a href="#2-建立-Django-專案" class="headerlink" title="2. 建立 Django 專案"></a>2. <strong>建立 Django 專案</strong></h3><p>確認專案要放置在哪一個路徑下，切換至此路徑後輸入<br><code>django-admin startproject 自訂專案名稱</code> 即可於此路徑下建立此專案。</p>
+<p>建立完成後切換至專案資料夾中，此時可以發現整個專案的結構如下 : </p>
+<p><img width="500" src="https://i.imgur.com/kgTalrm.jpg"></p>
+<p>在 Django 中，一個專案可以對應到多個應用程式 (Application)，我們要建立一個 LINE Bot 前就必須建立一個 application 應用</p>
+<p><code>python manage.py startapp 自訂應用程式名稱</code></p>
+<p>建立 application 應用以後，專案資料夾底下就會多出一個應用程式資料夾。這是一個最基本的 Django LINE Bot 架構，而下圖紅色標註的部份便是我們接下來要進行更動的部分。</p>
+<p><img width="500" src="https://i.imgur.com/qqm0Zvi.png"><br>( 假設應用程式名稱自訂為 <code>mybot</code> )</p>
+<p>雖說基本架構如上，但還是建議建立一個完整的 Django 專案，因此依照下列方式在專案資料夾內建立 templates、static資料夾，以及 migration 資料檔</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">md templates </span><br><span class="line"># 放置模板 (.html檔)</span><br><span class="line"></span><br><span class="line">md static </span><br><span class="line"># 儲存圖形檔、CSS 及 JavaScript 檔案</span><br><span class="line"></span><br><span class="line">python manage.py makemigrations </span><br><span class="line">#此步驟會在 mybot app資料夾中產生 migration 資料夾</span><br></pre></td></tr></table></figure>
+<ul>
+<li><h3 id="設定-settings-py"><a href="#設定-settings-py" class="headerlink" title="設定 settings.py"></a>設定 <strong>settings.py</strong></h3></li>
+</ul>
+<p>settings.py 是整個專案的環境設定檔案，<br>找到下面兩列程式碼<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"># SECURITY WARNING: keep the secret key used in production secret!</span><br><span class="line">SECRET_KEY = &apos;*********************&apos;</span><br></pre></td></tr></table></figure></p>
+<p>在後面加上兩列，並填入在上述 LINE 平台設定上取得的 Channel access token 以及 Channel secret</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">LINE_CHANNEL_ACCESS_TOKEN=<span class="string">'LINE 的 Channel access token'</span></span><br><span class="line">LINE_CHANNEL_SECRET=<span class="string">'LINE 的 Channel secret'</span></span><br></pre></td></tr></table></figure>
+<p>設定外部連結均可以連到本機伺服器</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">ALLOWED_HOSTS = [<span class="string">'*'</span>]</span><br></pre></td></tr></table></figure>
+<p>將我們的 app 加入 INSTALLED_APP 中</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">INSTALLED_APPS = [</span><br><span class="line">    <span class="string">'django.contrib.admin'</span>,</span><br><span class="line">    <span class="string">'django.contrib.auth'</span>,</span><br><span class="line">    <span class="string">'django.contrib.contenttypes'</span>,</span><br><span class="line">    <span class="string">'django.contrib.sessions'</span>,</span><br><span class="line">    <span class="string">'django.contrib.messages'</span>,</span><br><span class="line">    <span class="string">'django.contrib.staticfiles'</span>,</span><br><span class="line">    <span class="string">'mybot'</span>,  <span class="comment">#新增的app</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>設定我們已經建立的模板路徑</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">TEMPLATES = [</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">'BACKEND'</span>: <span class="string">'django.template.backends.django.DjangoTemplates'</span>,</span><br><span class="line">        <span class="string">'DIRS'</span>: [os.path.join(BASE_DIR,<span class="string">'templates'</span>)], </span><br><span class="line">        <span class="comment"># 加上 templates 路徑</span></span><br><span class="line">        <span class="string">'APP_DIRS'</span>: <span class="literal">True</span>,</span><br><span class="line">        <span class="string">'OPTIONS'</span>: &#123;</span><br><span class="line">            <span class="string">'context_processors'</span>: [</span><br><span class="line">                <span class="string">'django.template.context_processors.debug'</span>,</span><br><span class="line">                <span class="string">'django.template.context_processors.request'</span>,</span><br><span class="line">                <span class="string">'django.contrib.auth.context_processors.auth'</span>,</span><br><span class="line">                <span class="string">'django.contrib.messages.context_processors.messages'</span>,</span><br><span class="line">            ],</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>設定語系及時區</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br></pre></td><td class="code"><pre><span class="line">LANGUAGE_CODE = <span class="string">'zh-Hant'</span> <span class="comment"># 繁體中文</span></span><br><span class="line"></span><br><span class="line">TIME_ZONE = <span class="string">'Asia/Taipei'</span> <span class="comment"># 台北時區</span></span><br></pre></td></tr></table></figure>
+<p>設定 static 路徑</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Static files (CSS, JavaScript, Images)</span></span><br><span class="line"><span class="comment"># https://docs.djangoproject.com/en/2.2/howto/static-files/</span></span><br><span class="line"></span><br><span class="line">STATIC_URL = <span class="string">'/static/'</span></span><br><span class="line">STATICFILES_DIR=[os.path.join(BASE_DIR,<span class="string">'static'</span>),]</span><br></pre></td></tr></table></figure>
+<ul>
+<li><h3 id="設定-urls-py"><a href="#設定-urls-py" class="headerlink" title="設定 urls.py"></a>設定 <strong>urls.py</strong></h3></li>
+</ul>
+<p>在 Django 中要做出一個能夠回應使用者的網頁，主要靠的就是 urls.py 與 views.py 這兩個檔案的互動，從 urlpatterns 來確認我們要從 views.py 中調用什麼函式來作回應。</p>
+<p>因此我們先進行 urls.py 的設定如下 : </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</span><br><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path</span><br><span class="line"><span class="keyword">from</span> django.conf.urls <span class="keyword">import</span> url</span><br><span class="line"><span class="keyword">from</span> mybot <span class="keyword">import</span> views</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    url(<span class="string">'^callback'</span>,views.callback), </span><br><span class="line">    <span class="comment"># 從 views.py 調用 callback 函式來回應</span></span><br><span class="line">    path(<span class="string">'admin/'</span>, admin.site.urls),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<ul>
+<li><h3 id="設定-views-py"><a href="#設定-views-py" class="headerlink" title="設定 views.py"></a>設定 <strong>views.py</strong></h3></li>
+</ul>
+<p>views.py 主掌了整個 LINE Bot 的回應，因此在這邊我們會有較大的篇幅來進行解說。此外，我仍建議剛開始進行 LINE Bot 開發的人，可以先完成 Echo Bot 的佈署，確定整的佈署到使用端都沒有問題後，再進行其他功能的增加。</p>
+<p>想要確定 views.py 該怎麼寫，要定義哪函式，那麼就得先了解自己需要 LINE Bot 擁有什麼樣的功能，又要怎麼實現，下圖則是目前 MoBot 的整個功能架構圖。</p>
+<p><img src="https://i.imgur.com/ve1qLyn.png" alt></p>
+<p>在確定了 callback 函式大概要做的事情後，我們先來定義幾個函式 : </p>
+<p><code>sendUse()</code> 處理使用者輸入 <code>@使用說明</code> 時 MoBot　會回傳的一個簡易使用說明。</p>
+<p>其中值得注意的是　<code>line_bot_api.reply_message(
+            event.reply_token, TextSendMessage(text=&#39;腦子故障中，請稍等 Q_Q&#39;))</code>　這是 LINE API 的一個固定回傳文字的方式 <code>text</code> 後面則是接希望 LINE Bot 回覆的文字。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sendUse</span><span class="params">(event)</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        text1 = <span class="string">'''</span></span><br><span class="line"><span class="string">查詢天氣  : \n請輸入「 XXXX 天氣如何? 」\n例如 : 「高雄天氣如何?」\n</span></span><br><span class="line"><span class="string">查詢電影場次  : \n請輸入「 XXXX 電影資訊 」\n例如 : 「第九分局電影資訊」\n</span></span><br><span class="line"><span class="string">查詢本週星座運勢  : \n請輸入「 本週運勢」\n</span></span><br><span class="line"><span class="string">              '''</span></span><br><span class="line">        message = TextSendMessage(</span><br><span class="line">            text=text1</span><br><span class="line">        )</span><br><span class="line">        line_bot_api.reply_message(event.reply_token, message)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        line_bot_api.reply_message(</span><br><span class="line">            event.reply_token, TextSendMessage(text=<span class="string">'腦子故障中，請稍等 Q_Q'</span>))</span><br></pre></td></tr></table></figure>
+<p><code>sendLUIS()</code> 則是處理天氣查詢以及電影場次查詢的部分。</p>
+<p><a href="https://www.luis.ai/" target="_blank" rel="noopener">LUIS</a> (Language Understanding Intelligent Service) 是微軟開發的一套線上雲端語言處理系統，藉由使用者給定的 examples 以及實體命名，線上訓練模型，可以針對輸入文字進行命名實體識別 ( NER ) 以及語句意向的預測<sup><a href="#fn_2" id="reffn_2">2</a></sup>。</p>
+<p>MoBot 利用 LUIS 對使用者的語句進行意向預測，確認使用者要取得天氣還是電影資訊。如果偵測使用者要取得天氣資訊，則利用氣象局 API 針對使用者的需求將文字資料提供出來。</p>
+<p>電影資訊的取得相對來說比較麻煩。</p>
+<p>我希望可以 MoBot 不單單可以回覆某一個電影的台北戲院場次，在連結之前還要先丟出一張海報圖。因此 MoBot 裡面使用 BeautifulSoup 來進行「開眼電影網」的資料取得。由於每一部電影在開眼電影網內都有一個專屬 ID，我們必須將其找出後，嵌入當天場次表的網址之中，就可以得到每一部電影的當日場次表。</p>
+<p><img src="https://i.imgur.com/fNF5KO6.png" alt></p>
+<p>其中 a02 為大台北地區代碼 ( 我們也藉此可以找出不同地區的場次表 )<br><img src="https://i.imgur.com/5S5glc3.png" alt></p>
+<p>圖片的部分比較麻煩，因為在開眼電影網裡面，電影的海報被包在頁面內的 json 裡面，因此需要用 <code>pic_link = json.loads(p_soup.find(
+                    &#39;script&#39;, {&#39;type&#39;: &#39;application/ld+json&#39;}).get_text())[&quot;image&quot;]</code> 來取得 image 網址。</p>
+<p>此外，LINE Bot 要傳送圖片訊息必須是 https 開頭網址，但絕大多數我們可以撈的到的圖片都是 http 網址，因此必須借助 imgur API 將我們撈到的圖片先上傳到 imgur 後再利用其生成的網址來傳送。 </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sendLUIS</span><span class="params">(event, mtext)</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line"></span><br><span class="line">        r = requests.get(<span class="string">'LUIS 終結點網址'</span>+mtext)</span><br><span class="line">        result = r.json()</span><br><span class="line"></span><br><span class="line">        cities = []</span><br><span class="line">        movies = []</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> result[<span class="string">'topScoringIntent'</span>][<span class="string">'intent'</span>] == <span class="string">'縣市天氣'</span>:</span><br><span class="line">            <span class="keyword">for</span> en <span class="keyword">in</span> result[<span class="string">'entities'</span>]:</span><br><span class="line">                <span class="keyword">if</span> en[<span class="string">'type'</span>] == <span class="string">'地點'</span>:</span><br><span class="line">                    cities.append(en[<span class="string">'entity'</span>])</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">elif</span> result[<span class="string">'topScoringIntent'</span>][<span class="string">'intent'</span>] == <span class="string">'電影時刻'</span>:</span><br><span class="line">            <span class="keyword">for</span> en <span class="keyword">in</span> result[<span class="string">'entities'</span>]:</span><br><span class="line">                <span class="keyword">if</span> en[<span class="string">'type'</span>] == <span class="string">'電影名稱'</span>:</span><br><span class="line">                    movies.append(en[<span class="string">'entity'</span>])</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> cities:</span><br><span class="line">            cities[<span class="number">0</span>] = cities[<span class="number">0</span>].replace(<span class="string">'台'</span>, <span class="string">'臺'</span>)</span><br><span class="line">            api_link = <span class="string">f"http://opendata.cwb.gov.tw/opendataapi?dataid=<span class="subst">&#123;氣象局資料代碼&#125;</span>&amp;authorizationkey=<span class="subst">&#123;使用者API授權碼&#125;</span>"</span></span><br><span class="line"></span><br><span class="line">            report = requests.get(api_link).text</span><br><span class="line"></span><br><span class="line">            xml_namespace = <span class="string">'&#123;urn:cwb:gov:tw:cwbcommon:0.1&#125;'</span></span><br><span class="line">            root = et.fromstring(report)</span><br><span class="line">            dataset = root.find(xml_namespace+<span class="string">'dataset'</span>)</span><br><span class="line">            locations_info = dataset.findall(xml_namespace+<span class="string">'location'</span>)</span><br><span class="line"></span><br><span class="line">            location = cities[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">            target_index = <span class="number">-1</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> i, loc <span class="keyword">in</span> enumerate(locations_info):</span><br><span class="line">                locationName = loc[<span class="number">0</span>].text</span><br><span class="line">                <span class="keyword">if</span> location <span class="keyword">in</span> locationName:</span><br><span class="line">                    target_index = i</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">if</span> target_index != <span class="number">-1</span>:</span><br><span class="line">                show = location+<span class="string">'的天氣如下 :\n'</span></span><br><span class="line">                tlist = [<span class="string">'天氣狀況'</span>, <span class="string">'最高溫'</span>, <span class="string">'最低溫'</span>, <span class="string">'舒適度'</span>, <span class="string">'降雨機率'</span>]</span><br><span class="line">                <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">5</span>):</span><br><span class="line">                    element = locations_info[target_index][j+<span class="number">1</span>]</span><br><span class="line">                    timeblock = element[<span class="number">1</span>]</span><br><span class="line">                    data = timeblock[<span class="number">2</span>][<span class="number">0</span>].text</span><br><span class="line">                    show = show+tlist[j]+<span class="string">' : '</span>+data+<span class="string">'\n'</span></span><br><span class="line">                line_bot_api.reply_message(</span><br><span class="line">                    event.reply_token, TextSendMessage(text=show[:<span class="number">-1</span>]))</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                line_bot_api.reply_message(</span><br><span class="line">                    event.reply_token, TextSendMessage(text=<span class="string">'無此地點天氣資料！'</span>))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">elif</span> len(movies) != <span class="number">0</span>:</span><br><span class="line">            at_link = <span class="string">'http://www.atmovies.com.tw/movie/now/'</span></span><br><span class="line">            res = requests.get(at_link)</span><br><span class="line">            res.encoding = <span class="string">'utf-8'</span></span><br><span class="line">            soup = BeautifulSoup(res.text, <span class="string">'lxml'</span>)</span><br><span class="line">            a_tags = soup.find_all(<span class="string">'a'</span>)</span><br><span class="line">            film_id = []</span><br><span class="line">            <span class="keyword">for</span> tag <span class="keyword">in</span> a_tags:</span><br><span class="line">                <span class="keyword">if</span> movies[<span class="number">0</span>] <span class="keyword">in</span> str(tag.string):</span><br><span class="line">                    film_id.append(tag.get(<span class="string">'href'</span>)[<span class="number">7</span>:<span class="number">-1</span>])</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> len(film_id) != <span class="number">0</span>:</span><br><span class="line">                movie_link = <span class="string">f'http://www.atmovies.com.tw/showtime/<span class="subst">&#123;film_id[<span class="number">0</span>]&#125;</span>/a02/'</span></span><br><span class="line">                p_res = requests.get(movie_link)</span><br><span class="line">                p_res.encoding = <span class="string">'utf-8'</span></span><br><span class="line">                p_soup = BeautifulSoup(p_res.text, <span class="string">'lxml'</span>)</span><br><span class="line">                pic_link = json.loads(p_soup.find(</span><br><span class="line">                    <span class="string">'script'</span>, &#123;<span class="string">'type'</span>: <span class="string">'application/ld+json'</span>&#125;).get_text())[<span class="string">"image"</span>]</span><br><span class="line">                img_link = upload_photo(pic_link.strip())</span><br><span class="line">                <span class="comment">#line_bot_api.reply_message(event.reply_token, ImageSendMessage(original_content_url=img_link, preview_image_url=img_link))</span></span><br><span class="line">                line_bot_api.reply_message(event.reply_token, [ImageSendMessage(</span><br><span class="line">                    original_content_url=img_link, preview_image_url=img_link), TextSendMessage(text=<span class="string">f'<span class="subst">&#123;movies[<span class="number">0</span>]&#125;</span> 台北戲院播映場次 :\n<span class="subst">&#123;movie_link&#125;</span>'</span>)])</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                line_bot_api.reply_message(</span><br><span class="line">                    event.reply_token, TextSendMessage(text=<span class="string">'無此電影資訊！'</span>))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        <span class="keyword">import</span> traceback</span><br><span class="line">        traceback.print_exc()</span><br><span class="line">        <span class="comment">#line_bot_api.reply_message(event.reply_token, TextSendMessage(text='查詢時產生錯誤，請稍後再查詢唷~'))</span></span><br></pre></td></tr></table></figure>
+<p>這裡我們必須多定義一個函式，return 圖片在 imgur 中生成的網址，函式內部的運作可以參照 <a href="https://github.com/Imgur/imgurpython" target="_blank" rel="noopener">imgurpython library</a> 。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">upload_photo</span><span class="params">(image_url)</span>:</span></span><br><span class="line">    client_id = <span class="string">'使用者 imgur ID'</span></span><br><span class="line">    client_secret = <span class="string">'使用者 imgur secret'</span></span><br><span class="line">    access_token = <span class="string">'使用者 imgur access_token'</span></span><br><span class="line">    refresh_token = <span class="string">'使用者 imgur refresh_token'</span></span><br><span class="line">    client = ImgurClient(client_id, client_secret, access_token, refresh_token)</span><br><span class="line">    album = <span class="literal">None</span>  <span class="comment"># You can also enter an album ID here</span></span><br><span class="line">    config = &#123;</span><br><span class="line">        <span class="string">'album'</span>: album,</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">#print("Uploading image... ")</span></span><br><span class="line">    image = client.upload_from_url(image_url, config=config, anon=<span class="literal">False</span>)</span><br><span class="line">    <span class="comment"># print("Done")</span></span><br><span class="line">    <span class="keyword">return</span> image[<span class="string">'link'</span>]</span><br></pre></td></tr></table></figure>
+<p>LINE API 上對於圖片訊息的處理如下，我們只要將上面的函式回傳的網址填進去即可。</p>
+<p><code>line_bot_api.reply_message(event.reply_token, ImageSendMessage(original_content_url=img_link, preview_image_url=img_link))</code></p>
+<p>但這裡有一個部分是比較少人關注的，因為我希望 LINE Bot 是可以回覆一張海報圖後再接著傳送場次網址，等同於要傳一張圖片訊息跟一個文字訊息。</p>
+<p>原本我以為可以這樣</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">line_bot_api.reply_message(event.reply_token, ImageSendMessage(original_content_url=img_link, preview_image_url=img_link))</span><br><span class="line">line_bot_api.reply_message(event.reply_token,  TextSendMessage(text=<span class="string">f'<span class="subst">&#123;movies[<span class="number">0</span>]&#125;</span> 台北戲院播映場次 :\n<span class="subst">&#123;movie_link&#125;</span>'</span>))</span><br></pre></td></tr></table></figure>
+<p>但這樣始終會跑不出來，後來這個問題在 LINE Developer 的 Message API 解說頁面找到答案</p>
+<p><img src="https://i.imgur.com/1gGjUGp.png" alt></p>
+<p>連續回覆必須要用 array 的型態來表示，因此上面那兩行應該改為 : </p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">line_bot_api.reply_message(event.reply_token, [ImageSendMessage(</span><br><span class="line">                    original_content_url=img_link, preview_image_url=img_link), TextSendMessage(text=<span class="string">f'<span class="subst">&#123;movies[<span class="number">0</span>]&#125;</span> 台北戲院播映場次 :\n<span class="subst">&#123;movie_link&#125;</span>'</span>)])</span><br></pre></td></tr></table></figure>
+<h2 id="Heroku-伺服器佈屬"><a href="#Heroku-伺服器佈屬" class="headerlink" title="Heroku 伺服器佈屬"></a>Heroku 伺服器佈屬</h2><ul>
+<li><h3 id="創建-Heroku-app"><a href="#創建-Heroku-app" class="headerlink" title="創建 Heroku app"></a>創建 Heroku app</h3></li>
+</ul>
+<p>要部屬到 Heroku，我們得先進行註冊，註冊過程與一般網站大同小異，這裡就不贅述，我們直接跳到部屬的階段。</p>
+<p><img src="https://i.imgur.com/ICztWOv.png" alt></p>
+<p>按下 <code>Create new app</code> 以建立新的 app 後，先輸入 app 的名稱，這邊要特別注意的地方是不能宇其他使用者所創建的 app 名稱重複。</p>
+<p><img src="https://i.imgur.com/C0nR95f.png" alt></p>
+<ul>
+<li><h3 id="安裝-Git-版本控制系統"><a href="#安裝-Git-版本控制系統" class="headerlink" title="安裝 Git 版本控制系統"></a>安裝 Git 版本控制系統</h3></li>
+</ul>
+<p>Heroku 上的專案部屬是基於 Git 版控系統，因此在部屬 Heroku 前必須要安裝 Git 系統。安裝很簡單，至 <a href="https://git-scm.com/download/win" target="_blank" rel="noopener">Git 下載頁面</a>選擇適合的版本下載並無腦安裝即可。</p>
+<p><img src="https://i.imgur.com/clSlAC9.png" alt></p>
+<p>題外話，Git 系統在版本控制上面非常好用，無論是在 Heroku 的部屬，或是在 Github 上面要進行專案的協作，都是不可或缺的工具之一。</p>
+<ul>
+<li><h3 id="安裝-Heroku-CLI"><a href="#安裝-Heroku-CLI" class="headerlink" title="安裝 Heroku CLI"></a>安裝 Heroku CLI</h3></li>
+</ul>
+<p>Heroku CLI 全名 Heroku Command Line Interface，是 Heroku 官方的一種命令行介面，藉由 Heroku CLI 可以利用 Git 讓整個專案在 Heroku 上的部屬變得更加容易簡單。</p>
+<p><a href="https://devcenter.heroku.com/articles/heroku-cli" target="_blank" rel="noopener">Heroku CLI 下載頁面</a>中一樣選擇適合的版本下載安裝。<br><img src="https://i.imgur.com/SJJSnoN.png" alt></p>
+<p>安裝結束後，我們可以開啟提示命令字元輸入 <code>heroku --version</code> 來驗證是否 Heroku CLI 已安裝完成。</p>
+<ul>
+<li><h3 id="登入-Heroku，並上傳專案至-Heroku"><a href="#登入-Heroku，並上傳專案至-Heroku" class="headerlink" title="登入 Heroku，並上傳專案至 Heroku"></a>登入 Heroku，並上傳專案至 Heroku</h3></li>
+</ul>
+<p>依序輸入下列指令</p>
+<p>登入 Heroku<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ heroku login</span><br></pre></td></tr></table></figure></p>
+<p>在本機專案資料夾中建立 git 版本庫<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git init</span><br></pre></td></tr></table></figure></p>
+<p>本機專案資料夾與 Heroku app 專案作連結<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ heroku git:clone -a &lt;app_name&gt;</span><br></pre></td></tr></table></figure></p>
+<p>將資料夾中所有資料加入 git 版本庫追蹤<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git add .</span><br></pre></td></tr></table></figure></p>
+<p>將這次 commit 執行命名為 “update project”<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git commit -am &quot;update project&quot;</span><br></pre></td></tr></table></figure></p>
+<p>把 master 的內容提交到遠端的 Heroku 上面<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git push heroku master</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><h3 id="專案修改"><a href="#專案修改" class="headerlink" title="專案修改"></a>專案修改</h3></li>
+</ul>
+<p>掌握了上面的步驟，日後在本機上修改專案內容後只需要依序執行下列命令即可</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git add . </span><br><span class="line">$ git commit -am &quot;update project&quot;</span><br><span class="line">$ git push heroku master</span><br></pre></td></tr></table></figure>
+<p>Heroku 作為一個免費的機器人伺服器算是蠻好用的，但有些要注意的狀況。由於 Heroku 仍存在免費流量額度，為了讓使用者能夠節約流量，Heroku 會在 30 分鐘未使用的狀態下進行休眠，再次喚醒需要約 20 秒的時間。</p>
+<p>因此當機器人未收到訊息就會進入休眠，下一次丟訊息給機器人時，需要等待一段時間機器人才會進行回覆。</p>
+<h2 id="後記"><a href="#後記" class="headerlink" title="後記"></a>後記</h2><p>這個專案是求職前的一個簡易 QA 聊天機器人的實現，有一部分也可以算是一個實驗性質的專案，筆者在這個專案裡面用不同的方式進行機器人的應答過程。</p>
+<p>這個專案仍然不夠完善，筆者最希望可以加入類似 BERT 的模型，讓機器人不只有 QA 功能，還能針對使用者的訊息進行更人性化的閒聊，達成真正的「聊天」機器人，但後續由於工作的關係，便沒有繼續進行開發，望日後能夠繼續補強 MoBot 的功能。</p>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ol>
+<li>文淵閣工作室。<a href="https://www.books.com.tw/products/0010830739" target="_blank" rel="noopener"><em>Python與LINE Bot機器人全面實戰特訓班</em></a>。碁峰出版社。</li>
+<li>何敏煌, 林亮昀。<a href="https://www.books.com.tw/products/0010790747" target="_blank" rel="noopener"><em>Python新手使用Django架站技術實作：活用Django 2.0 Web Framework建構動態網站的16堂課</em></a>。博碩出版社。</li>
+<li><a href="https://gitbook.tw/chapters/github/push-to-github.html" target="_blank" rel="noopener">Git教學：如何 Push 上傳到 GitHub？</a></li>
+</ol>
+<h2 id="註釋"><a href="#註釋" class="headerlink" title="註釋"></a>註釋</h2><p><sup><a href="#fn_1" id="reffn_1">1</a></sup>:<br>“<em><a href="https://www.books.com.tw/products/0010790747" target="_blank" rel="noopener">Python新手使用Django架站技術實作：活用Django 2.0 Web Framework建構動態網站的16堂課</a></em> “ , page 1-04。</p>
+<p><sup><a href="#fn_2" id="reffn_2">2</a></sup>:<br>LUIS 並非是唯一的選擇，目前也有許多不同的工具可供選擇，例如 google DialogFlow 或是威盛電子 OLAMI 都是不錯的選擇。</p>
+
+    </div>
+
+    
+    
+    
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>作者： </strong>Allen Tzeng</li>
+  <li class="post-copyright-link">
+    <strong>文章連結：</strong>
+    <a href="https://allen108108.github.io/blog/2020/03/26/MoBot _ LINE Bot 開發紀錄 ( LINE _ Heroku )/" title="MoBot : LINE Bot 開發紀錄 ( LINE / Heroku ) ">https://allen108108.github.io/blog/2020/03/26/MoBot _ LINE Bot 開發紀錄 ( LINE _ Heroku )/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/blog/2020/03/25/古典線性模型 v.s 廣義線性模型/" rel="next" title="古典線性模型 v.s 廣義線性模型">
+                  <i class="fa fa-chevron-left"></i> 古典線性模型 v.s 廣義線性模型
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    
+  <div class="comments" id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#MoBot-功能"><span class="nav-number">1.</span> <span class="nav-text">MoBot 功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MoBot-架構"><span class="nav-number">2.</span> <span class="nav-text">MoBot 架構</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LINE-平台佈屬"><span class="nav-number">3.</span> <span class="nav-text">LINE 平台佈屬</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-先至-https-developers-line-biz-en-進行註冊"><span class="nav-number">3.1.</span> <span class="nav-text">1. 先至 https://developers.line.biz/en/ 進行註冊</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-建立新的-Provider"><span class="nav-number">3.2.</span> <span class="nav-text">2. 建立新的 Provider</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-填入-Provider-名稱後便成功建立了一個新的-Provider"><span class="nav-number">3.3.</span> <span class="nav-text">3. 填入 Provider 名稱後便成功建立了一個新的 Provider</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-選取-Messageing-API-以建立一個-LINE-Bot"><span class="nav-number">3.4.</span> <span class="nav-text">4. 選取 Messageing API 以建立一個 LINE Bot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-設定-LINE-Bot-基本資料"><span class="nav-number">3.5.</span> <span class="nav-text">5. 設定 LINE Bot 基本資料</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-確認建立-Provider"><span class="nav-number">3.6.</span> <span class="nav-text">6. 確認建立 Provider</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-設定-LINE-Bot"><span class="nav-number">3.7.</span> <span class="nav-text">7. 設定 LINE Bot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#設定-LINE-Bot-有幾個部分需要注意的地方-其他部分都不需更動"><span class="nav-number">3.8.</span> <span class="nav-text">設定 LINE Bot 有幾個部分需要注意的地方 ( 其他部分都不需更動 ) :</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Channel-ID、Channel-secret、Channel-access-token-long-lived"><span class="nav-number">3.8.1.</span> <span class="nav-text">Channel ID、Channel secret、Channel access token (long-lived)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Use-webhooks"><span class="nav-number">3.8.2.</span> <span class="nav-text">Use webhooks</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Webhook-URL"><span class="nav-number">3.8.3.</span> <span class="nav-text">Webhook URL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Auto-reply-messages、Greeting-messages"><span class="nav-number">3.8.4.</span> <span class="nav-text">Auto-reply messages、Greeting messages</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Django-架構佈屬"><span class="nav-number">4.</span> <span class="nav-text">Django 架構佈屬</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-安裝-Django-及-LINE-Bot-API"><span class="nav-number">4.1.</span> <span class="nav-text">1. 安裝 Django 及 LINE Bot API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-建立-Django-專案"><span class="nav-number">4.2.</span> <span class="nav-text">2. 建立 Django 專案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#設定-settings-py"><span class="nav-number">4.3.</span> <span class="nav-text">設定 settings.py</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#設定-urls-py"><span class="nav-number">4.4.</span> <span class="nav-text">設定 urls.py</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#設定-views-py"><span class="nav-number">4.5.</span> <span class="nav-text">設定 views.py</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Heroku-伺服器佈屬"><span class="nav-number">5.</span> <span class="nav-text">Heroku 伺服器佈屬</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#創建-Heroku-app"><span class="nav-number">5.1.</span> <span class="nav-text">創建 Heroku app</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安裝-Git-版本控制系統"><span class="nav-number">5.2.</span> <span class="nav-text">安裝 Git 版本控制系統</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安裝-Heroku-CLI"><span class="nav-number">5.3.</span> <span class="nav-text">安裝 Heroku CLI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#登入-Heroku，並上傳專案至-Heroku"><span class="nav-number">5.4.</span> <span class="nav-text">登入 Heroku，並上傳專案至 Heroku</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#專案修改"><span class="nav-number">5.5.</span> <span class="nav-text">專案修改</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#後記"><span class="nav-number">6.</span> <span class="nav-text">後記</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考資料"><span class="nav-number">7.</span> <span class="nav-text">參考資料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#註釋"><span class="nav-number">8.</span> <span class="nav-text">註釋</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/blog/images/allen.jpg"
+      alt="Allen Tzeng">
+  <p class="site-author-name" itemprop="name">Allen Tzeng</p>
+  <div class="site-description" itemprop="description">Study about Mathematics , Programming and Data Science</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/blog/archives/">
+        
+          <span class="site-state-item-count">95</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/blog/categories/">
+          
+        
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分類</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://allen108108.github.io/" title="Github page &rarr; https://allen108108.github.io/"><i class="fa fa-fw fa-github-alt"></i>Github page</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/allen108108" title="GitHub &rarr; https://github.com/allen108108" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:allen108108@hotmail.com" title="E-Mail &rarr; mailto:allen108108@hotmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://www.facebook.com/Mathpy-257929091666547/" title="FB Page &rarr; https://www.facebook.com/Mathpy-257929091666547/" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB Page</a>
+      </span>
+    
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Allen Tzeng</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主題 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="訪客總數">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="總瀏覽次數">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+    
+  
+  <script color='255, 80, 219' opacity='1' zIndex='-1' count='100' src="/blog/lib/canvas-nest/canvas-nest-nomobile.min.js"></script>
+  <script src="/blog/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/blog/js/utils.js?v=7.4.0"></script><script src="/blog/js/motion.js?v=7.4.0"></script>
+<script src="/blog/js/schemes/pisces.js?v=7.4.0"></script>
+
+<script src="/blog/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: 21351,
+      el: 'wpac-rating',
+      color: 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://math-py.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  function disqus_config() {
+    this.page.url = "https://allen108108.github.io/blog/2020/03/26/MoBot _ LINE Bot 開發紀錄 ( LINE _ Heroku )/";
+    this.page.identifier = "2020/03/26/MoBot _ LINE Bot 開發紀錄 ( LINE _ Heroku )/";
+    this.page.title = 'MoBot : LINE Bot 開發紀錄 ( LINE / Heroku ) ';};
+  function loadComments() {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://math-py.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  }
+    window.addEventListener('load', loadComments, false);
+  
+</script>
+
+</body>
+</html>
