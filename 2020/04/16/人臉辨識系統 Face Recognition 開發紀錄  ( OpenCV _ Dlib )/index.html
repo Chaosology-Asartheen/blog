@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-TW">
+<head>
+  <meta name="google-site-verification" content="exmdvS3MT1hVojBxSEZZZ8TIBBOg6pJ2POTtzNuecqs" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+
+
+<meta property="og:site_name" content="">
+<meta property="og:title" content="categories">
+<meta property="og:url" content="http://">
+<meta property="og:image" content="">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/blog/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Gemini',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","width":280,"display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '複製',
+      copy_success: '複製成功',
+      copy_failure: '複製失敗'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="此專案利用 Pre-train 好的 Dlib model，進行人臉辨識　(Face Detection)　，並且實現僅用一張照片作為 database　就可以作出達到一定效果的人臉識別 (Face Recognition)。 除此之外，更加入了活體偵測 (Liveness Detection) 技術，以避免利用靜態圖片通過系統識別的問題。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="人臉辨識系統 Face Recognition 開發紀錄  ( OpenCV &#x2F; Dlib )">
+<meta property="og:url" content="https://allen108108.github.io/blog/2020/04/16/人臉辨識系統 Face Recognition 開發紀錄  ( OpenCV _ Dlib )/index.html">
+<meta property="og:site_name" content="Math.py">
+<meta property="og:description" content="此專案利用 Pre-train 好的 Dlib model，進行人臉辨識　(Face Detection)　，並且實現僅用一張照片作為 database　就可以作出達到一定效果的人臉識別 (Face Recognition)。 除此之外，更加入了活體偵測 (Liveness Detection) 技術，以避免利用靜態圖片通過系統識別的問題。">
+<meta property="og:locale" content="zh-TW">
+<meta property="og:image" content="https://i.imgur.com/W11yLoi.png">
+<meta property="og:image" content="https://i.imgur.com/mGUgrGI.jpg">
+<meta property="og:updated_time" content="2020-04-16T10:53:14.398Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="人臉辨識系統 Face Recognition 開發紀錄  ( OpenCV &#x2F; Dlib )">
+<meta name="twitter:description" content="此專案利用 Pre-train 好的 Dlib model，進行人臉辨識　(Face Detection)　，並且實現僅用一張照片作為 database　就可以作出達到一定效果的人臉識別 (Face Recognition)。 除此之外，更加入了活體偵測 (Liveness Detection) 技術，以避免利用靜態圖片通過系統識別的問題。">
+<meta name="twitter:image" content="https://i.imgur.com/W11yLoi.png">
+  <link rel="canonical" href="https://allen108108.github.io/blog/2020/04/16/人臉辨識系統 Face Recognition 開發紀錄  ( OpenCV _ Dlib )/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>人臉辨識系統 Face Recognition 開發紀錄  ( OpenCV / Dlib ) | Math.py</title>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-149442581-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-149442581-1');
+    }
+  </script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-TW">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Math.py</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Wir müssen wissen , wir werden wissen</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切換導航欄">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/blog/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首頁</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/blog/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分類</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/blog/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>歸檔</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://allen108108.github.io/blog/blog/2020/04/16/人臉辨識系統 Face Recognition 開發紀錄  ( OpenCV _ Dlib )/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Allen Tzeng">
+      <meta itemprop="description" content="Study about Mathematics , Programming and Data Science">
+      <meta itemprop="image" content="/blog/images/allen.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Math.py">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">人臉辨識系統 Face Recognition 開發紀錄  ( OpenCV / Dlib )
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              
+                
+              
+
+              <time title="創建時間：2020-04-16 18:14:27 / 修改時間：18:53:14" itemprop="dateCreated datePublished" datetime="2020-04-16T18:14:27+08:00">2020-04-16</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/專案-Project/" itemprop="url" rel="index"><span itemprop="name">專案 Project</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="閱讀次數" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">閱讀次數：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/blog/2020/04/16/人臉辨識系統 Face Recognition 開發紀錄  ( OpenCV _ Dlib )/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/04/16/人臉辨識系統 Face Recognition 開發紀錄  ( OpenCV _ Dlib )/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>此專案利用 Pre-train 好的 Dlib model，進行人臉辨識　(Face Detection)　，並且實現僅用一張照片作為 database　就可以作出達到一定效果的人臉識別 (Face Recognition)。 除此之外，更加入了活體偵測 (Liveness Detection) 技術，以避免利用靜態圖片通過系統識別的問題。</p>
+<a id="more"></a>
+<p><img src="https://i.imgur.com/W11yLoi.png" alt></p>
+<p>整個 pipeline 是由多個模型所組成，其中包含 : </p>
+<ul>
+<li>臉部的偵測</li>
+<li>人臉識別</li>
+<li>雙眼的偵測</li>
+<li>開閉眼識別</li>
+</ul>
+<p>最後利用開閉眼的偵測來決定是否將人臉識別的結果顯示出來。</p>
+<div class="video-container"><iframe src="//www.youtube.com/embed/CvZQnJfuP6Q" frameborder="0" allowfullscreen></iframe></div>
+<h2 id="Dlib"><a href="#Dlib" class="headerlink" title="Dlib"></a>Dlib</h2><p>Dlib 是一套基於 C++ 的機器學習工具包，藉由 Dlib 可以使用這些機器學習工具在任何的專案上，目前無論在機器人、嵌入設備、移動設備甚至是大型高效運算環境中都被廣泛使用。</p>
+<h3 id="在-Window-系統中安裝-Dlib"><a href="#在-Window-系統中安裝-Dlib" class="headerlink" title="在 Window 系統中安裝 Dlib"></a>在 Window 系統中安裝 Dlib</h3><p>Dlib 跟許多開發套件相同，在 Windows 系統下非常容易出現安裝上的問題，因此在安裝上面需要花一些時間避坑，以下是筆者安裝成功的一些方法。</p>
+<ul>
+<li><strong><code>pip</code> 安裝</strong></li>
+</ul>
+<p>簡單一點的方法就是直接在命令提示字元中輸入 <code>pip</code> 進行安裝</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ pip install dlib</span><br></pre></td></tr></table></figure>
+<p>上述方式在環境不同的狀況下，可能因為一些依賴項或是系統問題，很有可能會安裝失敗，筆者改輸入下列命令，即可安裝成功，但這樣的安裝方式並不會安裝最新版本的 Dlib，而安裝的 Dlib 也無法調用 GPU。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ python -m pip install https://files.pythonhosted.org/packages/0e/ce/f8a3cff33ac03a8219768f0694c5d703c8e037e6aba2e865f9bae22ed63c/dlib-19.8.1-cp36-cp36m-win_amd64.whl#sha256=794994fa2c54e7776659fddb148363a5556468a6d5d46be8dad311722d54bfcf</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>從 Sourse Code 進行安裝</strong></li>
+</ul>
+<p>若是希望可以調用 GPU 運算或是要確保安裝最新版本的 Dlib ，最推薦的方式還是要直接從 Source Code 進行安裝。</p>
+<p>首先，先將專案整個 clone 至本機資料夾中<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git clone https://github.com/davisking/dlib</span><br></pre></td></tr></table></figure></p>
+<p>接著，請確認電腦中有安裝 Visual Studio 2015，根據實際上測試的結果，Visual Studio 2015 以外的版本都會導致編譯失敗。</p>
+<p>最後在專案位址下輸入<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ python setup.py install</span><br></pre></td></tr></table></figure></p>
+<p>正常情況下，在 Windows 系統中利用此方法進行安裝，應該可以調用 GPU ，但筆者仍然無法成功使用 GPU，這部分的問題仍試圖釐清中。</p>
+<h2 id="人臉識別-Face-Detection-amp-Recognition"><a href="#人臉識別-Face-Detection-amp-Recognition" class="headerlink" title="人臉識別 Face Detection &amp; Recognition"></a>人臉識別 Face Detection &amp; Recognition</h2><p>不管是用什麼方式進行人臉識別，基本上都要經過兩個階段的步驟</p>
+<ul>
+<li>人臉對齊</li>
+<li>身分判斷</li>
+</ul>
+<p>先對一張照片、一張 Frame 找出人臉的位置進行對齊，再利用模型進行特徵萃取來比對出身分。在這個專案中，我們利用 Dlib 本身的臉部偵測器來進行人臉對齊後，再使用 Imperial College London 在 <a href="https://ibug.doc.ic.ac.uk/resources/facial-point-annotations/" target="_blank" rel="noopener">ibug 300-W dataset</a> 所訓練的<a href="https://github.com/AKSHAYUBHAT/TensorFace/blob/master/openface/models/dlib/shape_predictor_68_face_landmarks.dat" target="_blank" rel="noopener">模型</a>由鏡頭中人臉與資料庫中的人臉同時萃取出關鍵點後進行 Embedding，再進行身分比對。</p>
+<h3 id="流程簡述"><a href="#流程簡述" class="headerlink" title="流程簡述"></a>流程簡述</h3><ol>
+<li>先收集欲辨識的人正面照片 ( 甚至可以收集多角度照片 )於特定資料夾 (此處設為 <code>./rec</code> )中，並將檔名設為人名。</li>
+<li>使用 <code>dlib.get_frontal_face_detector()</code> 擷取資料夾中照片的人臉，再利用 <code>dlib.shape_predictor()</code> 取出臉部 68 個關鍵點。</li>
+<li><code>dlib.face_recognition_model_v1().compute_face_descriptor()</code> 將 68 個關鍵點進行嵌入成一個 128 維的向量 $\nu_1,\nu_2,\cdots$。</li>
+<li>相同的方式將鏡頭中的人臉也嵌入成 128 維的向量 $\nu$。</li>
+<li>計算 $\nu$ 與 $\nu_1,\nu_2,\cdots$ 個別計算歐式距離，最接近者及判定其身分。</li>
+</ol>
+<h3 id="模型路徑-Model-Path"><a href="#模型路徑-Model-Path" class="headerlink" title="模型路徑 Model Path"></a>模型路徑 Model Path</h3><p>我們先將要使用的模型路徑設定好，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 人臉對齊</span></span><br><span class="line">detector = dlib.get_frontal_face_detector()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 人臉關鍵點模型</span></span><br><span class="line">predictor = dlib.shape_predictor( <span class="string">'shape_predictor_68_face_landmarks.dat'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 128維向量嵌入模型</span></span><br><span class="line">face_rec_model_path = <span class="string">"dlib_face_recognition_resnet_model_v1.dat"</span></span><br><span class="line">facerec = dlib.face_recognition_model_v1(face_rec_model_path)</span><br></pre></td></tr></table></figure>
+<h3 id="人臉嵌入-Face-Embedding"><a href="#人臉嵌入-Face-Embedding" class="headerlink" title="人臉嵌入 Face Embedding"></a>人臉嵌入 Face Embedding</h3><p>將每一個資料庫中的資料進行人臉各嵌入成一個 128 維度向量，並且收集所欲判定的人名。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 比對人臉描述子列表</span></span><br><span class="line">descriptors = []</span><br><span class="line"></span><br><span class="line"><span class="comment"># 欲比對人臉名稱列表</span></span><br><span class="line">candidate = []</span><br><span class="line"></span><br><span class="line"><span class="comment"># 針對比對資料夾裡每張圖片做比對:</span></span><br><span class="line"><span class="keyword">for</span> f <span class="keyword">in</span> glob.glob(os.path.join(faces_folder_path, <span class="string">"*.jpg"</span>)):</span><br><span class="line">    base = os.path.basename(f)</span><br><span class="line"><span class="comment"># 依序取得圖片檔案人名</span></span><br><span class="line">    candidate.append(os.path.splitext(base)[ <span class="number">0</span>])</span><br><span class="line">    img = io.imread(f)</span><br><span class="line"><span class="comment"># 1.人臉偵測</span></span><br><span class="line">    dets = detector(img, <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">for</span> k, d <span class="keyword">in</span> enumerate(dets):</span><br><span class="line"><span class="comment"># 2.特徵點偵測</span></span><br><span class="line">        shape = predictor(img, d)</span><br><span class="line"><span class="comment"># 3.取得描述子，128維特徵向量</span></span><br><span class="line">        face_descriptor = facerec.compute_face_descriptor(img, shape)    </span><br><span class="line"><span class="comment"># 轉換numpy array格式</span></span><br><span class="line">        v = numpy.array(face_descriptor)</span><br><span class="line">        descriptors.append(v)</span><br></pre></td></tr></table></figure>
+<p>相同的方式，配合鏡頭擷取出來的 Frame 來將畫面中的人臉嵌入成 128 維向量。</p>
+<h3 id="身分判別-Face-Recognition"><a href="#身分判別-Face-Recognition" class="headerlink" title="身分判別 Face Recognition"></a>身分判別 Face Recognition</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 計算歐式距離</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> descriptors:</span><br><span class="line">    dist_ = np.linalg.norm(i -d_test)</span><br><span class="line">    dist.append(dist_)</span><br><span class="line"><span class="comment"># 將比對人名和比對出來的歐式距離組成一個dict</span></span><br><span class="line">cd = dict( zip(candidate,dist))</span><br><span class="line">cd_sorted = sorted(c_d.items(), key = <span class="keyword">lambda</span> d:d[<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+<p>使用 <code>np.linalg.norm()</code> 直接計算嵌入向量的距離，並將人名及相對應計算出來的距離以 Dictionary 方式呈現，排序後取最高者作為判斷結果。</p>
+<p>上面的流程就是單純人臉身分判斷的流程及部分程式碼解析，這樣的方式應用在 Windows 系統中 Inference time 稍長大概是唯一的問題，其判別的準確度筆者認為並不算太差。</p>
+<p><img src="https://i.imgur.com/mGUgrGI.jpg" alt></p>
+<h2 id="活人偵測-Liveness-Detection"><a href="#活人偵測-Liveness-Detection" class="headerlink" title="活人偵測 Liveness Detection"></a>活人偵測 Liveness Detection</h2><p>在筆者實作人臉辨識專案的同時，意外地看到了一篇挺有趣的新聞 : “ <a href="https://www.setn.com/News.aspx?NewsID=619777" target="_blank" rel="noopener">刷臉被破解！小學生拿「彩色照」秒解鎖　側臉、偷拍都能開</a> “，讓筆者不禁思考，如何可以在不另外安裝硬體設備 (譬如 : 深度相機、紅外線鏡頭…等) 下，盡可能地避免這樣的狀況發生 ?</p>
+<p>搜尋了一些資料，以目前的狀況大約有兩個方向可行 : (1) 直接訓練一個 Deep Learning Model 判斷人臉真假 ，(2) 利用眨眼的過程進行真實人臉的判斷。在此專案中，筆者採用了後者的方式進行 Liveness Detection。</p>
+<p>眨眼偵測，筆者使用了 <a href="https://towardsdatascience.com/real-time-face-liveness-detection-with-python-keras-and-opencv-c35dc70dafd3" target="_blank" rel="noopener">Jordan Van Eetveldt</a> 預訓練好的左右眼開闔判別模型，先偵測鏡頭捕捉的眼睛是開啟還是閉眼。</p>
+<p>再來配合簡單的邏輯判斷，當偵測眼睛的過程中出現了開、閉、開的過程，即判斷為真人，將前述的人臉辨識結果呈現出來。</p>
+<h3 id="定義函式"><a href="#定義函式" class="headerlink" title="定義函式"></a>定義函式</h3><p>這邊主要定義三個函式，載入預訓練模型、進行開閉眼預測、以及邏輯判斷眨眼狀態 : </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">isBlinking</span><span class="params">(history, maxFrames)</span>:</span></span><br><span class="line">    <span class="comment"># 偵測眼睛狀態是否有開、閉、開這樣的連續動作出現</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(maxFrames):</span><br><span class="line">        pattern = <span class="string">'1'</span> + <span class="string">'0'</span>*(i+<span class="number">1</span>) + <span class="string">'1'</span></span><br><span class="line">        <span class="keyword">if</span> pattern <span class="keyword">in</span> history:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(img, model)</span>:</span></span><br><span class="line">	img = Image.fromarray(img, <span class="string">'RGB'</span>).convert(<span class="string">'L'</span>)</span><br><span class="line">	img = imresize(img, (<span class="number">24</span>,<span class="number">24</span>)).astype(<span class="string">'float32'</span>)</span><br><span class="line">	img /= <span class="number">255</span></span><br><span class="line">	img = img.reshape(<span class="number">1</span>,<span class="number">24</span>,<span class="number">24</span>,<span class="number">1</span>)</span><br><span class="line">	prediction = model.predict(img)</span><br><span class="line">	<span class="keyword">if</span> prediction &lt; <span class="number">0.1</span>:</span><br><span class="line">		prediction = <span class="string">'closed'</span></span><br><span class="line">	<span class="keyword">elif</span> prediction &gt; <span class="number">0.9</span>:</span><br><span class="line">		prediction = <span class="string">'open'</span></span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		prediction = <span class="string">'idk'</span></span><br><span class="line">	<span class="keyword">return</span> prediction</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_model</span><span class="params">()</span>:</span></span><br><span class="line">	json_file = open(<span class="string">'model.json'</span>, <span class="string">'r'</span>)</span><br><span class="line">	loaded_model_json = json_file.read()</span><br><span class="line">	json_file.close()</span><br><span class="line">	loaded_model = model_from_json(loaded_model_json)</span><br><span class="line">	<span class="comment"># load weights into new model</span></span><br><span class="line">	loaded_model.load_weights(<span class="string">"model.h5"</span>)</span><br><span class="line">	loaded_model.compile(loss=<span class="string">'binary_crossentropy'</span>, optimizer=<span class="string">'adam'</span>, metrics=[<span class="string">'accuracy'</span>])</span><br><span class="line">	<span class="keyword">return</span> loaded_model</span><br></pre></td></tr></table></figure>
+<h3 id="載入模型-Load-Model"><a href="#載入模型-Load-Model" class="headerlink" title="載入模型 Load Model"></a>載入模型 Load Model</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">open_eye_cascPath = <span class="string">'C:\pythonwork\Face detection\haarcascade_eye_tree_eyeglasses.xml'</span></span><br><span class="line">left_eye_cascPath = <span class="string">'C:\pythonwork\Face detection\haarcascade_lefteye_2splits.xml'</span></span><br><span class="line">right_eye_cascPath =<span class="string">'C:\pythonwork\Face detection\haarcascade_righteye_2splits.xml'</span></span><br><span class="line"></span><br><span class="line">open_eyes_detector = cv2.CascadeClassifier(open_eye_cascPath)</span><br><span class="line">left_eye_detector = cv2.CascadeClassifier(left_eye_cascPath)</span><br><span class="line">right_eye_detector = cv2.CascadeClassifier(right_eye_cascPath)</span><br><span class="line"></span><br><span class="line">model = load_model()</span><br></pre></td></tr></table></figure>
+<h3 id="真人判定-Liveness-Detection"><a href="#真人判定-Liveness-Detection" class="headerlink" title="真人判定 Liveness Detection"></a>真人判定 Liveness Detection</h3><p>一開始，系統僅會偵測眼睛，雖然同時也會對人臉進行辨識，卻不會顯示出來。而這個部分定義了，在什麼樣子的狀態下，才會將人臉辨識的結果呈現出來。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> isBlinking(eyes_detected[rec_name],<span class="number">3</span>):</span><br><span class="line">    cv2.rectangle(frame, (x, y), (x+w, y+h), (<span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>), <span class="number">2</span>)</span><br><span class="line">    <span class="comment"># Display name</span></span><br><span class="line">    y = y - <span class="number">15</span> <span class="keyword">if</span> y - <span class="number">15</span> &gt; <span class="number">15</span> <span class="keyword">else</span> y + <span class="number">15</span></span><br><span class="line">    cv2.putText(frame, rec_name, (x, y),</span><br></pre></td></tr></table></figure>
+<h2 id="後記"><a href="#後記" class="headerlink" title="後記"></a>後記</h2><p>其實看了此文介紹的人臉辨識，用了兩三個模型進行最終的人臉判別，其實如果有看過 FaceNet 論文 “<a href="https://arxiv.org/abs/1503.03832" target="_blank" rel="noopener"><em>FaceNet: A Unified Embedding for Face Recognition and Clustering</em></a>“ 其概念幾乎完全一樣，但是用了更快的方法來達成而已，或許，這個專案未來可以試著用 FaceNet 來替代 Dlib 的方式進行辨識。</p>
+<p>另外，這種 Liveness Detection 的方式是否能完全杜絕人臉辨識被破解 ? 其實不然，基本上利用一個人臉有眨眼的影片或許也可以破解這個部分，但是正如筆者所提到的，真正萬無一失的辦法還是得另外安裝硬體設備，單純使用深度學習的方式或許盡可能可以做到的就是如此。</p>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ol>
+<li><a href="https://towardsdatascience.com/real-time-face-liveness-detection-with-python-keras-and-opencv-c35dc70dafd3" target="_blank" rel="noopener">Real-time face liveness detection with Python, Keras and OpenCV</a></li>
+<li><a href="https://www.pyimagesearch.com/2019/03/11/liveness-detection-with-opencv/" target="_blank" rel="noopener">Liveness Detection with OpenCV</a></li>
+<li><a href="https://tpu.thinkpower.com.tw/tpu/articleDetails/950" target="_blank" rel="noopener">基於python語言使用OpenCV搭配dlib實作人臉偵測與辨識</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>作者： </strong>Allen Tzeng</li>
+  <li class="post-copyright-link">
+    <strong>文章連結：</strong>
+    <a href="https://allen108108.github.io/blog/2020/04/16/人臉辨識系統 Face Recognition 開發紀錄  ( OpenCV _ Dlib )/" title="人臉辨識系統 Face Recognition 開發紀錄  ( OpenCV / Dlib )">https://allen108108.github.io/blog/2020/04/16/人臉辨識系統 Face Recognition 開發紀錄  ( OpenCV _ Dlib )/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/blog/2020/04/06/Jetson Nano 初體驗 (二) – Jetson Nano/" rel="next" title="Jetson Nano 初體驗 (二) -- Jetson Nano">
+                  <i class="fa fa-chevron-left"></i> Jetson Nano 初體驗 (二) -- Jetson Nano
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/blog/2020/04/16/Jetson Nano 初體驗 (三) – Deep Learning Model/" rel="prev" title="Jetson Nano 初體驗 (三) -- Deep Learning Model">
+                  Jetson Nano 初體驗 (三) -- Deep Learning Model <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    
+  <div class="comments" id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Dlib"><span class="nav-number">1.</span> <span class="nav-text">Dlib</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在-Window-系統中安裝-Dlib"><span class="nav-number">1.1.</span> <span class="nav-text">在 Window 系統中安裝 Dlib</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#人臉識別-Face-Detection-amp-Recognition"><span class="nav-number">2.</span> <span class="nav-text">人臉識別 Face Detection &amp; Recognition</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#流程簡述"><span class="nav-number">2.1.</span> <span class="nav-text">流程簡述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模型路徑-Model-Path"><span class="nav-number">2.2.</span> <span class="nav-text">模型路徑 Model Path</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#人臉嵌入-Face-Embedding"><span class="nav-number">2.3.</span> <span class="nav-text">人臉嵌入 Face Embedding</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#身分判別-Face-Recognition"><span class="nav-number">2.4.</span> <span class="nav-text">身分判別 Face Recognition</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#活人偵測-Liveness-Detection"><span class="nav-number">3.</span> <span class="nav-text">活人偵測 Liveness Detection</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定義函式"><span class="nav-number">3.1.</span> <span class="nav-text">定義函式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#載入模型-Load-Model"><span class="nav-number">3.2.</span> <span class="nav-text">載入模型 Load Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#真人判定-Liveness-Detection"><span class="nav-number">3.3.</span> <span class="nav-text">真人判定 Liveness Detection</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#後記"><span class="nav-number">4.</span> <span class="nav-text">後記</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考資料"><span class="nav-number">5.</span> <span class="nav-text">參考資料</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/blog/images/allen.jpg"
+      alt="Allen Tzeng">
+  <p class="site-author-name" itemprop="name">Allen Tzeng</p>
+  <div class="site-description" itemprop="description">Study about Mathematics , Programming and Data Science</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/blog/archives/">
+        
+          <span class="site-state-item-count">99</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/blog/categories/">
+          
+        
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分類</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://allen108108.github.io/" title="Github page &rarr; https://allen108108.github.io/"><i class="fa fa-fw fa-github-alt"></i>Github page</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/allen108108" title="GitHub &rarr; https://github.com/allen108108" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:allen108108@hotmail.com" title="E-Mail &rarr; mailto:allen108108@hotmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://www.facebook.com/Mathpy-257929091666547/" title="FB Page &rarr; https://www.facebook.com/Mathpy-257929091666547/" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB Page</a>
+      </span>
+    
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Allen Tzeng</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主題 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="訪客總數">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="總瀏覽次數">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+    
+  
+  <script color='255, 80, 219' opacity='1' zIndex='-1' count='100' src="/blog/lib/canvas-nest/canvas-nest-nomobile.min.js"></script>
+  <script src="/blog/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/blog/js/utils.js?v=7.4.0"></script><script src="/blog/js/motion.js?v=7.4.0"></script>
+<script src="/blog/js/schemes/pisces.js?v=7.4.0"></script>
+
+<script src="/blog/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: 21351,
+      el: 'wpac-rating',
+      color: 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://math-py.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  function disqus_config() {
+    this.page.url = "https://allen108108.github.io/blog/2020/04/16/人臉辨識系統 Face Recognition 開發紀錄  ( OpenCV _ Dlib )/";
+    this.page.identifier = "2020/04/16/人臉辨識系統 Face Recognition 開發紀錄  ( OpenCV _ Dlib )/";
+    this.page.title = '人臉辨識系統 Face Recognition 開發紀錄  ( OpenCV / Dlib )';};
+  function loadComments() {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://math-py.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  }
+    window.addEventListener('load', loadComments, false);
+  
+</script>
+
+</body>
+</html>

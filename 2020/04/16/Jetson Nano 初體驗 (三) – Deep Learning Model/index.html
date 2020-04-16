@@ -63,27 +63,23 @@
   };
 </script>
 
-  <meta name="description" content="在正式進入 Word Embedding 之前，我覺得應該先來談談什麼是 Word Vector。 今天看了幾個 Medium 文章，有技術部落格甚至認為 Word Embedding 就是 Word Vector。這才讓我覺得，似乎要對 Word Embedding 要有更深刻的了解才是。">
+  <meta name="description" content="系列文章 Jetson Nano 初體驗 (一) — WaveShare JetBot Jetson Nano 初體驗 (二) — Jetson Nano Jetson Nano 初體驗 (三) — Deep Learning Model">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Unsupervised Learning (3) -- Word Embedding">
-<meta property="og:url" content="https://allen108108.github.io/blog/2019/10/08/Unsupervised Learning (3) -- Word Embedding/index.html">
+<meta property="og:title" content="Jetson Nano 初體驗 (三) -- Deep Learning Model">
+<meta property="og:url" content="https://allen108108.github.io/blog/2020/04/16/Jetson Nano 初體驗 (三) – Deep Learning Model/index.html">
 <meta property="og:site_name" content="Math.py">
-<meta property="og:description" content="在正式進入 Word Embedding 之前，我覺得應該先來談談什麼是 Word Vector。 今天看了幾個 Medium 文章，有技術部落格甚至認為 Word Embedding 就是 Word Vector。這才讓我覺得，似乎要對 Word Embedding 要有更深刻的了解才是。">
+<meta property="og:description" content="系列文章 Jetson Nano 初體驗 (一) — WaveShare JetBot Jetson Nano 初體驗 (二) — Jetson Nano Jetson Nano 初體驗 (三) — Deep Learning Model">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:image" content="https://i.imgur.com/Q2yK9cs.png =300x">
-<meta property="og:image" content="https://i.imgur.com/Y6gh48b.png =300x">
-<meta property="og:image" content="https://i.imgur.com/K4EvdrZ.png =500x">
-<meta property="og:image" content="https://i.imgur.com/IW9Ve1s.png =500x">
-<meta property="og:image" content="https://i.imgur.com/adgSMho.png =500x">
-<meta property="og:image" content="https://i.imgur.com/xBv13wS.png =330x">
-<meta property="og:image" content="https://i.imgur.com/z0Pp3P0.png =330x">
-<meta property="og:image" content="https://i.imgur.com/orAfN63.png">
-<meta property="og:updated_time" content="2019-10-22T08:00:29.324Z">
+<meta property="og:image" content="https://i.imgur.com/GmxuUp4.jpg">
+<meta property="og:image" content="https://i.imgur.com/FFiuXhb.jpg">
+<meta property="og:image" content="https://i.imgur.com/iCkTj5Q.jpg">
+<meta property="og:image" content="https://i.imgur.com/WwC4PEh.jpg">
+<meta property="og:updated_time" content="2020-04-16T10:51:40.091Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Unsupervised Learning (3) -- Word Embedding">
-<meta name="twitter:description" content="在正式進入 Word Embedding 之前，我覺得應該先來談談什麼是 Word Vector。 今天看了幾個 Medium 文章，有技術部落格甚至認為 Word Embedding 就是 Word Vector。這才讓我覺得，似乎要對 Word Embedding 要有更深刻的了解才是。">
-<meta name="twitter:image" content="https://i.imgur.com/Q2yK9cs.png =300x">
-  <link rel="canonical" href="https://allen108108.github.io/blog/2019/10/08/Unsupervised Learning (3) -- Word Embedding/">
+<meta name="twitter:title" content="Jetson Nano 初體驗 (三) -- Deep Learning Model">
+<meta name="twitter:description" content="系列文章 Jetson Nano 初體驗 (一) — WaveShare JetBot Jetson Nano 初體驗 (二) — Jetson Nano Jetson Nano 初體驗 (三) — Deep Learning Model">
+<meta name="twitter:image" content="https://i.imgur.com/GmxuUp4.jpg">
+  <link rel="canonical" href="https://allen108108.github.io/blog/2020/04/16/Jetson Nano 初體驗 (三) – Deep Learning Model/">
 
 
 <script id="page-configurations">
@@ -97,7 +93,7 @@
   };
 </script>
 
-  <title>Unsupervised Learning (3) -- Word Embedding | Math.py</title>
+  <title>Jetson Nano 初體驗 (三) -- Deep Learning Model | Math.py</title>
   
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-149442581-1"></script>
   <script>
@@ -235,7 +231,7 @@
   
   
   <div class="post-block post">
-    <link itemprop="mainEntityOfPage" href="https://allen108108.github.io/blog/blog/2019/10/08/Unsupervised Learning (3) -- Word Embedding/">
+    <link itemprop="mainEntityOfPage" href="https://allen108108.github.io/blog/blog/2020/04/16/Jetson Nano 初體驗 (三) – Deep Learning Model/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Allen Tzeng">
@@ -247,7 +243,7 @@
       <meta itemprop="name" content="Math.py">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">Unsupervised Learning (3) -- Word Embedding
+        <h1 class="post-title" itemprop="name headline">Jetson Nano 初體驗 (三) -- Deep Learning Model
 
           
         </h1>
@@ -263,19 +259,11 @@
                 
               
 
-              <time title="創建時間：2019-10-08 00:42:04" itemprop="dateCreated datePublished" datetime="2019-10-08T00:42:04+08:00">2019-10-08</time>
+              <time title="創建時間：2020-04-16 18:50:55 / 修改時間：18:51:40" itemprop="dateCreated datePublished" datetime="2020-04-16T18:50:55+08:00">2020-04-16</time>
             </span>
           
             
 
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2019-10-22 16:00:29" itemprop="dateModified" datetime="2019-10-22T16:00:29+08:00">2019-10-22</time>
-              </span>
             
           
             <span class="post-meta-item">
@@ -284,14 +272,7 @@
               </span>
               <span class="post-meta-item-text">分類於</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/課程筆記-Course/" itemprop="url" rel="index"><span itemprop="name">課程筆記 Course</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/課程筆記-Course/李宏毅-Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">李宏毅 Machine Learning</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/創客-Maker/" itemprop="url" rel="index"><span itemprop="name">創客 Maker</span></a></span>
 
                 
                 
@@ -318,7 +299,7 @@
       
       <span class="post-meta-item-text">Disqus：</span>
     
-    <a title="disqus" href="/blog/2019/10/08/Unsupervised Learning (3) -- Word Embedding/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/10/08/Unsupervised Learning (3) -- Word Embedding/" itemprop="commentCount"></span></a>
+    <a title="disqus" href="/blog/2020/04/16/Jetson Nano 初體驗 (三) – Deep Learning Model/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/04/16/Jetson Nano 初體驗 (三) – Deep Learning Model/" itemprop="commentCount"></span></a>
   </span>
   
   
@@ -332,57 +313,27 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>在正式進入 Word Embedding 之前，我覺得應該先來談談什麼是 Word Vector。</p>
-<p>今天看了幾個 Medium 文章，有技術部落格甚至認為 Word Embedding 就是 Word Vector。這才讓我覺得，似乎要對 Word Embedding 要有更深刻的了解才是。</p>
+        <h2 id="系列文章"><a href="#系列文章" class="headerlink" title="系列文章"></a>系列文章</h2><ul>
+<li><a href="https://allen108108.github.io/blog/2020/04/06/Jetson%20Nano%20%E5%88%9D%E9%AB%94%E9%A9%97%20%28%E4%B8%80%29%20%E2%80%93%20WaveShare%20JetBot/"><em>Jetson Nano 初體驗 (一) — WaveShare JetBot</em></a></li>
+<li><a href="https://allen108108.github.io/blog/2020/04/06/Jetson%20Nano%20%E5%88%9D%E9%AB%94%E9%A9%97%20%28%E4%BA%8C%29%20%E2%80%93%20Jetson%20Nano/"><em>Jetson Nano 初體驗 (二) — Jetson Nano</em></a></li>
+<li><a href><em>Jetson Nano 初體驗 (三) — Deep Learning Model</em></a></li>
+</ul>
 <a id="more"></a>
-<h2 id="Word-Vector"><a href="#Word-Vector" class="headerlink" title="Word Vector"></a>Word Vector</h2><p>在 Machine Learning 中，資料的特徵表示是整個領域中最核心的部分，不同的特徵表示，可能會訓練出天差地遠的 Model。當然，在 Natural Language Processing ( NLP ) 中亦然。</p>
-<p>然而於 NLP 中我們應該要用什麼樣子的方式來表示資料 ? 怎麼樣子的方式才能真正有效的表現文本裡面「字」、「詞」、「句」之間的意義呢 ? 此時便有了 Word Vector 的概念。</p>
-<h3 id="1-of-N-Encoding-One-Hot-representation"><a href="#1-of-N-Encoding-One-Hot-representation" class="headerlink" title="1-of-N Encoding ( One-Hot representation )"></a>1-of-N Encoding ( One-Hot representation )</h3><p>這是 NLP 中最直覺也是最多人使用的方法，將 One-Hot Encoding 的概念引入 NLP ，每一個字都是一個很長的向量，維度是我們手中擁有的詞數量。</p>
-<p><img src="https://i.imgur.com/Q2yK9cs.png =300x" alt></p>
-<p>上面的示例，只是為了讓我們理解 1-of-N Encoding 的概念，實務上，每一個 Word Vector 可能都會是好幾萬維的稀疏矩陣。</p>
-<p>1-of-N Encoding 直觀、簡潔，而且在演算法上計算也沒有什麼太大的瓶頸，但是這樣的 Word Vector Representation 卻有一些問題 : </p>
-<ul>
-<li>隨著文本的內容增加，維度會越來越大。</li>
-<li>每一個 Word Vector 之間都是 Independent，無法體現上下文之間的語意相關，而這在 NLP 中是極為嚴重的問題。</li>
-<li>無法加入新詞。</li>
-</ul>
-<h3 id="Word-Embedding-Distribution-representation"><a href="#Word-Embedding-Distribution-representation" class="headerlink" title="Word Embedding ( Distribution representation )"></a>Word Embedding ( Distribution representation )</h3><p>Distribution Representation 最早是在 1986 年 Hinton 的論文 — “ <em>Learning distributed representations of concepts</em> “ 中被提出。而 Word Embedding 則是 Distribution representation 的一種型態，可以克服 One-Hot repesentation 的缺點 。</p>
-<p><img src="https://i.imgur.com/Y6gh48b.png =300x" alt><br>( 圖片來源 : <a href="https://blog.csdn.net/scotfield_msn/article/details/69075227" target="_blank" rel="noopener">DeepNLP的表示学习·词嵌入来龙去脉·深度学习（Deep Learning）·自然语言处理（NLP）·表示（Representation）</a> )</p>
-<p>Word Embedding 的核心概念是將每一個詞映射到一個 (相對於 One-Hot representation) 低維度的賦距空間內，而這些帶有文本訊息的低維度向量形成一個稠密的「詞向量空間」，然後利用距離來判斷其 ( 語法、語意 ) 相似性。</p>
-<p>這才是真正「詞嵌入」的精隨所在。</p>
-<p>值得一提的是，當我們以 Neural Network 建模時，中間的 hidden layer 都可以視為是一種 feature extraction ( 特徵萃取 )，如果利用 NN 來做 NLP 模型時，這些低維度 hidden layer 也是有捕捉上下文的能力。換句話說， Word Embedding 可以視為 NN 處理 NLP 問題下的副產品。</p>
-<p>說起來簡單，但真正在 NLP 要取得詞向量並不是這麼容易，因為映射方式的不同、嵌入空間的大小不同…等因素，詞向量並不會是唯一的。</p>
-<p>Word Embedding 可以簡單地做一個分類 : </p>
-<ul>
-<li>Count-Based : 利用詞頻統計來建立 Word Vector 的一種方法。著名的方法有 — Count Vector、TF-IDF Vector 以及 Co-Occurence Vector ( GloVe<sup><a href="#fn_註1" id="reffn_註1">註1</a></sup> )</li>
-</ul>
-<ul>
-<li>Prediction-Based : 利用神經網路來建立 Word Vector 的一種方法。常見的方法有 — Continuous Bag of Words ( CBOW ) 及 Skip-gram。( Prediction-Base 為李宏毅教授的重點 )</li>
-</ul>
-<p><img src="https://i.imgur.com/K4EvdrZ.png =500x" alt></p>
-<p>假如果我們要以前一個字 $w_{i-1}$ 來預測下一個字 $w_i$，那我們可以利用一組 NN 架構以及一些文本訓練資料，將文本中 $w_{i-1}$ 的 1-of-N Encoding 作為輸入，輸出則是所有文本內文字的機率值 ( 輸入輸出雖是同樣維度，但是意義卻不同。 ) ，藉此訓練出一套預測模型。</p>
-<p><img src="https://i.imgur.com/IW9Ve1s.png =500x" alt></p>
-<p>當然我們也可以用前兩個字 $w_{i-2},w_{i-1}$ 來預測下一個字 $w_i$。<br>就直觀來看，$w_{i-2}$ 與 $w_{i-1}$ 理應具有相同的性質 (語意、上下文關係…)，才能預測出 $w_i$。因為這樣的理由，我們可以將其權重共享來體現其上述的概念。當然，也可以藉此降低參數量，減少計算成本。</p>
-<p>理解了 Prediction-Base 概念後，前面所講的 CBOW 或是 Skip-gram 也只是其變形應用。</p>
-<p><img src="https://i.imgur.com/adgSMho.png =500x" alt></p>
-<h2 id="Advantage-of-Word-Embedding"><a href="#Advantage-of-Word-Embedding" class="headerlink" title="Advantage of Word Embedding"></a>Advantage of Word Embedding</h2><p>當我們可以建立出 Word Embedding 後，就可以對 Word 進行觀察、操作</p>
-<ul>
-<li>我們可以藉由可視化來觀察字詞之間的關聯性</li>
-</ul>
-<p><img src="https://i.imgur.com/xBv13wS.png =330x" alt><img src="https://i.imgur.com/z0Pp3P0.png =330x" alt></p>
-<ul>
-<li>我們也可以利用向量的運算法則對 Word 進行運算。</li>
-</ul>
-<p><img width="500" src="https://i.imgur.com/orAfN63.png"></p>
-<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ol>
-<li>Hung-yi Lee ,  <a href="http://speech.ee.ntu.edu.tw/~tlkagk/courses_ML17_2.html" target="_blank" rel="noopener">Machine Learning</a>(2017)</li>
-<li><a href="https://blog.csdn.net/scotfield_msn/article/details/69075227" target="_blank" rel="noopener">DeepNLP的表示学习·词嵌入来龙去脉·深度学习（Deep Learning）·自然语言处理（NLP）·表示（Representation）</a></li>
-<li><a href="https://nlp.stanford.edu/projects/glove/" target="_blank" rel="noopener">GloVe: Global Vectors for Word Representation</a></li>
-<li><a href="https://pengfoo.com/post/machine-learning/2017-04-11" target="_blank" rel="noopener">GloVe:另一种Word Embedding方法</a></li>
-<li><a href="http://www.fanyeong.com/2018/02/19/glove-in-detail/" target="_blank" rel="noopener">GloVe详解</a></li>
-<li><a href="https://www.jianshu.com/p/2a76b7d3126b" target="_blank" rel="noopener">Word Embedding的发展和原理简介</a></li>
-</ol>
-<h2 id="註釋"><a href="#註釋" class="headerlink" title="註釋"></a>註釋</h2><p><sup><a href="#fn_註1" id="reffn_註1">註1</a></sup>:<br>Global Vectors for Word Representation 的簡稱。這是 Stanford University 於2014年所發表的 Word Embedding 方法，利用 Co-Occurence Matrix ( 共現矩陣 ) 與上下文的關係建立一套 Loss Function，找出最優化解時的 Word Vector。</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>前面的工作已經為我們的專案開發打好了基礎，接下來就可以開始進行專案開發。筆者試圖將之前自己作的幾個開發專案移植到 Jetson Nano ，看看是否可行。除此之外，筆者也藉由 Jetson Nano 搭配 MLX 90615 紅外線測溫模組來對專案進行延伸開發。</p>
+<h2 id="手勢辨識-Gesture-Recognition"><a href="#手勢辨識-Gesture-Recognition" class="headerlink" title="手勢辨識 Gesture Recognition"></a>手勢辨識 Gesture Recognition</h2><p>手勢辨識專案之前筆者已經寫過一篇專題介紹 “ <a href="https://allen108108.github.io/blog/2020/01/18/Gesture%20Recognition%20using%20YOLO%20v3%20tiny/">Gesture Recognition using YOLO v3 tiny</a> “ ，但移植到 Jetson Nano 的模型是基於 Darknet 的 YOLOv2 tiny ，訓練資料及時間上都與前文之版本不太相同，因此表現上也有所差異，但這並非本文所要討論的內容，因此不多加解釋。</p>
+<div class="video-container"><iframe src="//www.youtube.com/embed/UoOW0amTH9w" frameborder="0" allowfullscreen></iframe></div>
+<p>硬體上與筆電仍有差異，因此效能上會有落差，這是可以預期的，可以藉由 Gstream 調整畫面大小來提升 FPS。但要達到 Nvidia 官方宣稱的 25 FPS 我認為有其難度，這方面還需要再研究。</p>
+<h2 id="人臉辨識-Face-Recognition"><a href="#人臉辨識-Face-Recognition" class="headerlink" title="人臉辨識 Face Recognition"></a>人臉辨識 Face Recognition</h2><p>這個專案沿用了 “<a href>人臉辨識系統 Face Recognition 開發紀錄 ( OpenCV / Dlib )</a>“ 並且利用 MLX 90615 來量測體溫。</p>
+<p><img src="https://i.imgur.com/GmxuUp4.jpg" alt></p>
+<p>MLX 90615 是一個紅外線溫度感測模組，支援 I2C 接口，因此額外購入了 其附上的 I2C 接線筆者想直接使用，因此額外購入了 Base Hat for Raspberry Pi Zero 將 MLX 90615 與 Jetson Nano 可以直接串接。</p>
+<p><img src="https://i.imgur.com/FFiuXhb.jpg" alt></p>
+<p>紅外線偵測必須跟鏡頭同步偵測，因此筆者將 MLX90615 的紅外線探測頭固定在鏡頭之上。</p>
+<p><img src="https://i.imgur.com/iCkTj5Q.jpg" alt></p>
+<p><img src="https://i.imgur.com/WwC4PEh.jpg" alt></p>
+<p>僅將接線鏡頭安裝，仍未能使用，必須要有相關模組的 Library 才能使用。MLX90615 官方僅提供 Arduino Lib，筆者嘗試使用 MLX 90614 Lib 也無法正常運作，最後找到了一個 MLX 90615 可用的 <a href="https://github.com/2n3906/python-sensor-drivers/blob/master/mlx90615.py" target="_blank" rel="noopener">Python Lib</a></p>
+<p>惟要注意的地方是，必須將 <code>i2c_bus</code> 與 <code>i2c_address</code> 設定正確才可正常運作。</p>
+<div class="video-container"><iframe src="//www.youtube.com/embed/6uDmfeJqv9k" frameborder="0" allowfullscreen></iframe></div>
+<p>從上面的實作上面看來，Inference time 不算太高，接下來還可以嘗試將 Facenet 替換掉 Dlib 進行人臉辨識，看看是否能有更高的效率。</p>
 
     </div>
 
@@ -399,7 +350,7 @@
     <strong>作者： </strong>Allen Tzeng</li>
   <li class="post-copyright-link">
     <strong>文章連結：</strong>
-    <a href="https://allen108108.github.io/blog/2019/10/08/Unsupervised Learning (3) -- Word Embedding/" title="Unsupervised Learning (3) -- Word Embedding">https://allen108108.github.io/blog/2019/10/08/Unsupervised Learning (3) -- Word Embedding/</a>
+    <a href="https://allen108108.github.io/blog/2020/04/16/Jetson Nano 初體驗 (三) – Deep Learning Model/" title="Jetson Nano 初體驗 (三) -- Deep Learning Model">https://allen108108.github.io/blog/2020/04/16/Jetson Nano 初體驗 (三) – Deep Learning Model/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！</li>
@@ -421,8 +372,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/blog/2019/10/08/Unsupervised Learning (2) -- AutoEncoder/" rel="next" title="Unsupervised Learning (2) -- AutoEncoder">
-                  <i class="fa fa-chevron-left"></i> Unsupervised Learning (2) -- AutoEncoder
+                <a href="/blog/2020/04/16/人臉辨識系統 Face Recognition 開發紀錄  ( OpenCV _ Dlib )/" rel="next" title="人臉辨識系統 Face Recognition 開發紀錄  ( OpenCV / Dlib )">
+                  <i class="fa fa-chevron-left"></i> 人臉辨識系統 Face Recognition 開發紀錄  ( OpenCV / Dlib )
                 </a>
               
             </div>
@@ -430,10 +381,6 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-              
-                <a href="/blog/2019/10/08/Unsupervised Learning (4) -- Neighbor Embedding/" rel="prev" title="Unsupervised Learning (4) -- Neighbor Embedding">
-                  Unsupervised Learning (4) -- Neighbor Embedding <i class="fa fa-chevron-right"></i>
-                </a>
               
             </div>
           </div>
@@ -491,7 +438,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Word-Vector"><span class="nav-number">1.</span> <span class="nav-text">Word Vector</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-of-N-Encoding-One-Hot-representation"><span class="nav-number">1.1.</span> <span class="nav-text">1-of-N Encoding ( One-Hot representation )</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Word-Embedding-Distribution-representation"><span class="nav-number">1.2.</span> <span class="nav-text">Word Embedding ( Distribution representation )</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Advantage-of-Word-Embedding"><span class="nav-number">2.</span> <span class="nav-text">Advantage of Word Embedding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考資料"><span class="nav-number">3.</span> <span class="nav-text">參考資料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#註釋"><span class="nav-number">4.</span> <span class="nav-text">註釋</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#系列文章"><span class="nav-number">1.</span> <span class="nav-text">系列文章</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">2.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#手勢辨識-Gesture-Recognition"><span class="nav-number">3.</span> <span class="nav-text">手勢辨識 Gesture Recognition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#人臉辨識-Face-Recognition"><span class="nav-number">4.</span> <span class="nav-text">人臉辨識 Face Recognition</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -768,9 +715,9 @@
 </script>
 <script>
   function disqus_config() {
-    this.page.url = "https://allen108108.github.io/blog/2019/10/08/Unsupervised Learning (3) -- Word Embedding/";
-    this.page.identifier = "2019/10/08/Unsupervised Learning (3) -- Word Embedding/";
-    this.page.title = 'Unsupervised Learning (3) -- Word Embedding';};
+    this.page.url = "https://allen108108.github.io/blog/2020/04/16/Jetson Nano 初體驗 (三) – Deep Learning Model/";
+    this.page.identifier = "2020/04/16/Jetson Nano 初體驗 (三) – Deep Learning Model/";
+    this.page.title = 'Jetson Nano 初體驗 (三) -- Deep Learning Model';};
   function loadComments() {
     if (window.DISQUS) {
       DISQUS.reset({
