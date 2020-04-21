@@ -224,6 +224,252 @@
   
   
   <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://allen108108.github.io/blog/blog/2019/12/04/Deep Reinforcement Learning (2) — Proximal Policy Optimization (PPO)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Allen Tzeng">
+      <meta itemprop="description" content="Study about Mathematics , Programming and Data Science">
+      <meta itemprop="image" content="/blog/images/allen.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Math.py">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/blog/2019/12/04/Deep Reinforcement Learning (2) — Proximal Policy Optimization (PPO)/" class="post-title-link" itemprop="url">Deep Reinforcement Learning (2) --- Proximal Policy Optimization (PPO)</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              
+                
+              
+
+              <time title="創建時間：2019-12-04 12:13:24 / 修改時間：12:13:25" itemprop="dateCreated datePublished" datetime="2019-12-04T12:13:24+08:00">2019-12-04</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/課程筆記-Course/" itemprop="url" rel="index"><span itemprop="name">課程筆記 Course</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/課程筆記-Course/李宏毅-Machine-Learning-and-having-it-Deep-and-Structured/" itemprop="url" rel="index"><span itemprop="name">李宏毅 Machine Learning and having it Deep and Structured</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/blog/2019/12/04/Deep Reinforcement Learning (2) — Proximal Policy Optimization (PPO)/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/12/04/Deep Reinforcement Learning (2) — Proximal Policy Optimization (PPO)/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="On-Policy-amp-Off-Policy"><a href="#On-Policy-amp-Off-Policy" class="headerlink" title="On Policy &amp; Off Policy"></a>On Policy &amp; Off Policy</h2><p>我們前面所用的技巧稱為 “ On Policy “ ，意思就是，我們用來跟 Environment 互動的 Actor 跟我們要訓練的 Actor 是同一個。</p>
+<p>但前面有提到，這樣的訓練其實會花非常多時間，因為每一次參數更新完，就必須要重新讓 Actor 跟 Environment 互動收集新的資料，然後再進行訓練。是不是有辦法可以讓 Actor 跟 Environment 互動收集的資料拿來更新多次參數，省去一直收集資料的冗長過程 ?</p>
+<p>這就是 “ Off Policy “ 的作用。在 Off Policy 中，我們利用一個不同的 Actor 、Policy $\pi_{\theta}’$  來跟 Environment 互動收集資料，然後讓我們想要訓練的 Actor 、 Policy $\pi_{\theta}’$ 利用這些資料，一次進行多次參數更新。</p>
+          
+         
+         <div class="out-img-topic">
+           <img src=https://i.imgur.com/MdVC5JZ.png class="img-topic" />
+         </div>
+         
+                     
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/blog/2019/12/04/Deep Reinforcement Learning (2) — Proximal Policy Optimization (PPO)/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://allen108108.github.io/blog/blog/2019/12/04/Deep Reinforcement Learning (1) — Policy Gradient (Review)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Allen Tzeng">
+      <meta itemprop="description" content="Study about Mathematics , Programming and Data Science">
+      <meta itemprop="image" content="/blog/images/allen.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Math.py">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/blog/2019/12/04/Deep Reinforcement Learning (1) — Policy Gradient (Review)/" class="post-title-link" itemprop="url">Deep Reinforcement Learning (1) --- Policy Gradient (Review)</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              
+                
+              
+
+              <time title="創建時間：2019-12-04 12:10:09 / 修改時間：12:10:10" itemprop="dateCreated datePublished" datetime="2019-12-04T12:10:09+08:00">2019-12-04</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/課程筆記-Course/" itemprop="url" rel="index"><span itemprop="name">課程筆記 Course</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/課程筆記-Course/李宏毅-Machine-Learning-and-having-it-Deep-and-Structured/" itemprop="url" rel="index"><span itemprop="name">李宏毅 Machine Learning and having it Deep and Structured</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/blog/2019/12/04/Deep Reinforcement Learning (1) — Policy Gradient (Review)/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/12/04/Deep Reinforcement Learning (1) — Policy Gradient (Review)/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>作為 Deep Reinforcement Learning 的第一堂課，主要是針對 Machine Learning 中 RL 的部分進行簡單的複習及補充。有些基礎的概念，在 MLDS GAN 系列課程中也已有提及，閱讀此篇筆記前可先看看 “ <a href="https://" target="_blank" rel="noopener">Reinforcement Learning</a> “ 及 “ <a href="http://bit.ly/2D6MEMp" target="_blank" rel="noopener">Generative Adversarial Network (9) — Sequence Generation</a> “ 這兩篇筆記。</p>
+          
+         
+         <div class="out-img-topic">
+           <img src=https://i.imgur.com/MdVC5JZ.png class="img-topic" />
+         </div>
+         
+                     
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/blog/2019/12/04/Deep Reinforcement Learning (1) — Policy Gradient (Review)/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="https://allen108108.github.io/blog/blog/2019/11/24/[論文] You Only Look Once _ Unified, Real-Time Object Detection/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1182,255 +1428,11 @@
   </article>
 
     
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://allen108108.github.io/blog/blog/2019/11/11/Generative Adversarial Network (5) — General Framework/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Allen Tzeng">
-      <meta itemprop="description" content="Study about Mathematics , Programming and Data Science">
-      <meta itemprop="image" content="/blog/images/allen.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Math.py">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/blog/2019/11/11/Generative Adversarial Network (5) — General Framework/" class="post-title-link" itemprop="url">Generative Adversarial Network (5) --- General Framework</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              
-                
-              
-
-              <time title="創建時間：2019-11-11 01:09:00 / 修改時間：01:12:40" itemprop="dateCreated datePublished" datetime="2019-11-11T01:09:00+08:00">2019-11-11</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/課程筆記-Course/" itemprop="url" rel="index"><span itemprop="name">課程筆記 Course</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/課程筆記-Course/李宏毅-Machine-Learning-and-having-it-Deep-and-Structured/" itemprop="url" rel="index"><span itemprop="name">李宏毅 Machine Learning and having it Deep and Structured</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-        
-      
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/blog/2019/11/11/Generative Adversarial Network (5) — General Framework/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/11/11/Generative Adversarial Network (5) — General Framework/" itemprop="commentCount"></span></a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>從上一個部分的推導，我們可以知道如果我們調整 $V(G,D)$，最後的結果可能就會是另外一種計算 Divergence 的方式，而不會是 JS-Divergence。那我們能不能找出一個 divergence 通式，直接藉由調整通式來改變我們想要的 Divergence ?</p>
-          
-         
-         <div class="out-img-topic">
-           <img src=https://i.imgur.com/RrdITkw.png class="img-topic" />
-         </div>
-         
-                     
-          <!--noindex-->
-          
-            <div class="post-button">
-              <a class="btn" href="/blog/2019/11/11/Generative Adversarial Network (5) — General Framework/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://allen108108.github.io/blog/blog/2019/11/11/Chapter 4 – Greedy algorithms ( 2 )/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Allen Tzeng">
-      <meta itemprop="description" content="Study about Mathematics , Programming and Data Science">
-      <meta itemprop="image" content="/blog/images/allen.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Math.py">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/blog/2019/11/11/Chapter 4 – Greedy algorithms ( 2 )/" class="post-title-link" itemprop="url">Chapter 4 -- Greedy algorithms ( 2 )</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              
-                
-              
-
-              <time title="創建時間：2019-11-11 01:05:32 / 修改時間：01:05:56" itemprop="dateCreated datePublished" datetime="2019-11-11T01:05:32+08:00">2019-11-11</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/課程筆記-Course/" itemprop="url" rel="index"><span itemprop="name">課程筆記 Course</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/課程筆記-Course/江蕙如-Algorithm/" itemprop="url" rel="index"><span itemprop="name">江蕙如 Algorithm</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-        
-      
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/blog/2019/11/11/Chapter 4 – Greedy algorithms ( 2 )/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/11/11/Chapter 4 – Greedy algorithms ( 2 )/" itemprop="commentCount"></span></a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Interval-Partition"><a href="#Interval-Partition" class="headerlink" title="Interval Partition"></a>Interval Partition</h2><h3 id="Scenario"><a href="#Scenario" class="headerlink" title="Scenario"></a>Scenario</h3><p>$Let\ \{I(i)=\big[s(i),f(i)\big)\mid i=1,2,3,\cdots,n\}\ is\ a\ set\ of\ requests\ interval.$<br>$Partition\ these\ requests\ into\ a\ minimum\ number\ of\ compatible(no\ overlap)\ subsets.$<br>給定一個區間，以及 $n$ 個子區間，試圖將這個子區間分成最少的子集合，子集合內的子區間互不重疊。</p>
-          
-         
-         <div class="out-img-topic">
-           <img src=https://blog.techbridge.cc/img/kdchang/cs101/algorithm/algorithm-cover.png class="img-topic" />
-         </div>
-         
-                     
-          <!--noindex-->
-          
-            <div class="post-button">
-              <a class="btn" href="/blog/2019/11/11/Chapter 4 – Greedy algorithms ( 2 )/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </div>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/2/"><i class="fa fa-angle-left" aria-label="上一頁"></i></a><a class="page-number" href="/blog/">1</a><a class="page-number" href="/blog/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/blog/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/10/">10</a><a class="extend next" rel="next" href="/blog/page/4/"><i class="fa fa-angle-right" aria-label="下一頁"></i></a>
+    <a class="extend prev" rel="prev" href="/blog/page/2/"><i class="fa fa-angle-left" aria-label="上一頁"></i></a><a class="page-number" href="/blog/">1</a><a class="page-number" href="/blog/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/blog/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/11/">11</a><a class="extend next" rel="next" href="/blog/page/4/"><i class="fa fa-angle-right" aria-label="下一頁"></i></a>
   </nav>
 
 
@@ -1479,7 +1481,7 @@
         
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">99</span>
+          <span class="site-state-item-count">101</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>

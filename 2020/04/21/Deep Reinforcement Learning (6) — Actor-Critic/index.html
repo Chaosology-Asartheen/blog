@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-TW">
+<head>
+  <meta name="google-site-verification" content="exmdvS3MT1hVojBxSEZZZ8TIBBOg6pJ2POTtzNuecqs" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+
+
+<meta property="og:site_name" content="">
+<meta property="og:title" content="categories">
+<meta property="og:url" content="http://">
+<meta property="og:image" content="">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/blog/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Gemini',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","width":280,"display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '複製',
+      copy_success: '複製成功',
+      copy_failure: '複製失敗'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="從 Policy Gradieint 開始說起在前面的課程筆記 “Deep Reinforcement Learning (1) —- Policy Gradient (Review)“ 中，最後我們推導出了 policy gradient 的通式如下 :  \nabla\bar{R}_{\theta}\approx\frac{1}{N}\sum\limits_{i=1}^{N}\sum\limi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Deep Reinforcement Learning (6) --- Actor-Critic">
+<meta property="og:url" content="https://allen108108.github.io/blog/2020/04/21/Deep Reinforcement Learning (6) — Actor-Critic/index.html">
+<meta property="og:site_name" content="Math.py">
+<meta property="og:description" content="從 Policy Gradieint 開始說起在前面的課程筆記 “Deep Reinforcement Learning (1) —- Policy Gradient (Review)“ 中，最後我們推導出了 policy gradient 的通式如下 :  \nabla\bar{R}_{\theta}\approx\frac{1}{N}\sum\limits_{i=1}^{N}\sum\limi">
+<meta property="og:locale" content="zh-TW">
+<meta property="og:image" content="https://i.imgur.com/HmwDXk2.png">
+<meta property="og:image" content="https://i.imgur.com/QIAlYfR.png">
+<meta property="og:image" content="https://i.imgur.com/4ztbFPX.png">
+<meta property="og:image" content="https://i.imgur.com/TpU4t6H.png">
+<meta property="og:image" content="https://i.imgur.com/EgyKxL0.png">
+<meta property="og:updated_time" content="2020-04-21T00:56:32.833Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Deep Reinforcement Learning (6) --- Actor-Critic">
+<meta name="twitter:description" content="從 Policy Gradieint 開始說起在前面的課程筆記 “Deep Reinforcement Learning (1) —- Policy Gradient (Review)“ 中，最後我們推導出了 policy gradient 的通式如下 :  \nabla\bar{R}_{\theta}\approx\frac{1}{N}\sum\limits_{i=1}^{N}\sum\limi">
+<meta name="twitter:image" content="https://i.imgur.com/HmwDXk2.png">
+  <link rel="canonical" href="https://allen108108.github.io/blog/2020/04/21/Deep Reinforcement Learning (6) — Actor-Critic/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Deep Reinforcement Learning (6) --- Actor-Critic | Math.py</title>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-149442581-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-149442581-1');
+    }
+  </script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-TW">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Math.py</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Wir müssen wissen , wir werden wissen</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切換導航欄">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/blog/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首頁</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/blog/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分類</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/blog/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>歸檔</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://allen108108.github.io/blog/blog/2020/04/21/Deep Reinforcement Learning (6) — Actor-Critic/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Allen Tzeng">
+      <meta itemprop="description" content="Study about Mathematics , Programming and Data Science">
+      <meta itemprop="image" content="/blog/images/allen.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Math.py">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Deep Reinforcement Learning (6) --- Actor-Critic
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              
+                
+              
+
+              <time title="創建時間：2020-04-21 08:56:14 / 修改時間：08:56:32" itemprop="dateCreated datePublished" datetime="2020-04-21T08:56:14+08:00">2020-04-21</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/課程筆記-Course/" itemprop="url" rel="index"><span itemprop="name">課程筆記 Course</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/課程筆記-Course/李宏毅-Machine-Learning-and-having-it-Deep-and-Structured/" itemprop="url" rel="index"><span itemprop="name">李宏毅 Machine Learning and having it Deep and Structured</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="閱讀次數" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">閱讀次數：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/blog/2020/04/21/Deep Reinforcement Learning (6) — Actor-Critic/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/04/21/Deep Reinforcement Learning (6) — Actor-Critic/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="從-Policy-Gradieint-開始說起"><a href="#從-Policy-Gradieint-開始說起" class="headerlink" title="從 Policy Gradieint 開始說起"></a>從 Policy Gradieint 開始說起</h2><p>在前面的課程筆記 “<a href="https://" target="_blank" rel="noopener">Deep Reinforcement Learning (1) —- Policy Gradient (Review)</a>“ 中，最後我們推導出了 policy gradient 的通式如下 :</p>
+<script type="math/tex; mode=display">
+\nabla\bar{R}_{\theta}\approx\frac{1}{N}\sum\limits_{i=1}^{N}\sum\limits_{t=1}^{T}\big(\sum\limits_{t'=t}^{T_n}\alpha^{t'-t} r_{t'}^n-b\big)\nabla\log P_{\theta}(a_t^n|s_t^n)</script><a id="more"></a>
+<p>然而在這樣的通式中，$G_t^n=\sum\limits_{t’=t}^{T_n}\alpha^{t’-t} r_{t’}^n$ 其實是非常不穩定的，因為互動的過程中其實是充滿隨機性的，每一個 $s_t$，會有對應的隨機 $a_t$，隨後又會有一個隨機的 $s_{t+1}$ 出現，這過程中，$r_t$ 便也充滿了隨機性於其中，而 $G_t^n$ 就是這些 $r_t$ 的總和，當然會非常不穩定。</p>
+<p>換一個角度來說，我們就是藉由抽樣 $G_t^n$ 來做梯度的估測，但如果我們的抽樣數不夠多 ( 通常都會不夠多 ) 那麼如果我們抽到表現較差的 $G_t^n$，便會很有可能影響到後面的結果。因此要解這一個問題，就必須要想辦法處理 $G_t^n$ 這種不穩定的狀況，再直接一點說，我們能不能直接估出 $G_t^n$ 的期望值來取代 $G_t^n$ ? 既可以有表徵的能力，也可以避免 $G_t^n$ 的震盪來影響結果。</p>
+<p>那，$\mathbb{E}\big[G_t^n\big]$ 到底指的是什麼呢 ?</p>
+<h2 id="與-Q-Learning-結合"><a href="#與-Q-Learning-結合" class="headerlink" title="與 Q-Learning 結合"></a>與 Q-Learning 結合</h2><p>從 $\mathbb{E}\big[G_t^n\big]$ 的定義來看，其實它是等同於 Q-function 的，兩者都是在計算在時間 $t$ 之後獲得 cumulated reward 的期望值是多少。</p>
+<script type="math/tex; mode=display">
+\mathbb{E}\big[G_t^n\big]=Q^{\pi_{\theta}}(s_t^n,a_t^n)</script><p>因此我們可以將 policy gradient 的通式利用 Q-function 來做修改，然後 $b$ 則以 $V^{\pi_{\theta}}(s_t^n)$ 來取代。$V$ 是不考量 action 的 cumulated reward，所以從意義上來看，$V$ 其實是 $Q$ 針對 action 的期望值，因此可以依舊可以確保 $Q^{\pi_{\theta}}(s_t^n,a_t^n)-b$ 這一項不會恆正。</p>
+<script type="math/tex; mode=display">
+\nabla\bar{R}_{\theta}\approx\frac{1}{N}\sum\limits_{i=1}^{N}\sum\limits_{t=1}^{T}\big(Q^{\pi_{\theta}}(s_t^n,a_t^n)-V^{\pi_{\theta}}(s_t^n)\big)\nabla\log P_{\theta}(a_t^n|s_t^n)</script><p>這種型態結合了 Actor 與 Critic ，便稱為 Actor-Critic。</p>
+<h2 id="Advantage-Actor-Critic-A2C"><a href="#Advantage-Actor-Critic-A2C" class="headerlink" title="Advantage Actor-Critic ( A2C )"></a>Advantage Actor-Critic ( A2C )</h2><p>在上述的實作上，並不會就這樣直接做，原因是因為這樣的結構我們變成要使用兩個 network 來做估測，那也相當於可能會讓誤差變成兩倍。( 兩個網路都可能會造成誤差 )</p>
+<p>因此在實作上會稍微做一點調整</p>
+<script type="math/tex; mode=display">
+Q^{\pi_{\theta}}(s_t^n,a_t^n)=\mathbb{E}\big[r_t^n+V^{\pi_{\theta}}(s_{t+1}^n)\big]\overset{let}{=}r_t^n+V^{\pi_{\theta}}(s_{t+1}^n)</script><p>這裡其實是給了一個蠻強的前提在裡面，在直覺上來說稍微可以理解，$r_t^n$ 是單一個步驟的 reward ，因此 variance 較小，有沒有取期望值是可能有機會相等的。其次，在文獻上也可以由實驗發現這樣的前提下做出來的實驗是夠好的。</p>
+<p>藉由上面這樣的強假設，我們可以再一次改寫梯度的估測通式</p>
+<script type="math/tex; mode=display">
+\nabla\bar{R}_{\theta}\approx\frac{1}{N}\sum\limits_{i=1}^{N}\sum\limits_{t=1}^{T}\big(r_t^n+V^{\pi_{\theta}}(s_{t+1}^n)-V^{\pi_{\theta}}(s_t^n)\big)\nabla\log P_{\theta}(a_t^n|s_t^n)</script><p>這樣的改變，我們只需要利用一個 network 來估測梯度，但換來一個不穩定的隨機變量 $r_t^n$，但前面我們也提到，$r_t^n$ 的 variance 其實不大，因此這樣的交易還算划算。</p>
+<p>因此我們可以了解整個 A2C 的過程如下圖 : </p>
+<p><img src="https://i.imgur.com/HmwDXk2.png" alt></p>
+<h3 id="Tips-of-A2C"><a href="#Tips-of-A2C" class="headerlink" title="Tips of A2C"></a>Tips of A2C</h3><p>在 A2C 中，我們仍然會使用一些技巧來幫助訓練 : </p>
+<h4 id="1-權重共享"><a href="#1-權重共享" class="headerlink" title="1. 權重共享"></a>1. 權重共享</h4><p>在整個 A2C 中，我們有兩個網路結構需要訓練 : $V$ 與 $\pi$，這兩個網路結構其實都是針對 state 的輸入來進行目標的估測，因此在實務上，會將這兩個網路的前半部分做權重共享來減少訓練參數。</p>
+<h4 id="2-限制-pi-的輸出-entropy-必須要大於某值"><a href="#2-限制-pi-的輸出-entropy-必須要大於某值" class="headerlink" title="2. 限制 $\pi$ 的輸出 entropy 必須要大於某值"></a>2. 限制 $\pi$ 的輸出 entropy 必須要大於某值</h4><p>主要原因其實就是為了加強整個網路的探索能力，當 entropy 越高，相對地對於不同 action 的選擇機率就會越接近，這樣可以確保探索到其他的 actions。</p>
+<h2 id="Asynchronous-Advantage-Actor-Critic-A3C"><a href="#Asynchronous-Advantage-Actor-Critic-A3C" class="headerlink" title="Asynchronous Advantage Actor-Critic ( A3C )"></a>Asynchronous Advantage Actor-Critic ( A3C )</h2><p>說穿了 A3C 就是一個平行運算的應用，利用不同可平行運算的單元同時進行運算並更新權重，這樣可以讓整個訓練速度加快許多。</p>
+<p><img src="https://i.imgur.com/QIAlYfR.png" alt><br>(圖片來源 : <a href="https://medium.com/emergent-future/simple-reinforcement-learning-with-tensorflow-part-8-asynchronous-actor-critic-agents-a3c-c88f72a5e9f2#.68x6na7o9" target="_blank" rel="noopener">Simple Reinforcement Learning with Tensorflow Part 8: Asynchronous Actor-Critic Agents (A3C)</a>)</p>
+<p>從上圖來看，我可以同時將兩個網路結構放在不同的運算單元中，同時進行計算，先計算出梯度的就可以先對參數做更新，所以如果 worker 2 先計算出梯度更新參數，那麼比較慢計算出梯度的 worker 1 就會將已經被 worker 2 更新過後的權重再進行更新。</p>
+<h2 id="Pathwise-Derivative-Policy-Gradient"><a href="#Pathwise-Derivative-Policy-Gradient" class="headerlink" title="Pathwise Derivative Policy Gradient"></a>Pathwise Derivative Policy Gradient</h2><p>這可以看做是一個 Actor-Critic 的特例，可以作為 Q-Learning 解決 Continuous Actor 的方案之一。</p>
+<p>前面我們在說 Q-Learning 時，$V$ 或 $Q$ function 都是在評估這樣的 actor 好還是不好，但 Pathwise Derivative Policy Gradient 不只要讓你知道 action 的好壞，還要直接告訴你可以得到最大 cumulated reward 的 action 是什麼。</p>
+<p><img src="https://i.imgur.com/4ztbFPX.png" alt></p>
+<p>做法其實就是將 actor 作為 solver 來產出 action 提供給 $Q$ 然後目標要讓 Q 值越大越好。這個結構是否看起來熟悉 ? 這其實就是前一個部分課程的 GAN 架構。我們將原本要找出一個能夠讓 Q 值最大化的 action 這樣的問題轉化為一個 GAN 結構來解決。 actor 相當於 generator 的角色，而 $Q$ 就是一個 discriminator。</p>
+<h3 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h3><p><img src="https://i.imgur.com/TpU4t6H.png" alt></p>
+<ul>
+<li>初始化 Q-funtion $Q$ 與 target function $\hat{Q}=Q$</li>
+<li>初始化 Actor $\pi$ 與 target function $\hat{\pi}=\pi$</li>
+<li>在每一個 episode 中 : <ul>
+<li>每 $t$ 個時間段 : <ul>
+<li>當遇見 state $s_t$，利用 entropy constrain 從 Actor $\pi$ 來決定 action $a_t$</li>
+<li>我們會得到 $r_t$， state 轉換成 $s_{t+1}$</li>
+<li>將資料 $(s_t,a_t,r_t,s_{t+1})$ 儲存到 buffer 中</li>
+<li>從 buffer 裡面抽樣一個 batch 的資料 $\{(s_i,a_i,r_i,s_{i+1})\}_{i=1}^{n}$ 出來</li>
+<li>利用 $\hat{Q}$ 計算這一個 batch 的 target $y_i=r_i+\hat{Q}(s_i,\hat{\pi}(s_{i+1}))$</li>
+<li>訓練 $Q$ 使 $Q(s_i,a_i)$ 盡可能地接近 $y_i$</li>
+<li>訓練 $\pi$ 使 $Q(s_i,\pi(s_i))$ 越大越好</li>
+<li>更新 $C$ 次後，用 $Q$ 來取代 $\hat{Q}$</li>
+<li>更新 $C$ 次後，用 $\pi$ 來取代 $\hat{\pi}$</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="GAN-V-s-Actor-Critic"><a href="#GAN-V-s-Actor-Critic" class="headerlink" title="GAN V.s. Actor-Critic"></a>GAN V.s. Actor-Critic</h2><p>這一個部分，在論文 “ <em>Connecting Generative Adversarial Networks and Actor-Critic Methods</em> “ 中有非常詳盡的介紹。</p>
+<p>其中，作者詳列了 GAN 與 Actor-Critic 中所用到的一些技巧，既然兩者的概念如此接近，或許這些技巧也能互相使用 ? </p>
+<p><img src="https://i.imgur.com/EgyKxL0.png" alt></p>
+
+    </div>
+
+    
+    
+    
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>作者： </strong>Allen Tzeng</li>
+  <li class="post-copyright-link">
+    <strong>文章連結：</strong>
+    <a href="https://allen108108.github.io/blog/2020/04/21/Deep Reinforcement Learning (6) — Actor-Critic/" title="Deep Reinforcement Learning (6) --- Actor-Critic">https://allen108108.github.io/blog/2020/04/21/Deep Reinforcement Learning (6) — Actor-Critic/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/blog/2020/04/21/Deep Reinforcement Learning (7) — Sparse Reward/" rel="next" title="Deep Reinforcement Learning (7) --- Sparse Reward">
+                  <i class="fa fa-chevron-left"></i> Deep Reinforcement Learning (7) --- Sparse Reward
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    
+  <div class="comments" id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#從-Policy-Gradieint-開始說起"><span class="nav-number">1.</span> <span class="nav-text">從 Policy Gradieint 開始說起</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#與-Q-Learning-結合"><span class="nav-number">2.</span> <span class="nav-text">與 Q-Learning 結合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Advantage-Actor-Critic-A2C"><span class="nav-number">3.</span> <span class="nav-text">Advantage Actor-Critic ( A2C )</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tips-of-A2C"><span class="nav-number">3.1.</span> <span class="nav-text">Tips of A2C</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-權重共享"><span class="nav-number">3.1.1.</span> <span class="nav-text">1. 權重共享</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-限制-pi-的輸出-entropy-必須要大於某值"><span class="nav-number">3.1.2.</span> <span class="nav-text">2. 限制 $\pi$ 的輸出 entropy 必須要大於某值</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Asynchronous-Advantage-Actor-Critic-A3C"><span class="nav-number">4.</span> <span class="nav-text">Asynchronous Advantage Actor-Critic ( A3C )</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pathwise-Derivative-Policy-Gradient"><span class="nav-number">5.</span> <span class="nav-text">Pathwise Derivative Policy Gradient</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Algorithm"><span class="nav-number">5.1.</span> <span class="nav-text">Algorithm</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GAN-V-s-Actor-Critic"><span class="nav-number">6.</span> <span class="nav-text">GAN V.s. Actor-Critic</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/blog/images/allen.jpg"
+      alt="Allen Tzeng">
+  <p class="site-author-name" itemprop="name">Allen Tzeng</p>
+  <div class="site-description" itemprop="description">Study about Mathematics , Programming and Data Science</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/blog/archives/">
+        
+          <span class="site-state-item-count">101</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/blog/categories/">
+          
+        
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分類</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://allen108108.github.io/" title="Github page &rarr; https://allen108108.github.io/"><i class="fa fa-fw fa-github-alt"></i>Github page</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/allen108108" title="GitHub &rarr; https://github.com/allen108108" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:allen108108@hotmail.com" title="E-Mail &rarr; mailto:allen108108@hotmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://www.facebook.com/Mathpy-257929091666547/" title="FB Page &rarr; https://www.facebook.com/Mathpy-257929091666547/" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB Page</a>
+      </span>
+    
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Allen Tzeng</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主題 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="訪客總數">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="總瀏覽次數">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+    
+  
+  <script color='255, 80, 219' opacity='1' zIndex='-1' count='100' src="/blog/lib/canvas-nest/canvas-nest-nomobile.min.js"></script>
+  <script src="/blog/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/blog/js/utils.js?v=7.4.0"></script><script src="/blog/js/motion.js?v=7.4.0"></script>
+<script src="/blog/js/schemes/pisces.js?v=7.4.0"></script>
+
+<script src="/blog/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: 21351,
+      el: 'wpac-rating',
+      color: 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://math-py.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  function disqus_config() {
+    this.page.url = "https://allen108108.github.io/blog/2020/04/21/Deep Reinforcement Learning (6) — Actor-Critic/";
+    this.page.identifier = "2020/04/21/Deep Reinforcement Learning (6) — Actor-Critic/";
+    this.page.title = 'Deep Reinforcement Learning (6) --- Actor-Critic';};
+  function loadComments() {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://math-py.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  }
+    window.addEventListener('load', loadComments, false);
+  
+</script>
+
+</body>
+</html>
