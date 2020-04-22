@@ -63,22 +63,21 @@
   };
 </script>
 
-  <meta name="description" content="前幾天搞壞了一個 Anaconda Environment，只能利用其他的 Env. 來繼續手邊的工作。但由於這些其他的 Env. 大多為特定狀況下使用，也並不是常用的環境，所以很多的套件、設定多少都會要重新處理，這也不算太意外。">
+  <meta name="description" content="前一個部分，我們了解到如果遇到 Sparse Reward 時，可以怎麼樣做學習。但，如果今天可能連 Reward 都沒有，又或者是 Reward 很難定義的狀況下，可以怎麼做學習呢 ? Imitation Learning ( 或稱 Learning by Demonstration / Apprenticeship Learning ) 就是在解決這樣的情況。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="將 VS Code 終端機預設成為 Anaconda Prompt">
-<meta property="og:url" content="https://allen108108.github.io/blog/2019/10/13/將 VS Code 終端機預設成為 Anaconda Prompt/index.html">
+<meta property="og:title" content="Deep Reinforcement Learning (8) --- Imitation Learning">
+<meta property="og:url" content="https://allen108108.github.io/blog/2020/04/22/Deep Reinforcement Learning (8) — Imitation Learning/index.html">
 <meta property="og:site_name" content="Math.py">
-<meta property="og:description" content="前幾天搞壞了一個 Anaconda Environment，只能利用其他的 Env. 來繼續手邊的工作。但由於這些其他的 Env. 大多為特定狀況下使用，也並不是常用的環境，所以很多的套件、設定多少都會要重新處理，這也不算太意外。">
+<meta property="og:description" content="前一個部分，我們了解到如果遇到 Sparse Reward 時，可以怎麼樣做學習。但，如果今天可能連 Reward 都沒有，又或者是 Reward 很難定義的狀況下，可以怎麼做學習呢 ? Imitation Learning ( 或稱 Learning by Demonstration / Apprenticeship Learning ) 就是在解決這樣的情況。">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:image" content="https://i.imgur.com/UwZMBZH.png">
-<meta property="og:image" content="https://i.imgur.com/MQxGYwj.png">
-<meta property="og:image" content="https://i.imgur.com/Zph52Dx.png">
-<meta property="og:updated_time" content="2019-10-12T20:45:36.560Z">
+<meta property="og:image" content="https://i.imgur.com/wLFDAac.png">
+<meta property="og:image" content="https://i.imgur.com/aZDubVK.png">
+<meta property="og:updated_time" content="2020-04-22T09:39:49.838Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="將 VS Code 終端機預設成為 Anaconda Prompt">
-<meta name="twitter:description" content="前幾天搞壞了一個 Anaconda Environment，只能利用其他的 Env. 來繼續手邊的工作。但由於這些其他的 Env. 大多為特定狀況下使用，也並不是常用的環境，所以很多的套件、設定多少都會要重新處理，這也不算太意外。">
-<meta name="twitter:image" content="https://i.imgur.com/UwZMBZH.png">
-  <link rel="canonical" href="https://allen108108.github.io/blog/2019/10/13/將 VS Code 終端機預設成為 Anaconda Prompt/">
+<meta name="twitter:title" content="Deep Reinforcement Learning (8) --- Imitation Learning">
+<meta name="twitter:description" content="前一個部分，我們了解到如果遇到 Sparse Reward 時，可以怎麼樣做學習。但，如果今天可能連 Reward 都沒有，又或者是 Reward 很難定義的狀況下，可以怎麼做學習呢 ? Imitation Learning ( 或稱 Learning by Demonstration / Apprenticeship Learning ) 就是在解決這樣的情況。">
+<meta name="twitter:image" content="https://i.imgur.com/wLFDAac.png">
+  <link rel="canonical" href="https://allen108108.github.io/blog/2020/04/22/Deep Reinforcement Learning (8) — Imitation Learning/">
 
 
 <script id="page-configurations">
@@ -92,7 +91,7 @@
   };
 </script>
 
-  <title>將 VS Code 終端機預設成為 Anaconda Prompt | Math.py</title>
+  <title>Deep Reinforcement Learning (8) --- Imitation Learning | Math.py</title>
   
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-149442581-1"></script>
   <script>
@@ -230,7 +229,7 @@
   
   
   <div class="post-block post">
-    <link itemprop="mainEntityOfPage" href="https://allen108108.github.io/blog/blog/2019/10/13/將 VS Code 終端機預設成為 Anaconda Prompt/">
+    <link itemprop="mainEntityOfPage" href="https://allen108108.github.io/blog/blog/2020/04/22/Deep Reinforcement Learning (8) — Imitation Learning/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Allen Tzeng">
@@ -242,7 +241,7 @@
       <meta itemprop="name" content="Math.py">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">將 VS Code 終端機預設成為 Anaconda Prompt
+        <h1 class="post-title" itemprop="name headline">Deep Reinforcement Learning (8) --- Imitation Learning
 
           
         </h1>
@@ -258,7 +257,7 @@
                 
               
 
-              <time title="創建時間：2019-10-13 04:41:28 / 修改時間：04:45:36" itemprop="dateCreated datePublished" datetime="2019-10-13T04:41:28+08:00">2019-10-13</time>
+              <time title="創建時間：2020-04-22 17:39:48 / 修改時間：17:39:49" itemprop="dateCreated datePublished" datetime="2020-04-22T17:39:48+08:00">2020-04-22</time>
             </span>
           
             
@@ -271,7 +270,14 @@
               </span>
               <span class="post-meta-item-text">分類於</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/軟體-Software/" itemprop="url" rel="index"><span itemprop="name">軟體 Software</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/課程筆記-Course/" itemprop="url" rel="index"><span itemprop="name">課程筆記 Course</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/課程筆記-Course/李宏毅-Machine-Learning-and-having-it-Deep-and-Structured/" itemprop="url" rel="index"><span itemprop="name">李宏毅 Machine Learning and having it Deep and Structured</span></a></span>
 
                 
                 
@@ -298,7 +304,7 @@
       
       <span class="post-meta-item-text">Disqus：</span>
     
-    <a title="disqus" href="/blog/2019/10/13/將 VS Code 終端機預設成為 Anaconda Prompt/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/10/13/將 VS Code 終端機預設成為 Anaconda Prompt/" itemprop="commentCount"></span></a>
+    <a title="disqus" href="/blog/2020/04/22/Deep Reinforcement Learning (8) — Imitation Learning/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/04/22/Deep Reinforcement Learning (8) — Imitation Learning/" itemprop="commentCount"></span></a>
   </span>
   
   
@@ -312,19 +318,34 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>前幾天搞壞了一個 Anaconda Environment，只能利用其他的 Env. 來繼續手邊的工作。但由於這些其他的 Env. 大多為特定狀況下使用，也並不是常用的環境，所以很多的套件、設定多少都會要重新處理，這也不算太意外。</p>
+        <p>前一個部分，我們了解到如果遇到 Sparse Reward 時，可以怎麼樣做學習。但，如果今天可能連 Reward 都沒有，又或者是 Reward 很難定義的狀況下，可以怎麼做學習呢 ? Imitation Learning ( 或稱 Learning by Demonstration / Apprenticeship Learning ) 就是在解決這樣的情況。</p>
 <a id="more"></a>
-<p>但卻遇到了一個挺匪夷所思的狀況，在原先舊的環境中，使用 VS Code 終端機執行都沒問題的小程式，換了一個環境卻出現問題。 </p>
-<p>在該環境下的 Anaconda Prompt 或是 Pycharm 上執行都不會有問題，但同一個環境下的 VS Code 終端機執行卻屢屢發生錯誤。</p>
-<p>目前大概猜想是預設終端機 PowerShell 上面的問題，既然如此乾脆把 VS Code 終端機設定為 Anaconda Prompt ，也解決一些整合上的問題。</p>
-<h2 id="Step-1-開啟設定檔"><a href="#Step-1-開啟設定檔" class="headerlink" title="Step 1. 開啟設定檔"></a>Step 1. 開啟設定檔</h2><p>檔案 &gt; 喜好設定 &gt; 設定 &gt; 功能 &gt; 終端機 &gt; Integrated › Shell: Windows 點選 “ 在 settings.json 內編輯 “</p>
-<p><img src="https://i.imgur.com/UwZMBZH.png" alt></p>
-<h2 id="Step-2-修改設定檔"><a href="#Step-2-修改設定檔" class="headerlink" title="Step 2. 修改設定檔"></a>Step 2. 修改設定檔</h2><h3 id="修改-“terminal-integrated-shell-windows”"><a href="#修改-“terminal-integrated-shell-windows”" class="headerlink" title="修改 “terminal.integrated.shell.windows”"></a>修改 “terminal.integrated.shell.windows”</h3><p>將其值改為 “C:\\WINDOWS\\System32\\cmd.exe”</p>
-<h3 id="加上-“terminal-integrated-shellArgs-windows”"><a href="#加上-“terminal-integrated-shellArgs-windows”" class="headerlink" title="加上 “terminal.integrated.shellArgs.windows”"></a>加上 “terminal.integrated.shellArgs.windows”</h3><p>在 { } 內部最後加上一段</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&quot;terminal.integrated.shellArgs.windows&quot;: [</span><br><span class="line">        &quot;/K&quot;, &quot;C:\Users\allen\Anaconda3\Scripts\activate.bat C:\Users\allen\Anaconda3&quot;</span><br><span class="line">    ]</span><br></pre></td></tr></table></figure>
-<p><img src="https://i.imgur.com/MQxGYwj.png" alt></p>
-<p>[ ] 內部的值請將 Anaconda Prompt 點選滑鼠右鍵選擇 內容 &gt; 目標 內的值填入即可</p>
-<p><img width="500" src="https://i.imgur.com/Zph52Dx.png"></p>
+<h2 id="Behavior-Clone"><a href="#Behavior-Clone" class="headerlink" title="Behavior Clone"></a>Behavior Clone</h2><p>Behavior Clone 其實就是一種 Supervised Learning，我們無法得到 Reward，就收集許多專家 (Expert) 的資料</p>
+<script type="math/tex; mode=display">
+(s_1, \hat{a}_1)\\
+(s_2, \hat{a}_2)\\
+(s_3, \hat{a}_3)\\
+(s_4, \hat{a}_4)\\
+\vdots</script><p>然後設計一個神經網路來進行訓練。</p>
+<p><img width="500" src="https://i.imgur.com/wLFDAac.png"></p>
+<p>這樣的訓練過程看似簡單，但真正在實作上仍會存在一些問題  : </p>
+<p>(1)<br>我們在收集資料的時候往往都收集的是有限的資料，難以讓機器學習到各種可能情況的應對方式，舉例來說，收集駕駛人的駕駛行為給自駕車學習，但它可能會學習不到當即將遇到車禍時應該怎麼處理，因為我們的資料裡面可能收集不到即將出車禍時駕駛的應對方式。又或者，當我們收集玩家遊戲的資料給機器做學習時，也可能很難學習到發生一些突發狀況時應該怎麼反應。</p>
+<p>這些狀況，只能夠靠著 Data Aggregation 收集更多樣化的資料來避免。但在許多真實情況下，Data Aggregation 的資料收集其實是不切實際的，拿上面自駕車的例子來看，我們不可能一直讓車子持續往牆壁衝過去然後一直收集駕駛人的行為吧 ? </p>
+<p>(2)<br>其次，收集專家的資料時，往往也會同時收集到專家行為中某些與任務較為無關的行為，這樣子的行為可能出於個人習慣等等因素。如果機器可以百分之百完全複製專家行為倒也還好，但我們設計的 Neural Network Capacity 是有限的，在學習過程中不可能百分百完全學習，如果機器只學習到這些無關的行為，便會出現問題。</p>
+<p>(3)<br>Supervised Learning 的每一筆資料都是獨立的，上一筆資料有所誤差，並不會影響到下一筆的預測。然而 RL 中，每一筆資料都是有序列關係的，一個 State 往往決定於上一個 Action，除非 Data Aggregation 可以收集到足夠多樣的資料且機器可以完全做到訓練 0 誤差，否則，在 Bahavior Clone 中，訓練資料與測試資料的分布基本上會完全不同。</p>
+<h2 id="Inverse-Reinforcement-Learning"><a href="#Inverse-Reinforcement-Learning" class="headerlink" title="Inverse Reinforcement Learning"></a>Inverse Reinforcement Learning</h2><p>Behavior Clone 的問題衍伸出另外一種方法 — Inverse Reinforcement Learning。在講解 IRL 的訓練過程之前我們先來看看 RL 與 IRL 的不同 : </p>
+<h3 id="Reinforcement-Learning"><a href="#Reinforcement-Learning" class="headerlink" title="Reinforcement Learning"></a>Reinforcement Learning</h3><p>給定一個 Reward Function ，利用不斷的互動來找出可以使 Reward 最大化的 Actors。</p>
+<h3 id="Inverse-Reinforcement-Learning-1"><a href="#Inverse-Reinforcement-Learning-1" class="headerlink" title="Inverse Reinforcement Learning"></a>Inverse Reinforcement Learning</h3><p>給定一些專家行為資料，試圖去找出一個 Reward Function ，在從這個 Reward Function 中找出最佳行為模式。找出最佳模式後再重新找出一個新的 Reward Funciton ，如此反覆訓練讓最佳行為模式越來越好。</p>
+<p>其實，從上面的敘述就可以了解到 IRL 的整個訓練框架如下</p>
+<p><img src="https://i.imgur.com/aZDubVK.png" alt></p>
+<ul>
+<li>隨機初始一個 Actor $\pi$</li>
+<li>讓 $\pi$ 與環境互動後試圖找出一個 Reward Function，可以讓專家的 Action $\hat{\pi}$ 得到的 Reward 總是高過於 $\pi$ 所的到的 Reward。</li>
+<li>利用找出來的 Reward Function 來訓練 $\pi$ 可以得到更好的分數</li>
+<li>再利用訓練完成的 $\pi$，重新找一個 Reward Function，可以讓專家的 Action $\hat{\pi}$ 得到的 Reward 總是高過於 $\pi$ 所的到的 Reward。</li>
+<li>重複上列步驟</li>
+</ul>
+<p>仔細想想，這樣的框架不就是 GAN 的概念嗎 ?</p>
 
     </div>
 
@@ -341,7 +362,7 @@
     <strong>作者： </strong>Allen Tzeng</li>
   <li class="post-copyright-link">
     <strong>文章連結：</strong>
-    <a href="https://allen108108.github.io/blog/2019/10/13/將 VS Code 終端機預設成為 Anaconda Prompt/" title="將 VS Code 終端機預設成為 Anaconda Prompt">https://allen108108.github.io/blog/2019/10/13/將 VS Code 終端機預設成為 Anaconda Prompt/</a>
+    <a href="https://allen108108.github.io/blog/2020/04/22/Deep Reinforcement Learning (8) — Imitation Learning/" title="Deep Reinforcement Learning (8) --- Imitation Learning">https://allen108108.github.io/blog/2020/04/22/Deep Reinforcement Learning (8) — Imitation Learning/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！</li>
@@ -363,8 +384,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/blog/2019/10/11/Chapter 3 – Graph ( 2 )/" rel="next" title="Chapter 3 -- Graph ( 2 )">
-                  <i class="fa fa-chevron-left"></i> Chapter 3 -- Graph ( 2 )
+                <a href="/blog/2020/04/21/Deep Reinforcement Learning (6) — Actor-Critic/" rel="next" title="Deep Reinforcement Learning (6) --- Actor-Critic">
+                  <i class="fa fa-chevron-left"></i> Deep Reinforcement Learning (6) --- Actor-Critic
                 </a>
               
             </div>
@@ -372,10 +393,6 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-              
-                <a href="/blog/2019/10/14/[新書] Algebra, Topology, Differential Calculus, and Optimization Theory for Computer Science and Machine Learning/" rel="prev" title="[新書] Algebra, Topology, Differential Calculus, and Optimization Theory for Computer Science and Machine Learning">
-                  [新書] Algebra, Topology, Differential Calculus, and Optimization Theory for Computer Science and Machine Learning <i class="fa fa-chevron-right"></i>
-                </a>
               
             </div>
           </div>
@@ -433,7 +450,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-1-開啟設定檔"><span class="nav-number">1.</span> <span class="nav-text">Step 1. 開啟設定檔</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-2-修改設定檔"><span class="nav-number">2.</span> <span class="nav-text">Step 2. 修改設定檔</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改-“terminal-integrated-shell-windows”"><span class="nav-number">2.1.</span> <span class="nav-text">修改 “terminal.integrated.shell.windows”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加上-“terminal-integrated-shellArgs-windows”"><span class="nav-number">2.2.</span> <span class="nav-text">加上 “terminal.integrated.shellArgs.windows”</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Behavior-Clone"><span class="nav-number">1.</span> <span class="nav-text">Behavior Clone</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Inverse-Reinforcement-Learning"><span class="nav-number">2.</span> <span class="nav-text">Inverse Reinforcement Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Reinforcement-Learning"><span class="nav-number">2.1.</span> <span class="nav-text">Reinforcement Learning</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Inverse-Reinforcement-Learning-1"><span class="nav-number">2.2.</span> <span class="nav-text">Inverse Reinforcement Learning</span></a></li></ol></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -710,9 +727,9 @@
 </script>
 <script>
   function disqus_config() {
-    this.page.url = "https://allen108108.github.io/blog/2019/10/13/將 VS Code 終端機預設成為 Anaconda Prompt/";
-    this.page.identifier = "2019/10/13/將 VS Code 終端機預設成為 Anaconda Prompt/";
-    this.page.title = '將 VS Code 終端機預設成為 Anaconda Prompt';};
+    this.page.url = "https://allen108108.github.io/blog/2020/04/22/Deep Reinforcement Learning (8) — Imitation Learning/";
+    this.page.identifier = "2020/04/22/Deep Reinforcement Learning (8) — Imitation Learning/";
+    this.page.title = 'Deep Reinforcement Learning (8) --- Imitation Learning';};
   function loadComments() {
     if (window.DISQUS) {
       DISQUS.reset({
