@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-TW">
+<head>
+  <meta name="google-site-verification" content="exmdvS3MT1hVojBxSEZZZ8TIBBOg6pJ2POTtzNuecqs" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+
+
+<meta property="og:site_name" content="">
+<meta property="og:title" content="categories">
+<meta property="og:url" content="http://">
+<meta property="og:image" content="">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/blog/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Gemini',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","width":280,"display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '複製',
+      copy_success: '複製成功',
+      copy_failure: '複製失敗'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="假設 $\pi$ 為有理數，即， $\pi=\dfrac{p}{q}\text{,}$ and $p,q\in\mathbb{N}$。 令 :">
+<meta property="og:type" content="article">
+<meta property="og:title" content="$\pi$ 為無理數之證明">
+<meta property="og:url" content="https://allen108108.github.io/blog/2020/05/01/ππ_pi 為無理數之證明/index.html">
+<meta property="og:site_name" content="Math.py">
+<meta property="og:description" content="假設 $\pi$ 為有理數，即， $\pi=\dfrac{p}{q}\text{,}$ and $p,q\in\mathbb{N}$。 令 :">
+<meta property="og:locale" content="zh-TW">
+<meta property="og:updated_time" content="2020-04-30T22:15:32.988Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="$\pi$ 為無理數之證明">
+<meta name="twitter:description" content="假設 $\pi$ 為有理數，即， $\pi=\dfrac{p}{q}\text{,}$ and $p,q\in\mathbb{N}$。 令 :">
+  <link rel="canonical" href="https://allen108108.github.io/blog/2020/05/01/ππ_pi 為無理數之證明/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>$\pi$ 為無理數之證明 | Math.py</title>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-149442581-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-149442581-1');
+    }
+  </script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-TW">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Math.py</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Wir müssen wissen , wir werden wissen</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切換導航欄">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/blog/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首頁</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/blog/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分類</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/blog/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>歸檔</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://allen108108.github.io/blog/blog/2020/05/01/ππ_pi 為無理數之證明/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Allen Tzeng">
+      <meta itemprop="description" content="Study about Mathematics , Programming and Data Science">
+      <meta itemprop="image" content="/blog/images/allen.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Math.py">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">$\pi$ 為無理數之證明
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              
+                
+              
+
+              <time title="創建時間：2020-05-01 06:02:19 / 修改時間：06:15:32" itemprop="dateCreated datePublished" datetime="2020-05-01T06:02:19+08:00">2020-05-01</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/數學筆記-Mathematics-Note/" itemprop="url" rel="index"><span itemprop="name">數學筆記 Mathematics Note</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="閱讀次數" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">閱讀次數：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/blog/2020/05/01/ππ_pi 為無理數之證明/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/05/01/ππ_pi 為無理數之證明/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>假設 $\pi$ 為有理數，即， $\pi=\dfrac{p}{q}\text{,}$ and $p,q\in\mathbb{N}$。 令 : </p>
+<a id="more"></a>
+<script type="math/tex; mode=display">
+f_n(x)=\dfrac{1}{n!}q^nx^n(\pi-x)^n=\dfrac{1}{n!}x^n(p-qx)^n</script><p>則 $f_n(x)$ 為一個 $2n$ 次多項式，且 $x^n(p-qx)^n$ 展開後係數為整數。</p>
+<p>(1)</p>
+<p>$\because f_n’(x)=\dfrac{1}{n!}q^n\cdot n\cdot (\pi x-x^2)^{n-1}\cdot (\pi-2x)$</p>
+<p>$\therefore f_n(\dfrac{\pi}{2})=M_n$ 是 $f_n$ 在 $[0,\pi]$ 區間中的最大值</p>
+<p>$\Longrightarrow M_n=f_n(\dfrac{\pi}{2})=\dfrac{1}{n!}q^n\cdot(\dfrac{\pi}{2})^n$</p>
+<p>$\Longrightarrow \displaystyle\lim_{n \to \infty}M_n=0$ $\big(\because \displaystyle\lim_{n \to \infty}\dfrac{a^n}{n!}=0\big)$</p>
+<p>令</p>
+<script type="math/tex; mode=display">
+I_n=\int_0^\pi f_n(x)\sin xdx</script><p>$\because f_n(x)&gt;0\text{ , }\sin x&gt;0\text{ , }0&lt;x&lt;\pi$</p>
+<p>$\therefore\displaystyle\int_0^\pi f_n(x)\sin xdx=I_n&gt;0$</p>
+<p>$\Longrightarrow I_n=\displaystyle\int_0^\pi f_n(x)\sin xdx&lt;\int_0^\pi M_n\sin xdx=2M_n$</p>
+<p>$\because \displaystyle\lim_{n\to\infty}M_n=0$</p>
+<p>$\Longrightarrow \exists\ n&gt;0$ 滿足 $M_n&lt;\dfrac{1}{2}$</p>
+<p>$\Longrightarrow I_n&lt;2M_n&lt;1$</p>
+<p>(2)</p>
+<p>$f_n(x)=\dfrac{1}{n!}x^n(p-qx)^n\overset{let}{=}\dfrac{1}{n!}\displaystyle\sum_{k=n}^{2n}\alpha_kx^k$，$\alpha_k\in\mathbb{Z}$</p>
+<p>$\therefore f_n(x)=\alpha_nx^n+\alpha_{n-1}x^{n-1}+\cdots+\alpha_{2n}x^{2n}$</p>
+<p>$\Longrightarrow\begin{cases}f_n^{(m)}(0)=0&amp;\in\mathbb{Z}&amp;\mbox{, }m &lt; n\\<br>f_n^{(m)}(0)=\alpha_n n!&amp;\in\mathbb{Z}&amp;\mbox{, }m = n \\<br>f_n^{(m)}(0)=\alpha_m m!&amp;\in\mathbb{Z}&amp;\mbox{, }m&gt;n\end{cases}\Longrightarrow f_n^{(m)}\in\mathbb{Z}\text{ , }\forall m&gt;0$</p>
+<p>且</p>
+<p>$f_n(x)=f_n(\pi-x)\Rightarrow f_n^{(m)}(x)=f_n^{(m)}(\pi-x)\cdot(-1)^m$</p>
+<p>$\Longrightarrow f_n^{(m)}(\pi)=f_n^{(m)}(0)\cdot(-1)^m\in\mathbb{Z}$</p>
+<p>$\Longrightarrow f_n^{(m)}(0), f_n^{(m)}(\pi)\in\mathbb{Z}$</p>
+<p>(3)</p>
+<p>令</p>
+<p>$F_n(x)\ \ \ =f_n(x)-f_n^{(2)}(x)+f_n^{(4)}(x)-f_n^{(6)}(x)+\cdots+(-1)^nf_n^{(2n)}(x)$</p>
+<p>$F_n^{(2)}(x)=\ \ \ \ \ \ \ \ \ \ +f_n^{(2)}(x)-f_n^{(4)}(x)+f_n^{(6)}(x)+\cdots+(-1)^{n-1}f_n^{(2n)}(x)+(-1)^{n}f_n^{(2n+2)}(x)$</p>
+<p>$\therefore F_n(x)+F_n’’(x)=f_n(x)+(-1)^{n}f_n^{(2n+2)}(x)=f_n(x)$</p>
+<p>$\big(\because f_n(x)=\alpha_nx^n+\alpha_{n-1}x^{n-1}+\cdots+\alpha_{2n}x^{2n}\Longrightarrow f_n^{(2n+2)}(x)=0\big)$</p>
+<p>$\big[F_n’(x)\sin x-F_n(x)\cos x\big]’=\Big(F_n’’(x)\sin x+F_n’(x)\cos x\Big)-\Big(F_n’(x)\cos x+F_n(x)(-\sin x)\Big)$</p>
+<p>$=F_n’’(x)\sin x+F_n’(x)\cos x-F_n’(x)\cos x+F_n(x)\sin x$</p>
+<p>$=F_n’’(x)\sin x+F_n(x)\sin x=f_n(x)\sin x$</p>
+<p>(4)</p>
+<p>由微積分基本定理 (Fundamental Theorem of Calculus) 可知 : </p>
+<p>$I_n=\int_0^{\pi}f_n(x)\sin xdx=\Big(F_n’(x)\sin x-<br>f_n(x)\cos x\Big)_0^{\pi}=F_n(0)+F_n(\pi)$</p>
+<p>$\overset{by\text{ (3)}}{\Longrightarrow} F_n(0)=f_n(0)-f_n^{(2)}(0)+f_n^{(4)}(0)-f_n^{(6)}(0)+\cdots+(-1)^nf_n^{(2n)}(0)\in\mathbb{Z}$</p>
+<p>$\overset{by\text{ (2)}}{\Longrightarrow} F_n(\pi)\in\mathbb{Z}$</p>
+<p>$\overset{by\text{ (1)}}{\Longrightarrow} I_n=F_n(0)+F_n(\pi)\in\mathbb{Z}$ ($\rightarrow\leftarrow$)</p>
+<p>$\therefore \pi \text{ is irrational.}$</p>
+
+    </div>
+
+    
+    
+    
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>作者： </strong>Allen Tzeng</li>
+  <li class="post-copyright-link">
+    <strong>文章連結：</strong>
+    <a href="https://allen108108.github.io/blog/2020/05/01/ππ_pi 為無理數之證明/" title="$\pi$ 為無理數之證明">https://allen108108.github.io/blog/2020/05/01/ππ_pi 為無理數之證明/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/blog/2020/04/22/Deep Reinforcement Learning (8) — Imitation Learning/" rel="next" title="Deep Reinforcement Learning (8) --- Imitation Learning">
+                  <i class="fa fa-chevron-left"></i> Deep Reinforcement Learning (8) --- Imitation Learning
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    
+  <div class="comments" id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/blog/images/allen.jpg"
+      alt="Allen Tzeng">
+  <p class="site-author-name" itemprop="name">Allen Tzeng</p>
+  <div class="site-description" itemprop="description">Study about Mathematics , Programming and Data Science</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/blog/archives/">
+        
+          <span class="site-state-item-count">104</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/blog/categories/">
+          
+        
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">分類</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://allen108108.github.io/" title="Github page &rarr; https://allen108108.github.io/"><i class="fa fa-fw fa-github-alt"></i>Github page</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/allen108108" title="GitHub &rarr; https://github.com/allen108108" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:allen108108@hotmail.com" title="E-Mail &rarr; mailto:allen108108@hotmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://www.facebook.com/Mathpy-257929091666547/" title="FB Page &rarr; https://www.facebook.com/Mathpy-257929091666547/" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB Page</a>
+      </span>
+    
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Allen Tzeng</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主題 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="訪客總數">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="總瀏覽次數">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+    
+  
+  <script color='255, 80, 219' opacity='1' zIndex='-1' count='100' src="/blog/lib/canvas-nest/canvas-nest-nomobile.min.js"></script>
+  <script src="/blog/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/blog/js/utils.js?v=7.4.0"></script><script src="/blog/js/motion.js?v=7.4.0"></script>
+<script src="/blog/js/schemes/pisces.js?v=7.4.0"></script>
+
+<script src="/blog/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: 21351,
+      el: 'wpac-rating',
+      color: 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://math-py.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  function disqus_config() {
+    this.page.url = "https://allen108108.github.io/blog/2020/05/01/ππ_pi 為無理數之證明/";
+    this.page.identifier = "2020/05/01/ππ_pi 為無理數之證明/";
+    this.page.title = '$\\pi$ 為無理數之證明';};
+  function loadComments() {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://math-py.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  }
+    window.addEventListener('load', loadComments, false);
+  
+</script>
+
+</body>
+</html>
