@@ -14,9 +14,9 @@
 
 
 <meta property="og:site_name" content="">
-<meta property="og:title" content="2020 Presidential Hackathon 1st. Workshop (2020.06.19)">
+<meta property="og:title" content="芋香冬瓜「查」 : 專為自家需求的機器人查詢系統 App ( MoBot ver.2 ) ">
 <meta property="og:url" content="http://">
-<meta property="og:image" content="https://i.imgur.com/hn30AXu.jpg">
+<meta property="og:image" content="https://i.imgur.com/TdNr0Jn.jpg">
 
   <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=7.4.0">
   <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=7.4.0">
@@ -63,12 +63,12 @@
   };
 </script>
 
-  <meta name="description" content="(2019.06)  自學深度學習與 Python 將近一年，也該為這一段學習做一個階段性的總整理。而最好的方式便是試著實作一個專案，大概在今年中我便決定了兩個主要的專題方向 — LINE Bot 與 人臉辨識。 本篇文章主要以建構一個可用且符合自己需求的 LINE Bot 的過程紀錄，因此會持續更新文章，直到整個 LINE Bot 達到我自己想要的標準為止。">
+  <meta name="description" content="系列文章 MoBot : LINE Bot 開發紀錄 ( LINE / Heroku ) 芋香冬瓜「查」 : 專為自家需求的機器人查詢系統 App ( MoBot ver.2 )">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MoBot : LINE Bot 開發紀錄 ( LINE &#x2F; Heroku ) ">
 <meta property="og:url" content="https://allen108108.github.io/blog/2020/03/26/MoBot _ LINE Bot 開發紀錄 ( LINE _ Heroku )/index.html">
 <meta property="og:site_name" content="Math.py">
-<meta property="og:description" content="(2019.06)  自學深度學習與 Python 將近一年，也該為這一段學習做一個階段性的總整理。而最好的方式便是試著實作一個專案，大概在今年中我便決定了兩個主要的專題方向 — LINE Bot 與 人臉辨識。 本篇文章主要以建構一個可用且符合自己需求的 LINE Bot 的過程紀錄，因此會持續更新文章，直到整個 LINE Bot 達到我自己想要的標準為止。">
+<meta property="og:description" content="系列文章 MoBot : LINE Bot 開發紀錄 ( LINE / Heroku ) 芋香冬瓜「查」 : 專為自家需求的機器人查詢系統 App ( MoBot ver.2 )">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https://i.imgur.com/haTp0nw.jpg">
 <meta property="og:image" content="https://i.imgur.com/lWHkqdV.jpg">
@@ -93,10 +93,10 @@
 <meta property="og:image" content="https://i.imgur.com/C0nR95f.png">
 <meta property="og:image" content="https://i.imgur.com/clSlAC9.png">
 <meta property="og:image" content="https://i.imgur.com/SJJSnoN.png">
-<meta property="og:updated_time" content="2020-03-25T16:14:26.865Z">
+<meta property="og:updated_time" content="2020-06-25T22:00:59.172Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MoBot : LINE Bot 開發紀錄 ( LINE &#x2F; Heroku ) ">
-<meta name="twitter:description" content="(2019.06)  自學深度學習與 Python 將近一年，也該為這一段學習做一個階段性的總整理。而最好的方式便是試著實作一個專案，大概在今年中我便決定了兩個主要的專題方向 — LINE Bot 與 人臉辨識。 本篇文章主要以建構一個可用且符合自己需求的 LINE Bot 的過程紀錄，因此會持續更新文章，直到整個 LINE Bot 達到我自己想要的標準為止。">
+<meta name="twitter:description" content="系列文章 MoBot : LINE Bot 開發紀錄 ( LINE / Heroku ) 芋香冬瓜「查」 : 專為自家需求的機器人查詢系統 App ( MoBot ver.2 )">
 <meta name="twitter:image" content="https://i.imgur.com/haTp0nw.jpg">
   <link rel="canonical" href="https://allen108108.github.io/blog/2020/03/26/MoBot _ LINE Bot 開發紀錄 ( LINE _ Heroku )/">
 
@@ -278,11 +278,19 @@
                 
               
 
-              <time title="創建時間：2020-03-26 00:05:12 / 修改時間：00:14:26" itemprop="dateCreated datePublished" datetime="2020-03-26T00:05:12+08:00">2020-03-26</time>
+              <time title="創建時間：2020-03-26 00:05:12" itemprop="dateCreated datePublished" datetime="2020-03-26T00:05:12+08:00">2020-03-26</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-06-26 06:00:59" itemprop="dateModified" datetime="2020-06-26T06:00:59+08:00">2020-06-26</time>
+              </span>
             
           
             <span class="post-meta-item">
@@ -332,10 +340,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>(2019.06) </p>
+        <h2 id="系列文章"><a href="#系列文章" class="headerlink" title="系列文章"></a>系列文章</h2><ul>
+<li><a href="https://allen108108.github.io/blog/2020/03/26/MoBot%20_%20LINE%20Bot%20%E9%96%8B%E7%99%BC%E7%B4%80%E9%8C%84%20%28%20LINE%20_%20Heroku%20%29">MoBot : LINE Bot 開發紀錄 ( LINE / Heroku )</a></li>
+<li>芋香冬瓜「查」 : 專為自家需求的機器人查詢系統 App ( MoBot ver.2 )</li>
+</ul>
+<a id="more"></a>
+<p>(2019.06) </p>
 <p>自學深度學習與 Python 將近一年，也該為這一段學習做一個階段性的總整理。而最好的方式便是試著實作一個專案，大概在今年中我便決定了兩個主要的專題方向 — LINE Bot 與 人臉辨識。</p>
 <p>本篇文章主要以建構一個可用且符合自己需求的 LINE Bot 的過程紀錄，因此會持續更新文章，直到整個 LINE Bot 達到我自己想要的標準為止。</p>
-<a id="more"></a>
 <p>(2020.03)</p>
 <p>這篇文章的撰寫，從開始到完成，中間隔了近半年，主要是因為筆者這段期間適逢求職以及就職的過程，加上工作上的專案以及領域的論文閱讀，導致此篇開發記錄一直沒有機會完成，一直到現在才抽空將其補完。</p>
 <h2 id="MoBot-功能"><a href="#MoBot-功能" class="headerlink" title="MoBot 功能"></a>MoBot 功能</h2><p>MoBot 主要都是以自己以及家人為需求進行開發，因此目前 ( 2019.09.20 ) 先完成幾個功能 : </p>
@@ -608,7 +620,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#MoBot-功能"><span class="nav-number">1.</span> <span class="nav-text">MoBot 功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MoBot-架構"><span class="nav-number">2.</span> <span class="nav-text">MoBot 架構</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LINE-平台佈屬"><span class="nav-number">3.</span> <span class="nav-text">LINE 平台佈屬</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-先至-https-developers-line-biz-en-進行註冊"><span class="nav-number">3.1.</span> <span class="nav-text">1. 先至 https://developers.line.biz/en/ 進行註冊</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-建立新的-Provider"><span class="nav-number">3.2.</span> <span class="nav-text">2. 建立新的 Provider</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-填入-Provider-名稱後便成功建立了一個新的-Provider"><span class="nav-number">3.3.</span> <span class="nav-text">3. 填入 Provider 名稱後便成功建立了一個新的 Provider</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-選取-Messageing-API-以建立一個-LINE-Bot"><span class="nav-number">3.4.</span> <span class="nav-text">4. 選取 Messageing API 以建立一個 LINE Bot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-設定-LINE-Bot-基本資料"><span class="nav-number">3.5.</span> <span class="nav-text">5. 設定 LINE Bot 基本資料</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-確認建立-Provider"><span class="nav-number">3.6.</span> <span class="nav-text">6. 確認建立 Provider</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-設定-LINE-Bot"><span class="nav-number">3.7.</span> <span class="nav-text">7. 設定 LINE Bot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#設定-LINE-Bot-有幾個部分需要注意的地方-其他部分都不需更動"><span class="nav-number">3.8.</span> <span class="nav-text">設定 LINE Bot 有幾個部分需要注意的地方 ( 其他部分都不需更動 ) :</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Channel-ID、Channel-secret、Channel-access-token-long-lived"><span class="nav-number">3.8.1.</span> <span class="nav-text">Channel ID、Channel secret、Channel access token (long-lived)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Use-webhooks"><span class="nav-number">3.8.2.</span> <span class="nav-text">Use webhooks</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Webhook-URL"><span class="nav-number">3.8.3.</span> <span class="nav-text">Webhook URL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Auto-reply-messages、Greeting-messages"><span class="nav-number">3.8.4.</span> <span class="nav-text">Auto-reply messages、Greeting messages</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Django-架構佈屬"><span class="nav-number">4.</span> <span class="nav-text">Django 架構佈屬</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-安裝-Django-及-LINE-Bot-API"><span class="nav-number">4.1.</span> <span class="nav-text">1. 安裝 Django 及 LINE Bot API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-建立-Django-專案"><span class="nav-number">4.2.</span> <span class="nav-text">2. 建立 Django 專案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#設定-settings-py"><span class="nav-number">4.3.</span> <span class="nav-text">設定 settings.py</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#設定-urls-py"><span class="nav-number">4.4.</span> <span class="nav-text">設定 urls.py</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#設定-views-py"><span class="nav-number">4.5.</span> <span class="nav-text">設定 views.py</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Heroku-伺服器佈屬"><span class="nav-number">5.</span> <span class="nav-text">Heroku 伺服器佈屬</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#創建-Heroku-app"><span class="nav-number">5.1.</span> <span class="nav-text">創建 Heroku app</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安裝-Git-版本控制系統"><span class="nav-number">5.2.</span> <span class="nav-text">安裝 Git 版本控制系統</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安裝-Heroku-CLI"><span class="nav-number">5.3.</span> <span class="nav-text">安裝 Heroku CLI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#登入-Heroku，並上傳專案至-Heroku"><span class="nav-number">5.4.</span> <span class="nav-text">登入 Heroku，並上傳專案至 Heroku</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#專案修改"><span class="nav-number">5.5.</span> <span class="nav-text">專案修改</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#後記"><span class="nav-number">6.</span> <span class="nav-text">後記</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考資料"><span class="nav-number">7.</span> <span class="nav-text">參考資料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#註釋"><span class="nav-number">8.</span> <span class="nav-text">註釋</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#系列文章"><span class="nav-number">1.</span> <span class="nav-text">系列文章</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MoBot-功能"><span class="nav-number">2.</span> <span class="nav-text">MoBot 功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MoBot-架構"><span class="nav-number">3.</span> <span class="nav-text">MoBot 架構</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LINE-平台佈屬"><span class="nav-number">4.</span> <span class="nav-text">LINE 平台佈屬</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-先至-https-developers-line-biz-en-進行註冊"><span class="nav-number">4.1.</span> <span class="nav-text">1. 先至 https://developers.line.biz/en/ 進行註冊</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-建立新的-Provider"><span class="nav-number">4.2.</span> <span class="nav-text">2. 建立新的 Provider</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-填入-Provider-名稱後便成功建立了一個新的-Provider"><span class="nav-number">4.3.</span> <span class="nav-text">3. 填入 Provider 名稱後便成功建立了一個新的 Provider</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-選取-Messageing-API-以建立一個-LINE-Bot"><span class="nav-number">4.4.</span> <span class="nav-text">4. 選取 Messageing API 以建立一個 LINE Bot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-設定-LINE-Bot-基本資料"><span class="nav-number">4.5.</span> <span class="nav-text">5. 設定 LINE Bot 基本資料</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-確認建立-Provider"><span class="nav-number">4.6.</span> <span class="nav-text">6. 確認建立 Provider</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-設定-LINE-Bot"><span class="nav-number">4.7.</span> <span class="nav-text">7. 設定 LINE Bot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#設定-LINE-Bot-有幾個部分需要注意的地方-其他部分都不需更動"><span class="nav-number">4.8.</span> <span class="nav-text">設定 LINE Bot 有幾個部分需要注意的地方 ( 其他部分都不需更動 ) :</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Channel-ID、Channel-secret、Channel-access-token-long-lived"><span class="nav-number">4.8.1.</span> <span class="nav-text">Channel ID、Channel secret、Channel access token (long-lived)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Use-webhooks"><span class="nav-number">4.8.2.</span> <span class="nav-text">Use webhooks</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Webhook-URL"><span class="nav-number">4.8.3.</span> <span class="nav-text">Webhook URL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Auto-reply-messages、Greeting-messages"><span class="nav-number">4.8.4.</span> <span class="nav-text">Auto-reply messages、Greeting messages</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Django-架構佈屬"><span class="nav-number">5.</span> <span class="nav-text">Django 架構佈屬</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-安裝-Django-及-LINE-Bot-API"><span class="nav-number">5.1.</span> <span class="nav-text">1. 安裝 Django 及 LINE Bot API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-建立-Django-專案"><span class="nav-number">5.2.</span> <span class="nav-text">2. 建立 Django 專案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#設定-settings-py"><span class="nav-number">5.3.</span> <span class="nav-text">設定 settings.py</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#設定-urls-py"><span class="nav-number">5.4.</span> <span class="nav-text">設定 urls.py</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#設定-views-py"><span class="nav-number">5.5.</span> <span class="nav-text">設定 views.py</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Heroku-伺服器佈屬"><span class="nav-number">6.</span> <span class="nav-text">Heroku 伺服器佈屬</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#創建-Heroku-app"><span class="nav-number">6.1.</span> <span class="nav-text">創建 Heroku app</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安裝-Git-版本控制系統"><span class="nav-number">6.2.</span> <span class="nav-text">安裝 Git 版本控制系統</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安裝-Heroku-CLI"><span class="nav-number">6.3.</span> <span class="nav-text">安裝 Heroku CLI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#登入-Heroku，並上傳專案至-Heroku"><span class="nav-number">6.4.</span> <span class="nav-text">登入 Heroku，並上傳專案至 Heroku</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#專案修改"><span class="nav-number">6.5.</span> <span class="nav-text">專案修改</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#後記"><span class="nav-number">7.</span> <span class="nav-text">後記</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考資料"><span class="nav-number">8.</span> <span class="nav-text">參考資料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#註釋"><span class="nav-number">9.</span> <span class="nav-text">註釋</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -627,7 +639,7 @@
         
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">109</span>
+          <span class="site-state-item-count">110</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
