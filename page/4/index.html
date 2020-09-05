@@ -14,9 +14,9 @@
 
 
 <meta property="og:site_name" content="">
-<meta property="og:title" content="categories">
+<meta property="og:title" content="將已有的專案加入 TotoiseSVN 進行版本控制">
 <meta property="og:url" content="http://">
-<meta property="og:image" content="">
+<meta property="og:image" content="https://i.imgur.com/pZhNbwz.jpg">
 
   <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=7.4.0">
   <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=7.4.0">
@@ -219,6 +219,130 @@
           <div id="content" class="content">
             
   <div id="posts" class="posts-expand">
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://allen108108.github.io/blog/blog/2019/12/04/Deep Reinforcement Learning (2) — Proximal Policy Optimization (PPO)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Allen Tzeng">
+      <meta itemprop="description" content="Study about Mathematics , Programming and Data Science">
+      <meta itemprop="image" content="/blog/images/allen.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Math.py">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/blog/2019/12/04/Deep Reinforcement Learning (2) — Proximal Policy Optimization (PPO)/" class="post-title-link" itemprop="url">Deep Reinforcement Learning (2) --- Proximal Policy Optimization (PPO)</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              
+                
+              
+
+              <time title="創建時間：2019-12-04 12:13:24 / 修改時間：12:13:25" itemprop="dateCreated datePublished" datetime="2019-12-04T12:13:24+08:00">2019-12-04</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/課程筆記-Course/" itemprop="url" rel="index"><span itemprop="name">課程筆記 Course</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/課程筆記-Course/李宏毅-Machine-Learning-and-having-it-Deep-and-Structured/" itemprop="url" rel="index"><span itemprop="name">李宏毅 Machine Learning and having it Deep and Structured</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/blog/2019/12/04/Deep Reinforcement Learning (2) — Proximal Policy Optimization (PPO)/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/12/04/Deep Reinforcement Learning (2) — Proximal Policy Optimization (PPO)/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="On-Policy-amp-Off-Policy"><a href="#On-Policy-amp-Off-Policy" class="headerlink" title="On Policy &amp; Off Policy"></a>On Policy &amp; Off Policy</h2><p>我們前面所用的技巧稱為 “ On Policy “ ，意思就是，我們用來跟 Environment 互動的 Actor 跟我們要訓練的 Actor 是同一個。</p>
+<p>但前面有提到，這樣的訓練其實會花非常多時間，因為每一次參數更新完，就必須要重新讓 Actor 跟 Environment 互動收集新的資料，然後再進行訓練。是不是有辦法可以讓 Actor 跟 Environment 互動收集的資料拿來更新多次參數，省去一直收集資料的冗長過程 ?</p>
+<p>這就是 “ Off Policy “ 的作用。在 Off Policy 中，我們利用一個不同的 Actor 、Policy $\pi_{\theta}’$  來跟 Environment 互動收集資料，然後讓我們想要訓練的 Actor 、 Policy $\pi_{\theta}’$ 利用這些資料，一次進行多次參數更新。</p>
+          
+         
+         <div class="out-img-topic">
+           <img src=https://i.imgur.com/MdVC5JZ.png class="img-topic" />
+         </div>
+         
+                     
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/blog/2019/12/04/Deep Reinforcement Learning (2) — Proximal Policy Optimization (PPO)/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
         <article itemscope itemtype="http://schema.org/Article">
   
   
@@ -1334,128 +1458,6 @@
   </article>
 
     
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://allen108108.github.io/blog/blog/2019/11/11/Generative Adversarial Network (5) — General Framework/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Allen Tzeng">
-      <meta itemprop="description" content="Study about Mathematics , Programming and Data Science">
-      <meta itemprop="image" content="/blog/images/allen.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Math.py">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/blog/2019/11/11/Generative Adversarial Network (5) — General Framework/" class="post-title-link" itemprop="url">Generative Adversarial Network (5) --- General Framework</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              
-                
-              
-
-              <time title="創建時間：2019-11-11 01:09:00 / 修改時間：01:12:40" itemprop="dateCreated datePublished" datetime="2019-11-11T01:09:00+08:00">2019-11-11</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/課程筆記-Course/" itemprop="url" rel="index"><span itemprop="name">課程筆記 Course</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/課程筆記-Course/李宏毅-Machine-Learning-and-having-it-Deep-and-Structured/" itemprop="url" rel="index"><span itemprop="name">李宏毅 Machine Learning and having it Deep and Structured</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-        
-      
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/blog/2019/11/11/Generative Adversarial Network (5) — General Framework/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/11/11/Generative Adversarial Network (5) — General Framework/" itemprop="commentCount"></span></a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>從上一個部分的推導，我們可以知道如果我們調整 $V(G,D)$，最後的結果可能就會是另外一種計算 Divergence 的方式，而不會是 JS-Divergence。那我們能不能找出一個 divergence 通式，直接藉由調整通式來改變我們想要的 Divergence ?</p>
-          
-         
-         <div class="out-img-topic">
-           <img src=https://i.imgur.com/RrdITkw.png class="img-topic" />
-         </div>
-         
-                     
-          <!--noindex-->
-          
-            <div class="post-button">
-              <a class="btn" href="/blog/2019/11/11/Generative Adversarial Network (5) — General Framework/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </div>
 
   
@@ -1509,7 +1511,7 @@
         
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-count">112</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -1522,7 +1524,7 @@
             <a href="/blog/categories/">
           
         
-        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">分類</span>
         </a>
       </div>
