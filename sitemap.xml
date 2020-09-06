@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://allen108108.github.io/blog/2020/03/25/%E5%8F%A4%E5%85%B8%E7%B7%9A%E6%80%A7%E6%A8%A1%E5%9E%8B%20v.s%20%E5%BB%A3%E7%BE%A9%E7%B7%9A%E6%80%A7%E6%A8%A1%E5%9E%8B/</loc>
+    
+    <lastmod>2020-09-06T02:27:17.685Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://allen108108.github.io/blog/2019/10/07/%E5%88%A9%E7%94%A8%20ImageDataGenerator%20(%E8%B3%87%E6%96%99%E5%A2%9E%E5%BC%B7)%20%E5%8A%A0%E5%BC%B7%20CNN%20%E8%BE%A8%E8%AD%98%E7%8E%87/</loc>
     
     <lastmod>2020-09-06T02:22:46.388Z</lastmod>
@@ -9,14 +16,14 @@
   </url>
   
   <url>
-    <loc>https://allen108108.github.io/blog/2020/03/02/Android%20%E5%88%9D%E6%8E%A2%20(%E4%BA%8C)%20%EF%BC%9A%20%E5%BE%9E%20Hi,%20Android%20!%20%E4%BE%86%E8%AA%8D%E8%AD%98%20Activity%20%E8%88%87%20UI/</loc>
+    <loc>https://allen108108.github.io/blog/2020/03/02/Android%20%E5%88%9D%E6%8E%A2%20(%E4%B8%80)%20%EF%BC%9A%20%E5%BE%9E%20Hello%20%20World%20!%20%E8%AA%8D%E8%AD%98%20Android%20%E5%B0%88%E6%A1%88%E9%96%8B%E7%99%BC/</loc>
     
     <lastmod>2020-09-06T02:21:42.967Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://allen108108.github.io/blog/2020/03/02/Android%20%E5%88%9D%E6%8E%A2%20(%E4%B8%80)%20%EF%BC%9A%20%E5%BE%9E%20Hello%20%20World%20!%20%E8%AA%8D%E8%AD%98%20Android%20%E5%B0%88%E6%A1%88%E9%96%8B%E7%99%BC/</loc>
+    <loc>https://allen108108.github.io/blog/2020/03/02/Android%20%E5%88%9D%E6%8E%A2%20(%E4%BA%8C)%20%EF%BC%9A%20%E5%BE%9E%20Hi,%20Android%20!%20%E4%BE%86%E8%AA%8D%E8%AD%98%20Activity%20%E8%88%87%20UI/</loc>
     
     <lastmod>2020-09-06T02:21:42.967Z</lastmod>
     
@@ -65,13 +72,6 @@
   </url>
   
   <url>
-    <loc>https://allen108108.github.io/blog/2020/03/25/%E5%8F%A4%E5%85%B8%E7%B7%9A%E6%80%A7%E6%A8%A1%E5%9E%8B%20v.s%20%E5%BB%A3%E7%BE%A9%E7%B7%9A%E6%80%A7%E6%A8%A1%E5%9E%8B/</loc>
-    
-    <lastmod>2020-09-06T02:04:54.562Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://allen108108.github.io/blog/2020/09/05/%E5%B0%87%E5%B7%B2%E6%9C%89%E7%9A%84%E5%B0%88%E6%A1%88%E5%8A%A0%E5%85%A5%20TotoiseSVN%20%E9%80%B2%E8%A1%8C%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/</loc>
     
     <lastmod>2020-09-05T11:23:11.152Z</lastmod>
@@ -86,14 +86,14 @@
   </url>
   
   <url>
-    <loc>https://allen108108.github.io/blog/2019/10/07/%5B%E8%AB%96%E6%96%87%5D%20Going%20Deeper%20with%20Convolutions/</loc>
+    <loc>https://allen108108.github.io/blog/2020/07/27/%5B%E8%AB%96%E6%96%87%5D%20End-to-End%20Object%20Detection%20with%20Transformers/</loc>
     
     <lastmod>2020-07-28T00:54:09.466Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://allen108108.github.io/blog/2020/07/27/%5B%E8%AB%96%E6%96%87%5D%20End-to-End%20Object%20Detection%20with%20Transformers/</loc>
+    <loc>https://allen108108.github.io/blog/2019/10/07/%5B%E8%AB%96%E6%96%87%5D%20Going%20Deeper%20with%20Convolutions/</loc>
     
     <lastmod>2020-07-28T00:54:09.466Z</lastmod>
     
@@ -114,14 +114,14 @@
   </url>
   
   <url>
-    <loc>https://allen108108.github.io/blog/2020/02/15/%5B%E8%AB%96%E6%96%87%5D%20YOLOv3%20_%20An%20Incremental%20Improvement/</loc>
+    <loc>https://allen108108.github.io/blog/2020/02/05/%5B%E8%AB%96%E6%96%87%5D%20YOLO9000%20_%20Better,%20Faster,%20Stronger/</loc>
     
     <lastmod>2020-07-28T00:54:09.466Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://allen108108.github.io/blog/2020/02/05/%5B%E8%AB%96%E6%96%87%5D%20YOLO9000%20_%20Better,%20Faster,%20Stronger/</loc>
+    <loc>https://allen108108.github.io/blog/2020/02/15/%5B%E8%AB%96%E6%96%87%5D%20YOLOv3%20_%20An%20Incremental%20Improvement/</loc>
     
     <lastmod>2020-07-28T00:54:09.466Z</lastmod>
     
