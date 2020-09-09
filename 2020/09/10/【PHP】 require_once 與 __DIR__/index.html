@@ -63,23 +63,20 @@
   };
 </script>
 
-  <meta name="description" content="GAN 講了這麼多，重點還是要得到一個夠好的 Generator 可以生成我們想要的東西。可是，什麼樣的 Generator 是夠好的 ? 我們怎麼評估訓練完成的 Generator ?">
+  <meta name="description" content="最近在進行 PHP 的一個開發項目，在測試時剛好遇到一個 Bug，測試了很久，始終找不到真正討人厭的那隻蟲，一直到最後回家後進行一些簡單的測試才知道問題出在哪裡。查了一下，發現其實不乏有人問相同的問題，因此想說隨手做個小短篇紀錄一下。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Generative Adversarial Network (10) --- Evaluation &amp; Concluding Remarks">
-<meta property="og:url" content="https://allen108108.github.io/blog/2019/11/23/Generative Adversarial Network (10) — Evaluation & Concluding Remarks/index.html">
+<meta property="og:title" content="【PHP】 `require_once` 與 `__DIR__`">
+<meta property="og:url" content="https://allen108108.github.io/blog/2020/09/10/【PHP】 require_once 與 __DIR__/index.html">
 <meta property="og:site_name" content="Math.py">
-<meta property="og:description" content="GAN 講了這麼多，重點還是要得到一個夠好的 Generator 可以生成我們想要的東西。可是，什麼樣的 Generator 是夠好的 ? 我們怎麼評估訓練完成的 Generator ?">
+<meta property="og:description" content="最近在進行 PHP 的一個開發項目，在測試時剛好遇到一個 Bug，測試了很久，始終找不到真正討人厭的那隻蟲，一直到最後回家後進行一些簡單的測試才知道問題出在哪裡。查了一下，發現其實不乏有人問相同的問題，因此想說隨手做個小短篇紀錄一下。">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:image" content="https://i.imgur.com/pBHtWof.png">
-<meta property="og:image" content="https://i.imgur.com/nCGkPZ5.png">
-<meta property="og:image" content="https://i.imgur.com/KgXOjIO.png">
-<meta property="og:image" content="https://i.imgur.com/YSgdswY.png">
-<meta property="og:updated_time" content="2019-11-23T08:56:06.087Z">
+<meta property="og:image" content="https://i.imgur.com/JCxGfBi.png">
+<meta property="og:updated_time" content="2020-09-09T17:23:39.232Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Generative Adversarial Network (10) --- Evaluation &amp; Concluding Remarks">
-<meta name="twitter:description" content="GAN 講了這麼多，重點還是要得到一個夠好的 Generator 可以生成我們想要的東西。可是，什麼樣的 Generator 是夠好的 ? 我們怎麼評估訓練完成的 Generator ?">
-<meta name="twitter:image" content="https://i.imgur.com/pBHtWof.png">
-  <link rel="canonical" href="https://allen108108.github.io/blog/2019/11/23/Generative Adversarial Network (10) — Evaluation & Concluding Remarks/">
+<meta name="twitter:title" content="【PHP】 `require_once` 與 `__DIR__`">
+<meta name="twitter:description" content="最近在進行 PHP 的一個開發項目，在測試時剛好遇到一個 Bug，測試了很久，始終找不到真正討人厭的那隻蟲，一直到最後回家後進行一些簡單的測試才知道問題出在哪裡。查了一下，發現其實不乏有人問相同的問題，因此想說隨手做個小短篇紀錄一下。">
+<meta name="twitter:image" content="https://i.imgur.com/JCxGfBi.png">
+  <link rel="canonical" href="https://allen108108.github.io/blog/2020/09/10/【PHP】 require_once 與 __DIR__/">
 
 
 <script id="page-configurations">
@@ -93,7 +90,7 @@
   };
 </script>
 
-  <title>Generative Adversarial Network (10) --- Evaluation & Concluding Remarks | Math.py</title>
+  <title>【PHP】 `require_once` 與 `__DIR__` | Math.py</title>
   
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-149442581-1"></script>
   <script>
@@ -231,7 +228,7 @@
   
   
   <div class="post-block post">
-    <link itemprop="mainEntityOfPage" href="https://allen108108.github.io/blog/blog/2019/11/23/Generative Adversarial Network (10) — Evaluation & Concluding Remarks/">
+    <link itemprop="mainEntityOfPage" href="https://allen108108.github.io/blog/blog/2020/09/10/【PHP】 require_once 與 __DIR__/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Allen Tzeng">
@@ -243,7 +240,7 @@
       <meta itemprop="name" content="Math.py">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">Generative Adversarial Network (10) --- Evaluation & Concluding Remarks
+        <h1 class="post-title" itemprop="name headline">【PHP】 `require_once` 與 `__DIR__`
 
           
         </h1>
@@ -259,7 +256,7 @@
                 
               
 
-              <time title="創建時間：2019-11-23 02:46:54 / 修改時間：16:56:06" itemprop="dateCreated datePublished" datetime="2019-11-23T02:46:54+08:00">2019-11-23</time>
+              <time title="創建時間：2020-09-10 01:23:10 / 修改時間：01:23:39" itemprop="dateCreated datePublished" datetime="2020-09-10T01:23:10+08:00">2020-09-10</time>
             </span>
           
             
@@ -272,14 +269,7 @@
               </span>
               <span class="post-meta-item-text">分類於</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/課程筆記-Course/" itemprop="url" rel="index"><span itemprop="name">課程筆記 Course</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/課程筆記-Course/李宏毅-Machine-Learning-and-having-it-Deep-and-Structured/" itemprop="url" rel="index"><span itemprop="name">李宏毅 Machine Learning and having it Deep and Structured</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/後端開發-Backend-Development/" itemprop="url" rel="index"><span itemprop="name">後端開發 Backend Development</span></a></span>
 
                 
                 
@@ -306,7 +296,7 @@
       
       <span class="post-meta-item-text">Disqus：</span>
     
-    <a title="disqus" href="/blog/2019/11/23/Generative Adversarial Network (10) — Evaluation & Concluding Remarks/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/11/23/Generative Adversarial Network (10) — Evaluation & Concluding Remarks/" itemprop="commentCount"></span></a>
+    <a title="disqus" href="/blog/2020/09/10/【PHP】 require_once 與 __DIR__/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/09/10/【PHP】 require_once 與 __DIR__/" itemprop="commentCount"></span></a>
   </span>
   
   
@@ -320,40 +310,44 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>GAN 講了這麼多，重點還是要得到一個夠好的 Generator 可以生成我們想要的東西。可是，什麼樣的 Generator 是夠好的 ? 我們怎麼評估訓練完成的 Generator ?</p>
+        <p>最近在進行 PHP 的一個開發項目，在測試時剛好遇到一個 Bug，測試了很久，始終找不到真正討人厭的那隻蟲，一直到最後回家後進行一些簡單的測試才知道問題出在哪裡。查了一下，發現其實不乏有人問相同的問題，因此想說隨手做個小短篇紀錄一下。</p>
 <a id="more"></a>
-<h2 id="Likelihood"><a href="#Likelihood" class="headerlink" title="Likelihood"></a>Likelihood</h2><p>傳統的評估方式就是計算資料的 Likelihood。給定一些真實的圖像 ( 不再訓練資料中的 )，則我們稱 Generator 生成出這些圖像的機率為 Likelyhood。</p>
-<p>如果 Likelyhood 夠大，則我們可以稱這樣的 Generator 夠好。在計算上我們會針對每一個資料點計算 Likelyhood 後取 $\log$ 再平均。</p>
-<script type="math/tex; mode=display">
-\log\ Likelyhood=\frac{1}{N}\sum\limits_{i=1}^{N}P_G(x^i)</script><p>但在這裡，這樣的計算很困難，因為我們無法找出 $P_G(x^i)$ 是多少，所以也無法計算 Likelyhood。</p>
-<p>在文獻上，有一個方式來解決 $P_G(x^i)$ 的狀況，稱為 Kernel Density Estimation。其概念大概是這樣，我們沒辦法對每一個 $x^i$ 計算其 Likelyhood，但我們可以先用 Generator 生成許多資料，將每一筆資料視為是一個 Gaussain Distribution 的平均值 (mean)，然後每一筆資料/均值配合一個 variance 我們可以得到每一個 Gaussain Distribution，再將這些分佈疊成一個 Gaussian Mixture Model，那我們就可以利用這個 Gaussian Mixture Model 來計算生成 $x^i$ 的機率了。</p>
-<p><img src="https://i.imgur.com/pBHtWof.png" alt></p>
-<p>Likelyhood 來作為評估的作法很直覺，但其實還是會有幾個問題產生 : </p>
-<ol>
-<li><p>我們不知道要生成幾筆資料做出幾個 Gaussain Distribution 來疊成一個 Gaussian Mixture Model 比較適合。因此許多文獻上用這種方式做出來的結果都不見得會很好。</p>
-</li>
-<li><p>Likelyhood 與 Generator 並不一定相關。低 Likelyhood 頂多表示 Generator 生成出來的跟我們拿出來的真實資料 $x^i$ 「不夠像」，但 Generator 可能生成出夠清楚的圖片，只是跟這些 $x^i$ 不一樣而已。另一方面，Likelyhood 其實很難反映出 Generator 的能力差異，舉例來說，如果有一個 $G_1$ 可以算出其 Likelyhood 為非常大的值 $L$，另外一個 $G_2$ 有 $1\%$ 的機會表現得跟 $G_1$ 一樣，$99\%$ 都生成 noise，那麼計算過後其 Likelyhood$=L-\log 100\approx L-4.6$ 相差根本不大。</p>
-</li>
-</ol>
-<p><img src="https://i.imgur.com/nCGkPZ5.png" alt></p>
-<h2 id="Objective-Evaluation"><a href="#Objective-Evaluation" class="headerlink" title="Objective Evaluation"></a>Objective Evaluation</h2><p>現在文獻上比較常使用的方式是利用一個 Pre-train Classifier 來進行評估。</p>
-<p>如果將 Generator 生成的圖片丟給一個 Classifier (VGG / Inception / …) 會輸出一個分佈，會針對所有類別給出機率。我們可以看看這些類別的機率，如果分佈越集中 ( 某一個類別的機率很明顯的特別高 ) 那我們就可以稱這個 Generator 的生成圖像越好。</p>
-<p>但這樣其實並不夠，因為 Generator可能「只會」生成同一個很清楚的圖，這種情況也可以讓 Classifier 的分佈很集中，但這樣的結果不是我們要的。</p>
-<p>因此我們還需要評估這個 Generator 的輸出圖像的 diverse。計算的概念就是將所有的生成圖像丟進 Classifier，將這些這些分佈計算平均，如果平均後的分佈越不集中，則表示這個 Generator 可以生成多種不同的圖像。</p>
-<p>結合上述兩個評估面向 : (1) 分佈夠不夠集中 (2) Diverse 夠不夠分散，便可以定義出一個評估分數 Inception Score ，其計算方式如下</p>
-<script type="math/tex; mode=display">
-Inception\ Score=\sum\limits_{x}\sum\limits_{y}P(y|x)log P(y|x)-\sum\limits_{y}P(y)\log P(y)</script><p>第一項計算生成的圖像丟給分類器是否可以得到夠集中的分佈 (Entropy of $P(y|x)$) ; 第二項則是計算分佈平均夠不夠分佈平均夠不夠分散 (Entropy of $P(y)$)。</p>
-<h2 id="訓練-GAN-的注意事項"><a href="#訓練-GAN-的注意事項" class="headerlink" title="訓練 GAN 的注意事項"></a>訓練 GAN 的注意事項</h2><h3 id="生成圖像夠好，並不見得-Generator-的能力就夠好。"><a href="#生成圖像夠好，並不見得-Generator-的能力就夠好。" class="headerlink" title="生成圖像夠好，並不見得 Generator 的能力就夠好。"></a>生成圖像夠好，並不見得 Generator 的能力就夠好。</h3><p>如果只單純看生成出來的圖像夠不夠好，其實 Generator 只要複製訓練資料的圖片就好，也就是說，我們根本不用 Generator。</p>
-<p>一個能力夠好的 Generator 我們除了要它能生成夠好的圖片外，還會希望它可以生成跟訓練資料不同的圖像。</p>
-<p><img src="https://i.imgur.com/KgXOjIO.png" alt></p>
-<p>上圖為論文 “ <em>A NOTE ON THE EVALUATION OF GENERATIVE MODELS</em> “ 中的一個實驗結果。單純利用兩個圖像的 $L2\ norm$ 來衡量兩張圖像是否一樣，則會產生一些問題。以上圖左為例，當我們將一張山羊的圖像進行平移，就機器而言可能就會判斷成不同的圖片。</p>
-<p>因此，怎麼去自動化判斷生成圖像是否跟訓練資料圖像一樣仍是一個尚待解決的問題。</p>
-<h3 id="Mode-Drop"><a href="#Mode-Drop" class="headerlink" title="Mode Drop"></a>Mode Drop</h3><p>另外一個問題是，我們進行生成的時候，到底整個生成圖像的分佈到底可以多大 ? 白話一點說，就是生成的圖像，到底可以生出多少種截然不同的圖像 ?</p>
-<p>在 DCGAN ( Deep Convolutional GAN ) 的實驗中，嘗試著想找出機器到底可以生成多少種不同人臉。實驗後結果發現，可以保證生成 400 張人臉的狀況下，我們有 $50\%$ 的機率可以從中找到兩張同一個人臉 (可能只有某些細節不同，但人類可以認定為同一人)。也就是說，整個 DCGAN 可以生成出大約 0.16M 張不同的人臉圖像。</p>
-<p>另一個 ALI model 則可以生成出大約 1M 張不同的人臉圖像。</p>
-<h2 id="GAN-大集合"><a href="#GAN-大集合" class="headerlink" title="GAN 大集合"></a>GAN 大集合</h2><p>最後的部分，整理出課程內有介紹(或是簡單講過) 的所有 GAN 種類。</p>
-<p>PS : 在筆者的筆記中不見得全部都有介紹到，有些真的只有提過或只是為了湊梗，就沒有多花太多時間筆記。</p>
-<p><img src="https://i.imgur.com/YSgdswY.png" alt></p>
+<h2 id="require-once"><a href="#require-once" class="headerlink" title="require_once"></a><code>require_once</code></h2><p>已經有了 Python 的基礎，要上手 PHP 並不算太難，我自己比較粗淺的理解就是 Python 中 <code>import</code> 的概念，或許在細節上的設計內涵有所不同，但大概念上就是一種「匯入」的概念。</p>
+<p>在比較大型的專案中，通常會另外把用到的函式、特定的變數定義或是一些初始數值…等項目與真正的程式碼邏輯內容分開存放，這樣的好處一來是讓真正運作的部分顯得簡潔有力，二來就是當我們不同的程式碼檔案要用到同樣的函式、數值，就不用再重複寫入，這樣會讓整個開發效率快很多，當然，也讓後續維護的工作變得相對簡單。</p>
+<p>這就是我們常聽到的『模組化』概念。</p>
+<p>不管是 Python 中的 <code>import</code> ，還是 PHP 中的 <code>require_once</code> 都是方便我們進行模組化的絕佳工具。</p>
+<h3 id="require-once-require-include-once-include"><a href="#require-once-require-include-once-include" class="headerlink" title="require_once / require / include_once / include"></a><code>require_once</code> / <code>require</code> / <code>include_once</code> / <code>include</code></h3><p>雖然筆者拿了 Python 的 <code>import</code> 來進行概念上的類比，但在實際的應用上， PHP 的 <code>require_once</code> 還是有些本質上的不同。最常見的就是 PHP 裡面類似的工具其實不只有 <code>require_once</code>，正如同標題上說到的，<code>require_once</code> / <code>require</code> / <code>include_once</code> / <code>include</code> 都有類似的功效，那究竟這中間有什麼差異呢 ?</p>
+<h3 id="Differences"><a href="#Differences" class="headerlink" title="Differences"></a>Differences</h3><ul>
+<li><code>require</code> 在檔案引入的過程中，如果發生錯誤，會直接報 <code>fatal error</code> 且立刻中斷程式運作。</li>
+<li><code>include</code> 在檔案引入的過程中，如果發生錯誤，會給予警告，但程式會繼續進行。</li>
+<li><code>require</code> / <code>include</code> 在引入的過程中會檢查是否有重複引入的問題，若有，則會報錯。</li>
+<li><code>require_once</code> / <code>include_once</code> 在引入的過程中若有重複引入的狀況，則會選擇不要重複引入。</li>
+</ul>
+<p>上面的敘述大概可以掌握了其中的差異在哪邊，但是問題是，到底什麼情況要選擇什麼樣的工具呢 ? 筆者在這邊簡單的為大家列出幾個方向供讀者參考。</p>
+<h3 id="Principles"><a href="#Principles" class="headerlink" title="Principles"></a>Principles</h3><ul>
+<li>絕大多數狀況建議使用 <code>require_once</code>。</li>
+<li>匯入的模板或是檔案非必須，使用 <code>include</code>，若匯入的檔案極為重要，則建議使用 <code>require</code>。</li>
+<li>極大型的專案，或是對於反應時間極為敏感的專案建議使用 <code>require</code> 來取代 <code>require_once</code>。</li>
+</ul>
+<p>不過，在許多論壇及討論中，對於這些工具的使用時機仍然是爭論不休，筆者也僅是提供幾個大方向來給大家參考參考。</p>
+<h3 id="路徑問題"><a href="#路徑問題" class="headerlink" title="路徑問題"></a>路徑問題</h3><p>不管是 Python 還是 PHP，在檔案引入的時候，很常遇到環境、路徑上的問題導致檔案匯入發生問題，直接中斷程式運作，而這也是筆者在這次 PHP 的開發中遇到的問題。</p>
+<p><img src="https://i.imgur.com/JCxGfBi.png" alt></p>
+<p>假設現在我們有一個檔案結構如上圖，<code>index.php</code> 要引用 <code>Utility_1.php</code> 及 <code>Utility_2.php</code>，而 <code>Utility_2.php</code> 也同時要引用 <code>Utility_1.php</code>，以下，筆者舉了一個簡單的例子 : </p>
+<p><code>index.php</code><br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">require_once</span>(<span class="string">'./Utlis/Utility_1.php'</span>);</span><br><span class="line"><span class="keyword">require_once</span>(<span class="string">'./Utlis/Utility_2.php'</span>);</span><br><span class="line"></span><br><span class="line">$x = <span class="number">12</span>;</span><br><span class="line">$y = <span class="number">13</span>;</span><br><span class="line">$z = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">$sum = func($x, $y);</span><br><span class="line">$result = multi($sum, $z);</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span>($result)</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><code>Utility_1.php</code><br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">func</span><span class="params">($a, $b)</span></span>&#123;</span><br><span class="line">    $res = multi($a, $b)+<span class="number">5</span>;</span><br><span class="line">    <span class="keyword">return</span> $res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><code>Utility_2.php</code><br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">require_once</span>(.<span class="string">'/Utility_1.php'</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">multi</span><span class="params">($a, $b)</span></span>&#123;</span><br><span class="line">    $res = $a * $b;</span><br><span class="line">    <span class="keyword">return</span> $res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>這樣的寫法導致筆者專案線上測試時，一直會出現 <code>500 Interal Server Error</code> 的錯誤，然而避開引用，將 <code>Utility_2.php</code> 的函數直接放進 <code>index.php</code> 運行則是沒有問題的。</p>
+<p>看起來是引用 <code>Utility_2.php</code> 而導致報錯，而最後筆者利用上述例子使用 MAMP 來進行 debug 才確定了問題是出現在 <code>Utility_2.php</code> 中 <code>require_once</code> 的路徑設置出現問題。</p>
+<p>當筆者利用上述例子，會得到這樣的錯誤</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">Fatal error: <span class="keyword">require_once</span>(): Failed opening required <span class="string">'/Utilis/Utility_1.php'</span></span><br></pre></td></tr></table></figure>
+<p>原來，當我們使用 <code>require_once</code> 進行引用時，就<strong><em>意義上相當於把被引用的所有檔案置換進需要引用的檔案中</em></strong>。</p>
+<p>所以當我們用這種角度來看上面的例子，就會發現 <code>Utility_2.php</code> 的飲用路徑發生錯誤。最直覺的方法就是，我們依照要引用的檔案 (<code>index.php</code> ) 路徑來更改 : </p>
+<p><code>Utility_2.php</code><br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">require_once</span>(.<span class="string">'/Utilis/Utility_1.php'</span>);</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>這樣的方法當然很直接，然而這樣的處理方式還是會有致命的錯誤，尤其是日後專案擴編、後續維護上都會有額外的副作用產生。</p>
+<h2 id="DIR"><a href="#DIR" class="headerlink" title="__DIR__"></a><code>__DIR__</code></h2><p>為什麼上面的改法會有問題呢 ? 上述的例子是非常簡單的範例，如果今天有很多不同層的檔案都要對 <code>Utility_2.php</code> 來做引用的話，我們根本不可能滿足所有檔案的，對吧 !!! </p>
+<p>也因次，上述的方法並不能根本性的解決問題，因此筆者建議使用 <code>__DIR__</code> 來設置路徑。簡單來說，<code>__DIR__</code> 可以<strong><em>根據引用檔案的路徑來調整被引用的檔案的相對路徑</em></strong>，換句話說，這是一種『動態』調整路徑的方法。</p>
+<p>因此，我們要避免使用上述的方法來進行 <code>require_once</code> 路徑的設定，從舉例來看，我們應該這樣更改 : </p>
+<p><code>Utility_2.php</code><br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">require_once</span>(<span class="keyword">__DIR__</span>.<span class="string">'/Utility_1.php'</span>);</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></p>
 
     </div>
 
@@ -370,7 +364,7 @@ Inception\ Score=\sum\limits_{x}\sum\limits_{y}P(y|x)log P(y|x)-\sum\limits_{y}P
     <strong>作者： </strong>Allen Tzeng</li>
   <li class="post-copyright-link">
     <strong>文章連結：</strong>
-    <a href="https://allen108108.github.io/blog/2019/11/23/Generative Adversarial Network (10) — Evaluation & Concluding Remarks/" title="Generative Adversarial Network (10) --- Evaluation & Concluding Remarks">https://allen108108.github.io/blog/2019/11/23/Generative Adversarial Network (10) — Evaluation & Concluding Remarks/</a>
+    <a href="https://allen108108.github.io/blog/2020/09/10/【PHP】 require_once 與 __DIR__/" title="【PHP】 `require_once` 與 `__DIR__`">https://allen108108.github.io/blog/2020/09/10/【PHP】 require_once 與 __DIR__/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！</li>
@@ -392,8 +386,8 @@ Inception\ Score=\sum\limits_{x}\sum\limits_{y}P(y|x)log P(y|x)-\sum\limits_{y}P
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/blog/2019/11/23/Generative Adversarial Network (9) — Sequence Generation/" rel="next" title="Generative Adversarial Network (9) --- Sequence Generation">
-                  <i class="fa fa-chevron-left"></i> Generative Adversarial Network (9) --- Sequence Generation
+                <a href="/blog/2020/09/06/Gateway 在 IOT 中扮演的角色/" rel="next" title="Gateway 在 IOT 中扮演的角色">
+                  <i class="fa fa-chevron-left"></i> Gateway 在 IOT 中扮演的角色
                 </a>
               
             </div>
@@ -401,10 +395,6 @@ Inception\ Score=\sum\limits_{x}\sum\limits_{y}P(y|x)log P(y|x)-\sum\limits_{y}P
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-              
-                <a href="/blog/2019/11/24/[論文] You Only Look Once _ Unified, Real-Time Object Detection/" rel="prev" title="[論文] You Only Look Once : Unified, Real-Time Object Detection">
-                  [論文] You Only Look Once : Unified, Real-Time Object Detection <i class="fa fa-chevron-right"></i>
-                </a>
               
             </div>
           </div>
@@ -462,7 +452,7 @@ Inception\ Score=\sum\limits_{x}\sum\limits_{y}P(y|x)log P(y|x)-\sum\limits_{y}P
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Likelihood"><span class="nav-number">1.</span> <span class="nav-text">Likelihood</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Objective-Evaluation"><span class="nav-number">2.</span> <span class="nav-text">Objective Evaluation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#訓練-GAN-的注意事項"><span class="nav-number">3.</span> <span class="nav-text">訓練 GAN 的注意事項</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#生成圖像夠好，並不見得-Generator-的能力就夠好。"><span class="nav-number">3.1.</span> <span class="nav-text">生成圖像夠好，並不見得 Generator 的能力就夠好。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mode-Drop"><span class="nav-number">3.2.</span> <span class="nav-text">Mode Drop</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GAN-大集合"><span class="nav-number">4.</span> <span class="nav-text">GAN 大集合</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#require-once"><span class="nav-number">1.</span> <span class="nav-text">require_once</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#require-once-require-include-once-include"><span class="nav-number">1.1.</span> <span class="nav-text">require_once / require / include_once / include</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Differences"><span class="nav-number">1.2.</span> <span class="nav-text">Differences</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Principles"><span class="nav-number">1.3.</span> <span class="nav-text">Principles</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#路徑問題"><span class="nav-number">1.4.</span> <span class="nav-text">路徑問題</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DIR"><span class="nav-number">2.</span> <span class="nav-text">__DIR__</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -739,9 +729,9 @@ Inception\ Score=\sum\limits_{x}\sum\limits_{y}P(y|x)log P(y|x)-\sum\limits_{y}P
 </script>
 <script>
   function disqus_config() {
-    this.page.url = "https://allen108108.github.io/blog/2019/11/23/Generative Adversarial Network (10) — Evaluation & Concluding Remarks/";
-    this.page.identifier = "2019/11/23/Generative Adversarial Network (10) — Evaluation & Concluding Remarks/";
-    this.page.title = 'Generative Adversarial Network (10) --- Evaluation & Concluding Remarks';};
+    this.page.url = "https://allen108108.github.io/blog/2020/09/10/【PHP】 require_once 與 __DIR__/";
+    this.page.identifier = "2020/09/10/【PHP】 require_once 與 __DIR__/";
+    this.page.title = '【PHP】 `require_once` 與 `__DIR__`';};
   function loadComments() {
     if (window.DISQUS) {
       DISQUS.reset({
